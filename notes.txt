@@ -1,0 +1,9 @@
+https://medium.com/deno-the-complete-reference/a-comprehensive-guide-to-http-servers-in-deno-410227c1a45a
+https://medium.com/@nitinpatel_20236/how-to-create-an-https-server-on-localhost-using-express-366435d61f28
+https://doc.deno.land/https://deno.land/x/opine@2.0.2/mod.ts
+https://help.salesforce.com/s/articleView?id=remoteaccess_oauth_web_server_flow.htm&type=5&language=en_US
+https://spotlightdevelopment2-dev-ed.lightning.force.com/lightning/setup/ConnectedApplication/page?address=%2Fapp%2Fmgmt%2Fforceconnectedapps%2FforceAppDetail.apexp%3FapplicationId%3D06P8d000000PQHR%26notify%3Dtrue%26sfdcIFrameOrigin%3Dhttps%253A%252F%252Fspotlightdevelopment2-dev-ed.lightning.force.com%26clc%3D1%26appLayout%3Dsetup%26tour%3D%26sfdcIFrameHost%3Dweb%26nonce%3Dfa0353887ec557c0f26ad2413fefb7904b7e2189c0c4da46e789060ec0ae0cc2%26ltn_app_id%3D06m8d000001IkarAAC%26id%3D0Ci8d000000k9zP
+https://help.salesforce.com/s/articleView?id=sf.connected_app_create_api_integration.htm&type=5
+https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/quickstart_prereq.htm
+https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_rest_authentication.htm
+https://www.tableau.com/solutions/salesforce
