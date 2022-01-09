@@ -7,3 +7,5 @@ https://help.salesforce.com/s/articleView?id=sf.connected_app_create_api_integra
 https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/quickstart_prereq.htm
 https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_rest_authentication.htm
 https://www.tableau.com/solutions/salesforce
+https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/quickstart_code.htm
+https://gomakethings.com/using-oauth-with-fetch-in-vanilla-js/

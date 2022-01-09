@@ -1,5 +1,4 @@
 import "https://deno.land/x/dotenv/load.ts";
-// import { serveTls } from "https://deno.land/std/http/mod.ts";
 
 import {opine, OpineRequest, OpineResponse} from "./deps.ts"
 
@@ -7,9 +6,6 @@ const app = opine()
 
 const codeRedirect = `https://login.salesforce.com/services/oauth2/authorize?client_id=${Deno.env.get("CONSUMER_KEY")}&redirect_uri=http://localhost:3000/oauth2/callback&response_type=code`
 const tokenRedirect =`https://spotlightdevelopment2-dev-ed.my.salesforce.com/services/oauth2/token`
-
-// const key = "../keys/key.pem"
-// const cert = "../keys/cert.pem"
 
 app.get("/", (req: OpineRequest, res: OpineResponse) => {
   res.send(`<button onclick="window.location.replace('${codeRedirect}')">Login</button>`)
@@ -36,13 +32,6 @@ app.get("/oauth2/callback", async (req: OpineRequest, res: OpineResponse) => {
 
   res.send(resources)
 })
-
-// function reqHandler(req: Request) {
-//   return new Response("Secure Hello world");
-// }
-
-// serveTls(reqHandler, {port: 3000, cert, key})
-// console.log("Server has started on https://localhost:3000")
 
 app.listen(
   3000,
