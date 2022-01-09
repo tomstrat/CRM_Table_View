@@ -1,34 +1,35 @@
-import "https://deno.land/x/dotenv/load.ts";
+import dotenv from "dotenv"
+import express, {Request, Response} from "express"
+import got from "got"
 
-import {opine, OpineRequest, OpineResponse} from "./deps.ts"
+dotenv.config()
+const app = express()
 
-const app = opine()
-
-const codeRedirect = `https://login.salesforce.com/services/oauth2/authorize?client_id=${Deno.env.get("CONSUMER_KEY")}&redirect_uri=http://localhost:3000/oauth2/callback&response_type=code`
+const codeRedirect = `https://login.salesforce.com/services/oauth2/authorize?client_id=${process.env.CONSUMER_KEY}&redirect_uri=http://localhost:3000/oauth2/callback&response_type=code`
 const tokenRedirect =`https://spotlightdevelopment2-dev-ed.my.salesforce.com/services/oauth2/token`
 
-app.get("/", (req: OpineRequest, res: OpineResponse) => {
+app.get("/", (req: Request, res: Response) => {
   res.send(`<button onclick="window.location.replace('${codeRedirect}')">Login</button>`)
 })
 
-app.get("/oauth2/callback", async (req: OpineRequest, res: OpineResponse) => {
-  const tokenData = await fetch(tokenRedirect, {
+app.get("/oauth2/callback", async (req: Request, res: Response) => {
+  const tokenData = await got.post(tokenRedirect, {
     method: "POST",
-    body: `grant_type=authorization_code&code=${req.query.code}&client_id=${Deno.env.get("CONSUMER_KEY")}&client_secret=${Deno.env.get("CONSUMER_SECRET")}&redirect_uri=https://localhost:3000/oauth2/callback`,
+    body: `grant_type=authorization_code&code=${req.query.code}&client_id=${process.env.CONSUMER_KEY}&client_secret=${process.env.CONSUMER_SECRET}&redirect_uri=https://localhost:3000/oauth2/callback`,
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
     }
   })
-  const token = await tokenData.json()
+  const token = JSON.parse(tokenData.body).access_token
   console.log(token)
 
-  const resourcesData = await fetch("https://spotlightdevelopment2-dev-ed.my.salesforce.com/services/data/v33.0/sobjects/Account/describe/compactLayouts", {
+  const resourcesData = await got.get("https://spotlightdevelopment2-dev-ed.my.salesforce.com/services/data/v33.0/sobjects/Account/describe/compactLayouts", {
     headers: {
-      "Authorization": `Bearer ${token.access_token}`
+      "Authorization": `Bearer ${token}`
     }
   })
 
-  const resources = await resourcesData.json()
+  const resources = JSON.parse(resourcesData.body)
 
   res.send(resources)
 })
