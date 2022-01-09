@@ -10,9 +10,9 @@ export async function requestToken(url: string, code: string, id: string, secret
         "Content-Type": "application/x-www-form-urlencoded"
       }
     })
-
-    const {accessToken} = JSON.parse(tokenData.body)
-    return accessToken
+    const {access_token} = JSON.parse(tokenData.body)
+    console.log("Retrieved access token", access_token)
+    return access_token
 
   } catch(error) {
     let message = 'Unknown Error'
