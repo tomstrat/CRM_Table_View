@@ -1,38 +1,39 @@
 import { Router, Request, Response } from "express"
 import dotenv from "dotenv"
 import Config from "../../config/config"
-import {requestToken, requestResources} from "./requests"
+import { requestToken } from "../requests"
 
 dotenv.config()
+
+// /oauth2
 const authGetRouter = Router()
 
 authGetRouter.get("/login", (req: Request, res: Response) => {
 
-  const {authorize, redirect} = Config.urls 
+  const { authorize, redirect } = Config.urls
   const authLink = `${authorize}?client_id=${process.env.CONSUMER_KEY}&redirect_uri=${redirect}&response_type=code`
 
-  res.send(`<button onclick="window.location.replace('${authLink}')">Login</button>`)
+  return res.send(`<button onclick="window.location.replace('${authLink}')">Login</button>`)
 })
 
 authGetRouter.get("/callback", async (req: Request, res: Response) => {
 
   const id = process.env.CONSUMER_KEY as string
   const secret = process.env.CONSUMER_SECRET as string
-  const {token, redirect, data} = Config.urls
+  const { token, redirect, data } = Config.urls
   const code = req.query.code as string
+  const now = new Date()
+  now.setHours(now.getHours() + 4)
 
-  if(!code) {
+  if (!code) {
     return res.send("error")
   }
 
   const authToken = await requestToken(token, code, id, secret, redirect)
 
-  const path = `${data}v33.0/sobjects/Account/describe/compactLayouts`
+  req.session = { token: authToken }
 
-  const resources = await requestResources(path, authToken)
-
-
-  res.send(resources)
+  return res.redirect("/data")
 
 })
 
