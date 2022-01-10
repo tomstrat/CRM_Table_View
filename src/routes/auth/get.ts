@@ -20,7 +20,7 @@ authGetRouter.get("/callback", async (req: Request, res: Response) => {
 
   const id = process.env.CONSUMER_KEY as string
   const secret = process.env.CONSUMER_SECRET as string
-  const { token, redirect, data } = Config.urls
+  const { token, redirect } = Config.urls
   const code = req.query.code as string
   const now = new Date()
   now.setHours(now.getHours() + 4)
