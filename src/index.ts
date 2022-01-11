@@ -13,6 +13,7 @@ app.use(cookieSession({
   secure: Config.environment.secure,
   httpOnly: true
 }))
+app.use(express.static("./public"))
 app.use("/oauth2", authGetRouter)
 app.use("/data", dataGetRouter)
 
