@@ -16,6 +16,12 @@ dataGetRouter.get("/", requireAuth, async (req: Request, res: Response) => {
     version: "v33.0",
     fields: ["testNum__C", "Name"]
   }
+  
+//  const query_b = {
+//    resource: "Employee__c",
+//    version: "v33.0",
+//    fields: ["Employee__c", "Name", "Paid_Hours__c", "Revenue__c", "Total_Cost__c", "Waste__c", "Total_Services__c", "	RPH__c"]
+//  }
 
   // const path = `${data}v33.0/sobjects/testObj__c`
   // const path = `${data}v33.0/query?q=SELECT+testNum__c,+Name+from+testObj__c`
