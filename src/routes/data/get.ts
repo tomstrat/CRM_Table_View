@@ -12,12 +12,7 @@ dataGetRouter.get("/", requireAuth, async (req: Request, res: Response) => {
 
   const token = req.session ? req.session.token : "undefined"
 
-  const query = {
-    resource: "testObj__c",
-    version: "v33.0",
-    fields: ["testNum__C", "Name"]
-  }
-  
+
   const query_b = {
     resource: "Employee__c",
     version: "v33.0",
