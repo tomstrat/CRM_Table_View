@@ -2,7 +2,7 @@ import { Router, Request, Response } from "express"
 import { requestResources } from "../requests"
 import { requireAuth } from "../../middleware/auth"
 import { buildQuery } from "../../utilities/buildQuery"
-import tableViewBuilder from "../../views/table"
+import { tableViewBuilder } from "../../views/table"
 
 
 // /data
