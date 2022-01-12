@@ -1,10 +1,7 @@
 import { Router, Request, Response } from "express"
-import dotenv from "dotenv"
 import Config from "../../config/config"
 import { requestToken } from "../requests"
-import { BadRequest } from "../../models/error"
 
-dotenv.config()
 
 /*** /oauth2 */
 
@@ -20,15 +17,9 @@ authGetRouter.get("/login", (req: Request, res: Response) => {
 
 authGetRouter.get("/callback", async (req: Request, res: Response) => {
 
-  const id = process.env.CONSUMER_KEY as string
-  const secret = process.env.CONSUMER_SECRET as string
-  const { token, redirect } = Config.urls
   const code = req.query.code as string
-
-  const authToken = await requestToken(token, code, id, secret, redirect)
-
+  const authToken = await requestToken(code)
   req.session = { token: authToken }
-
   return res.redirect("/data")
 
 })

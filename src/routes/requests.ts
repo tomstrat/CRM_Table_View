@@ -1,10 +1,19 @@
 import { BadRequest, NotFound } from "../models/error"
+import Config from "../config/config"
 import got from "got"
+import dotenv from "dotenv"
 
-export async function requestToken(url: string, code: string, id: string, secret: string, redirect: string) {
+dotenv.config()
+
+
+export async function requestToken(code: string) {
+
+  const id = process.env.CONSUMER_KEY as string
+  const secret = process.env.CONSUMER_SECRET as string
+  const { token, redirect } = Config.urls
 
   try {
-    const tokenData = await got.post(url, {
+    const tokenData = await got.post(token, {
       method: "POST",
       body: `grant_type=authorization_code&code=${code}&client_id=${id}&client_secret=${secret}&redirect_uri=${redirect}`,
       headers: {

@@ -19,9 +19,6 @@ dataGetRouter.get("/", requireAuth, async (req: Request, res: Response) => {
     fields: ["Name", "Paid_Hours__c", "Revenue__c", "Total_Cost__c", "Waste__c", "AJS__c", "Total_Services__c", "	RPH__c"]
   }
 
-  // const path = `${data}v33.0/sobjects/testObj__c`
-  // const path = `${data}v33.0/query?q=SELECT+testNum__c,+Name+from+testObj__c`
-
   const url = buildQuery(query_b)
   console.log(url)
 
