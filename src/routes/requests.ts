@@ -1,3 +1,4 @@
+import { BadRequest, NotFound } from "../models/error"
 import got from "got"
 
 export async function requestToken(url: string, code: string, id: string, secret: string, redirect: string) {
@@ -15,10 +16,8 @@ export async function requestToken(url: string, code: string, id: string, secret
     return access_token
 
   } catch (error) {
-    let message = "Unknown Error"
-    if (error instanceof Error) message = error.message
-    console.log(message)
-    throw new Error(message)
+    console.log(error)
+    if (error instanceof Error) throw new BadRequest("Problem retreiving access token")
   }
 
 }
@@ -35,10 +34,8 @@ export async function requestResources(url: string, token: string) {
     return resources
 
   } catch (error) {
-    let message = "Unknown Error"
-    if (error instanceof Error) message = error.message
-    console.log(message)
-    throw new Error(message)
+    console.log(error)
+    if (error instanceof Error) throw new NotFound("Resources could not be found")
   }
 
 }
