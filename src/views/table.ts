@@ -1,4 +1,5 @@
 import * as R from "ramda"
+import layout from "./layout"
 
 interface Sfobject {
     Name: string
@@ -35,7 +36,7 @@ export function tableViewBuilder(sfdata: Sfdata) {
         `
     }).join("")
 
-    return `<!DOCTYPE html>
+    const page = `<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -57,5 +58,7 @@ export function tableViewBuilder(sfdata: Sfdata) {
         </table>    
     </body>
     </html>`
+
+    return layout(page)
 }
 

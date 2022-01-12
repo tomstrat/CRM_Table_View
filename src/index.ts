@@ -3,6 +3,7 @@ import cookieSession from "cookie-session"
 import authGetRouter from "./routes/auth/get"
 import dataGetRouter from "./routes/data/get"
 import Config from "./config/config"
+import { handleErrors } from "./middleware/handleErrors"
 
 const app = express()
 
@@ -17,6 +18,7 @@ app.use(express.static("./public"))
 app.use("/oauth2", authGetRouter)
 app.use("/data", dataGetRouter)
 
+app.use(handleErrors)
 
 app.get("/", (req: Request, res: Response) => {
   res.redirect("/oauth2/login")
