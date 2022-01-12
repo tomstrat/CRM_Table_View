@@ -4,6 +4,7 @@ import authGetRouter from "./routes/auth/get"
 import dataGetRouter from "./routes/data/get"
 import Config from "./config/config"
 import { handleErrors } from "./middleware/handleErrors"
+import { NotFound } from "./models/error"
 
 const app = express()
 
@@ -18,11 +19,17 @@ app.use(express.static("./public"))
 app.use("/oauth2", authGetRouter)
 app.use("/data", dataGetRouter)
 
-app.use(handleErrors)
-
 app.get("/", (req: Request, res: Response) => {
   res.redirect("/oauth2/login")
 })
+
+app.get("*", (req: Request, res: Response) => {
+  throw new NotFound("Page does not exist")
+})
+
+app.use(handleErrors)
+
+
 
 app.listen(
   3000,

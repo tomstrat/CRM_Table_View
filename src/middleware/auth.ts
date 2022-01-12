@@ -1,9 +1,10 @@
 import { Request, Response, NextFunction } from "express"
+import { BadRequest } from "../models/error"
 
 export function requireAuth(req: Request, res: Response, next: NextFunction) {
   if (req.session && req.session.token) {
     next()
   } else {
-    res.redirect("/")
+    throw new BadRequest("You dont have the correct authorisation")
   }
 }
