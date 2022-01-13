@@ -1,13 +1,6 @@
-import * as R from "ramda"
+import { InternalDataFormat } from "../models/internal.interfaces"
 import layout from "./layout"
 
-interface Sfobject {
-    Name: string
-}
-
-interface Sfdata {
-    records: Sfobject[]
-}
 
 function formatProp(prop: string) {
     return `${prop.split("__")[0].replace("_", " ")}`
@@ -21,8 +14,8 @@ function formatRow<T>(row: T) {
     return data
 }
 
-export function tableViewBuilder(sfdata: Sfdata) {
-    const dataArray = sfdata.records as Array<Sfobject>
+export function tableViewBuilder(sfdata: InternalDataFormat) {
+    const dataArray = sfdata.records
 
     var headers = ""
     for (const prop in dataArray[0]) {

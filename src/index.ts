@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express"
+import express, { NextFunction, Request, Response } from "express"
 import cookieSession from "cookie-session"
 import authGetRouter from "./routes/auth/get"
 import dataGetRouter from "./routes/data/get"
@@ -23,7 +23,7 @@ app.get("/", (req: Request, res: Response) => {
   res.redirect("/oauth2/login")
 })
 
-app.get("*", (req: Request, res: Response) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   throw new NotFound("Page does not exist")
 })
 

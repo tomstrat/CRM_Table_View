@@ -3,6 +3,7 @@ import { requestResources } from "../requests"
 import { requireAuth } from "../../middleware/auth"
 import { buildQuery } from "../../utilities/buildQuery"
 import { tableViewBuilder } from "../../views/table"
+import { formatRecords } from "../formatters/data.formatters"
 
 
 // /data
@@ -23,7 +24,8 @@ dataGetRouter.get("/", requireAuth, async (req: Request, res: Response) => {
   console.log(url)
 
   const resources = await requestResources(url, token)
-  res.send(tableViewBuilder(resources))
+  const formatted = formatRecords(resources)
+  res.send(tableViewBuilder(formatted))
 })
 
 export default dataGetRouter
