@@ -15,7 +15,7 @@ app.use(cookieSession({
   secure: Config.environment.secure,
   httpOnly: true
 }))
-app.use(express.static("public"))
+app.use(express.static(__dirname + "/public"))
 app.use("/oauth2", authGetRouter)
 app.use("/data", dataGetRouter)
 
@@ -23,9 +23,10 @@ app.get("/", (req: Request, res: Response) => {
   res.redirect("/oauth2/login")
 })
 
-app.use((req: Request, res: Response, next: NextFunction) => {
-  throw new NotFound("Page does not exist")
-})
+// app.use((req: Request, res: Response, next: NextFunction) => {
+//   console.log(req)
+//   throw new NotFound("Page does not exist")
+// })
 
 app.use(handleErrors)
 
