@@ -1,47 +1,54 @@
-import { InternalDataFormat } from "../models/internal.interfaces"
+import { InternalDataFormat, InternalRecord } from "../models/internal.interfaces"
 import layout from "./layout"
+import * as R from "ramda"
 
-
-function formatProp(prop: string) {
-    return `${prop.split("__")[0].replace("_", " ")}`
+interface TableDataConfig {
+	excludes: string[]
+	type: "header" | "row"
 }
 
-function formatRow<T>(row: T) {
-    let data = ""
-    for (const prop in row) {
-        data += `<td>${row[prop]}</td>`
-    }
-    return data
+function formatHeader(header: string): string {
+	return header.replace(/([a-z])([A-Z])/, (match, p1, p2) => {
+		return [p1, " ", p2].join("")
+	}).split(" ").map(word => word[0].toUpperCase() + word.substring(1)).join(" ")
+}
+
+function getTableData(record: InternalRecord, config: TableDataConfig): string {
+	const { excludes, type } = config
+	const keys = Object.keys(record) as Array<keyof typeof record>
+	return keys.map(key => {
+		if (R.not(R.includes(key, excludes))) {
+			return type === "header" ? `<td>${formatHeader(key)}</td>` : `<td>${record[key]}</td>`
+		}
+	}).join("")
 }
 
 export function tableViewBuilder(sfdata: InternalDataFormat) {
-    const dataArray = sfdata.records
+	const { records } = sfdata
+	const excludes = ["meta"]
 
-    var headers = ""
-    for (const prop in dataArray[0]) {
-        headers += `<td>${formatProp(prop)}</td>`
-    }
-    const renderedData = dataArray.map(record => {
-        return `
-            <tr>
-                ${formatRow(record)}
-            </tr>
-        `
-    }).join("")
+	const renderedHeaders = getTableData(records[0], { excludes, type: "header" })
+	const renderedData = records.map(record => {
+		return `
+				<tr>
+					${getTableData(record, { excludes, type: "row" })}
+				</tr>
+		`
+	}).join("")
 
-    const page = `
-        <table>
-            <thead>
-                <tr>
-                    ${headers}
-                </tr>
-            </thead>
-            <tbody>
-                ${renderedData}
-            </tbody>
-        </table>    
-    `
+	const page = `
+		<table>
+			<thead>
+				<tr>
+					${renderedHeaders}
+				</tr>
+			</thead>
+			<tbody>
+				${renderedData}
+			</tbody>
+		</table>    
+	`
 
-    return layout(page)
+	return layout(page)
 }
 

@@ -5,8 +5,10 @@ import * as R from "ramda"
 
 function formatRecord(externalRecord: ExternalRecord): InternalRecord {
   return {
-    sfObject: R.path(["attributes", "type"], externalRecord),
-    recordUrl: R.path(["attributes", "url"], externalRecord),
+    meta: {
+      sfObject: R.path(["attributes", "type"], externalRecord),
+      recordUrl: R.path(["attributes", "url"], externalRecord),
+    },
     name: externalRecord.Name,
     paidHours: externalRecord.Paid_Hours__c,
     revenue: externalRecord.Revenue__c,

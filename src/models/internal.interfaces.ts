@@ -1,7 +1,9 @@
 
 export interface InternalRecord {
-  sfObject?: string
-  recordUrl?: string
+  meta: {
+    sfObject?: string
+    recordUrl?: string
+  }
   name: string
   paidHours: number
   revenue: number
