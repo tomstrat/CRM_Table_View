@@ -15,7 +15,7 @@ app.use(cookieSession({
   secure: Config.environment.secure,
   httpOnly: true
 }))
-app.use(express.static("/public"))
+app.use(express.static(__dirname + "/public"))
 app.get("/favicon.ico", (req: Request, res: Response) => res.status(204))
 app.use("/oauth2", authGetRouter)
 app.use("/data", dataGetRouter)
