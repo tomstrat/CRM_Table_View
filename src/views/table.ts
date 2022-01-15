@@ -18,7 +18,7 @@ function getTableData(record: InternalRecord, config: TableDataConfig): string {
 	const keys = Object.keys(record) as Array<keyof typeof record>
 	return keys.map(key => {
 		if (R.not(R.includes(key, excludes))) {
-			return type === "header" ? `<td>${formatHeader(key)}</td>` : `<td>${record[key]}</td>`
+			return type === "header" ? `<div class="column">${formatHeader(key)}</div>` : `<div class="column">${record[key]}</div>`
 		}
 	}).join("")
 }
@@ -30,23 +30,23 @@ export function tableViewBuilder(sfdata: InternalDataFormat) {
 	const renderedHeaders = getTableData(records[0], { excludes, type: "header" })
 	const renderedData = records.map(record => {
 		return `
-				<tr>
+				<div class="row">
 					${getTableData(record, { excludes, type: "row" })}
-				</tr>
+				</div>
 		`
 	}).join("")
 
 	const page = `
-		<table class="ttmtable">
-			<thead>
-				<tr>
+		<div class="ttmtable">
+			<div class="thead">
+				<div class="row">
 					${renderedHeaders}
-				</tr>
-			</thead>
-			<tbody>
+				</div>
+			</div>
+			<div class="tbody">
 				${renderedData}
-			</tbody>
-		</table>    
+			</div>
+		</div>    
 	`
 
 	return layout(page)

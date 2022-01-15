@@ -8,24 +8,30 @@ body {
 }
 
 .ttmtable {
-  margin-left: auto;
-  margin-right: auto;
-  width: auto;
+  display: flex;
+  flex-direction: column;
   background-color: white;
   border: 3px solid #8dc63f;
-  text-align: center;
-  border-collapse: collapse;
 }
-th,
-td {
+.row {
+  display: flex;
+  flex-direction: row;
   text-align: center;
   border: 1px solid rgb(2, 2, 2);
-  width: 150px;
 }
-thead {
+
+.column {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border: 1px solid rgb(2, 2, 2); 
+}
+
+.thead {
+  display: flex;
+  flex-direction: row;
   text-align: center;
   border: 1px solid rgb(2, 2, 2);
-  width: 150px;
 }
 
 .login {
