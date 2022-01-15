@@ -1,7 +1,6 @@
 import { Router, Request, Response } from "express"
-import Config from "../../config/config"
 import { requestToken } from "../requests"
-import layout from "../../views/layout"
+import login from "../../views/login"
 
 
 
@@ -11,9 +10,8 @@ const authGetRouter = Router()
 
 authGetRouter.get("/login", (req: Request, res: Response) => {
 
-  if (req.session && req.session.token) res.redirect("/data")
-  const { authorizeFull } = Config.urls
-  return res.send(layout(`<button onclick="window.location.replace('${authorizeFull}')">Login</button>`))
+  if (req.session && req.session.token) return res.redirect("/data")
+  return res.send(login())
 
 })
 
