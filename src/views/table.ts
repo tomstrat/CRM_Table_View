@@ -37,7 +37,7 @@ export function tableViewBuilder(sfdata: InternalDataFormat) {
 	}).join("")
 
 	const page = `
-		<table>
+		<table class="ttmtable">
 			<thead>
 				<tr>
 					${renderedHeaders}

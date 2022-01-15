@@ -1,3 +1,24 @@
 body {
-  background-color: aquamarine;
+  background-color: #00539f;
+}
+
+.ttmtable {
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  background-color: white;
+  border: 3px solid #8dc63f;
+  text-align: center;
+  border-collapse: collapse;
+}
+th, td {
+  text-align: center;
+  border: 1px solid rgb(2, 2, 2);
+  width: 150px;
+
+}
+thead {
+  text-align: center;
+  border: 1px solid rgb(2, 2, 2);
+  width: 150px;
 }
