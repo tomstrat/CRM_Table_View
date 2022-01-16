@@ -36,6 +36,8 @@ app.listen(
   () => console.log("Server has started on http://localhost:3000")
 )
 
+export default app
+
 // process.on("SIGINT", () => { console.log("exiting…"); process.exit() })
 // process.on("exit", () => { console.log("exiting…"); process.exit() })
 
