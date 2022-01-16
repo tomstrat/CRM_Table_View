@@ -12,27 +12,38 @@ body {
   flex-direction: column;
   background-color: white;
   border: 3px solid #8dc63f;
+  border-collapse: collapse;
 }
 .row {
   display: flex;
   flex-direction: row;
   text-align: center;
-  border: 1px solid rgb(2, 2, 2);
+  
 }
 
 .column {
   display: flex;
   flex-direction: column;
-  text-align: center;
-  border: 1px solid rgb(2, 2, 2); 
+  width: 120px;
+  text-align: center; 
+  border: 1px solid rgb(2, 2, 2);
+  border-collapse: collapse;
 }
 
 .thead {
   display: flex;
   flex-direction: row;
   text-align: center;
-  border: 1px solid rgb(2, 2, 2);
 }
+
+.thead .row {
+  height: 40px;
+}
+.column:first-child {
+  width: 200px;
+}
+
+  
 
 .login {
   background-color: rgb(255, 255, 255);
