@@ -11,8 +11,9 @@ body {
   display: flex;
   flex-direction: column;
   background-color: white;
-  border: 3px solid #8dc63f;
+  border: 4px solid #8dc63f;
   border-collapse: collapse;
+  background-color: rgb(241, 241, 241);
 }
 .row {
   display: flex;
@@ -42,7 +43,11 @@ body {
 .column:first-child {
   width: 200px;
 }
-
+ .button {
+   font-size: 18px;
+   background-color: #8dc63f;
+   color: #000000;
+ }
 .dropdown {
   display: inline-block;
   position: relative;
@@ -53,6 +58,8 @@ body {
   width: 100%;
   overflow: auto;
   box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
+  background-color: #8dc63f;
+  
 }
 .dropdown:hover .dropdown-content {
   display: block;
@@ -64,8 +71,8 @@ body {
   text-decoration: none;
 }
 .dropdown-content a:hover {
-  color: #FFFFFF;
-  background-color: #00A4BD;
+  color: #000000;
+  background-color: #bddf8f;
 }  
 
 .login {

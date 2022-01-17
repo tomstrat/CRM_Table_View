@@ -1,5 +1,6 @@
 import { InternalDataFormat, InternalRecord } from "../models/internal.interfaces"
 import layout from "./layout"
+import controls from "./table/controls"
 import * as R from "ramda"
 
 interface TableDataConfig {
@@ -37,6 +38,7 @@ export function tableViewBuilder(sfdata: InternalDataFormat) {
 	}).join("")
 
 	const page = `
+		${controls()}
 		<div class="ttmtable">
 			<div class="thead">
 				<div class="row">
