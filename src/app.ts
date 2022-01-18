@@ -1,3 +1,4 @@
+import "reflect-metadata"
 import express, { Request, Response } from "express"
 import cookieSession from "cookie-session"
 import authGetRouter from "./routes/auth/get"
