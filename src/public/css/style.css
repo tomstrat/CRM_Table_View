@@ -71,6 +71,9 @@ justify-content: center;
 .column:first-child {
   width: 200px;
 }
+.row:hover {
+  background-color: #8dc63f;
+}
  .button {
    font-size: 18px;
    background-color: #8dc63f;
