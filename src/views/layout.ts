@@ -1,3 +1,5 @@
+import topnav from "./nav"
+
 export default function layout(template: string): string {
   return `
     <!DOCTYPE html>
@@ -10,6 +12,7 @@ export default function layout(template: string): string {
           <title>CRM Table Viewer</title>
       </head>
       <body>
+        ${topnav()}
         ${template}
       </body>
       </html>

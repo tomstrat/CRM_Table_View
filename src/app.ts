@@ -2,6 +2,7 @@ import express, { Request, Response } from "express"
 import cookieSession from "cookie-session"
 import authGetRouter from "./routes/auth/get"
 import dataGetRouter from "./routes/data/get"
+import timeGetRouter from "./routes/timesheets/get"
 import Config from "./config/config"
 import { handleErrors } from "./middleware/handleErrors"
 import { NotFound } from "./models/error"
@@ -19,6 +20,7 @@ app.use(express.static(__dirname + "/public"))
 app.get("/favicon.ico", (req: Request, res: Response) => res.status(204))
 app.use("/oauth2", authGetRouter)
 app.use("/data", dataGetRouter)
+app.use("/timesheets", timeGetRouter)
 
 app.get("/", (req: Request, res: Response) => {
   res.redirect("/oauth2/login")
