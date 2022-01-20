@@ -71,6 +71,9 @@ justify-content: center;
 .column:first-child {
   width: 200px;
 }
+.row:hover {
+  background-color: #8dc63f;
+}
  .button {
    font-size: 18px;
    background-color: #8dc63f;
@@ -104,6 +107,77 @@ justify-content: center;
   color: #000000;
   background-color: #bddf8f;
 }  
+
+/* Timesheet sections */
+.day-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding-bottom: 40px;
+}
+.form-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background-color: aliceblue;
+  border: 2px solid #8dc63f;
+  border-radius: 12px;
+  height: 450px;
+  width: 45%;
+  align-items: center;
+  justify-content: space-around;
+}
+.time-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-content: space-around;
+  justify-content: center;
+}
+.start-time-container {
+  display: flex;
+  flex-direction: row;
+}
+.break-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.end-time-container {
+  display: flex;
+  flex-direction: row;
+}
+.timedrop {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.break-time-container {
+  display: flex;
+  flex-direction: row;
+}
+input[type="radio"] {
+  display: none;
+}
+.comments-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+label {
+padding: 10px 20px;
+}
+
+
+input[type="radio"]:checked + label {
+  background-color: darkblue;
+  cursor: default;
+  color: #E6E6E6;
+}
+
+/* Login section */
 
 .login {
   background-color: rgb(255, 255, 255);
