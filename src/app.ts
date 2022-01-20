@@ -1,13 +1,12 @@
 import "reflect-metadata"
-import express, { Express, Request, Response, Router } from "express"
+import express, { Express, Request, ErrorRequestHandler, Response } from "express"
 import cookieSession from "cookie-session"
 import ConfigType from "./config/type"
-import { handleErrors } from "./middleware/handleErrors"
 import { NotFound } from "./models/error"
 import { RouteDefinition } from "./models/route"
 
-export default function appFactory({ Config, Routes }:
-  { Config: ConfigType, Routes: RouteDefinition[] }):
+export default function appFactory({ Config, Routes, handleErrors }:
+  { Config: ConfigType, Routes: RouteDefinition[], handleErrors: ErrorRequestHandler }):
   Express {
 
   const { environment } = Config
@@ -26,8 +25,6 @@ export default function appFactory({ Config, Routes }:
   Routes.map(route => {
     app.use(route[0], route[1])
   })
-  // app.use("/oauth2", authGetRouter)
-  // app.use("/data", dataGetRouter)
 
   app.get("/", (req: Request, res: Response) => {
     res.redirect("/oauth2/login")

@@ -6,7 +6,8 @@
   "scripts": {
     "build": "npx tsc",
     "dev": "jest && nodemon --watch './**/*.ts' --exec 'ts-node' ./src/index.ts",
-    "test": "jest",
+    "test": "jest --silent",
+    "test-log": "jest",
     "lint": "eslint ./src/**/*.ts",
     "prepare": "husky install"
   },

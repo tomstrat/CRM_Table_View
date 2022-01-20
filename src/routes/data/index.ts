@@ -1,13 +1,13 @@
-import { Router, Request, Response } from "express"
+import { Router, Request, Response, RequestHandler } from "express"
 import { requestResources } from "../requests"
-import { requireAuth } from "../../middleware/auth"
 import { buildQuery } from "../../utilities/buildQuery"
 import { formatRecords } from "../formatters/data.formatters"
 import { RouteDefinition } from "../../models/route"
 import { InternalDataFormat } from "../../models/internal.interfaces"
 
 
-export default function dataRouteFactory({ tableViewBuilder }: { tableViewBuilder: (sfdata: InternalDataFormat) => string }): RouteDefinition {
+export default function dataRouteFactory({ tableViewBuilder, requireAuth }:
+  { tableViewBuilder: (sfdata: InternalDataFormat) => string, requireAuth: RequestHandler }): RouteDefinition {
   const dataRouter = Router()
 
   dataRouter.get("/", requireAuth, async (req: Request, res: Response) => {

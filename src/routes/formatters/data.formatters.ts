@@ -3,7 +3,7 @@ import { InternalDataFormat, InternalRecord } from "../../models/internal.interf
 import * as R from "ramda"
 
 
-function formatRecord(externalRecord: ExternalRecord): InternalRecord {
+export function formatRecord(externalRecord: ExternalRecord): InternalRecord {
   return {
     meta: {
       sfObject: R.path(["attributes", "type"], externalRecord),

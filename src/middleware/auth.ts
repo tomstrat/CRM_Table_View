@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express"
 import { BadRequest } from "../models/error"
 
-export function requireAuth(req: Request, res: Response, next: NextFunction) {
+export default function requireAuth(req: Request, res: Response, next: NextFunction) {
   if (req.session && req.session.token) {
     next()
   } else {

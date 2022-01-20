@@ -7,6 +7,7 @@ import usersRouteFactory from "./routes/users"
 import authRouteFactory from "./routes/auth"
 import appFactory from "./app"
 import { tableViewBuilder, loginPage, timePage } from "./views"
+import { requireAuth, handleErrors } from "./middleware"
 import dataRouteFactory from "./routes/data"
 import timesheetsRouteFactory from "./routes/timesheets"
 
@@ -16,11 +17,11 @@ export default async function inject(testDB?: Connection) {
   const Routes = [
     usersRouteFactory({ usersClient }),
     authRouteFactory({ loginPage }),
-    dataRouteFactory({ tableViewBuilder }),
-    timesheetsRouteFactory({ timePage })
+    dataRouteFactory({ tableViewBuilder, requireAuth }),
+    timesheetsRouteFactory({ timePage, requireAuth })
   ]
 
-  const app = appFactory({ Config, Routes })
+  const app = appFactory({ Config, Routes, handleErrors })
 
   return app
 }
