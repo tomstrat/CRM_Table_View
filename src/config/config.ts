@@ -13,5 +13,23 @@ export default {
   },
   environment: {
     secure: false
+  },
+  database: {
+    host: "localhost",
+    port: 3000,
+    username: "test",
+    password: "test",
+    database: "test",
+    synchronize: true,
+    logging: false,
+    entities: [
+      "src/database/models/**/*.ts"
+    ],
+    migrations: [
+      "src/database/migrations/**/*.ts"
+    ],
+    subscribers: [
+      "src/database/subscribers/**/*.ts"
+    ],
   }
 }

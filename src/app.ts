@@ -1,39 +1,47 @@
 import "reflect-metadata"
-import express, { Request, Response } from "express"
+import express, { Express, Request, Response, Router } from "express"
 import cookieSession from "cookie-session"
-import authGetRouter from "./routes/auth/get"
-import dataGetRouter from "./routes/data/get"
-import Config from "./config/config"
+import ConfigType from "./config/type"
 import { handleErrors } from "./middleware/handleErrors"
 import { NotFound } from "./models/error"
+import { RouteDefinition } from "./models/route"
 
-const app = express()
+export default function appFactory({ Config, Routes }:
+  { Config: ConfigType, Routes: RouteDefinition[] }):
+  Express {
 
-app.use(cookieSession({
-  name: "session",
-  keys: ["WPOIJADad'#/]11"],
-  maxAge: 1 * 60 * 60 * 1000, // 1 Hour
-  secure: Config.environment.secure,
-  httpOnly: true
-}))
-app.use(express.static(__dirname + "/public"))
-app.get("/favicon.ico", (req: Request, res: Response) => res.status(204))
-app.use("/oauth2", authGetRouter)
-app.use("/data", dataGetRouter)
+  const { environment } = Config
 
-app.get("/", (req: Request, res: Response) => {
-  res.redirect("/oauth2/login")
-})
+  const app = express()
 
-app.all("*", (req: Request, res: Response) => {
-  console.log(req)
-  throw new NotFound("Page does not exist")
-})
+  app.use(cookieSession({
+    name: "session",
+    keys: ["WPOIJADad'#/]11"],
+    maxAge: 1 * 60 * 60 * 1000, // 1 Hour
+    secure: environment.secure,
+    httpOnly: true
+  }))
+  app.use(express.static(__dirname + "/public"))
+  app.get("/favicon.ico", (req: Request, res: Response) => res.status(204))
+  Routes.map(route => {
+    app.use(route[0], route[1])
+  })
+  // app.use("/oauth2", authGetRouter)
+  // app.use("/data", dataGetRouter)
 
-app.use(handleErrors)
+  app.get("/", (req: Request, res: Response) => {
+    res.redirect("/oauth2/login")
+  })
 
-export default app
+  app.all("*", (req: Request, res: Response) => {
+    console.log(req)
+    throw new NotFound("Page does not exist")
+  })
 
-// process.on("SIGINT", () => { console.log("exiting…"); process.exit() })
-// process.on("exit", () => { console.log("exiting…"); process.exit() })
+  app.use(handleErrors)
+
+  return app
+}
+
+
 
