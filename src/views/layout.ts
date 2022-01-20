@@ -1,4 +1,4 @@
-import topnav from "./nav"
+import topnav from "./components/layout/nav"
 
 export default function layout(template: string): string {
   return `

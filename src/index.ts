@@ -1,6 +1,14 @@
-import app from "./app"
+import inject from "./registry"
 
-app.listen(
-  3000,
-  () => console.log("Server has started on http://localhost:3000")
-)
+const app = inject()
+  .then(app => {
+    app.listen(
+      3000,
+      () => console.log("Server has started on http://localhost:3000")
+    )
+  })
+  .catch(err => {
+    console.log(err)
+  })
+
+

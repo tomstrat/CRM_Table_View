@@ -1,13 +1,19 @@
-import app from "../../app"
+import inject from "../../registry"
+import createDatabase from "../../database"
 import request from "supertest"
 import Config from "../../config/config"
 import nock from "nock"
 import cookieSession from "cookie-session"
 import express, { Express, Request, Response } from "express"
+import { Connection } from "typeorm"
 
 describe("GET /login", () => {
   let parentApp: Express
-  beforeEach(() => {
+  let DB: Connection
+
+  beforeAll(async () => {
+    DB = await createDatabase({ Config })
+    const app = await inject(DB)
     parentApp = express()
     parentApp.use(cookieSession({
       name: "session",
@@ -25,6 +31,10 @@ describe("GET /login", () => {
       .reply(200, {
         records: ["test", "test"]
       })
+  })
+
+  afterAll(async () => {
+    DB.close()
   })
 
   it("sends 200 code when getting without auth token", async () => {

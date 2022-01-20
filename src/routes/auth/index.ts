@@ -3,13 +3,13 @@ import { RouteDefinition } from "../../models/route"
 import { requestToken } from "../requests"
 
 
-export default function authRouteFactory({ login }: { login: () => string }): RouteDefinition {
+export default function authRouteFactory({ loginPage }: { loginPage: () => string }): RouteDefinition {
   const authRouter = Router()
 
   authRouter.get("/login", (req: Request, res: Response) => {
 
     if (req.session && req.session.token) return res.redirect("/data")
-    return res.send(login())
+    return res.send(loginPage())
 
   })
   authRouter.get("/callback", async (req: Request, res: Response) => {
@@ -21,5 +21,5 @@ export default function authRouteFactory({ login }: { login: () => string }): Ro
 
   })
 
-  return ["/users", authRouter]
+  return ["/oauth2", authRouter]
 }

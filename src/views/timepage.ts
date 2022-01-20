@@ -1,7 +1,8 @@
-import timeform from "./timeform"
+import timeform from "./components/timepage/timeform"
+import layout from "./layout"
 
-export default function timepage(): string {
-    return `
+export default function timePage(): string {
+    return layout(`
     <div class="day-container">
         <label for="day">Select day:</label>
         <input type="date" id="start" name="day"
@@ -10,5 +11,5 @@ export default function timepage(): string {
     </div>
     ${timeform()}
                 
-    `
+    `)
 }

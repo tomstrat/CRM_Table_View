@@ -1,7 +1,7 @@
 import { InternalDataFormat, InternalRecord } from "../models/internal.interfaces"
 import layout from "./layout"
-import topnav from "./nav"
-import controls from "./table/controls"
+import topnav from "./components/layout/nav"
+import controls from "./components/table/controls"
 import * as R from "ramda"
 
 interface TableDataConfig {

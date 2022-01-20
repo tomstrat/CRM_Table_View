@@ -1,8 +1,7 @@
-import { InternalDataFormat, InternalRecord } from "../../models/internal.interfaces"
-import layout from "../layout"
+import { InternalDataFormat, InternalRecord } from "../../../models/internal.interfaces"
+import layout from "../../layout"
 import controls from "./controls"
 import * as R from "ramda"
-import { table } from "console"
 
 interface TableDataConfig {
 	excludes: string[]
