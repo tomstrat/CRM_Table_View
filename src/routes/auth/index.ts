@@ -3,7 +3,7 @@ import { RouteDefinition } from "../../models/route"
 import { requestToken } from "../requests"
 
 
-export default function authRouteFactory({ loginPage }: { loginPage: () => string }): RouteDefinition {
+export default function authRouteFactory({ loginPage, newlogin }: { loginPage: () => string, newlogin: () => string }): RouteDefinition {
   const authRouter = Router()
 
   authRouter.get("/login", (req: Request, res: Response) => {
@@ -21,5 +21,8 @@ export default function authRouteFactory({ loginPage }: { loginPage: () => strin
 
   })
 
+  authRouter.get("/newlogin", (req: Request, res: Response) => {
+    return res.send(newlogin())
+  })
   return ["/oauth2", authRouter]
 }

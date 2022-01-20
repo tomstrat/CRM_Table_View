@@ -6,7 +6,7 @@ import { User } from "./database/models/User"
 import usersRouteFactory from "./routes/users"
 import authRouteFactory from "./routes/auth"
 import appFactory from "./app"
-import { tableViewBuilder, loginPage, timePage } from "./views"
+import { tableViewBuilder, loginPage, timePage, newlogin } from "./views"
 import dataRouteFactory from "./routes/data"
 import timesheetsRouteFactory from "./routes/timesheets"
 
@@ -15,7 +15,7 @@ export default async function inject(testDB?: Connection) {
   const usersClient = new Client("User", DB, User)
   const Routes = [
     usersRouteFactory({ usersClient }),
-    authRouteFactory({ loginPage }),
+    authRouteFactory({ loginPage, newlogin }),
     dataRouteFactory({ tableViewBuilder }),
     timesheetsRouteFactory({ timePage })
   ]
