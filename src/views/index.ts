@@ -1,7 +1,7 @@
 import { tableViewBuilder } from "./table"
 import errorPage from "./error"
 import loginPage from "./login"
-import timePage from "./timepage"
+import timePage from "./ttmhours"
 import layout from "./layout"
 import newlogin from "./newlogin"
 import ttmoverview from "./ttmoverview"
