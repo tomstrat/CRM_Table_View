@@ -1,8 +1,8 @@
 import { Connection, Repository, EntityTarget } from "typeorm"
 
 export default class Client<Model> {
-  private repository: Repository<Model>
-  constructor(private clientName: string, private database: Connection, private model: EntityTarget<Model>) {
+  protected repository: Repository<Model>
+  constructor(protected clientName: string, protected database: Connection, protected model: EntityTarget<Model>) {
     this.repository = this.database.getRepository(this.model)
   }
 
