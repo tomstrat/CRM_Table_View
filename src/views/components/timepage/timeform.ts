@@ -3,12 +3,12 @@ export default function timeform(): string {
     <div class="form-container">
         <div class="time-container">
             <div class="start-time-container">
-                <label for="start-time">Start time:</label>
+                <label for="start-time">Start time</label>
                 <input type="time" class="timedrop" name="start"
                 min="05:00" max="23:00" required>
             </div>
             <div class="end-time-container">
-                <label for="end-time">End time:</label>
+                <label for="end-time">End time</label>
                 <input type="time" class="timedrop" name="end"
                 min="05:00" max="23:00" required>
             </div>
@@ -23,21 +23,21 @@ export default function timeform(): string {
             </div>
         </div>
         <div class="break-time-container">
-        <label for="break-start">Break start time:</label>
-        <input type="time" class="timedrop" name="break-start"
-        min="05:00" max="23:00" required>
+            <label>Break time</label>
+            <div class="break-time-subcontainer">
+                <input type="time" class="timedrop" name="break-start"
+                min="05:00" max="23:00" required>
     
-        <label for="break-end">until</label>
-        <input type="time" class="timedrop" name="break-end"
-        min="05:00" max="23:00" required>
-        </div>
-        <form class="comments-container">
-            <div>
-                <label for="example">Comments</label>
-                <input id="example" type="text" name="text">
-            </div>
+                <label>to</label>
             
-        </form>
+                <input type="time" class="timedrop" name="break-end"
+                min="05:00" max="23:00" required>
+            </div>
+        </div>
+        <div class="comments-container">
+            <label for="example">Comments</label>
+            <input id="example" type="text" name="text">
+        </div>
         <button class="submit-button">Submit</button>
     
     </div>
