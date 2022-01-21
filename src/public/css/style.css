@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
-.topnav {
+.nav {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -14,11 +14,20 @@
   z-index: 10;
 }
 
-.topnav a {
+.link-container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 70%;
+}
+
+.nav a {
   padding-left: 40px;
   padding-right: 40px;
   color: #ffffff;
   text-decoration: none;
+}
+.nav a:hover {
+  color: #8dc63f;
 }
 
 body {
@@ -139,11 +148,59 @@ justify-content: center;
   flex-direction: row;
 }
 .break-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
 }
+
+.switch-field {
+	display: flex;
+	margin-bottom: 36px;
+	overflow: hidden;
+}
+
+.switch-field input {
+	position: absolute !important;
+	clip: rect(0, 0, 0, 0);
+	height: 1px;
+	width: 1px;
+	border: 0;
+	overflow: hidden;
+}
+
+.switch-field label {
+	background-color: #e4e4e4;
+	color: rgba(0, 0, 0, 0.6);
+	font-size: 14px;
+	line-height: 1;
+	text-align: center;
+	padding: 8px 16px;
+	margin-right: -1px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+	transition: all 0.1s ease-in-out;
+}
+
+.switch-field label:hover {
+	cursor: pointer;
+}
+
+.switch-field input:checked + label {
+	background-color: #a5dc86;
+	box-shadow: none;
+}
+
+.switch-field label:first-of-type {
+	border-radius: 4px 0 0 4px;
+}
+
+.switch-field label:last-of-type {
+	border-radius: 0 4px 4px 0;
+}
+
 .end-time-container {
   display: flex;
   flex-direction: row;
@@ -157,15 +214,14 @@ justify-content: center;
   display: flex;
   flex-direction: row;
 }
-input[type="radio"] {
-  display: none;
-}
+
 .comments-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
 label {
 padding: 10px 20px;
 }
@@ -216,8 +272,10 @@ padding-top: 100px;
 align-items: center;
 }
 
-.login-button {
+.login-container .submit-button {
   width: 90%; 
+}
+.submit-button { 
   background-color: #8dc63f;
   color: #ffffff; 
 }

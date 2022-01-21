@@ -1,4 +1,4 @@
-import topnav from "./components/layout/nav"
+import timenav from "./components/layout/nav"
 
 export default function layout(template: string): string {
   return `
@@ -12,7 +12,7 @@ export default function layout(template: string): string {
           <title>CRM Table Viewer</title>
       </head>
       <body>
-        ${topnav()}
+        ${timenav()}
         ${template}
       </body>
       </html>

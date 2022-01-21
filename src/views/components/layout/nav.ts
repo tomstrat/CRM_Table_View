@@ -1,12 +1,11 @@
-export default function topnav(): string {
+export default function timenav(): string {
   return `
-  <div class="topnav">
-      <a href="/data">Home</a>
-      <a href="/timesheets">Timesheets</a>
-      <a href="#Trucks">Trucks</a>
-      <a href="#Performance">Performance</a>
-      <a href="#Social">Social</a>
-      <a href="#Resources">Resources</a>
+  <div class="nav">
+    <div class="link-container">
+      <a href="/oauth2/ttmoverview">Overview</a>
+      <a href="/timesheets">Add hours</a>
+      <a href="/oauth2/ttmavailability">Availability/Requests</a>
+    </div>
   </div>
   `
 }

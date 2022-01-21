@@ -13,14 +13,16 @@ export default function timeform(): string {
                 min="05:00" max="23:00" required>
             </div>
         </div>
-        <div class="break-container">
-            <p1>Did you take your break?</p1>   
-            <div class="breakbutton-container>
-                <input id="toggle-on" name="toggle" type="radio">
-                <label for="toggle-on">Yes</label>
-                <input id="toggle-off" name="toggle" type="radio">
-                <label for="toggle-off">No</label>
-            </div>
+        <div class="break-container">  
+            <form class="breakbutton-container">
+                <p1>Did you take a break?</p1>
+                <div class="switch-field">
+                    <input type="radio" id="radio-one" name="switch-one" value="yes" checked/>
+                    <label for="radio-one">Yes</label>
+                    <input type="radio" id="radio-two" name="switch-one" value="no" />
+                    <label for="radio-two">No</label>
+                </div>
+            </form>
         </div>
         <div class="break-time-container">
         <label for="break-start">Break start time:</label>
@@ -38,8 +40,7 @@ export default function timeform(): string {
             </div>
             
         </form>
-        <div class="submit">
-                <input type="submit" value="Send">
+        <button class="submit-button">Submit</button>
     
     </div>
     `

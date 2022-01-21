@@ -7,7 +7,7 @@ export default function newlogin(): string {
 
         <input class="password" type="password" placeholder="Enter Password" name="psw" required>
         
-        <button class="login-button" type="submit">Login</button>
+        <button class="submit-button">Login</button>
     
         <label class="remember-me-container">
             <input class="remember-me" type="checkbox" checked="checked" name="remember"> Remember me
