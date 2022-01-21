@@ -4,6 +4,10 @@ import loginPage from "./login"
 import timePage from "./timepage"
 import layout from "./layout"
 import newlogin from "./newlogin"
+import ttmoverview from "./ttmoverview"
+import ttmhours from "./ttmhours"
+import ttmavailability from "./ttmavailability"
+import opsoverview from "./opsoverview"
 
 export {
   tableViewBuilder,
@@ -11,5 +15,9 @@ export {
   loginPage,
   timePage,
   layout,
-  newlogin
+  newlogin,
+  ttmoverview,
+  ttmhours,
+  ttmavailability,
+  opsoverview
 }
