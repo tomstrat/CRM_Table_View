@@ -7,7 +7,7 @@ import usersRouteFactory from "./routes/users"
 import authRouteFactory from "./routes/auth"
 import appFactory from "./app"
 import { requireAuth, handleErrors } from "./middleware"
-import { tableViewBuilder, loginPage, timePage, newlogin, ttmoverview, ttmhours, ttmavailability, opsoverview } from "./views"
+import { tableViewBuilder, loginPage, newlogin, ttmoverview, ttmhours, ttmavailability, opsoverview } from "./views"
 import dataRouteFactory from "./routes/data"
 import timesheetsRouteFactory from "./routes/timesheets"
 
@@ -16,9 +16,9 @@ export default async function inject(testDB?: Connection) {
   const usersClient = new Client("User", DB, User)
   const Routes = [
     usersRouteFactory({ usersClient }),
-    authRouteFactory({ loginPage, newlogin, ttmoverview, ttmhours, ttmavailability, opsoverview }),
+    authRouteFactory({ loginPage, newlogin, opsoverview }),
     dataRouteFactory({ tableViewBuilder, requireAuth }),
-    timesheetsRouteFactory({ timePage, requireAuth })
+    timesheetsRouteFactory({ requireAuth, ttmoverview, ttmhours, ttmavailability })
   ]
 
   const app = appFactory({ Config, Routes, handleErrors })

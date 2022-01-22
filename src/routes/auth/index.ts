@@ -3,7 +3,7 @@ import { RouteDefinition } from "../../models/route"
 import { requestToken } from "../requests"
 
 
-export default function authRouteFactory({ loginPage, newlogin, ttmoverview, ttmhours, ttmavailability, opsoverview }: { loginPage: () => string, newlogin: () => string, ttmoverview: () => string, ttmhours: () => string, ttmavailability: () => string, opsoverview: () => string }): RouteDefinition {
+export default function authRouteFactory({ loginPage, newlogin, opsoverview }: { loginPage: () => string, newlogin: () => string, opsoverview: () => string }): RouteDefinition {
   const authRouter = Router()
 
   authRouter.get("/login", (req: Request, res: Response) => {
@@ -24,15 +24,7 @@ export default function authRouteFactory({ loginPage, newlogin, ttmoverview, ttm
   authRouter.get("/newlogin", (req: Request, res: Response) => {
     return res.send(newlogin())
   })
-  authRouter.get("/ttmoverview", (req: Request, res: Response) => {
-    return res.send(ttmoverview())
-  })  
-  authRouter.get("/ttmhours", (req: Request, res: Response) => {
-    return res.send(ttmhours())
-  })  
-  authRouter.get("/ttmavailability", (req: Request, res: Response) => {
-    return res.send(ttmavailability())
-  })  
+
   authRouter.get("/opsoverview", (req: Request, res: Response) => {
     return res.send(opsoverview())
   })

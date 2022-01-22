@@ -2,9 +2,9 @@ export default function timenav(): string {
   return `
   <div class="nav">
     <div class="link-container">
-      <a href="/oauth2/ttmoverview">Overview</a>
-      <a href="/timesheets">Add hours</a>
-      <a href="/oauth2/ttmavailability">Availability/Requests</a>
+      <a href="/timesheets/ttmoverview">Overview</a>
+      <a href="/timesheets/ttmhours">Add hours</a>
+      <a href="/timesheets/ttmavailability">Availability/Requests</a>
     </div>
   </div>
   `
