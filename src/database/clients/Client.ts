@@ -1,4 +1,5 @@
 import { Connection, Repository, EntityTarget } from "typeorm"
+import { NotFound, BadRequest } from "../../models/error"
 
 export default class Client<Model> {
   protected repository: Repository<Model>
@@ -6,37 +7,32 @@ export default class Client<Model> {
     this.repository = this.database.getRepository(this.model)
   }
 
-  async addRecord(record: Model) {
+  async addRecord(record: Model): Promise<Model | void> {
     try {
       const recordToAdd = this.repository.create(record)
-      await this.repository.save(recordToAdd)
+      const savedRecord = await this.repository.save(recordToAdd)
       console.log(`${this.clientName} has been saved`)
+      return savedRecord
     } catch (err) {
-      console.log(err)
+      if (err instanceof Error) throw new BadRequest(err.message)
     }
   }
 
-  async getOne(id: number) {
-    try {
-      const record = await this.repository.findOne(id)
-      console.log(`Found ${this.clientName}: ${record}`)
-      return record
-    } catch (err) {
-      console.log(err)
-    }
+  async getOne(id: number): Promise<Model | void> {
+    const record = await this.repository.findOne(id)
+    if (!record) throw new NotFound(`${this.clientName} could not be found`)
+    console.log(`Found ${this.clientName}: ${record}`)
+    return record
   }
 
-  async getAll() {
-    try {
-      const records = await this.repository.find()
-      console.log(`Found all ${this.clientName}`)
-      return records
-    } catch (err) {
-      console.log(err)
-    }
+  async getAll(): Promise<Model[] | void> {
+    const records = await this.repository.find()
+    if (!records) throw new NotFound(`${this.clientName}s could not be found`)
+    console.log(`Found all ${this.clientName}`)
+    return records
   }
 
-  async updateRecord(id: number, fieldsToUpdate: Partial<Model>) {
+  async updateRecord(id: number, fieldsToUpdate: Partial<Model>): Promise<void> {
     try {
       const record = await this.repository.findOne(id)
       if (record) {
@@ -45,17 +41,17 @@ export default class Client<Model> {
       }
       console.log(`Updated ${this.clientName}: ${id}`)
     } catch (err) {
-      console.log(err)
+      if (err instanceof Error) throw new BadRequest(err.message)
     }
   }
 
-  async deleteRecord(id: number) {
+  async deleteRecord(id: number): Promise<void> {
     try {
       const record = await this.repository.findOne(id)
       if (record) await this.repository.remove(record)
       console.log(`Deleted ${this.clientName}: ${id}`)
     } catch (err) {
-      console.log(err)
+      if (err instanceof Error) throw new BadRequest(err.message)
     }
   }
 }

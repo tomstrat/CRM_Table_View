@@ -21,5 +21,14 @@ export default interface ConfigType {
     entities: string[]
     migrations: string[]
     subscribers: string[]
+  },
+  testDatabase: {
+    database: string
+    dropSchema: boolean
+    synchronize: boolean
+    logging: boolean
+    entities: string[]
+    migrations: string[]
+    subscribers: string[]
   }
 }

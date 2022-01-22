@@ -31,5 +31,20 @@ export default {
     subscribers: [
       "src/database/subscribers/**/*.ts"
     ],
+  },
+  testDatabase: {
+    database: ":memory:",
+    dropSchema: true,
+    synchronize: true,
+    logging: false,
+    entities: [
+      "src/database/models/**/*.ts"
+    ],
+    migrations: [
+      "src/database/migrations/**/*.ts"
+    ],
+    subscribers: [
+      "src/database/subscribers/**/*.ts"
+    ],
   }
 }

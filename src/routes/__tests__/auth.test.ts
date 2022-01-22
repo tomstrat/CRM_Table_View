@@ -1,5 +1,5 @@
 import inject from "../../registry"
-import createDatabase from "../../database"
+import { createDatabase } from "../../database"
 import request from "supertest"
 import Config from "../../config/config"
 import nock from "nock"

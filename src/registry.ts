@@ -1,8 +1,7 @@
-import Client from "./database/clients/Client"
+import UserClient from "./database/clients/UserClient"
 import { Connection } from "typeorm"
-import createDatabase from "./database"
+import { createDatabase } from "./database"
 import Config from "./config/config"
-import { User } from "./database/models/User"
 import usersRouteFactory from "./routes/users"
 import authRouteFactory from "./routes/auth"
 import appFactory from "./app"
@@ -12,8 +11,8 @@ import dataRouteFactory from "./routes/data"
 import timesheetsRouteFactory from "./routes/timesheets"
 
 export default async function inject(testDB?: Connection) {
-  const DB = testDB || await createDatabase({ Config })
-  const usersClient = new Client("User", DB, User)
+  const DB = testDB || await createDatabase({ Config, testdb: true })
+  const usersClient = new UserClient(DB)
   const Routes = [
     usersRouteFactory({ usersClient }),
     authRouteFactory({ loginPage, newlogin }),
