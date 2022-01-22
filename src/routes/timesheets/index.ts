@@ -3,7 +3,7 @@ import { RouteDefinition } from "../../models/route"
 
 
 export default function timesheetsRouteFactory({ requireAuth ,ttmoverview, ttmhours, ttmavailability }:
-  { ttmoverview: () => string, ttmhours: () => string, ttmavailability: () => string , requireAuth: RequestHandler }): RouteDefinition {
+  { ttmoverview: () => string, ttmhours: () => string, ttmavailability: () => string, requireAuth: RequestHandler }): RouteDefinition {
   const timesheetsRouter = Router()
 
   timesheetsRouter.get("/", requireAuth, (req: Request, res: Response) => {

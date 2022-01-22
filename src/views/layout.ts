@@ -1,5 +1,3 @@
-import timenav from "./components/layout/nav"
-
 export default function layout(template: string): string {
   return `
     <!DOCTYPE html>
@@ -12,8 +10,8 @@ export default function layout(template: string): string {
           <title>CRM Table Viewer</title>
       </head>
       <body>
-        ${timenav()}
         ${template}
+        <script src="/js/index.js"></script>
       </body>
       </html>
   `

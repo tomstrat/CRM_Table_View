@@ -6,7 +6,7 @@ import newlogin from "./newlogin"
 import ttmoverview from "./ttmviews/timesheets/ttmoverview"
 import ttmhours from "./ttmviews/timesheets/ttmhours"
 import ttmavailability from "./ttmviews/timesheets/ttmavailability"
-import opsoverview from "./opsoverview"
+
 
 export {
   tableViewBuilder,
@@ -17,5 +17,4 @@ export {
   ttmoverview,
   ttmhours,
   ttmavailability,
-  opsoverview
 }
