@@ -9,7 +9,6 @@ export default function timesheetsRouteFactory({ requireAuth ,ttmoverview, ttmho
   timesheetsRouter.get("/", requireAuth, (req: Request, res: Response) => {
     res.redirect("timesheets/ttmoverview")
   })
-
   timesheetsRouter.get("/ttmoverview", (req: Request, res: Response) => {
     return res.send(ttmoverview())
   })  

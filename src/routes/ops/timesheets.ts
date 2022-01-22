@@ -1,7 +1,5 @@
 import { Router, Request, Response, RequestHandler } from "express"
 import { RouteDefinition } from "../../models/route"
-import scheduler from "../../views/opsviews/timesheets/scheduler"
-
 
 export default function opstimesheetsRouteFactory({ requireAuth , opsoverview, scheduler, edithours, dataviewer, requests, adduser }:
   { requireAuth: RequestHandler, opsoverview: () => string, scheduler: () => string, edithours: () => string, dataviewer: () => string, requests: () => string, adduser: () => string }): RouteDefinition {
@@ -10,7 +8,7 @@ export default function opstimesheetsRouteFactory({ requireAuth , opsoverview, s
   opstimesheetsRouter.get("/", requireAuth, (req: Request, res: Response) => {
     res.redirect("/ops/timesheets/opsoverview")
   })
-  
+
   opstimesheetsRouter.get("/opsoverview", (req: Request, res: Response) => {
     return res.send(opsoverview())
   })
