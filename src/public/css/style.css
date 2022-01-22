@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 
-.topnav {
+.nav {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -14,20 +14,28 @@
   z-index: 10;
 }
 
-.topnav a {
+.link-container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 70%;
+}
+
+.nav a {
   padding-left: 40px;
   padding-right: 40px;
   color: #ffffff;
   text-decoration: none;
 }
+.nav a:hover {
+  color: #8dc63f;
+}
 
 body {
   background-color: #00539f;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   font-family: "Open Sans", sans-serif;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
   margin-top: 100px;
 }
 
@@ -109,72 +117,147 @@ justify-content: center;
 }  
 
 /* Timesheet sections */
+
 .day-container {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   padding-bottom: 40px;
 }
-.form-container {
+.calendar-container {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   background-color: aliceblue;
   border: 2px solid #8dc63f;
   border-radius: 12px;
-  height: 450px;
-  width: 45%;
+  justify-self: flex-start;
+  height: 500px;
+  width: 500px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  background-color: aliceblue;
+  border: 2px solid #8dc63f;
+  border-radius: 12px;
+  height: auto;
+  width: auto;
   align-items: center;
   justify-content: space-around;
+  padding: 30px;
 }
+
+.form-container label {
+  display: flex;
+  white-space: nowrap;
+  padding: 10px;
+}
+
 .time-container {
   display: flex;
   flex-direction: row;
-  width: 100%;
-  align-content: space-around;
-  justify-content: center;
+  width: 75%;
+  justify-content: space-evenly;
 }
 .start-time-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+  padding-right: 7px;
 }
+
+.end-time-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 7px;
+}
+
+
 .break-container {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  align-content: space-around;
   justify-content: center;
   align-items: center;
 }
-.end-time-container {
+
+.break-time-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.break-time-subcontainer {
   display: flex;
   flex-direction: row;
 }
+
+.switch-field {
+	display: flex;
+	margin-bottom: 36px;
+	overflow: hidden;
+}
+
+.switch-field input {
+	position: absolute !important;
+	clip: rect(0, 0, 0, 0);
+	height: 1px;
+	width: 1px;
+	border: 0;
+	overflow: hidden;
+}
+
+.switch-field label {
+	background-color: #ffffff;
+	color: rgb(0, 0, 0);
+	font-size: 14px;
+	line-height: 1;
+	text-align: center;
+	padding: 8px 16px;
+	margin-right: -1px;
+	border: 1px solid #8dc63f;
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+	transition: all 0.1s ease-in-out;
+}
+
+.switch-field label:hover {
+	cursor: pointer;
+}
+
+.switch-field input:checked + label {
+	background-color: #a5dc86;
+	box-shadow: none;
+}
+
+.switch-field label:first-of-type {
+	border-radius: 4px 0 0 4px;
+}
+
+.switch-field label:last-of-type {
+	border-radius: 0 4px 4px 0;
+}
+
 .timedrop {
   display: flex;
   flex-wrap: wrap;
 }
 
-.break-time-container {
-  display: flex;
-  flex-direction: row;
-}
-input[type="radio"] {
-  display: none;
-}
 .comments-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-label {
-padding: 10px 20px;
-}
-
 
 input[type="radio"]:checked + label {
-  background-color: darkblue;
+  background-color:#8dc63f;
   cursor: default;
-  color: #E6E6E6;
+  color: #ffffff;
 }
 
 /* Login section */
@@ -216,8 +299,10 @@ padding-top: 100px;
 align-items: center;
 }
 
-.login-button {
+.login-container .submit-button {
   width: 90%; 
+}
+.submit-button { 
   background-color: #8dc63f;
   color: #ffffff; 
 }
@@ -234,9 +319,10 @@ align-items: center;
 .remember-me-container {
   font-size: 11px;
 }
-input.remember-me {
-  background-color: #8dc63f;
-}
+
 .forgot-link {
   font-size: 12px;
 }
+
+/* flex calendar */
+

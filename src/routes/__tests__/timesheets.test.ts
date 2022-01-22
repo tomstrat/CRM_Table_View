@@ -42,7 +42,7 @@ describe("GET /data", () => {
       .expect(200)
     await agent
       .get("/timesheets")
-      .expect(200)
+      .expect(302)
   })
 
 })
