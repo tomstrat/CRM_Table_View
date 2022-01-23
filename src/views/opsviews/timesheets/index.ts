@@ -6,10 +6,10 @@ import requests from "./requests";
 import manageusers from "./manageusers";
 
 export {
-    opsoverview,
-    scheduler,
-    edithours,
-    dataviewer,
-    requests,
-    manageusers
+	opsoverview,
+	scheduler,
+	edithours,
+	dataviewer,
+	requests,
+	manageusers
 }
