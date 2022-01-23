@@ -10,8 +10,7 @@ import { tableViewBuilder, loginPage, newlogin, ttmoverview, ttmhours, ttmavaila
 import dataRouteFactory from "./routes/data"
 import timesheetsRouteFactory from "./routes/timesheets"
 import opstimesheetsRouteFactory from "./routes/ops/timesheets"
-import devRouteFactory from "./routes/devroleswitch"
-import { opsoverview, scheduler, edithours, dataviewer, requests, adduser } from "./views/opsviews/timesheets"
+import { opsoverview, scheduler, edithours, dataviewer, requests, manageusers } from "./views/opsviews/timesheets"
 
 
 export default async function inject(testDB?: Connection) {
@@ -22,8 +21,7 @@ export default async function inject(testDB?: Connection) {
     authRouteFactory({ loginPage, newlogin }),
     dataRouteFactory({ tableViewBuilder, requireAuth }),
     timesheetsRouteFactory({ requireAuth, ttmoverview, ttmhours, ttmavailability }),
-    opstimesheetsRouteFactory({ requireAuth, opsoverview, scheduler, edithours, dataviewer, requests, adduser }),
-    devRouteFactory({ requireAuth, ttmoverview })
+    opstimesheetsRouteFactory({ requireAuth, opsoverview, scheduler, edithours, dataviewer, requests, manageusers }),
   ]
 
   const app = appFactory({ Config, Routes, handleErrors })

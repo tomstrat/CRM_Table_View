@@ -3,7 +3,7 @@ import scheduler from "./scheduler";
 import edithours from "./edithours";
 import dataviewer from "./dataviewer";
 import requests from "./requests";
-import adduser from "./adduser";
+import manageusers from "./manageusers";
 
 export {
     opsoverview,
@@ -11,5 +11,5 @@ export {
     edithours,
     dataviewer,
     requests,
-    adduser
+    manageusers
 }
