@@ -60,4 +60,41 @@ describe("UserClient Methods", () => {
       })
     })
   })
+  describe("When updating a user", () => {
+    describe("Passing correct parameters", () => {
+      const correctEdit: User = { username: "Billy", password: "NewPassword", role: Role.superUser }
+      it("Should return edited user on full change", async () => {
+        const updatedUser = await userClient.updateRecord(testUser!.id!, correctEdit)
+        if (updatedUser) {
+          expect(typeof updatedUser.id).toBe("number")
+          expect(updatedUser.username).toBe("Billy")
+          expect(updatedUser.password).not.toBe("NewPassword")
+          expect(updatedUser.role).toBe("SUPERUSER")
+        }
+      })
+      it("Should return edited user on partial change", async () => {
+        const updatedUser = await userClient.updateRecord(testUser!.id!, { username: "Luke" })
+        if (updatedUser) {
+          expect(typeof updatedUser.id).toBe("number")
+          expect(updatedUser.username).toBe("Luke")
+          expect(updatedUser.password).not.toBe("NewPassword")
+          expect(updatedUser.role).toBe("SUPERUSER")
+        }
+      })
+    })
+  })
+  describe("When comparing passwords", () => {
+    it("And they match", async () => {
+      expect(await userClient.comparePasswords("Luke", "NewPassword")).toEqual(true)
+    })
+    it("And they dont match", async () => {
+      expect(await userClient.comparePasswords("Luke", "WrongPass")).toEqual(false)
+    })
+    it("Expect not found error on wrong username", () => {
+      userClient.comparePasswords("Bob", "WrongPass")
+        .catch(err => {
+          expect(err.getCode()).toEqual(404)
+        })
+    })
+  })
 })

@@ -32,14 +32,15 @@ export default class Client<Model> {
     return records
   }
 
-  async updateRecord(id: number, fieldsToUpdate: Partial<Model>): Promise<void> {
+  async updateRecord(id: number, fieldsToUpdate: Partial<Model>): Promise<Model | void> {
     try {
       const record = await this.repository.findOne(id)
       if (record) {
         const updated = await this.repository.create({ ...record, ...fieldsToUpdate })
         await this.repository.save(updated)
+        console.log(`Updated ${this.clientName}: ${id}`)
+        return updated
       }
-      console.log(`Updated ${this.clientName}: ${id}`)
     } catch (err) {
       if (err instanceof Error) throw new BadRequest(err.message)
     }
