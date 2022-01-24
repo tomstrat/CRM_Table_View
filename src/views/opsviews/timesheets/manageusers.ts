@@ -1,20 +1,17 @@
 import layout from "../../layout"
 import opstimenav from "../../components/layout/opstimenav"
+import sidebar from "../../components/layout/sidebar"
+import usercontrols from "../../components/timepage/usercontrols"
 
 export default function manageusers(): string {
     return layout(`
+			${sidebar("Select users", usercontrols)}
       ${opstimenav()}
-      <div class="table-container">
-        <div class="ttmtable">
-			    <div class="thead">
-			  	  <div class="row">
-			  	<!-- headers -->
-			  	  </div>
-			    </div>
-			  <div class="tbody">
-			  	<!-- data -->
-			  </div>
-		    </ div>    
-      </div>
+			<div class="users-content-container">
+				<h1>Dynamic tables go here</h1>
+			</div>
+			
+
+      
     `)
 }
