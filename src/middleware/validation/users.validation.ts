@@ -10,14 +10,14 @@ export default function userValidatorFactory({ userClient }:
       .escape()
       .custom(async username => {
         const user = await userClient.getOneByUsername(username)
-        if (!user) Promise.reject("Incorrect Username or Password")
+        if (!user) throw new Error("Incorrect Username or Password")
       }),
     requirePassword: body("password")
       .trim()
       .escape()
       .custom(async (password, { req }) => {
         const isCorrect = await userClient.comparePasswords(req.body.username, password)
-        if (!isCorrect) Promise.reject("Incorrect Username or Password")
+        if (!isCorrect) throw new Error("Incorrect Username or Password")
       })
   }
 }

@@ -21,17 +21,11 @@ export default class Client<Model> {
   }
 
   async getOne(id: number): Promise<Model | void> {
-    const record = await this.repository.findOne(id)
-    if (!record) throw new NotFound(`${this.clientName} could not be found`)
-    console.log(`Found ${this.clientName}: ${record}`)
-    return record
+    return await this.repository.findOne(id)
   }
 
   async getAll(): Promise<Model[] | void> {
-    const records = await this.repository.find()
-    if (!records) throw new NotFound(`${this.clientName}s could not be found`)
-    console.log(`Found all ${this.clientName}`)
-    return records
+    return await this.repository.find()
   }
 
   async updateRecord(id: number, fieldsToUpdate: Partial<Model>): Promise<Model | void> {

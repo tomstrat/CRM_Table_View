@@ -1,6 +1,7 @@
 import "reflect-metadata"
 import express, { Express, Request, ErrorRequestHandler, Response } from "express"
 import cookieSession from "cookie-session"
+import bodyParser from "body-parser"
 import ConfigType from "./config/type"
 import { NotFound } from "./models/error"
 import { RouteDefinition } from "./models/route"
@@ -20,6 +21,8 @@ export default function appFactory({ Config, Routes, handleErrors }:
     secure: environment.secure,
     httpOnly: true
   }))
+  app.use(bodyParser.urlencoded({ extended: false }))
+  app.use(bodyParser.json())
   app.use(express.static(__dirname + "/public"))
   app.get("/favicon.ico", (req: Request, res: Response) => res.status(204))
   Routes.map(route => {
@@ -31,7 +34,6 @@ export default function appFactory({ Config, Routes, handleErrors }:
   })
 
   app.all("*", (req: Request, res: Response) => {
-    console.log(req)
     throw new NotFound("Page does not exist")
   })
 

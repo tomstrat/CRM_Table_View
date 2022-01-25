@@ -46,17 +46,11 @@ describe("UserClient Methods", () => {
       })
     })
     describe("With incorrect User", () => {
-      it("Expect not found error on id", () => {
-        userClient.getOne(600)
-          .catch(err => {
-            expect(err.getCode()).toEqual(404)
-          })
+      it("Expect not found error on id", async () => {
+        expect(await userClient.getOne(600)).toEqual(undefined)
       })
-      it("Expect not found error on username", () => {
-        userClient.getOneByUsername("Bobby")
-          .catch(err => {
-            expect(err.getCode()).toEqual(404)
-          })
+      it("Expect not found error on username", async () => {
+        expect(await userClient.getOneByUsername("Bobby")).toEqual(undefined)
       })
     })
   })
@@ -90,11 +84,8 @@ describe("UserClient Methods", () => {
     it("And they dont match", async () => {
       expect(await userClient.comparePasswords("Luke", "WrongPass")).toEqual(false)
     })
-    it("Expect not found error on wrong username", () => {
-      userClient.comparePasswords("Bob", "WrongPass")
-        .catch(err => {
-          expect(err.getCode()).toEqual(404)
-        })
+    it("Expect not found error on wrong username", async () => {
+      expect(await userClient.comparePasswords("Bob", "WrongPass")).toEqual(undefined)
     })
   })
 })

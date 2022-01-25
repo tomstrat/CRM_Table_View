@@ -27,18 +27,15 @@ export default class UserClient extends Client<User> {
     }
   }
 
-  getOneByUsername = R.bind(async (username: string): Promise<User | undefined> => {
-    return await pipeWithPromise([
-      this.findOne,
-      this.checkUserExists
-    ])({ username })
-  }, this)
+  async getOneByUsername(username: string): Promise<User | undefined> {
+    return await this.findOne({ username })
+  }
 
-  async updateRecord(id: number, fieldsToUpdate: Partial<User>): Promise<User> {
+  async updateRecord(id: number, fieldsToUpdate: Partial<User>): Promise<User | undefined> {
     const isHashed = (password: string) => /\w{128}\.\w{32}/.test(password)
+    const user = await this.findOne({ id })
+    if (!user) return user
     return await pipeWithPromise([
-      this.findOne,
-      this.checkUserExists,
       R.mergeLeft(fieldsToUpdate),
       R.ifElse(
         R.pathSatisfies(isHashed, ["password"]),
@@ -46,15 +43,13 @@ export default class UserClient extends Client<User> {
         this.encrypt
       ),
       this.save
-    ])({ id })
+    ])(user)
   }
 
-  async comparePasswords(username: string, supplied: string): Promise<boolean> {
-    const record = await pipeWithPromise([
-      this.getOneByUsername,
-      this.checkUserExists
-    ])(username)
-    const [hashed, salt] = record.password.split(".")
+  async comparePasswords(username: string, supplied: string): Promise<boolean | undefined> {
+    const user = await this.findOne({ username })
+    if (!user) return user
+    const [hashed, salt] = user.password.split(".")
     const compare = (supplied: string): boolean => R.equals(supplied, hashed)
     const hex = (pass: Buffer): string => pass.toString("hex")
     return await pipeWithPromise([
@@ -68,14 +63,5 @@ export default class UserClient extends Client<User> {
     const salt = crypto.randomBytes(16).toString("hex")
     const buf = await crypto.scryptSync(user.password, salt, 64)
     return R.assoc("password", `${buf.toString("hex")}.${salt}`, user)
-  }, this)
-
-  private checkUserExists = R.bind((user: User | undefined): User => {
-    if (!user) {
-      throw new NotFound(`${this.clientName} could not be found`)
-    } else {
-      console.log(`Found User: ${user}`)
-      return user
-    }
   }, this)
 }
