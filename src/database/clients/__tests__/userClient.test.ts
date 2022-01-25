@@ -45,7 +45,7 @@ describe("UserClient Methods", () => {
         expect(returnedUser).toEqual(testUser)
       })
     })
-    describe("With incorrect Id", () => {
+    describe("With incorrect User", () => {
       it("Expect not found error on id", () => {
         userClient.getOne(600)
           .catch(err => {

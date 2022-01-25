@@ -1,5 +1,7 @@
-import { Connection, Repository, EntityTarget } from "typeorm"
+import { Connection, Repository, EntityTarget, DeepPartial } from "typeorm"
 import { NotFound, BadRequest } from "../../models/error"
+import * as R from "ramda"
+
 
 export default class Client<Model> {
   protected repository: Repository<Model>
