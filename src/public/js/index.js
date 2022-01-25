@@ -1,5 +1,20 @@
-//
-//
+let elements = document.querySelectorAll(".controlsbutton")
+
+elements.forEach(element => {
+ element.addEventListener("click", classSwitch)
+});
+
+function classSwitch(e) {
+console.log(e)
+if (e.target.classList.contains("controlsbutton")) {
+  e.target.classList.add("controls-button-clicked")
+  e.target.classList.remove("controlsbutton")
+} else {
+  e.target.classList.add("controlsbutton")
+  e.target.classList.remove("controls-button-clicked")
+}
+}
+
 //function controlsClick(id) {
 //
 //  const element = document.getElementsByClassName(id)
@@ -13,4 +28,17 @@
 //  
 //  console.log(element);
 //}
-//  
+
+//document.querySelector'(.classname') - brings array of all elements
+//
+//if(element.classList.contains("button")) 
+
+//element.classList.add("ButtonSelect")
+//element.classList.remove("ButtonSelect")
+//
+//
+//
+//
+//elements.forEach(element => {
+//  function....
+//})

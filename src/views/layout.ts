@@ -7,12 +7,11 @@ export default function layout(template: string): string {
           <meta http-equiv="X-UA-Compatible" content="IE=edge">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <link rel="stylesheet" type="text/css" href="/css/style.css" />
-          <script type="text/javascript" src="/js/index.js"></script>
           <title>CRM Table Viewer</title>
       </head>
       <body>
         ${template}
-        
+        <script type="text/javascript" src="/js/index.js"></script>
       </body>
       </html>
   `
