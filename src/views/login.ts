@@ -1,11 +1,19 @@
 import layout from "./layout"
-import Config from "../config/config"
 
 export default function loginPage(): string {
-  const { authorizeFull } = Config.urls
   return layout(`
-    <div class="login">
-      <button onclick="window.location.replace('${authorizeFull}')">Login</button>
-    </div>
+  <div class="login-container">
+      <input class="user-name" type="text" placeholder="Enter Username" name="uname" required>
+
+      <input class="password" type="password" placeholder="Enter Password" name="psw" required>
+      
+      <button class="submit-button">Login</button>
+  
+      <label class="remember-me-container">
+          <input class="remember-me" type="checkbox" checked="checked" name="remember"> Remember me
+      </label>
+      <a class="forgot-link" href="">Forgotton password?</a>
+  </div>
+              
   `)
 }

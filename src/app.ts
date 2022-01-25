@@ -27,7 +27,7 @@ export default function appFactory({ Config, Routes, handleErrors }:
   })
 
   app.get("/", (req: Request, res: Response) => {
-    res.redirect("/oauth2/login")
+    res.redirect("/login")
   })
 
   app.all("*", (req: Request, res: Response) => {
