@@ -29,12 +29,12 @@ export default function appFactory({ Config, Routes, handleErrors, requireAuth }
   app.get("/favicon.ico", (req: Request, res: Response) => res.status(204))
   Routes.map(route => {
     route[1].use(requireAuth(route[2]))
-    route[1].stack = reverse(route[1].stack)
+    route[1].stack = reverse(route[1].stack) // Reverse stack to put auth on top
     app.use(route[0], route[1])
   })
 
   app.get("/", (req: Request, res: Response) => {
-    res.redirect("/login")
+    res.redirect("/auth/login")
   })
 
   app.all("*", (req: Request, res: Response) => {
