@@ -21,7 +21,7 @@ export default async function inject(testDB?: Connection) {
     usersRouteFactory({ userClient, userValidators }),
     authRouteFactory({ loginPage, userValidators, handleValErrors }),
     dataRouteFactory({ tableViewBuilder, requireAuth }),
-    timesheetsRouteFactory({ requireAuth, ttmoverview, ttmhours, ttmavailability }),
+    timesheetsRouteFactory({ ttmoverview, ttmhours, ttmavailability }),
     opstimesheetsRouteFactory({ requireAuth, opsoverview, scheduler, edithours, dataviewer, requests, manageusers }),
   ]
 

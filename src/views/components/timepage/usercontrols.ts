@@ -23,6 +23,9 @@ export default function usercontrols(): string {
   <div class="user-controls-container">
       <button class="search-button" id="search">Search</button>
   </div>
+  <div class="new-user-container">
+    <button class="new-user-button">Add new user</button>
+  </div>
   `
 
 }
