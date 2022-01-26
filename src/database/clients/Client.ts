@@ -1,15 +1,23 @@
 import { Connection, Repository, EntityTarget, DeepPartial } from "typeorm"
-import { NotFound, BadRequest } from "../../models/error"
-import * as R from "ramda"
+import { BadRequest } from "../../models/error"
 
 
 export default class Client<Model> {
   protected repository: Repository<Model>
+  protected create
+  protected save
+  protected findOne
+  protected find
+
   constructor(protected clientName: string, protected database: Connection, protected model: EntityTarget<Model>) {
     this.repository = this.database.getRepository(this.model)
+    this.create = this.repository.create.bind(this.repository)
+    this.save = this.repository.save.bind(this.repository)
+    this.findOne = this.repository.findOne.bind(this.repository)
+    this.find = this.repository.find.bind(this.repository)
   }
 
-  async addRecord(record: Model): Promise<Model | void> {
+  async addRecord(record: Model): Promise<Model | undefined> {
     try {
       const recordToAdd = this.repository.create(record)
       const savedRecord = await this.repository.save(recordToAdd)
@@ -20,11 +28,11 @@ export default class Client<Model> {
     }
   }
 
-  async getOne(id: number): Promise<Model | void> {
+  async getOne(id: number): Promise<Model | undefined> {
     return await this.repository.findOne(id)
   }
 
-  async getAll(): Promise<Model[] | void> {
+  async getAll(): Promise<Model[] | undefined> {
     return await this.repository.find()
   }
 

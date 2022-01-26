@@ -1,9 +1,11 @@
-import { Router, Request, Response, RequestHandler } from "express"
+import { Router, Request, Response } from "express"
 import { RouteDefinition } from "../../models/route"
 import { Role } from "../../database/models/User"
+import { User } from "../../database/models/User"
+import Client from "../../database/clients/Client"
 
-export default function opstimesheetsRouteFactory({ opsoverview, scheduler, edithours, dataviewer, requests, manageusers }:
-  { opsoverview: () => string, scheduler: () => string, edithours: () => string, dataviewer: () => string, requests: () => string, manageusers: () => string }): RouteDefinition {
+export default function opstimesheetsRouteFactory({ userClient, opsoverview, scheduler, edithours, dataviewer, requests, manageusers }:
+  { userClient: Client<User>, opsoverview: () => string, scheduler: () => string, edithours: () => string, dataviewer: () => string, requests: () => string, manageusers: (data: User[] | undefined) => string }): RouteDefinition {
   const opstimesheetsRouter = Router()
 
   opstimesheetsRouter.get("/", (req: Request, res: Response) => {
@@ -30,8 +32,8 @@ export default function opstimesheetsRouteFactory({ opsoverview, scheduler, edit
     return res.send(requests())
   })
 
-  opstimesheetsRouter.get("/manageusers", (req: Request, res: Response) => {
-    return res.send(manageusers())
-  })
-  return ["/ops/timesheets", opstimesheetsRouter, Role.admin]
+  // opstimesheetsRouter.get("/manageusers", async (req: Request, res: Response) => {
+  //   return res.send(manageusers(await userClient.getAll()))
+  // })
+  return ["/ops/timesheets", opstimesheetsRouter, Role.operations]
 }

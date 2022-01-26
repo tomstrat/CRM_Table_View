@@ -1,5 +1,5 @@
 export default function opstimenav(): string {
-    return `
+  return `
     <div class="nav">
       <div class="link-container">
         <a href="/ops/timesheets/opsoverview">Overview</a>
@@ -7,8 +7,8 @@ export default function opstimenav(): string {
         <a href="/ops/timesheets/edithours">Edit hours</a>
         <a href="/ops/timesheets/dataviewer">Dataviewer</a>
         <a href="/ops/timesheets/requests">Requests</a>
-        <a href="/ops/timesheets/manageusers">Manage users</a>
+        <a href="/ops/users">Manage users</a>
       </div>
     </div>
     `
-  }
+}

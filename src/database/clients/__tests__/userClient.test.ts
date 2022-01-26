@@ -2,7 +2,8 @@ import { Connection } from "typeorm"
 import Config from "../../../config/config"
 import { createDatabase } from "../../"
 import UserClient from "../UserClient"
-import { User, Role } from "../../models/User"
+import { User, Role, Contract } from "../../models/User"
+import { RosterStatus } from "../../models/Roster"
 
 describe("UserClient Methods", () => {
 
@@ -19,7 +20,22 @@ describe("UserClient Methods", () => {
   })
 
   describe("When adding a user", () => {
-    const correctUser: User = { username: "Tom", password: "Password", role: Role.admin }
+    const correctUser: User = {
+      username: "Tom",
+      password: "password",
+      role: Role.driver,
+      contract: Contract.fullTime,
+      certified: true,
+      injured: false,
+      roster: {
+        monday: RosterStatus.working,
+        tuesday: RosterStatus.working,
+        wednesday: RosterStatus.working,
+        thursday: RosterStatus.working,
+        friday: RosterStatus.working,
+        saturday: RosterStatus.working,
+      }
+    }
     describe("Passing correct parameters", () => {
       it("Should return the new user", async () => {
         testUser = await userClient.addRecord(correctUser)
@@ -27,7 +43,7 @@ describe("UserClient Methods", () => {
           expect(typeof testUser.id).toBe("number")
           expect(testUser.username).toBe("Tom")
           expect(testUser.password).not.toBe("password")
-          expect(testUser.role).toBe(1)
+          expect(testUser.role).toBe(0)
         }
       })
     })
@@ -35,7 +51,7 @@ describe("UserClient Methods", () => {
   describe("When getting a user", () => {
     describe("By Username", () => {
       it("Should return correct User", async () => {
-        const returnedUser = await userClient.getOneByUsername(testUser!.username)
+        const returnedUser = await userClient.getOne(testUser!.username)
         expect(returnedUser).toEqual(testUser)
       })
     })
@@ -50,20 +66,20 @@ describe("UserClient Methods", () => {
         expect(await userClient.getOne(600)).toEqual(undefined)
       })
       it("Expect not found error on username", async () => {
-        expect(await userClient.getOneByUsername("Bobby")).toEqual(undefined)
+        expect(await userClient.getOne("Bobby")).toEqual(undefined)
       })
     })
   })
   describe("When updating a user", () => {
     describe("Passing correct parameters", () => {
-      const correctEdit: User = { username: "Billy", password: "NewPassword", role: Role.superUser }
+      const correctEdit: Partial<User> = { username: "Billy", password: "NewPassword", role: Role.operations }
       it("Should return edited user on full change", async () => {
         const updatedUser = await userClient.updateRecord(testUser!.id!, correctEdit)
         if (updatedUser) {
           expect(typeof updatedUser.id).toBe("number")
           expect(updatedUser.username).toBe("Billy")
           expect(updatedUser.password).not.toBe("NewPassword")
-          expect(updatedUser.role).toBe(2)
+          expect(updatedUser.role).toBe(1)
         }
       })
       it("Should return edited user on partial change", async () => {
@@ -72,7 +88,7 @@ describe("UserClient Methods", () => {
           expect(typeof updatedUser.id).toBe("number")
           expect(updatedUser.username).toBe("Luke")
           expect(updatedUser.password).not.toBe("NewPassword")
-          expect(updatedUser.role).toBe(2)
+          expect(updatedUser.role).toBe(1)
         }
       })
     })

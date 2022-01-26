@@ -12,20 +12,23 @@ import timesheetsRouteFactory from "./routes/timesheets"
 import opstimesheetsRouteFactory from "./routes/ops/timesheets"
 import { opsoverview, scheduler, edithours, dataviewer, requests, manageusers } from "./views/opsviews/timesheets"
 import userValidatorFactory from "./middleware/validation/users.validation"
+import makeTestUser from "./routes/auth/testUser"
 
 export default async function inject(testDB?: Connection) {
   const DB = testDB || await createDatabase({ Config, testdb: true })
   const userClient = new UserClient(DB)
   const userValidators = userValidatorFactory({ userClient })
   const Routes = [
-    usersRouteFactory({ userClient, userValidators }),
+    usersRouteFactory({ userClient, userValidators, manageusers }),
     authRouteFactory({ loginPage, userValidators, handleValErrors, userClient }),
     dataRouteFactory({ tableViewBuilder }),
     timesheetsRouteFactory({ ttmoverview, ttmhours, ttmavailability }),
-    opstimesheetsRouteFactory({ opsoverview, scheduler, edithours, dataviewer, requests, manageusers }),
+    opstimesheetsRouteFactory({ userClient, opsoverview, scheduler, edithours, dataviewer, requests, manageusers }),
   ]
 
   const app = appFactory({ Config, Routes, handleErrors, requireAuth })
-
+  await makeTestUser({ userClient })
   return app
+
+
 }

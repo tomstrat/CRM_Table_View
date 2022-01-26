@@ -29,5 +29,5 @@ export default function dataRouteFactory({ tableViewBuilder }:
     res.send("discontinued")
   })
 
-  return ["/data", dataRouter, Role.user]
+  return ["/data", dataRouter, Role.driver]
 }

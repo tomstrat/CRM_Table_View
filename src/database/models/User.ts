@@ -1,9 +1,19 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm"
+import { Roster } from "./Roster"
 
 export enum Role {
-	user,
-	admin,
-	superUser
+	driver = 0,
+	navigator = 0,
+	trainer = 0,
+	operations,
+	admin
+}
+
+export enum Contract {
+	fullTime,
+	partTime,
+	casual,
+	temp
 }
 
 @Entity()
@@ -21,4 +31,17 @@ export class User {
 	@Column()
 	role!: Role
 
+	@Column()
+	contract!: Contract
+
+	@Column()
+	certified!: Boolean
+
+	@Column()
+	injured!: Boolean
+
+	@OneToOne(type => Roster, roster => roster.user, {
+		cascade: true
+	})
+	roster!: Roster
 }

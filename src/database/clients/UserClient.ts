@@ -2,7 +2,7 @@ import Client from "./Client"
 import { User } from "../models/User"
 import { Connection } from "typeorm"
 import crypto from "crypto"
-import { NotFound, BadRequest } from "../../models/error"
+import { BadRequest } from "../../models/error"
 import pipeWithPromise from "../../utilities/pipeWithPromise"
 import * as R from "ramda"
 
@@ -11,11 +11,7 @@ export default class UserClient extends Client<User> {
     super("User", db, User)
   }
 
-  private create = R.bind(this.repository.create, this.repository)
-  private save = R.bind(this.repository.save, this.repository)
-  private findOne = R.bind(this.repository.findOne, this.repository)
-
-  async addRecord(record: User): Promise<User | void> {
+  async addRecord(record: User): Promise<User | undefined> {
     try {
       return await pipeWithPromise([
         this.create,
@@ -27,8 +23,18 @@ export default class UserClient extends Client<User> {
     }
   }
 
-  async getOneByUsername(username: string): Promise<User | undefined> {
-    return await this.findOne({ username })
+  async getOne(unameOrId: string | number): Promise<User | undefined> {
+    if (typeof unameOrId === "string") {
+      return await this.findOne({ username: unameOrId }, { relations: ["roster"] })
+    } else {
+      return await this.findOne({ id: unameOrId }, { relations: ["roster"] })
+    }
+  }
+
+  async getAll(): Promise<User[] | undefined> {
+    const users = await this.find({ relations: ["roster"] })
+    if (!users) return users
+    return R.map(R.assoc("password", ""), users)
   }
 
   async updateRecord(id: number, fieldsToUpdate: Partial<User>): Promise<User | undefined> {

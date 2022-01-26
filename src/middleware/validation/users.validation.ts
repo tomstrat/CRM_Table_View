@@ -9,7 +9,7 @@ export default function userValidatorFactory({ userClient }:
       .trim()
       .escape()
       .custom(async username => {
-        const user = await userClient.getOneByUsername(username)
+        const user = await userClient.getOne(username)
         if (!user) throw new Error("Incorrect Username or Password")
       }),
     requirePassword: body("password")

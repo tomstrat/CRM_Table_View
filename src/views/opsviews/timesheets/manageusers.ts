@@ -3,9 +3,15 @@ import opstimenav from "../../components/layout/opstimenav"
 import sidebar from "../../components/layout/sidebar"
 import usercontrols from "../../components/timepage/usercontrols"
 import newuserpanel from "../../components/timepage/newuserpanel"
+import { User } from "../../../database/models/User"
 
-export default function manageusers(): string {
-    return layout(`
+export default function manageusers(data: User[] | undefined): string {
+
+	const users = data
+		? data.map(user => JSON.stringify(user))
+		: "<div>No Users Found</div>"
+
+	return layout(`
 			<div id="default-sidebar" class="visible-sidebar">
 				${sidebar("Select users", usercontrols)}
 			</div>
@@ -15,9 +21,10 @@ export default function manageusers(): string {
       ${opstimenav()}
 			<div class="table-content-container">
 				<h1>Dynamic tables go here</h1>
+				<div class="data">
+					${users}
+				</div>
 			</div>
 			
-
-      
     `)
 }

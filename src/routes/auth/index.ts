@@ -29,21 +29,15 @@ export default function authRouteFactory(
     "/login",
     [requireUsername, requirePassword],
     handleValErrors(loginPage), async (req: Request, res: Response) => {
-      const { username, role } = await userClient.getOneByUsername(req.body.username) as User
+      const { username, role } = await userClient.getOne(req.body.username) as User
       req.session = { username, role }
-      return role === Role.user
+      return role === Role.driver
         ? res.redirect("/timesheets/ttmoverview")
         : res.redirect("/ops/timesheets/opsoverview")
     })
 
   authRouter.get("/logout", (req: Request, res: Response) => {
     req.session = {}
-    res.redirect("/auth/login")
-  })
-
-  authRouter.get("/test", async (req: Request, res: Response) => {
-    const testUser = await userClient.addRecord({ username: "test", password: "test", role: Role.superUser })
-    console.log(testUser)
     res.redirect("/auth/login")
   })
 

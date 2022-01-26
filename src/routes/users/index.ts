@@ -6,12 +6,12 @@ import UserValType from "../../middleware/validation/types/users"
 import { Role } from "../../database/models/User"
 
 
-export default function usersRouteFactory({ userClient, userValidators }:
-  { userClient: Client<User>, userValidators: UserValType }): RouteDefinition {
+export default function usersRouteFactory({ userClient, userValidators, manageusers }:
+  { userClient: Client<User>, userValidators: UserValType, manageusers: (data: User[] | undefined) => string }): RouteDefinition {
   const usersRouter = Router()
 
-  usersRouter.get("/", (req: Request, res: Response) => {
-
+  usersRouter.get("/", async (req: Request, res: Response) => {
+    return res.send(manageusers(await userClient.getAll()))
   })
   usersRouter.get("/:id", (req: Request, res: Response) => {
 
@@ -26,5 +26,5 @@ export default function usersRouteFactory({ userClient, userValidators }:
 
   })
 
-  return ["/users", usersRouter, Role.admin]
+  return ["/ops/users", usersRouter, Role.operations]
 }

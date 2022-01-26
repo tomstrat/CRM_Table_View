@@ -36,11 +36,6 @@ describe("GET /login", () => {
 
   describe("POST /auth/login", () => {
     describe("Posting correct data", () => {
-      it("makes a new user and redirects", async () => {
-        await request(parentApp)
-          .get("/auth/test")
-          .expect(302)
-      })
       it("allows login with correct user and redirects", async () => {
         await request(parentApp)
           .post("/auth/login")
