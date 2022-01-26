@@ -1,4 +1,4 @@
-export default function sidebar(title: string, components: Function): string {
+export default function sidebar(title: string, components: () => string): string {
     return (`
       <div class="sidebar">
         <div class="sidebar-title">

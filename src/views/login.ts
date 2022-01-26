@@ -12,7 +12,7 @@ export default function loginPage({ errors }: { errors?: Result<ValidationError>
       <div class="valError">${getError(errors, "password")}</div>
       <input class="submit-button" type="submit" value="Login"></br>
       <label class="remember-me-container">
-        <input class="remember-me" type="checkbox" checked="checked" name="remember"> Remember me
+        <input class="remember-me" type="checkbox" name="remember"> Remember me
       </label></br>
       <a class="forgot-link" href="">Forgotton password?</a>
     </form>
