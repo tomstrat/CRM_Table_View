@@ -6,10 +6,10 @@ import newuserpanel from "../../components/timepage/newuserpanel"
 
 export default function manageusers(): string {
     return layout(`
-			<div class="default-sidebar">
+			<div id="default-sidebar" class="visible-sidebar">
 				${sidebar("Select users", usercontrols)}
 			</div>
-			<div class="secondary-sidebar">
+			<div id="secondary-sidebar" class="invisible-sidebar">
 				${sidebar("New user", newuserpanel)}
 			</div>
       ${opstimenav()}
