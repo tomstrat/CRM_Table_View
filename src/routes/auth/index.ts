@@ -3,7 +3,7 @@ import UserValType from "../../middleware/validation/types/users"
 import { ViewWithErrors } from "../../views/types/views"
 import { RouteDefinition } from "../../models/route"
 import UserClient from "../../database/clients/UserClient"
-import { Role } from "../../database/models/User"
+import { Role, User } from "../../database/models/User"
 
 
 export default function authRouteFactory(
@@ -28,8 +28,8 @@ export default function authRouteFactory(
   authRouter.post(
     "/login",
     [requireUsername, requirePassword],
-    handleValErrors(loginPage), (req: Request, res: Response) => {
-      const { username, role } = req.body
+    handleValErrors(loginPage), async (req: Request, res: Response) => {
+      const { username, role } = await userClient.getOneByUsername(req.body.username) as User
       req.session = { username, role }
       return role === Role.user
         ? res.redirect("/timesheets/ttmoverview")

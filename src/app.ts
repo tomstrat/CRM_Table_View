@@ -30,7 +30,6 @@ export default function appFactory({ Config, Routes, handleErrors, requireAuth }
   Routes.map(route => {
     route[1].use(requireAuth(route[2]))
     route[1].stack = reverse(route[1].stack)
-    console.log(route[1])
     app.use(route[0], route[1])
   })
 
