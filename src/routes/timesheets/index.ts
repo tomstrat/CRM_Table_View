@@ -1,5 +1,6 @@
 import { Router, Request, Response, RequestHandler } from "express"
 import { RouteDefinition } from "../../models/route"
+import { Role } from "../../database/models/User"
 
 
 export default function timesheetsRouteFactory({ ttmoverview, ttmhours, ttmavailability }:
@@ -11,13 +12,13 @@ export default function timesheetsRouteFactory({ ttmoverview, ttmhours, ttmavail
   })
   timesheetsRouter.get("/ttmoverview", (req: Request, res: Response) => {
     return res.send(ttmoverview())
-  })  
+  })
   timesheetsRouter.get("/ttmhours", (req: Request, res: Response) => {
     return res.send(ttmhours())
-  })  
+  })
   timesheetsRouter.get("/ttmavailability", (req: Request, res: Response) => {
     return res.send(ttmavailability())
-  })  
+  })
 
-  return ["/timesheets", timesheetsRouter]
+  return ["/timesheets", timesheetsRouter, Role.user]
 }

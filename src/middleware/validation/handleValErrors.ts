@@ -1,13 +1,13 @@
-import { NextFunction, Request, Response } from "express"
+import { NextFunction, Request, Response, RequestHandler } from "express"
 import { validationResult } from "express-validator"
 import { ViewWithErrors } from "../../views/types/views"
 
-export default function handleValErrors(template: ViewWithErrors) {
+export default function handleValErrors(template: ViewWithErrors): RequestHandler {
   return (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
       console.log(`Errors: ${JSON.stringify(errors)}`)
-      return res.send(template({ errors }))
+      return res.status(400).send(template({ errors }))
     }
     next()
   }
