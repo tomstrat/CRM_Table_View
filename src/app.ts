@@ -1,13 +1,15 @@
 import "reflect-metadata"
-import express, { Express, Request, ErrorRequestHandler, Response } from "express"
+import express, { Express, Request, ErrorRequestHandler, Response, RequestHandler } from "express"
 import cookieSession from "cookie-session"
 import bodyParser from "body-parser"
 import ConfigType from "./config/type"
 import { NotFound } from "./models/error"
 import { RouteDefinition } from "./models/route"
+import { Role } from "./database/models/User"
+import { reverse } from "ramda"
 
-export default function appFactory({ Config, Routes, handleErrors }:
-  { Config: ConfigType, Routes: RouteDefinition[], handleErrors: ErrorRequestHandler }):
+export default function appFactory({ Config, Routes, handleErrors, requireAuth }:
+  { Config: ConfigType, Routes: RouteDefinition[], handleErrors: ErrorRequestHandler, requireAuth: (role?: Role) => RequestHandler }):
   Express {
 
   const { environment } = Config
@@ -26,6 +28,9 @@ export default function appFactory({ Config, Routes, handleErrors }:
   app.use(express.static(__dirname + "/public"))
   app.get("/favicon.ico", (req: Request, res: Response) => res.status(204))
   Routes.map(route => {
+    route[1].use(requireAuth(route[2]))
+    route[1].stack = reverse(route[1].stack)
+    console.log(route[1])
     app.use(route[0], route[1])
   })
 

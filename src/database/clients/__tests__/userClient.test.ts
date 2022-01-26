@@ -27,7 +27,7 @@ describe("UserClient Methods", () => {
           expect(typeof testUser.id).toBe("number")
           expect(testUser.username).toBe("Tom")
           expect(testUser.password).not.toBe("password")
-          expect(testUser.role).toBe("ADMIN")
+          expect(testUser.role).toBe(1)
         }
       })
     })
@@ -63,7 +63,7 @@ describe("UserClient Methods", () => {
           expect(typeof updatedUser.id).toBe("number")
           expect(updatedUser.username).toBe("Billy")
           expect(updatedUser.password).not.toBe("NewPassword")
-          expect(updatedUser.role).toBe("SUPERUSER")
+          expect(updatedUser.role).toBe(2)
         }
       })
       it("Should return edited user on partial change", async () => {
@@ -72,7 +72,7 @@ describe("UserClient Methods", () => {
           expect(typeof updatedUser.id).toBe("number")
           expect(updatedUser.username).toBe("Luke")
           expect(updatedUser.password).not.toBe("NewPassword")
-          expect(updatedUser.role).toBe("SUPERUSER")
+          expect(updatedUser.role).toBe(2)
         }
       })
     })

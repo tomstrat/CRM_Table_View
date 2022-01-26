@@ -3,6 +3,7 @@ import Client from "../../database/clients/Client"
 import { User } from "../../database/models/User"
 import { RouteDefinition } from "../../models/route"
 import UserValType from "../../middleware/validation/types/users"
+import { Role } from "../../database/models/User"
 
 
 export default function usersRouteFactory({ userClient, userValidators }:
@@ -25,5 +26,5 @@ export default function usersRouteFactory({ userClient, userValidators }:
 
   })
 
-  return ["/users", usersRouter]
+  return ["/users", usersRouter, Role.admin]
 }

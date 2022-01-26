@@ -1,10 +1,14 @@
-import { Request, Response, NextFunction } from "express"
-import { BadRequest } from "../models/error"
+import { Request, Response, NextFunction, RequestHandler } from "express"
+import { Role } from "../database/models/User"
+import { Unauthorised } from "../models/error"
 
-export default function requireAuth(req: Request, res: Response, next: NextFunction) {
-  if (req.session && req.session.token) {
-    next()
-  } else {
-    throw new BadRequest("You dont have the correct authorisation")
+export default function requireAuth(role?: Role): RequestHandler {
+  return (req: Request, res: Response, next: NextFunction) => {
+    console.log("ROLE IS", role)
+    if (!role === undefined || req.session && req.session.role === role) {
+      next()
+    } else {
+      throw new Unauthorised("You dont have the correct authorisation")
+    }
   }
 }

@@ -1,11 +1,12 @@
 import { Router, Request, Response, RequestHandler } from "express"
 import { RouteDefinition } from "../../models/route"
+import { Role } from "../../database/models/User"
 
-export default function opstimesheetsRouteFactory({ requireAuth , opsoverview, scheduler, edithours, dataviewer, requests, manageusers }:
-  { requireAuth: RequestHandler, opsoverview: () => string, scheduler: () => string, edithours: () => string, dataviewer: () => string, requests: () => string, manageusers: () => string }): RouteDefinition {
+export default function opstimesheetsRouteFactory({ opsoverview, scheduler, edithours, dataviewer, requests, manageusers }:
+  { opsoverview: () => string, scheduler: () => string, edithours: () => string, dataviewer: () => string, requests: () => string, manageusers: () => string }): RouteDefinition {
   const opstimesheetsRouter = Router()
 
-  opstimesheetsRouter.get("/", requireAuth, (req: Request, res: Response) => {
+  opstimesheetsRouter.get("/", (req: Request, res: Response) => {
     res.redirect("/ops/timesheets/opsoverview")
   })
 
@@ -32,5 +33,5 @@ export default function opstimesheetsRouteFactory({ requireAuth , opsoverview, s
   opstimesheetsRouter.get("/manageusers", (req: Request, res: Response) => {
     return res.send(manageusers())
   })
-  return ["/ops/timesheets", opstimesheetsRouter]
+  return ["/ops/timesheets", opstimesheetsRouter, Role.admin]
 }

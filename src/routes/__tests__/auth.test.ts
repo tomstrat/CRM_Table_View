@@ -2,9 +2,8 @@ import inject from "../../registry"
 import { createDatabase } from "../../database"
 import request from "supertest"
 import Config from "../../config/config"
-import nock from "nock"
 import cookieSession from "cookie-session"
-import express, { Express, Request, Response } from "express"
+import express, { Express } from "express"
 import { Connection } from "typeorm"
 
 describe("GET /login", () => {
@@ -19,38 +18,54 @@ describe("GET /login", () => {
       name: "session",
       keys: ["WPOIJADad'#/]11"],
     }))
-    parentApp.get("/api", (req: Request, res: Response) => {
-      req.session = { token: "12345" }
-      return res.send("Success")
-    })
     parentApp.use(app)
 
-    nock(Config.urls.domain)
-      .persist()
-      .get("/services/data/v33.0/query?q=SELECT+Name,+Paid_Hours__c,+Revenue__c,+Total_Cost__c,+Waste__c,+AJS__c,+Total_Services__c,+%09RPH__c+from+Employee__c")
-      .reply(200, {
-        records: ["test", "test"]
-      })
   })
 
   afterAll(async () => {
     DB.close()
   })
 
-  it("sends 200 code when getting without auth token", async () => {
-    await request(parentApp)
-      .get("/login")
-      .expect(200)
+  describe("GET /auth/login", () => {
+    it("sends 200 code", async () => {
+      await request(parentApp)
+        .get("/auth/login")
+        .expect(200)
+    })
   })
 
-  // it("redirects to data when getting with an auth token", async () => {
-  //   const agent = request.agent(parentApp)
-  //   await agent
-  //     .get("/api")
-  //     .expect(200)
-  //   await agent
-  //     .get("/oauth2/login")
-  //     .expect(302)
-  // })
+  describe("POST /auth/login", () => {
+    describe("Posting correct data", () => {
+      it("makes a new user and redirects", async () => {
+        await request(parentApp)
+          .get("/auth/test")
+          .expect(302)
+      })
+      it("allows login with correct user and redirects", async () => {
+        await request(parentApp)
+          .post("/auth/login")
+          .send({ username: "test", password: "test" })
+          .expect(302)
+      })
+    })
+    describe("Posting incorrect data", () => {
+      it("sends back layout with errors", async () => {
+        await request(parentApp)
+          .post("/auth/login")
+          .send({ username: "wrong", password: "wrong" })
+          .expect(400)
+      })
+    })
+  })
 
+  // describe("GET /auth/logout", () => {
+  //   it("logs the user out", async () => {
+  //     const agent = request.agent(parentApp)
+  //     await agent
+  //       .post("/auth/login")
+  //       .send({ username: "test", password: "test" })
+  //       .expect("set-cookie", /session=.*; Path=\/; expires=.*; httponly, session\.sig=.*; Path=\/; expires=.* httponly/)
+  //       .expect(302)
+  //   })
+  // })
 })
