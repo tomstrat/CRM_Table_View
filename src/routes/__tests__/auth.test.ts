@@ -43,12 +43,48 @@ describe("GET /login", () => {
           .expect(302)
       })
     })
-    describe("Posting incorrect data", () => {
+    describe("Posting wrong password", () => {
       it("sends back layout with errors", async () => {
         await request(parentApp)
           .post("/auth/login")
-          .send({ username: "wrong", password: "wrong" })
+          .send({ username: "test", password: "wrong" })
           .expect(400)
+          .expect(res => {
+            res.text.includes("Incorrect Username or Password")
+          })
+      })
+    })
+    describe("Posting wrong username", () => {
+      it("sends back layout with errors", async () => {
+        await request(parentApp)
+          .post("/auth/login")
+          .send({ username: "wrong", password: "test" })
+          .expect(400)
+          .expect(res => {
+            res.text.includes("Incorrect Username or Password")
+          })
+      })
+    })
+    describe("Posting no username", () => {
+      it("sends back layout with errors", async () => {
+        await request(parentApp)
+          .post("/auth/login")
+          .send({ username: "", password: "test" })
+          .expect(400)
+          .expect(res => {
+            res.text.includes("Incorrect Username or Password")
+          })
+      })
+    })
+    describe("Posting no password", () => {
+      it("sends back layout with errors", async () => {
+        await request(parentApp)
+          .post("/auth/login")
+          .send({ username: "test", password: "" })
+          .expect(400)
+          .expect(res => {
+            res.text.includes("Incorrect Username or Password")
+          })
       })
     })
   })
