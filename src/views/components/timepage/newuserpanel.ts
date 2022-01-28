@@ -4,7 +4,7 @@ import getError from "../../../utilities/getError"
 export default function newuserpanel({ errors }: { errors?: Result<ValidationError> } = {}): string {
     return (`
     <div class="new-user-container">
-      <form method="POST" action="/users/new" class="new-user-form">
+      <form method="POST" action="/users/new" class="new-user-form" id="new-user-form">
         <label class="new-user-label new-user-element">Required fields</label>
         <div class="user-button-container">
           <select name="contract" id="contract" class="new-user-drop new-user-element">
@@ -50,6 +50,12 @@ export default function newuserpanel({ errors }: { errors?: Result<ValidationErr
           <div class="availability-button new-user-element avail-none" id="avail-thu">T</div>
           <div class="availability-button new-user-element avail-none" id="avail-fri">F</div>
           <div class="availability-button new-user-element avail-none" id="avail-sat">S</div>
+          <input type="text" class="hidden-value" id="invis-mon" value=""></input>
+          <input type="text" class="hidden-value" id="invis-tue" value=""></input>
+          <input type="text" class="hidden-value" id="invis-wed" value=""></input>
+          <input type="text" class="hidden-value" id="invis-thu" value=""></input>
+          <input type="text" class="hidden-value" id="invis-fri" value=""></input>
+          <input type="text" class="hidden-value" id="invis-sat" value=""></input>
         </div>
         <div class="search-button-container">
         <input class="new-user-submit-button" type="submit" value="Submit"></br>

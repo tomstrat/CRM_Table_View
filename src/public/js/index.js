@@ -3,6 +3,8 @@ let newUserButtons = document.querySelectorAll(".new-user-button")
 let rosterButton = document.querySelectorAll(".roster-toggle")
 let dayButtons = document.querySelectorAll(".availability-button")
 
+var Myelement = document.forms['new-user-form']['invis-mon'];
+
 newUserButtons.forEach(element => {
   element.addEventListener("click", sidebarSwitch)
  });
@@ -59,17 +61,25 @@ function rosterToggle(e) {
 }
 
 function dayToggle (e) {
+  let idswitched = e.target.id.replace('avail', 'invis')
+  let otherElement = document.forms['new-user-form'][idswitched]
+  
+
   if (e.target.classList.contains("avail-none")) {
     e.target.classList.add("avail-green")
     e.target.classList.remove("avail-none")
+    otherElement.setAttribute('value', 'Working')
   } else if (e.target.classList.contains("avail-green")){
-    e.target.classList.add("avail-yellow")
-    e.target.classList.remove("avail-green")
+      e.target.classList.add("avail-yellow")
+      e.target.classList.remove("avail-green")
+      otherElement.setAttribute('value', '?')
   } else if (e.target.classList.contains("avail-yellow")){
-    e.target.classList.add("avail-red")
-    e.target.classList.remove("avail-yellow")
+      e.target.classList.add("avail-red")
+      e.target.classList.remove("avail-yellow")
+      otherElement.setAttribute('value', 'Not working')
   } else if (e.target.classList.contains("avail-red")){
-    e.target.classList.add("avail-none")
-    e.target.classList.remove("avail-red")
+      e.target.classList.add("avail-none")
+      e.target.classList.remove("avail-red")
+      otherElement.setAttribute('value', '')
 }
 }
