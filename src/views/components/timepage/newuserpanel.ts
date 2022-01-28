@@ -50,12 +50,12 @@ export default function newuserpanel({ errors }: { errors?: Result<ValidationErr
           <div class="availability-button new-user-element avail-none" id="avail-thu">T</div>
           <div class="availability-button new-user-element avail-none" id="avail-fri">F</div>
           <div class="availability-button new-user-element avail-none" id="avail-sat">S</div>
-          <input type="text" class="hidden-value" id="invis-mon" value=""></input>
-          <input type="text" class="hidden-value" id="invis-tue" value=""></input>
-          <input type="text" class="hidden-value" id="invis-wed" value=""></input>
-          <input type="text" class="hidden-value" id="invis-thu" value=""></input>
-          <input type="text" class="hidden-value" id="invis-fri" value=""></input>
-          <input type="text" class="hidden-value" id="invis-sat" value=""></input>
+          <input type="text" class="hidden-value" id="invis-mon" name="rosterMonday" value="unselected"></input>
+          <input type="text" class="hidden-value" id="invis-tue" name="rosterTuesday" value="unselected"></input>
+          <input type="text" class="hidden-value" id="invis-wed" name="rosterWednesday" value="unselected"></input>
+          <input type="text" class="hidden-value" id="invis-thu" name="rosterThursday" value="unselected"></input>
+          <input type="text" class="hidden-value" id="invis-fri" name="rosterFriday" value="unselected"></input>
+          <input type="text" class="hidden-value" id="invis-sat" name="rosterSaturday" value="unselected"></input>
         </div>
         <div class="search-button-container">
         <input class="new-user-submit-button" type="submit" value="Submit"></br>

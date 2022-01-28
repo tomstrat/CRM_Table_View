@@ -345,6 +345,7 @@ body {
   display: flex;
   flex-direction: row;
   text-align: center;
+  height: fit-content;
   
 }
 .thead .column {
@@ -628,10 +629,18 @@ align-items: center;
   height: 81vh;
 }
 
+.table {
+  display: flex;
+  flex-direction: row;
+  width: 98%;
+  height: 98%;
+}
+
 .table-content-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
   width: 70vw;
   padding: 10px;
   height: 81vh;

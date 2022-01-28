@@ -4,6 +4,7 @@ import sidebar from "../../components/layout/sidebar"
 import usercontrols from "../../components/timepage/usercontrols"
 import newuserpanel from "../../components/timepage/newuserpanel"
 import { User } from "../../../database/models/User"
+import { getHeaders } from "../../components/table/usertable" 
 
 export default function manageusers(data: User[] | undefined): string {
 
@@ -20,10 +21,11 @@ export default function manageusers(data: User[] | undefined): string {
 			</div>
       ${opstimenav()}
 			<div class="table-content-container">
-				<h1>Dynamic tables go here</h1>
-				<div class="data">
-					${users}
-				</div>
+			<div class="table">
+			<div class="row">
+				${getHeaders()}
+			</div>
+			</div>
 			</div>
 			
     `)
