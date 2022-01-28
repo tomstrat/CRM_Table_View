@@ -2,8 +2,9 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from "ty
 import { User } from "./User"
 
 export enum RosterStatus {
-  off,
-  available,
+  unselected,
+  notWorking,
+  contactable,
   working
 }
 

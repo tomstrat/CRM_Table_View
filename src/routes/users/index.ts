@@ -16,8 +16,12 @@ export default function usersRouteFactory({ userClient, userValidators, manageus
   usersRouter.get("/:id", (req: Request, res: Response) => {
 
   })
+  usersRouter.get("/new", async (req: Request, res: Response) => {
+    return res.json(await userClient.getAll())
+  })
   usersRouter.post("/new", (req: Request, res: Response) => {
-
+    console.log(req)
+    res.status(200).json({ success: "Success" })
   })
   usersRouter.patch("/:id", (req: Request, res: Response) => {
 

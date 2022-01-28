@@ -2,9 +2,9 @@ import { Result, ValidationError } from "express-validator"
 import getError from "../../../utilities/getError"
 
 export default function newuserpanel({ errors }: { errors?: Result<ValidationError> } = {}): string {
-    return (`
+  return (`
     <div class="new-user-container">
-      <form method="POST" action="/users/new" class="new-user-form" id="new-user-form">
+      <form method="POST" action="users/new" class="new-user-form" id="new-user-form" onsubmit="handleFormSubmitAndGet(event)">
         <label class="new-user-label new-user-element">Required fields</label>
         <div class="user-button-container">
           <select name="contract" id="contract" class="new-user-drop new-user-element">
