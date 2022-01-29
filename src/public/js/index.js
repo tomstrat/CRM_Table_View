@@ -68,18 +68,18 @@ function dayToggle (e) {
   if (e.target.classList.contains("avail-none")) {
     e.target.classList.add("avail-green")
     e.target.classList.remove("avail-none")
-    otherElement.setAttribute('value', 'working')
+    otherElement.setAttribute("value", "working")
   } else if (e.target.classList.contains("avail-green")){
       e.target.classList.add("avail-yellow")
       e.target.classList.remove("avail-green")
-      otherElement.setAttribute('value', 'contactable')
+      otherElement.setAttribute("value", "contactable")
   } else if (e.target.classList.contains("avail-yellow")){
       e.target.classList.add("avail-red")
       e.target.classList.remove("avail-yellow")
-      otherElement.setAttribute('value', 'notWorking')
+      otherElement.setAttribute("value", "notWorking")
   } else if (e.target.classList.contains("avail-red")){
       e.target.classList.add("avail-none")
       e.target.classList.remove("avail-red")
-      otherElement.setAttribute('value', 'unselected')
+      otherElement.setAttribute("value", "unselected")
 }
 }

@@ -1,3 +1,6 @@
+import { RosterStatus } from "../database/models/Roster"
+import { Contract, Role } from "../database/models/User"
+
 export interface AccessToken {
   access_token: string
   signature: string
@@ -28,4 +31,20 @@ export interface ExternalDataFormat {
   totalSize: number
   done: boolean
   records: ExternalRecord[]
+}
+
+export interface ExternalUser {
+  username: string
+  password: string
+  confirmPassword: string
+  contract: Contract
+  role: Role
+  certified: boolean
+  injured: boolean
+  rosterMonday: RosterStatus
+  rosterTuesday: RosterStatus
+  rosterWednesday: RosterStatus
+  rosterThursday: RosterStatus
+  rosterFriday: RosterStatus
+  rosterSaturday: RosterStatus
 }

@@ -3,9 +3,10 @@ import { RouteDefinition } from "../../models/route"
 import { Role } from "../../database/models/User"
 import { User } from "../../database/models/User"
 import Client from "../../database/clients/Client"
+import { ViewWithErrors } from "../../views/types/views"
 
 export default function opstimesheetsRouteFactory({ userClient, opsoverview, scheduler, edithours, dataviewer, requests, manageusers }:
-  { userClient: Client<User>, opsoverview: () => string, scheduler: () => string, edithours: () => string, dataviewer: () => string, requests: () => string, manageusers: (data: User[] | undefined) => string }): RouteDefinition {
+  { userClient: Client<User>, opsoverview: () => string, scheduler: () => string, edithours: () => string, dataviewer: () => string, requests: () => string, manageusers: ViewWithErrors }): RouteDefinition {
   const opstimesheetsRouter = Router()
 
   opstimesheetsRouter.get("/", (req: Request, res: Response) => {

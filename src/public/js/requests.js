@@ -1,3 +1,12 @@
+const fillErrors = (errors) => {
+	const errorTags = document.querySelectorAll(".valError")
+	
+	errors.errors.forEach(error => {
+		const errorTag = document.querySelector(`.valError[data-error="${error.param}"]`)
+		errorTag.innerHTML = error.msg
+	})
+}
+
 const handleFormSubmitAndGet = async event => {
   event.preventDefault()
 
@@ -8,6 +17,7 @@ const handleFormSubmitAndGet = async event => {
 		await postFormDataAsJson({ url, formData })
     formatData(await getData({url}))
 	} catch (error) {
+		fillErrors(JSON.parse(error.message))
 		console.error(error)
 	}
 }

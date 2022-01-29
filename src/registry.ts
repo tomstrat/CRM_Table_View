@@ -19,7 +19,7 @@ export default async function inject(testDB?: Connection) {
   const userClient = new UserClient(DB)
   const userValidators = userValidatorFactory({ userClient })
   const Routes = [
-    usersRouteFactory({ userClient, userValidators, manageusers }),
+    usersRouteFactory({ userClient, userValidators, handleValErrors, manageusers }),
     authRouteFactory({ loginPage, userValidators, handleValErrors, userClient }),
     dataRouteFactory({ tableViewBuilder }),
     timesheetsRouteFactory({ ttmoverview, ttmhours, ttmavailability }),
