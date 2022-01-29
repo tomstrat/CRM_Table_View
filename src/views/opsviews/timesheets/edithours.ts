@@ -4,11 +4,11 @@ import sidebar from "../../components/layout/sidebar"
 import edithourscontrols from "../../components/timepage/edithourscontrols"
 
 export default function edithours(): string {
-    return layout(`
-    ${sidebar("Select users", edithourscontrols)}
-    ${opstimenav()}
-          <div class="table-content-container">
-              <h1>Dynamic tables go here</h1>
-          </div>
-    `)
-}
+    return layout(`	
+    <div id="default-sidebar" class="visible-sidebar">
+				${sidebar("Edit hours", edithourscontrols)}
+			</div>
+			
+      ${opstimenav()}
+			<div class="table-content-container">
+            </div>`)}

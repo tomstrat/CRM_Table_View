@@ -9,18 +9,18 @@ export default function newuserpanel({ errors }: { errors?: Result<ValidationErr
         <div class="user-button-container">
         <div class="valError" data-error="contract">${getError(errors, "contract")}</div>
           <select name="contract" id="contract" class="new-user-drop new-user-element">
-            <option value="Full-time">Full-time</option>
-            <option value="Part-time">Part-time</option>
-            <option value="Casual">Casual</option>
-            <option value="Temp">Temp</option>
+            <option value="fullTime">Full-time</option>
+            <option value="partTime">Part-time</option>
+            <option value="casual">Casual</option>
+            <option value="temp">Temp</option>
           </select>
           <div class="valError" data-error="role">${getError(errors, "role")}</div>
           <select name="role" id="role" class="new-user-drop new-user-element">
-              <option value="Driver">Driver</option>
-              <option value="Navigator">Navigator</option>
-              <option value="Trainer">Trainer</option>
-              <option value="Operations">Operations</option>
-              <option value="Admin">Admin</option>
+              <option value="driver">Driver</option>
+              <option value="navigator">Navigator</option>
+              <option value="trainer">Trainer</option>
+              <option value="operations">Operations</option>
+              <option value="admin">Admin</option>
           </select>
         </div>
       

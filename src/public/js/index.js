@@ -2,8 +2,9 @@ let controlsButtons = document.querySelectorAll(".controlsbutton")
 let newUserButtons = document.querySelectorAll(".new-user-button")
 let rosterButton = document.querySelectorAll(".roster-toggle")
 let dayButtons = document.querySelectorAll(".availability-button")
+let routeForm = document.querySelectorAll("#route-form")
 
-var Myelement = document.forms["new-user-form"]["invis-mon"]
+//probs don't need var Myelement = document.forms["new-user-form"]["invis-mon"]
 
 newUserButtons.forEach(element => {
   element.addEventListener("click", sidebarSwitch)
@@ -20,6 +21,19 @@ rosterButton.forEach(element => {
 dayButtons.forEach(element => {
   element.addEventListener("click", dayToggle)
 })
+
+dayButtons.forEach(element => {
+  element.addEventListener("click", dayToggle)
+})
+
+routeForm.forEach(element => {
+  element.addEventListener("submit", newRoute)
+})
+
+
+  
+
+
 
 function sidebarSwitch() {
   if (document.querySelector("#default-sidebar").classList.contains("visible-sidebar")) {
@@ -83,3 +97,35 @@ function dayToggle (e) {
       otherElement.setAttribute("value", "unselected")
 }
 }
+function create(htmlStr){
+  let frag = document.createDocumentFragment()
+  temp = document.createElement('div')
+
+  temp.innerHTML = htmlStr
+
+while (temp.firstChild) {
+  frag.appendChild(temp.firstChild)
+}
+return frag
+}
+
+function newRoute(x) {
+  x.preventDefault(x)
+  var formData = new FormData(x.target)
+  routeName = formData.get('routeName')
+  routeType = formData.get('routeType')
+  var fragment = create(`<form class="route-box schedule-element">
+  <input class="route-name" value="${routeName}"></input>
+  <div class="route-type">${routeType}</div>
+  <div class="crew-member">
+    Name1
+  </div>
+  <div class="crew-member">
+    Name2
+  </div>
+</form>`)
+yes = document.getElementsByClassName('schedule-planner-container')
+yes[0].appendChild(fragment)
+document.getElementById("").value = "";
+}
+

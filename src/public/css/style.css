@@ -106,7 +106,7 @@
   border: 2px solid #8dc63f;
   background-color: #ffffff;
   border-radius: 12px;
-  width: 5vw;
+  width: 5.5vw;
   height: 5vh;
   margin-left: 4px;
   margin-right: 4px;
@@ -656,9 +656,10 @@ align-items: center;
 
 .table-content-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  flex-wrap: wrap;
   width: 70vw;
   padding: 10px;
   height: 81vh;
@@ -704,3 +705,105 @@ align-items: center;
 .date-select-container {
   padding-bottom: 20px;
 }
+
+/* Scheduler */
+
+.top-bar-container {
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+}
+
+.top-bar-form {
+height: 100%
+}
+
+.text-box {
+  text-align: center;
+  border: 2px solid #8dc63f;
+  background-color: #ffffff;
+  border-radius: 12px;
+  width: 80px;
+  height: 15px;
+}
+
+.route-button {
+  border: 2px solid #8dc63f; 
+  background-color:#00539f; 
+  color: #ffffff; 
+  border-radius: 12px;
+  font-size:11px;
+}
+
+.route-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border: 2px solid #8dc63f;
+  background-color: #ffffff;
+  border-radius: 12px;
+  min-width: 0;
+  height: fit-content;
+  padding: 5px;
+  width: 120px;
+}
+
+.schedule-element {
+  margin: 5px;
+}
+
+.schedule-planner-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 72.45vw;
+  height: fit-content;
+  margin-left: 23vw;
+  background-color: aliceblue;
+  border: 2px solid #8dc63f;
+  border-radius: 12px;
+  min-width: 0;
+  overflow: auto;
+}
+
+.border {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-top: 2px solid #00539f;
+  width: 95%;
+}
+
+.crew-title {
+  border-bottom: 1px solid #000000;
+}
+
+.crew-member {
+  font-size: 9px;
+}
+.controls-division {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-top: 1px solid #00539f;
+  width: 80%;
+}
+
+.route-name{
+  text-align: center;
+  font-size: 16px;
+  width: 100%;
+  border: none;
+}
+
+.route-type {
+  font-size: 12px;
+  border-bottom: 1px solid #00539f;
+}
+
