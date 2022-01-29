@@ -1,5 +1,6 @@
 import { header } from "express-validator";
 import { User } from "../../../database/models/User";
+import * as R from "ramda"
 
 const testUser = {
   username: "test",
@@ -20,6 +21,7 @@ const testUser = {
 
 
 export function getHeaders(): string {
-  return Object.keys(testUser).map(header => `<div class="column">${header.charAt(0).toUpperCase() + header.slice(1)}</div>`).join("") 
+  const newtestUser = R.omit(['password', 'roster'], testUser)
+  return Object.keys(newtestUser).map(header => `<div class="column">${header.charAt(0).toUpperCase() + header.slice(1)}</div>`).join("") + `<div class="column"></div>`
 }
 

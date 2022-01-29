@@ -13,6 +13,7 @@ export default function layout(template: string): string {
         ${template}
         <script type="text/javascript" src="/js/index.js"></script>
         <script type="text/javascript" src="/js/requests.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.25.0/ramda.min.js"></script>
       </body>
       </html>
   `

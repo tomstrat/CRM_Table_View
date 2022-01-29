@@ -22,8 +22,12 @@ export default function manageusers(data: User[] | undefined): string {
       ${opstimenav()}
 			<div class="table-content-container">
 			<div class="table">
+			<div class="headers">
 			<div class="row">
 				${getHeaders()}
+			</div>
+			</div>
+			<div class="tbody">
 			</div>
 			</div>
 			</div>
