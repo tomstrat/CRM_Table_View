@@ -1,19 +1,20 @@
 import { Result, ValidationError } from "express-validator"
 import getError from "../../../utilities/getError"
 
-export default function newuserpanel({ errors }: { errors?: Result<ValidationError> } = {}): string {
+export default function newuserpanel({ errors }: { errors?: Result<ValidationError> | undefined } = {}): string {
   return (`
     <div class="new-user-container">
       <form method="POST" action="users/new" class="new-user-form" id="new-user-form" onsubmit="handleFormSubmitAndGet(event)">
         <label class="new-user-label new-user-element">Required fields</label>
         <div class="user-button-container">
+        <div class="valError" data-error="contract">${getError(errors, "contract")}</div>
           <select name="contract" id="contract" class="new-user-drop new-user-element">
             <option value="Full-time">Full-time</option>
             <option value="Part-time">Part-time</option>
             <option value="Casual">Casual</option>
             <option value="Temp">Temp</option>
           </select>
-
+          <div class="valError" data-error="role">${getError(errors, "role")}</div>
           <select name="role" id="role" class="new-user-drop new-user-element">
               <option value="Driver">Driver</option>
               <option value="Navigator">Navigator</option>
@@ -24,21 +25,21 @@ export default function newuserpanel({ errors }: { errors?: Result<ValidationErr
         </div>
       
         <input class="user-name new-user-element new-user-auth-form" type="text" placeholder="Enter Username" name="username" autocomplete="off" required>
-        <div class="valError">${getError(errors, "username")}</div>
+        <div class="valError" data-error="username">${getError(errors, "username")}</div>
         
         <input class="password new-user-element new-user-auth-form" type="password" placeholder="Enter Password" name="password" autocomplete="off" required>
-        <div class="valError">${getError(errors, "password")}</div>
+        <div class="valError" data-error="password">${getError(errors, "password")}</div>
         
         <input class="password new-user-element new-user-auth-form" type="password" placeholder="Confirm Password" name="confirmPassword" autocomplete="off" required>
-        <div class="valError">${getError(errors, "confirmPassword")}</div>
+        <div class="valError" data-error="confirmPassword">${getError(errors, "confirmPassword")}</div>
         <label class="new-user-label new-user-element">Optional fields</label>
         <div class="user-button-container">
         <label class="checkbox-label" new-user-element>Certified
-          <input type="checkbox" class="new-user-element controls-checkbox">
+          <input name="certified" type="checkbox" class="new-user-element controls-checkbox">
           <span class="checkmark"></span>
         </label>
         <label class="checkbox-label new-user-element controls-checkbox">Injured
-          <input type="checkbox" class="new-user-element">
+          <input name="injured" type="checkbox" class="new-user-element">
           <span class="checkmark"></span>
         </label>
         </div>
