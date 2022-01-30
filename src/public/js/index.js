@@ -103,7 +103,7 @@ function create(htmlStr){
 
   temp.innerHTML = htmlStr
 
-while (temp.firstChild) {
+  while (temp.firstChild) {
   frag.appendChild(temp.firstChild)
 }
 return frag
@@ -121,7 +121,7 @@ function newRoute(x) {
     Name1
   </div>
   <div class="crew-member">
-    Name2
+    Name2 
   </div>
 </form>`)
 yes = document.getElementsByClassName('schedule-planner-container')
