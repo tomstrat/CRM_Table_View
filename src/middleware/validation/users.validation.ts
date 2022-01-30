@@ -44,11 +44,16 @@ export default function userValidatorFactory({ userClient }:
       }),
     requireContract: body("contract")
       .custom(contract => {
-        if (!Object.keys(Contract).includes(contract)) throw new Error("Contract not valid")
+        // if (!Object.keys(Contract).includes(contract)) throw new Error("Contract not valid")
+        console.log(contract, Contract)
+        if (contract in Contract) throw new Error("Contract not valid")
+
       }),
     requireRole: body("role")
       .custom(role => {
-        if (!Object.keys(Role).includes(role)) throw new Error("Role not valid")
+        // if (!Object.keys(Role).includes(role)) throw new Error("Role not valid")
+        console.log(role, Role)
+        if (role in Contract) throw new Error("Contract not valid")
       })
   }
 }
