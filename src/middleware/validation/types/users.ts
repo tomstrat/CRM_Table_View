@@ -8,4 +8,6 @@ export default interface UserValType {
   requirePasswordConfirmation: ValidationChain
   requireContract: ValidationChain
   requireRole: ValidationChain
+  requireCert: ValidationChain
+  requireInjured: ValidationChain
 }
