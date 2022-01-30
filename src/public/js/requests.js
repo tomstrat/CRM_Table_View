@@ -58,14 +58,18 @@ const postFormDataAsJson = async ({url, formData}) => {
 function formatData(data){
 
 	const formattedData = data.reduce((htmlString, next) => {
-		const newObject = R.omit(['id', 'password', 'roster'], next)
+		const newObject = R.omit(["id", "password", "roster"], next)
 		for (const property in newObject) {
 			htmlString += `<div class="column">${newObject[property]}</div>`
 		}
-		return htmlString + `<div class="column">Edit user</div>`
+		return htmlString + '<div class="column">Edit user</div>'
 	}, "")
-	document.querySelector('.tbody').innerHTML = `<div class="row">${formattedData}</div>`
+	document.querySelector(".tbody").innerHTML = `<div class="row">${formattedData}</div>`
 	
 }
 
+(loadPageData = async () => {
+	const url = document.getElementById("dataLoad").innerHTML
+	if(url) formatData(await getData({url}))
+})()
 

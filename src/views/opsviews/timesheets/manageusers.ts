@@ -14,6 +14,7 @@ export default function manageusers({ errors }: { errors?: Result<ValidationErro
 	// 	: "<div>No Users Found</div>"
 
 	return layout(`
+			<div hidden id="dataLoad">users/new</div>
 			<div id="default-sidebar" class="visible-sidebar">
 				${sidebar("Select users", usercontrols)}
 			</div>
@@ -21,7 +22,7 @@ export default function manageusers({ errors }: { errors?: Result<ValidationErro
 				${sidebar("New user", newuserpanel, errors)}
 			</div>
       ${opstimenav()}
-			<div class="table-content-container">
+			<div class="table-content-container" onload="loadPageData('users/new')">
 			<div class="table">
 			<div class="headers">
 			<div class="row">

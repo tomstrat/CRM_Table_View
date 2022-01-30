@@ -25,6 +25,7 @@ export default function userValidatorFactory({ userClient }:
       .escape()
       .exists()
       .isLength({ min: 3, max: 20 })
+      .withMessage("Must be between 3 and 20 characters")
       .custom(async username => {
         const user = await userClient.getOne(username)
         if (user) throw new Error("Username already exists")
@@ -33,22 +34,37 @@ export default function userValidatorFactory({ userClient }:
       .trim()
       .escape()
       .exists()
-      .isLength({ min: 5, max: 30 }),
+      .isLength({ min: 5, max: 30 })
+      .withMessage("Must be between 5 and 30 characters"),
     requirePasswordConfirmation: body("confirmPassword")
       .trim()
       .escape()
       .exists()
       .isLength({ min: 5, max: 30 })
+      .withMessage("Must be between 5 and 30 characters")
       .custom((password, { req }) => {
         if (password != req.body.password) throw new Error("Passwords dont match")
+        return true
       }),
     requireContract: body("contract")
       .custom(contract => {
-        if (!Object.keys(Contract).includes(contract)) throw new Error("Contract not valid")
+        if (!(contract in Contract)) throw new Error("Contract not valid")
+        return true
       }),
     requireRole: body("role")
       .custom(role => {
-        if (!Object.keys(Role).includes(role)) throw new Error("Role not valid")
-      })
+        if (!(role in Role)) throw new Error("Role not valid")
+        return true
+      }),
+    requireCert: body("certified")
+      .custom(cert => {
+        if (cert && cert != "on") throw new Error("Certified not valid")
+        return true
+      }),
+    requireInjured: body("injured")
+      .custom(inj => {
+        if (inj && inj != "on") throw new Error("Injured not valid")
+        return true
+      }),
   }
 }

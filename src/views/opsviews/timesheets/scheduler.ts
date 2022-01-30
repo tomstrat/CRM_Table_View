@@ -7,7 +7,7 @@ import routebox from "../../components/timepage/routebox"
 import employeeSearchRes from "../../components/timepage/Junkiesearch"
 
 export default function scheduler(): string {
-    return layout(`	
+  return layout(`	
     <div id="default-sidebar" class="visible-sidebar">
 				${sidebar("Employee Search", schedulecontrols)}
 			</div>
@@ -21,6 +21,7 @@ export default function scheduler(): string {
       </div>
 			<div class="schedule-planner-container">
         ${scheduletopbar()}
-        ${routebox('Everyday routes', 'Ask Mike')}
-        
-        </div>`)}
+        ${routebox("Everyday routes", "Ask Mike")}
+        </form>
+        </div>`)
+}

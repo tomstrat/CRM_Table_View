@@ -95,25 +95,25 @@ function dayToggle (e) {
       e.target.classList.add("avail-none")
       e.target.classList.remove("avail-red")
       otherElement.setAttribute("value", "unselected")
-}
+  }
 }
 function create(htmlStr){
   let frag = document.createDocumentFragment()
-  temp = document.createElement('div')
+  temp = document.createElement("div")
 
   temp.innerHTML = htmlStr
 
   while (temp.firstChild) {
-  frag.appendChild(temp.firstChild)
-}
-return frag
+    frag.appendChild(temp.firstChild)
+  }
+  return frag
 }
 
 function newRoute(x) {
   x.preventDefault(x)
   var formData = new FormData(x.target)
-  routeName = formData.get('routeName')
-  routeType = formData.get('routeType')
+  routeName = formData.get("routeName")
+  routeType = formData.get("routeType")
   var fragment = create(`<form class="route-box schedule-element">
   <input class="route-name" value="${routeName}"></input>
   <div class="route-type">${routeType}</div>
@@ -123,9 +123,9 @@ function newRoute(x) {
   <div class="crew-member">
     Name2 
   </div>
-</form>`)
-yes = document.getElementsByClassName('schedule-planner-container')
-yes[0].appendChild(fragment)
-document.getElementById("").value = "";
+  </form>`)
+  yes = document.getElementsByClassName("schedule-planner-container")
+  yes[0].appendChild(fragment)
+  document.getElementById("").value = ""
 }
 
