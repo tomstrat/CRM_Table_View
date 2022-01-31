@@ -16,7 +16,8 @@ export default class UserClient extends Client<User> {
       return await pipeWithPromise([
         this.create,
         this.encrypt,
-        this.save
+        this.save,
+        this.hidePassword
       ])(record)
     } catch (err) {
       if (err instanceof Error) throw new BadRequest(err.message)
@@ -24,17 +25,24 @@ export default class UserClient extends Client<User> {
   }
 
   async getOne(unameOrId: string | number): Promise<User | undefined> {
-    if (typeof unameOrId === "string") {
-      return await this.findOne({ username: unameOrId }, { relations: ["roster"] })
-    } else {
-      return await this.findOne({ id: unameOrId }, { relations: ["roster"] })
-    }
+    const key = typeof unameOrId === "string"
+      ? "username"
+      : "id"
+
+    return await pipeWithPromise([
+      this.findOne,
+      R.ifElse(
+        R.has("username"),
+        this.hidePassword,
+        (user) => user
+      )
+    ])({ [key]: unameOrId }, { relations: ["roster"] })
   }
 
   async getAll(): Promise<User[] | undefined> {
     const users = await this.find({ relations: ["roster"] })
     if (!users) return users
-    return R.map(R.assoc("password", ""), users)
+    return R.map(this.hidePassword, users)
   }
 
   async updateRecord(id: number, fieldsToUpdate: Partial<User>): Promise<User | undefined> {
@@ -48,7 +56,8 @@ export default class UserClient extends Client<User> {
         (user) => user,
         this.encrypt
       ),
-      this.save
+      this.save,
+      this.hidePassword
     ])(user)
   }
 
@@ -70,4 +79,8 @@ export default class UserClient extends Client<User> {
     const buf = await crypto.scryptSync(user.password, salt, 64)
     return R.assoc("password", `${buf.toString("hex")}.${salt}`, user)
   }, this)
+
+  private hidePassword = (user: User): User => {
+    return R.assoc("password", "", user)
+  }
 }

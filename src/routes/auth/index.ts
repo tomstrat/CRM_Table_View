@@ -31,7 +31,7 @@ export default function authRouteFactory(
     handleValErrors(loginPage), async (req: Request, res: Response) => {
       const { username, role } = await userClient.getOne(req.body.username) as User
       req.session = { username, role }
-      return role === Role.driver
+      return role === Role.user
         ? res.redirect("/timesheets/ttmoverview")
         : res.redirect("/ops/timesheets/opsoverview")
     })

@@ -5,60 +5,11 @@ import Config from "../../config/config"
 import cookieSession from "cookie-session"
 import express, { Express } from "express"
 import { Connection } from "typeorm"
-import { User, Role, Contract } from "../../database/models/User"
-import { RosterStatus } from "../../database/models/Roster"
+import { testUser, correctUser, correctPostUser, incorrectPostUser, errorObject } from "../../testing/dummy-data/userdata"
 
 let parentApp: Express
 let DB: Connection
 let agent: SuperAgentTest
-const testUser: User = {
-  id: 1,
-  username: "test",
-  password: "",
-  role: Role.admin,
-  contract: Contract.fullTime,
-  certified: true,
-  injured: false,
-  roster: {
-    id: 1,
-    monday: RosterStatus.working,
-    tuesday: RosterStatus.working,
-    wednesday: RosterStatus.working,
-    thursday: RosterStatus.working,
-    friday: RosterStatus.working,
-    saturday: RosterStatus.working,
-  }
-}
-const correctUser = {
-  username: "newUser",
-  password: "password",
-  passwordConfirm: "password",
-  role: "admin",
-  contract: "fullTime",
-  certified: "on",
-  injured: "on",
-  rosterMonday: "working",
-  rosterTuesday: "working",
-  rosterWednesday: "working",
-  rosterThursday: "working",
-  rosterFriday: "working",
-  rosterSaturday: "working",
-}
-const incorrectUser = {
-  username: "test",
-  password: "dd",
-  passwordConfirm: "pissword",
-  role: "admin",
-  contract: "fullTime",
-  certified: "on",
-  injured: "on",
-  rosterMonday: "working",
-  rosterTuesday: "working",
-  rosterWednesday: "working",
-  rosterThursday: "working",
-  rosterFriday: "working",
-  rosterSaturday: "working",
-}
 
 beforeAll(async () => {
   DB = await createDatabase({ Config })
@@ -98,7 +49,7 @@ describe("Routes for Users", () => {
   })
   describe("GET /ops/users/new", () => {
     describe("Without Auth", () => {
-      it("sends 200 code", async () => {
+      it("sends 401 code", async () => {
         await request(parentApp)
           .get("/ops/users/new")
           .expect(401)
@@ -110,6 +61,44 @@ describe("Routes for Users", () => {
           .get("/ops/users/new")
           .expect(200)
           .expect([testUser])
+      })
+    })
+  })
+  describe("POST /ops/users/new", () => {
+    describe("Without Auth", () => {
+      it("sends 401 code", async () => {
+        await request(parentApp)
+          .post("/ops/users/new")
+          .send(correctPostUser)
+          .expect(401)
+      })
+    })
+    describe("With Auth", () => {
+      describe("And correct data", () => {
+        it("sends 200 code", async () => {
+          await agent
+            .post("/ops/users/new")
+            .send(correctPostUser)
+            .expect(200)
+            .expect({ newUser: correctUser })
+        })
+      })
+      describe("And incorrect data", () => {
+        it("sends 400 code", async () => {
+          await agent
+            .post("/ops/users/new")
+            .send(incorrectPostUser)
+            .expect(400)
+            .expect(errorObject)
+        })
+      })
+      describe("And empty data", () => {
+        it("sends 400 code", async () => {
+          await agent
+            .post("/ops/users/new")
+            .send({})
+            .expect(400)
+        })
       })
     })
   })

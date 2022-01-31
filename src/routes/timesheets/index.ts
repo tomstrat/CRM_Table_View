@@ -20,5 +20,5 @@ export default function timesheetsRouteFactory({ ttmoverview, ttmhours, ttmavail
     return res.send(ttmavailability())
   })
 
-  return ["/timesheets", timesheetsRouter, Role.driver]
+  return ["/timesheets", timesheetsRouter, Role.user]
 }

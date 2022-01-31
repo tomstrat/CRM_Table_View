@@ -28,7 +28,9 @@ export default function usersRouteFactory(
     requireContract,
     requireRole,
     requireCert,
-    requireInjured
+    requireInjured,
+    requireRoster,
+    requireEmployeeType
   } = userValidators
 
   usersRouter.get("/", async (req: Request, res: Response) => {
@@ -49,12 +51,13 @@ export default function usersRouteFactory(
       requireNewUsername, requireNewPassword,
       requirePasswordConfirmation,
       requireContract, requireRole,
-      requireCert, requireInjured
+      requireCert, requireInjured, requireRoster,
+      requireEmployeeType
     ],
     handleValErrors(),
-    (req: Request, res: Response) => {
+    async (req: Request, res: Response) => {
 
-      const newUser = userClient.addRecord(formatUser(req.body))
+      const newUser = await userClient.addRecord(formatUser(req.body))
       res.status(200).json({ newUser })
 
     })

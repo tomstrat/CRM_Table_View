@@ -33,11 +33,11 @@ export default function newuserpanel({ errors }: { errors?: Result<ValidationErr
         <label class="new-user-label new-user-element">Optional fields</label>
         <div class="user-button-container">
         <label class="checkbox-label" new-user-element>Certified
-          <input name="certified" type="checkbox" class="new-user-element controls-checkbox">
+          <input name="certified" type="checkbox" class="new-user-element controls-checkbox" value="true">
           <span class="checkmark"></span>
         </label>
         <label class="checkbox-label new-user-element controls-checkbox">Injured
-          <input name="injured" type="checkbox" class="new-user-element">
+          <input name="injured" type="checkbox" class="new-user-element" value="true">
           <span class="checkmark"></span>
         </label>
         </div>

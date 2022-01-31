@@ -2,18 +2,30 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm"
 import { Roster } from "./Roster"
 
 export enum Role {
-	driver = 0,
-	navigator = 0,
-	trainer = 0,
+	user = "user",
+	operations = "operations",
+	admin = "admin"
+}
+
+export enum RolePermission {
+	user,
 	operations,
 	admin
 }
 
+export enum EmployeeType {
+	driver = "driver",
+	trainer = "trainer",
+	temp = "temp",
+	navigator = "navigator",
+	operations = "operations"
+}
+
 export enum Contract {
-	fullTime,
-	partTime,
-	casual,
-	temp
+	fullTime = "fullTime",
+	partTime = "partTime",
+	casual = "casual",
+	temp = "temp"
 }
 
 @Entity()
@@ -28,10 +40,21 @@ export class User {
 	@Column({ length: 40 })
 	password!: string
 
-	@Column()
+	@Column({ type: "simple-array" })
+	employeeType?: EmployeeType[]
+
+	@Column({
+		type: "simple-enum",
+		enum: Role,
+		default: Role.user
+	})
 	role!: Role
 
-	@Column()
+	@Column({
+		type: "simple-enum",
+		enum: Contract,
+		default: Contract.fullTime
+	})
 	contract!: Contract
 
 	@Column()

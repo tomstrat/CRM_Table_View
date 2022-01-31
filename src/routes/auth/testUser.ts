@@ -1,4 +1,4 @@
-import { User, Role, Contract } from "../../database/models/User"
+import { User, Role, Contract, EmployeeType } from "../../database/models/User"
 import Client from "../../database/clients/Client"
 import { RosterStatus } from "../../database/models/Roster"
 
@@ -6,6 +6,7 @@ export default async function makeTestUser({ userClient }: { userClient: Client<
   const testUser = {
     username: "test",
     password: "test",
+    employeeType: [EmployeeType.operations],
     role: Role.admin,
     contract: Contract.fullTime,
     certified: true,

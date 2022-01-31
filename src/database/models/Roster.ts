@@ -2,10 +2,10 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from "ty
 import { User } from "./User"
 
 export enum RosterStatus {
-  unselected,
-  notWorking,
-  contactable,
-  working
+  unselected = "unselected",
+  notWorking = "notWorking",
+  contactable = "contactable",
+  working = "working"
 }
 
 @Entity()
@@ -18,17 +18,41 @@ export class Roster {
   @JoinColumn()
   user?: User
 
-  @Column()
+  @Column({
+    type: "simple-enum",
+    enum: RosterStatus,
+    default: RosterStatus.unselected
+  })
   monday!: RosterStatus
-  @Column()
+  @Column({
+    type: "simple-enum",
+    enum: RosterStatus,
+    default: RosterStatus.unselected
+  })
   tuesday!: RosterStatus
-  @Column()
+  @Column({
+    type: "simple-enum",
+    enum: RosterStatus,
+    default: RosterStatus.unselected
+  })
   wednesday!: RosterStatus
-  @Column()
+  @Column({
+    type: "simple-enum",
+    enum: RosterStatus,
+    default: RosterStatus.unselected
+  })
   thursday!: RosterStatus
-  @Column()
+  @Column({
+    type: "simple-enum",
+    enum: RosterStatus,
+    default: RosterStatus.unselected
+  })
   friday!: RosterStatus
-  @Column()
+  @Column({
+    type: "simple-enum",
+    enum: RosterStatus,
+    default: RosterStatus.unselected
+  })
   saturday!: RosterStatus
 
 }

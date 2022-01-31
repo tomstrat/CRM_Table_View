@@ -2,7 +2,7 @@ import { Connection } from "typeorm"
 import Config from "../../../config/config"
 import { createDatabase } from "../../"
 import UserClient from "../UserClient"
-import { User, Role, Contract } from "../../models/User"
+import { User, Role, Contract, EmployeeType } from "../../models/User"
 import { RosterStatus } from "../../models/Roster"
 
 describe("UserClient Methods", () => {
@@ -23,7 +23,8 @@ describe("UserClient Methods", () => {
     const correctUser: User = {
       username: "Tom",
       password: "password",
-      role: Role.driver,
+      employeeType: [EmployeeType.driver, EmployeeType.navigator],
+      role: Role.user,
       contract: Contract.fullTime,
       certified: true,
       injured: false,
@@ -42,8 +43,9 @@ describe("UserClient Methods", () => {
         if (testUser) {
           expect(typeof testUser.id).toBe("number")
           expect(testUser.username).toBe("Tom")
-          expect(testUser.password).not.toBe("password")
-          expect(testUser.role).toBe(0)
+          expect(testUser.password).toBe("")
+          expect(testUser.role).toBe("user")
+          expect(testUser.employeeType).toEqual(["driver", "navigator"])
         }
       })
     })
@@ -78,8 +80,8 @@ describe("UserClient Methods", () => {
         if (updatedUser) {
           expect(typeof updatedUser.id).toBe("number")
           expect(updatedUser.username).toBe("Billy")
-          expect(updatedUser.password).not.toBe("NewPassword")
-          expect(updatedUser.role).toBe(1)
+          expect(updatedUser.password).toBe("")
+          expect(updatedUser.role).toBe("operations")
         }
       })
       it("Should return edited user on partial change", async () => {
@@ -87,8 +89,8 @@ describe("UserClient Methods", () => {
         if (updatedUser) {
           expect(typeof updatedUser.id).toBe("number")
           expect(updatedUser.username).toBe("Luke")
-          expect(updatedUser.password).not.toBe("NewPassword")
-          expect(updatedUser.role).toBe(1)
+          expect(updatedUser.password).toBe("")
+          expect(updatedUser.role).toBe("operations")
         }
       })
     })

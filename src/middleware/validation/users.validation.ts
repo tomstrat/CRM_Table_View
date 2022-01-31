@@ -1,6 +1,7 @@
 import { body } from "express-validator"
 import UserClient from "../../database/clients/UserClient"
-import { Contract, Role } from "../../database/models/User"
+import { RosterStatus } from "../../database/models/Roster"
+import { Contract, EmployeeType, Role } from "../../database/models/User"
 
 
 export default function userValidatorFactory({ userClient }:
@@ -58,13 +59,26 @@ export default function userValidatorFactory({ userClient }:
       }),
     requireCert: body("certified")
       .custom(cert => {
-        if (cert && cert != "on") throw new Error("Certified not valid")
+        if (cert && cert != "true") throw new Error("Certified not valid")
         return true
       }),
     requireInjured: body("injured")
       .custom(inj => {
-        if (inj && inj != "on") throw new Error("Injured not valid")
+        if (inj && inj != "true") throw new Error("Injured not valid")
         return true
       }),
+    requireRoster: body(["rosterMonday", "rosterTuesday", "rosterWednesday", "rosterThursday", "rosterFriday", "rosterSaturday"])
+      .custom(roster => {
+        if (!(roster in RosterStatus)) throw new Error("Roster not valid")
+        return true
+      }),
+    requireEmployeeType: body("employeeType")
+      .custom(types => {
+        const typesArr: string[] = types.split(",")
+        typesArr.forEach(type => {
+          if (!(type in EmployeeType)) throw new Error("Employee type not valid")
+        })
+        return true
+      })
   }
 }

@@ -10,4 +10,6 @@ export default interface UserValType {
   requireRole: ValidationChain
   requireCert: ValidationChain
   requireInjured: ValidationChain
+  requireRoster: ValidationChain
+  requireEmployeeType: ValidationChain
 }

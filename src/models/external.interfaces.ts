@@ -1,5 +1,5 @@
 import { RosterStatus } from "../database/models/Roster"
-import { Contract, Role } from "../database/models/User"
+import { Contract, EmployeeType, Role } from "../database/models/User"
 
 export interface AccessToken {
   access_token: string
@@ -37,10 +37,11 @@ export interface ExternalUser {
   username: string
   password: string
   confirmPassword: string
+  employeeType: string | undefined
   contract: Contract
   role: Role
-  certified: boolean
-  injured: boolean
+  certified: string | undefined
+  injured: string | undefined
   rosterMonday: RosterStatus
   rosterTuesday: RosterStatus
   rosterWednesday: RosterStatus
