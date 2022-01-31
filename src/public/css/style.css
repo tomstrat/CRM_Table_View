@@ -349,7 +349,7 @@ body {
   width: 100%;
   border-bottom: 1px solid rgb(2, 2, 2);
   border-right: 1px solid rgb(2, 2, 2);
-  
+  background-color: #ffffff;
 }
 
 .headers {
@@ -361,7 +361,7 @@ body {
 
 .tbody {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   height: 100%;
   width: 100%;
 }
@@ -667,6 +667,11 @@ align-items: center;
   background-color: aliceblue;
   border: 2px solid #8dc63f;
   border-radius: 12px;
+}
+
+.row-link {
+  color: #000000;
+  text-decoration: none;
 }
 
 .overview-container {

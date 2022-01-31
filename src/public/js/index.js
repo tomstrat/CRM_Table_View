@@ -3,7 +3,7 @@ let newUserButtons = document.querySelectorAll(".new-user-button")
 let rosterButton = document.querySelectorAll(".roster-toggle")
 let dayButtons = document.querySelectorAll(".availability-button")
 let routeForm = document.querySelectorAll("#route-form")
-
+let searchButton = document.querySelector("#search")
 //probs don't need var Myelement = document.forms["new-user-form"]["invis-mon"]
 
 newUserButtons.forEach(element => {
@@ -30,7 +30,7 @@ routeForm.forEach(element => {
   element.addEventListener("submit", newRoute)
 })
 
-
+searchButton.addEventListener("click", getUserResults)
   
 
 
@@ -50,15 +50,42 @@ function sidebarSwitch() {
 }
 
 function buttonHighlight(e) {
-
-if (e.target.classList.contains("controlsbutton")) {
-  e.target.classList.add("controls-button-clicked")
-  e.target.classList.remove("controlsbutton")
-} else {
-  e.target.classList.add("controlsbutton")
-  e.target.classList.remove("controls-button-clicked")
+  if (e.target.id !== 'allusers') {
+    if (e.target.classList.contains("controlsbutton")) {
+      document.querySelector("#allusers").setAttribute("class", "controlsbutton")
+      e.target.classList.add("controls-button-clicked")
+      e.target.classList.remove("controlsbutton")
+    } else {
+        e.target.classList.add("controlsbutton")
+        e.target.classList.remove("controls-button-clicked")
+      }
+    } else {
+        if (e.target.classList.contains("controlsbutton")) {
+          document.querySelector("#operations").setAttribute("class", "controlsbutton")
+          document.querySelector("#trainers").setAttribute("class", "controlsbutton")
+          document.querySelector("#drivers").setAttribute("class", "controlsbutton")
+          document.querySelector("#navigators").setAttribute("class", "controlsbutton")
+          document.querySelector("#temp").setAttribute("class", "controlsbutton")
+          e.target.classList.add("controls-button-clicked")
+          e.target.classList.remove("controlsbutton")
+      } else {
+          e.target.classList.add("controlsbutton")
+          e.target.classList.remove("controls-button-clicked")
+    }
+  }
 }
-}
+//Just playing with generating a list of the roles selected from the user search when the search button is clicked
+//hopefully we can use it
+function getUserResults(){
+  let searchQueries = document.querySelectorAll(".controls-button-clicked")
+  //is there a way to declare queryList at the start of the arrow function? was getting undefined
+  let queryList = []
+  searchQueries.forEach(element => {
+    queryList.push(element.id)
+  })
+  console.log(queryList)
+  return queryList
+  }
 
 function rosterToggle(e) {
   if (e.target.classList.contains("roster-toggle-off")) {
