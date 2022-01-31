@@ -19,7 +19,7 @@
   flex-direction: column;
   background-color: #00539f;
   width: 20vw;
-  height: 80vh;
+  height: 84vh;
   justify-content: flex-start;
   align-items: center;
   background-color: aliceblue;
@@ -349,7 +349,7 @@ body {
   width: 100%;
   border-bottom: 1px solid rgb(2, 2, 2);
   border-right: 1px solid rgb(2, 2, 2);
-  
+  background-color: #ffffff;
 }
 
 .headers {
@@ -361,7 +361,7 @@ body {
 
 .tbody {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   height: 100%;
   width: 100%;
 }
@@ -669,6 +669,11 @@ align-items: center;
   border-radius: 12px;
 }
 
+.row-link {
+  color: #000000;
+  text-decoration: none;
+}
+
 .overview-container {
   display: flex;
   flex-direction: row;
@@ -715,7 +720,7 @@ align-items: center;
   border-top-right-radius: 12px;
   border-top-left-radius: 12px;
   width: 100%;
-  height: 100%;
+  height: fit-content;
   background-color: #000000;
 }
 
@@ -758,13 +763,31 @@ height: 100%
   margin: 5px;
 }
 
+.junkie-search-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 72.45vw;
+  min-height: 25vh;
+  background-color: aliceblue;
+  border: 2px solid #8dc63f;
+  border-radius: 12px;
+  margin-bottom: 5px;
+}
+
+.schedule-content-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 23vw; 
+}
+
 .schedule-planner-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   width: 72.45vw;
   height: fit-content;
-  margin-left: 23vw;
   background-color: aliceblue;
   border: 2px solid #8dc63f;
   border-radius: 12px;

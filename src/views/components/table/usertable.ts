@@ -22,6 +22,6 @@ const testUser = {
 
 export function getHeaders(): string {
   const newtestUser = R.omit(['password', 'roster'], testUser)
-  return Object.keys(newtestUser).map(header => `<div class="column">${header.charAt(0).toUpperCase() + header.slice(1)}</div>`).join("") + `<div class="column"></div>`
+  return Object.keys(newtestUser).map(header => `<div class="column">${header.charAt(0).toUpperCase() + header.slice(1)}</div>`).join("") 
 }
 
