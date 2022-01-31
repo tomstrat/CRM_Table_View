@@ -22,7 +22,7 @@ export default function manageusers({ errors }: { errors?: Result<ValidationErro
 				${sidebar("New user", newuserpanel, errors)}
 			</div>
       ${opstimenav()}
-			<div class="table-content-container" onload="loadPageData('users/new')">
+			<div class="table-content-container">
 			<div class="table">
 			<div class="headers">
 			<div class="row">

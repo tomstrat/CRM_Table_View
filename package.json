@@ -6,8 +6,8 @@
   "scripts": {
     "build": "npx tsc",
     "dev": "npm run test && nodemon --watch './**/*.ts' --exec 'ts-node' ./src/index.ts",
-    "test": "jest --silent",
-    "test-log": "jest",
+    "test": "jest --maxWorkers=50% --silent",
+    "test-log": "jest --maxWorkers=50%",
     "lint": "eslint ./src/**/*.ts",
     "prepare": "husky install"
   },
