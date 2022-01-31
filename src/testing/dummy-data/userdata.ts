@@ -1,8 +1,8 @@
-import { User, Role, Contract, EmployeeType } from "../../database/models/User"
+import { User, Role, Contract, EmployeeType, Location } from "../../database/models/User"
 import { RosterStatus } from "../../database/models/Roster"
-import { ExternalUser } from "../../models/external.interfaces"
+import { ExternalInputUser, ExternalOutputUser } from "../../models/external.interfaces"
 
-export const testUser: User = {
+export const testUser: ExternalOutputUser = {
   id: 1,
   username: "test",
   password: "",
@@ -11,6 +11,8 @@ export const testUser: User = {
   contract: Contract.fullTime,
   certified: true,
   injured: false,
+  location: Location.centralBusinessDistrict,
+  joinDate: "2018-07-22T00:00:00.000Z",
   roster: {
     id: 1,
     monday: RosterStatus.working,
@@ -22,7 +24,7 @@ export const testUser: User = {
   }
 }
 
-export const correctUser: User = {
+export const correctUser: ExternalOutputUser = {
   id: 2,
   username: "newUser",
   password: "",
@@ -31,6 +33,8 @@ export const correctUser: User = {
   contract: Contract.fullTime,
   certified: true,
   injured: true,
+  location: Location.innerEast,
+  joinDate: "2018-07-22T00:00:00.000Z",
   roster: {
     id: 2,
     monday: RosterStatus.working,
@@ -42,7 +46,7 @@ export const correctUser: User = {
   }
 }
 
-export const correctPostUser: ExternalUser = {
+export const correctPostUser: ExternalInputUser = {
   username: "newUser",
   password: "password",
   confirmPassword: "password",
@@ -51,6 +55,8 @@ export const correctPostUser: ExternalUser = {
   contract: Contract.fullTime,
   certified: "true",
   injured: "true",
+  location: Location.innerEast,
+  joinDate: "2018-07-22",
   rosterMonday: RosterStatus.working,
   rosterTuesday: RosterStatus.notWorking,
   rosterWednesday: RosterStatus.working,
@@ -68,6 +74,8 @@ export const incorrectPostUser = {
   contract: "frullTime",
   certified: "blah",
   injured: "blah",
+  location: "nope",
+  joinDate: "niiin-07-22",
   rosterMonday: "nope",
   rosterTuesday: "unselected",
   rosterWednesday: "unselected",
@@ -130,6 +138,18 @@ export const errorObject = {
       value: "dongo, deeriver",
       msg: "Employee type not valid",
       param: "employeeType",
+      location: "body"
+    },
+    {
+      value: "niiin-07-22",
+      msg: "Invalid date",
+      param: "joinDate",
+      location: "body"
+    },
+    {
+      value: "nope",
+      msg: "Location not valid",
+      param: "location",
       location: "body"
     }
   ]

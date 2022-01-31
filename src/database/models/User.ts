@@ -28,6 +28,18 @@ export enum Contract {
 	temp = "temp"
 }
 
+export enum Location {
+	centralBusinessDistrict = "centralBusinessDistrict",
+	innerNorth = "innerNorth",
+	outerNorth = "outerNorth",
+	innerEast = "innerEast",
+	outerEast = "outerEast",
+	innerSouth = "innerSouth",
+	outerSouth = "outerSouth",
+	innerWest = "innerWest",
+	outerWest = "outerWest"
+}
+
 @Entity()
 export class User {
 
@@ -40,7 +52,7 @@ export class User {
 	@Column({ length: 40 })
 	password!: string
 
-	@Column({ type: "simple-array" })
+	@Column({ type: "simple-array", nullable: true })
 	employeeType?: EmployeeType[]
 
 	@Column({
@@ -62,6 +74,16 @@ export class User {
 
 	@Column()
 	injured!: Boolean
+
+	@Column({ type: "datetime", nullable: true })
+	joinDate?: Date
+
+	@Column({
+		type: "simple-enum",
+		enum: Location,
+		nullable: true
+	})
+	location?: Location
 
 	@OneToOne(type => Roster, roster => roster.user, {
 		cascade: true

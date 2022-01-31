@@ -12,6 +12,8 @@ describe("Using formatters", () => {
         contract: "fullTime",
         certified: true,
         injured: true,
+        location: "innerEast",
+        joinDate: new Date("2018-07-22"),
         roster: {
           monday: "working",
           tuesday: "notWorking",

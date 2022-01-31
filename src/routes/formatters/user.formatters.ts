@@ -1,7 +1,7 @@
-import { ExternalUser } from "../../models/external.interfaces"
+import { ExternalInputUser } from "../../models/external.interfaces"
 import { EmployeeType, User } from "../../database/models/User"
 
-export function formatUser(user: ExternalUser): User {
+export function formatUser(user: ExternalInputUser): User {
   return {
     username: user.username,
     password: user.password,
@@ -10,6 +10,8 @@ export function formatUser(user: ExternalUser): User {
     contract: user.contract,
     certified: convertCheckBox(user.certified),
     injured: convertCheckBox(user.injured),
+    location: user.location,
+    joinDate: convertDate(user.joinDate),
     roster: {
       monday: user.rosterMonday,
       tuesday: user.rosterTuesday,
@@ -23,6 +25,10 @@ export function formatUser(user: ExternalUser): User {
 
 function convertCheckBox(result: string | undefined): boolean {
   return result ? true : false
+}
+
+function convertDate(date: string | undefined): Date | undefined {
+  return date ? new Date(date) : undefined
 }
 
 function formatTypes(types: string | undefined): EmployeeType[] | undefined {

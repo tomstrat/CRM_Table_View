@@ -1,4 +1,4 @@
-import { User, Role, Contract, EmployeeType } from "../../database/models/User"
+import { Location, User, Role, Contract, EmployeeType } from "../../database/models/User"
 import Client from "../../database/clients/Client"
 import { RosterStatus } from "../../database/models/Roster"
 
@@ -11,6 +11,8 @@ export default async function makeTestUser({ userClient }: { userClient: Client<
     contract: Contract.fullTime,
     certified: true,
     injured: false,
+    location: Location.centralBusinessDistrict,
+    joinDate: new Date("2018-07-22"),
     roster: {
       monday: RosterStatus.working,
       tuesday: RosterStatus.working,

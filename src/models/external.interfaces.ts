@@ -1,5 +1,5 @@
 import { RosterStatus } from "../database/models/Roster"
-import { Contract, EmployeeType, Role } from "../database/models/User"
+import { Contract, EmployeeType, Location, Role } from "../database/models/User"
 
 export interface AccessToken {
   access_token: string
@@ -33,19 +33,43 @@ export interface ExternalDataFormat {
   records: ExternalRecord[]
 }
 
-export interface ExternalUser {
+export interface ExternalInputUser {
   username: string
   password: string
   confirmPassword: string
-  employeeType: string | undefined
+  employeeType?: string
   contract: Contract
   role: Role
-  certified: string | undefined
-  injured: string | undefined
+  certified?: string
+  injured?: string
+  location?: Location
+  joinDate?: string
   rosterMonday: RosterStatus
   rosterTuesday: RosterStatus
   rosterWednesday: RosterStatus
   rosterThursday: RosterStatus
   rosterFriday: RosterStatus
   rosterSaturday: RosterStatus
+}
+
+export interface ExternalOutputUser {
+  id: number
+  username: string
+  password: ""
+  employeeType?: EmployeeType[]
+  contract: Contract
+  role: Role
+  certified?: boolean
+  injured?: boolean
+  location?: Location
+  joinDate?: string
+  roster: {
+    id: number
+    monday: RosterStatus
+    tuesday: RosterStatus
+    wednesday: RosterStatus
+    thursday: RosterStatus
+    friday: RosterStatus
+    saturday: RosterStatus
+  }
 }

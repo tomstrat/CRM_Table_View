@@ -1,7 +1,7 @@
 import { body } from "express-validator"
 import UserClient from "../../database/clients/UserClient"
 import { RosterStatus } from "../../database/models/Roster"
-import { Contract, EmployeeType, Role } from "../../database/models/User"
+import { Contract, EmployeeType, Location, Role } from "../../database/models/User"
 
 
 export default function userValidatorFactory({ userClient }:
@@ -58,13 +58,15 @@ export default function userValidatorFactory({ userClient }:
         return true
       }),
     requireCert: body("certified")
+      .optional()
       .custom(cert => {
-        if (cert && cert != "true") throw new Error("Certified not valid")
+        if (cert != "true") throw new Error("Certified not valid")
         return true
       }),
     requireInjured: body("injured")
+      .optional()
       .custom(inj => {
-        if (inj && inj != "true") throw new Error("Injured not valid")
+        if (inj != "true") throw new Error("Injured not valid")
         return true
       }),
     requireRoster: body(["rosterMonday", "rosterTuesday", "rosterWednesday", "rosterThursday", "rosterFriday", "rosterSaturday"])
@@ -73,12 +75,31 @@ export default function userValidatorFactory({ userClient }:
         return true
       }),
     requireEmployeeType: body("employeeType")
+      .optional()
       .custom(types => {
         const typesArr: string[] = types.split(",")
         typesArr.forEach(type => {
           if (!(type in EmployeeType)) throw new Error("Employee type not valid")
         })
         return true
+      }),
+    requireLocation: body("location")
+      .optional()
+      .custom(location => {
+        if (!(location in Location)) throw new Error("Location not valid")
+        return true
+      }),
+    requireJoinDate: body("joinDate")
+      .optional()
+      .trim()
+      .custom(date => {
+        const workingDate = new Date(date)
+        if (
+          date.match(/^\d{4}-\d{2}-\d{2}$/) &&
+          workingDate.getTime() &&
+          workingDate.toISOString().slice(0, 10) === date
+        ) return true
+        throw new Error("Invalid date")
       })
   }
 }

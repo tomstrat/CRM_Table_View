@@ -31,7 +31,9 @@ export default function usersRouteFactory(
     requireCert,
     requireInjured,
     requireRoster,
-    requireEmployeeType
+    requireEmployeeType,
+    requireJoinDate,
+    requireLocation
   } = userValidators
 
   usersRouter.get("/", async (req: Request, res: Response) => {
@@ -53,7 +55,8 @@ export default function usersRouteFactory(
       requirePasswordConfirmation,
       requireContract, requireRole,
       requireCert, requireInjured, requireRoster,
-      requireEmployeeType
+      requireEmployeeType, requireJoinDate,
+      requireLocation
     ],
     handleValErrors(),
     async (req: Request, res: Response) => {

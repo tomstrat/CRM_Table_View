@@ -2,7 +2,7 @@ import { Connection } from "typeorm"
 import Config from "../../../config/config"
 import { createDatabase } from "../../"
 import UserClient from "../UserClient"
-import { User, Role, Contract, EmployeeType } from "../../models/User"
+import { User, Role, Contract, EmployeeType, Location } from "../../models/User"
 import { RosterStatus } from "../../models/Roster"
 
 describe("UserClient Methods", () => {
@@ -20,6 +20,7 @@ describe("UserClient Methods", () => {
   })
 
   describe("When adding a user", () => {
+    const joined = new Date("2018-07-22")
     const correctUser: User = {
       username: "Tom",
       password: "password",
@@ -28,6 +29,8 @@ describe("UserClient Methods", () => {
       contract: Contract.fullTime,
       certified: true,
       injured: false,
+      joinDate: joined,
+      location: Location.centralBusinessDistrict,
       roster: {
         monday: RosterStatus.working,
         tuesday: RosterStatus.working,
@@ -46,6 +49,8 @@ describe("UserClient Methods", () => {
           expect(testUser.password).toBe("")
           expect(testUser.role).toBe("user")
           expect(testUser.employeeType).toEqual(["driver", "navigator"])
+          expect(testUser.joinDate).toEqual(joined)
+          expect(testUser.location).toEqual("centralBusinessDistrict")
         }
       })
     })
