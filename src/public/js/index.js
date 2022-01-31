@@ -2,9 +2,7 @@ let controlsButtons = document.querySelectorAll(".controlsbutton")
 let newUserButtons = document.querySelectorAll(".new-user-button")
 let rosterButton = document.querySelectorAll(".roster-toggle")
 let dayButtons = document.querySelectorAll(".availability-button")
-let routeForm = document.querySelectorAll("#route-form")
 let searchButton = document.querySelector("#search")
-//probs don't need var Myelement = document.forms["new-user-form"]["invis-mon"]
 
 newUserButtons.forEach(element => {
   element.addEventListener("click", sidebarSwitch)
@@ -22,30 +20,15 @@ dayButtons.forEach(element => {
   element.addEventListener("click", dayToggle)
 })
 
-dayButtons.forEach(element => {
-  element.addEventListener("click", dayToggle)
-})
-
-routeForm.forEach(element => {
-  element.addEventListener("submit", newRoute)
-})
-
 searchButton.addEventListener("click", getUserResults)
   
-
-
-
 function sidebarSwitch() {
   if (document.querySelector("#default-sidebar").classList.contains("visible-sidebar")) {
-    document.querySelector("#default-sidebar").classList.remove("visible-sidebar")
-    document.querySelector("#default-sidebar").classList.add("invisible-sidebar")
-    document.querySelector("#secondary-sidebar").classList.add("visible-sidebar")
-    document.querySelector("#secondary-sidebar").classList.remove("invisible-sidebar")
+    document.querySelector("#default-sidebar").setAttribute("class", "invisible-sidebar")
+    document.querySelector("#secondary-sidebar").setAttribute("class", "visible-sidebar")
   } else {
-    document.querySelector("#default-sidebar").classList.add("visible-sidebar")
-    document.querySelector("#default-sidebar").classList.remove("invisible-sidebar")
-    document.querySelector("#secondary-sidebar").classList.remove("visible-sidebar")
-    document.querySelector("#secondary-sidebar").classList.add("invisible-sidebar")
+    document.querySelector("#default-sidebar").setAttribute("class", "visible-sidebar")
+    document.querySelector("#secondary-sidebar").setAttribute("class", "invisible-sidebar")
   }
 }
 
@@ -53,11 +36,9 @@ function buttonHighlight(e) {
   if (e.target.id !== 'allusers') {
     if (e.target.classList.contains("controlsbutton")) {
       document.querySelector("#allusers").setAttribute("class", "controlsbutton")
-      e.target.classList.add("controls-button-clicked")
-      e.target.classList.remove("controlsbutton")
+      e.target.setAttribute("class", "controls-button-clicked")
     } else {
-        e.target.classList.add("controlsbutton")
-        e.target.classList.remove("controls-button-clicked")
+      e.target.setAttribute("class", "controlsbutton")
       }
     } else {
         if (e.target.classList.contains("controlsbutton")) {
@@ -66,26 +47,21 @@ function buttonHighlight(e) {
           document.querySelector("#drivers").setAttribute("class", "controlsbutton")
           document.querySelector("#navigators").setAttribute("class", "controlsbutton")
           document.querySelector("#temp").setAttribute("class", "controlsbutton")
-          e.target.classList.add("controls-button-clicked")
-          e.target.classList.remove("controlsbutton")
+          e.target.setAttribute("class", "controls-button-clicked")
       } else {
-          e.target.classList.add("controlsbutton")
-          e.target.classList.remove("controls-button-clicked")
+        e.target.setAttribute("class", "controlsbutton")
     }
   }
 }
+
 //Just playing with generating a list of the roles selected from the user search when the search button is clicked
 //hopefully we can use it
 function getUserResults(){
-  let searchQueries = document.querySelectorAll(".controls-button-clicked")
-  //is there a way to declare queryList at the start of the arrow function? was getting undefined
-  let queryList = []
-  searchQueries.forEach(element => {
-    queryList.push(element.id)
-  })
-  console.log(queryList)
-  return queryList
-  }
+  return R.map(element => {
+    console.log(element.id)
+    return element.id
+  }, document.querySelectorAll(".controls-button-clicked"))
+}
 
 function rosterToggle(e) {
   if (e.target.classList.contains("roster-toggle-off")) {
@@ -124,35 +100,5 @@ function dayToggle (e) {
       otherElement.setAttribute("value", "unselected")
   }
 }
-function create(htmlStr){
-  let frag = document.createDocumentFragment()
-  temp = document.createElement("div")
 
-  temp.innerHTML = htmlStr
-
-  while (temp.firstChild) {
-    frag.appendChild(temp.firstChild)
-  }
-  return frag
-}
-
-function newRoute(x) {
-  x.preventDefault(x)
-  var formData = new FormData(x.target)
-  routeName = formData.get("routeName")
-  routeType = formData.get("routeType")
-  var fragment = create(`<form class="route-box schedule-element">
-  <input class="route-name" value="${routeName}"></input>
-  <div class="route-type">${routeType}</div>
-  <div class="crew-member">
-    Name1
-  </div>
-  <div class="crew-member">
-    Name2 
-  </div>
-  </form>`)
-  yes = document.getElementsByClassName("schedule-planner-container")
-  yes[0].appendChild(fragment)
-  document.getElementById("").value = ""
-}
 

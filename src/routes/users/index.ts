@@ -6,6 +6,7 @@ import UserValType from "../../middleware/validation/types/users"
 import { Role } from "../../database/models/User"
 import { ViewWithErrors } from "../../views/types/views"
 import { formatUser } from "../formatters/user.formatters"
+import usercard from "../../views/opsviews/timesheets/usercard"
 
 export default function usersRouteFactory(
   {
@@ -38,7 +39,7 @@ export default function usersRouteFactory(
   })
 
   usersRouter.get("/:id", (req: Request, res: Response) => {
-
+    return res.send(usercard())
   })
 
   usersRouter.get("/new", async (req: Request, res: Response) => {

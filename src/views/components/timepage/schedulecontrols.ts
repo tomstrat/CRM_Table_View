@@ -4,24 +4,24 @@ export default function schedulecontrols(): string {
       Hours
     </div>
     <div class="user-button-container">
-    <button class="controlsbutton">Full-time</button>
-    <button class="controlsbutton">Part-time</button>
-    <button class="controlsbutton">Casual</button>
+    <button class="controlsbutton" id="fulltime">Full-time</button>
+    <button class="controlsbutton" id="parttime">Part-time</button>
+    <button class="controlsbutton "id="casual">Casual</button>
     </div>
     <div class="controls-division schedule-element">
     Role
     </div>
     <div class="user-button-container">
-    <button class="controlsbutton" ">All Junkies</button>
+    <button class="controlsbutton" id="alljunkies">All Junkies</button>
   </div>
   <div class="user-button-container">
-    <button class="controlsbutton" >Trainees</button>
-    <button class="controlsbutton" >Trainers</button>
+    <button class="controlsbutton" id="trainees">Trainees</button>
+    <button class="controlsbutton" id="trainers">Trainers</button>
   </div>
   <div class="user-button-container">
-    <button class="controlsbutton">Drivers</button>
-    <button class="controlsbutton">Navigators</button>
-    <button class="controlsbutton">Temps</button>
+    <button class="controlsbutton" id="drivers">Drivers</button>
+    <button class="controlsbutton" id="navigators">Navigators</button>
+    <button class="controlsbutton" id="temp">Temps</button>
   </div>
 </div>
 <div class="controls-division schedule-element">
