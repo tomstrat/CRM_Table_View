@@ -55,25 +55,11 @@ const postFormDataAsJson = async ({url, formData}) => {
 	}
 }
 
-//adds ID to the link url in the row
-//gets ID wrong when adding new user, fixed by refresh
-function idInsert(data) {
-	if (typeof idList == 'undefined') {
-    idList = []
-}
-	data.forEach(element => {
-		idList.push(element['id'])
-	})
-	return idList.shift()
-}
-
-
-
 function formatData(data){
 	
 	const formattedData = data.reduce((htmlString, next) => {
 		const newObject = R.omit(["id", "password", "roster"], next) 
-		htmlString += `<a href="/ops/users/${idInsert(data)}" class="row-link"><div class="row">`
+		htmlString += `<a href="/ops/users/${next.id}" class="row-link"><div class="row">`
 		for (const property in newObject) {
 			htmlString += `<div class="column">${newObject[property]}</div>`
 		}

@@ -12,8 +12,6 @@ export default function layout(template: string): string {
       </head>
       <body>
         ${template}
-        <script type="text/javascript" src="/js/index.js"></script>
-        <script type="text/javascript" src="/js/requests.js"></script>
       </body>
       </html>
   `

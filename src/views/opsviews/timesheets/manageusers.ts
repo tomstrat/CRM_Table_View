@@ -14,6 +14,7 @@ export default function manageusers({ errors }: { errors?: Result<ValidationErro
 	// 	: "<div>No Users Found</div>"
 
 	return layout(`
+			
 			<div hidden id="dataLoad">users/new</div>
 			<div id="default-sidebar" class="visible-sidebar">
 				${sidebar("Select users", usercontrols)}
@@ -32,6 +33,8 @@ export default function manageusers({ errors }: { errors?: Result<ValidationErro
 					<div class="tbody">
 					</div>
 			</div>
+			<script type="text/javascript" src="/js/index.js"></script>
+			<script type="text/javascript" src="/js/requests.js"></script>
 			
 			
     `)
