@@ -29,7 +29,7 @@ export enum Contract {
 }
 
 export enum Location {
-	centralBusinessDistrict = "centralBusinessDistrict",
+	cbd = "cbd",
 	innerNorth = "innerNorth",
 	outerNorth = "outerNorth",
 	innerEast = "innerEast",

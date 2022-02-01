@@ -346,24 +346,25 @@ body {
   flex-direction: row;
   text-align: center;
   height: fit-content;
-  width: 100%;
-  border-bottom: 1px solid rgb(2, 2, 2);
-  border-right: 1px solid rgb(2, 2, 2);
+  width: fit-content;
   background-color: #ffffff;
 }
 
-.headers {
+.theaders {
   display: flex;
+  justify-content: center;
   flex-direction: row;
   font-weight: bold;
-  width: 100%;
+  width: fit-content;
+  background-color: #00539f;
+  color: #ffffff;
 }
 
 .tbody {
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 100%;
+  
 }
 
 .thead .column {
@@ -373,11 +374,20 @@ justify-content: center;
 .column {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  flex-wrap: nowrap;
+  max-width: 125px;
+  min-width: 125px;
   text-align: center; 
-  border-left: 1px solid rgb(2, 2, 2);
-  border-top: 1px solid rgb(2, 2, 2);;
+  box-shadow: 
+  1px 0 0 0 #000000, 
+  0 1px 0 0 #000000, 
+  1px 1px 0 0 #000000,   /* Just to fix the corner */
+  1px 0 0 0 #000000 inset, 
+  0 1px 0 0 #000000 inset;
   height: 21px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; 
 }
 
 .thead {
@@ -392,7 +402,7 @@ justify-content: center;
 }
 
 
-.row:hover {
+.row-link:hover {
   background-color: #8dc63f;
 }
  .button {
@@ -668,22 +678,31 @@ align-items: center;
   height: 100%;
 }
 
+
+
 .table-content-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
   flex-wrap: wrap;
-  width: 70vw;
   padding: 10px;
-  height: 81vh;
   margin-left: 25vw;
+  margin-right: 2.5vw;
   background-color: aliceblue;
   border: 2px solid #8dc63f;
   border-radius: 12px;
+  
 }
 
 .row-link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: fit-content;
+  background-color: #ffffff;
   color: #000000;
   text-decoration: none;
 }
