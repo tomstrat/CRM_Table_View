@@ -63,7 +63,7 @@ function formatData(data){
 		for (const property in newObject) {
 			htmlString += `<div class="column">${newObject[property]}</div>`
 		}
-		return htmlString + '</div></a>'
+		return htmlString + "</div></a>"
 	}, "")
 	document.querySelector(".tbody").innerHTML = `${formattedData}`
 	
