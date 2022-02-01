@@ -25,14 +25,11 @@ export default function manageusers({ errors }: { errors?: Result<ValidationErro
       ${opstimenav()}
 			<div class="table-content-container" onload="loadPageData('users/new')">
 				<div class="table">
-					<div class="headers">
-						<div class="row">
-							${getHeaders()}
-						</div>
+					<div class="theaders">
 					</div>
 					<div class="tbody">
 					</div>
-			</div>
+				</div>
 			<script type="text/javascript" src="/js/index.js"></script>
 			<script type="text/javascript" src="/js/requests.js"></script>
 			

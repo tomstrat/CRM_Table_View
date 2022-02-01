@@ -30,7 +30,7 @@ describe("UserClient Methods", () => {
       certified: true,
       injured: false,
       joinDate: joined,
-      location: Location.centralBusinessDistrict,
+      location: Location.cbd,
       roster: {
         monday: RosterStatus.working,
         tuesday: RosterStatus.working,
@@ -50,7 +50,7 @@ describe("UserClient Methods", () => {
           expect(testUser.role).toBe("user")
           expect(testUser.employeeType).toEqual(["driver", "navigator"])
           expect(testUser.joinDate).toEqual(joined)
-          expect(testUser.location).toEqual("centralBusinessDistrict")
+          expect(testUser.location).toEqual("cbd")
         }
       })
     })

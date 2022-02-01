@@ -11,7 +11,7 @@ export default async function makeTestUser({ userClient }: { userClient: Client<
     contract: Contract.fullTime,
     certified: true,
     injured: false,
-    location: Location.centralBusinessDistrict,
+    location: Location.cbd,
     joinDate: new Date("2018-07-22"),
     roster: {
       monday: RosterStatus.working,

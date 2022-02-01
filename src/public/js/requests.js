@@ -15,6 +15,7 @@ const handleFormSubmitAndGet = async event => {
     const url = form.action
 		const formData = new FormData(form)
 		await postFormDataAsJson({ url, formData })
+		formatHeaders(await getData({url}))
     formatData(await getData({url}))
 	} catch (error) {
 		fillErrors(JSON.parse(error.message))
@@ -55,15 +56,24 @@ const postFormDataAsJson = async ({url, formData}) => {
 	}
 }
 
-function formatData(data){
+function formatHeaders(data) {
+	helpMe = data[0]
+	noIdea = R.omit(["password", "roster"], helpMe) 
 	
+	console.log(noIdea)
+	let headers = Object.keys(noIdea).map(header => `<div class="column">${header.charAt(0).toUpperCase() + header.slice(1)}</div>`).join("")
+	document.querySelector(".theaders").innerHTML = `${headers}`
+}
+
+
+function formatData(data){
 	const formattedData = data.reduce((htmlString, next) => {
-		const newObject = R.omit(["id", "password", "roster"], next) 
-		htmlString += `<a href="/ops/users/${next.id}" class="row-link"><div class="row">`
+		const newObject = R.omit(["password", "roster"], next) 
+		htmlString += `<a href="/ops/users/${next.id}" class="row-link">`
 		for (const property in newObject) {
 			htmlString += `<div class="column">${newObject[property]}</div>`
 		}
-		return htmlString + '</div></a>'
+		return htmlString + '</a>'
 	}, "")
 	document.querySelector(".tbody").innerHTML = `${formattedData}`
 	
@@ -71,6 +81,6 @@ function formatData(data){
 
 (loadPageData = async () => {
 	const url = document.getElementById("dataLoad").innerHTML
-	if(url) formatData(await getData({url}))
+	if(url) formatHeaders(await getData({url})), formatData(await getData({url}))
 })()
 

@@ -11,7 +11,7 @@ export const testUser: ExternalOutputUser = {
   contract: Contract.fullTime,
   certified: true,
   injured: false,
-  location: Location.centralBusinessDistrict,
+  location: Location.cbd,
   joinDate: "2018-07-22T00:00:00.000Z",
   roster: {
     id: 1,

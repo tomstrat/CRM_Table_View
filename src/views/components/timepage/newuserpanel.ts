@@ -14,9 +14,7 @@ export default function newuserpanel({ errors }: { errors?: Result<ValidationErr
             <option value="temp">Temp</option>
           </select>
           <select name="role" id="role" class="new-user-drop new-user-element">
-              <option value="driver">Driver</option>
-              <option value="navigator">Navigator</option>
-              <option value="trainer">Trainer</option>
+              <option value="user">User</option>
               <option value="operations">Operations</option>
               <option value="admin">Admin</option>
           </select>
