@@ -36,6 +36,11 @@ export default function authRouteFactory(
         : res.redirect("/ops/timesheets/opsoverview")
     })
 
+  authRouter.get("/test", (req: Request, res: Response) => {
+    console.log("Got /auth/test")
+    res.json({ test: "This is a test" })
+  })
+
   authRouter.get("/logout", (req: Request, res: Response) => {
     req.session = {}
     res.redirect("/auth/login")

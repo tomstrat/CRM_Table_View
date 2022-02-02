@@ -16,7 +16,7 @@ export default {
   },
   database: {
     host: "localhost",
-    port: 3000,
+    port: 3001,
     username: "test",
     password: "test",
     database: "test",
