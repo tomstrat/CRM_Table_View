@@ -36,11 +36,12 @@ describe("GET /login", () => {
 
   describe("POST /auth/login", () => {
     describe("Posting correct data", () => {
-      it("allows login with correct user and redirects", async () => {
+      it("allows login with correct user", async () => {
         await request(parentApp)
           .post("/auth/login")
           .send({ username: "test", password: "test" })
-          .expect(302)
+          .expect(200)
+          .expect(res => res.text.includes("admin"))
       })
     })
     describe("Posting wrong password", () => {

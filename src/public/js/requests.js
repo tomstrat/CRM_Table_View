@@ -12,7 +12,7 @@ const handleFormSubmitAndGet = async event => {
 
 	try {
     const form = event.currentTarget
-    const url = form.action
+    const {url, method} = form
 		const formData = new FormData(form)
 		await postFormDataAsJson({ url, formData })
 		formatHeaders(await getData({url}))

@@ -1,6 +1,10 @@
 import "reflect-metadata"
 import express, { Express, Request, ErrorRequestHandler, Response, RequestHandler } from "express"
 import cookieSession from "cookie-session"
+import helmet from "helmet"
+import hpp from "hpp"
+import csurf from "csurf"
+import limiter from "express-rate-limit"
 import bodyParser from "body-parser"
 import ConfigType from "./config/type"
 import { NotFound } from "./models/error"
@@ -16,13 +20,16 @@ export default function appFactory({ Config, Routes, handleErrors, requireAuth }
 
   const app = express()
 
+  // app.use(helmet())
+  // app.use(hpp())
   app.use(cookieSession({
     name: "session",
-    keys: ["WPOIJADad'#/]11"],
+    keys: [process.env.COOKIE_SECRET_KEY!],
     maxAge: 1 * 60 * 60 * 1000, // 1 Hour
     secure: environment.secure,
-    httpOnly: true
   }))
+  // app.use(csurf())
+  // app.use(limiter())
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(bodyParser.json())
   app.use(express.static(__dirname + "/public"))
