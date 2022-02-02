@@ -57,8 +57,7 @@ const postFormDataAsJson = async ({url, formData}) => {
 }
 
 function formatHeaders(data) {
-	helpMe = data[0]
-	noIdea = R.omit(["password", "roster"], helpMe) 
+	const noIdea = R.omit(["password", "roster"], data[0]) 
 	
 	console.log(noIdea)
 	let headers = Object.keys(noIdea).map(header => `<div class="column">${header.charAt(0).toUpperCase() + header.slice(1)}</div>`).join("")
