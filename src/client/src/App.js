@@ -1,41 +1,37 @@
-import logo from './logo.svg';
-import React from 'react';
-import './App.css';
+import React, {useState, useEffect} from 'react'
+import Login from "./views/pages/login"
+import Profile from './views/pages/profile'
+import './views/styles/App.css'
+import { Switch, Redirect, BrowserRouter } from 'react-router-dom';
+import PrivateRoute from './views/components/privateRoute'
+import PublicRoute from "./views/components/publicRoute"
 
-class App extends React.Component {
+function App() {
 
-  constructor(props) {
-    super(props);
-    this.state = {test: ""};  
+  const [auth, setAuth] = useState(false);
+  useEffect(() => {
+    checkAuth()
+  }, [])
+
+  const checkAuth = async () => {
+    const response = await fetch("/auth/current-session")
+    const role = await response.text()
+    setAuth(role)
   }
 
-  componentDidMount() {
-    fetch("/auth/test")
-      .then(res => res.json())
-      .then(test => this.setState({ test: test.test }))
-  }
-
-  render() {
-    return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <div>{this.state.test}</div>
-      </header>
+  return (
+    <div className="app-container bg-light">
+      <BrowserRouter>
+        <div className="container pt-4 pb-4">
+          <Switch>
+            <PrivateRoute exact path="/" auth={auth} component={Profile} />
+            <PublicRoute path="/login" auth={auth} component={Login} />
+            <Redirect from="*" to="/" />
+          </Switch>
+        </div>
+      </BrowserRouter>
     </div>
-    )
-  }
+  )
 }
 
 export default App;
