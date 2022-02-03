@@ -19,16 +19,16 @@ function Login(props) {
 
   return (
     <>
-    <div class="login-container">
+    <div className="login-container">
       <form method="POST" action="/auth/login" onSubmit={handleSubmit}>
-        <input class="user-name" type="text" placeholder="Enter Username" name="username" required /><br />
-        <input class="password" type="password" placeholder="Enter Password" name="password" required />
+        <input className="user-name" type="text" placeholder="Enter Username" name="username" required /><br />
+        <input className="password" type="password" placeholder="Enter Password" name="password" required />
         <ValError message={
           errors["password"] ? errors["password"] : errors["username"]
         }/>
-        <input class="submit-button" type="submit" value="Login" />
-        <label class="remember-me-container">
-          <input class="remember-me" type="checkbox" name="remember" /> Remember me
+        <input className="submit-button" type="submit" value="Login" />
+        <label className="remember-me-container">
+          <input className="remember-me" type="checkbox" name="remember" /> Remember me
         </label>
       </form>
     </div>

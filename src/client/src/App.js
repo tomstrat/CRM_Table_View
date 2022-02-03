@@ -5,6 +5,8 @@ import './views/styles/App.css'
 import { Switch, Redirect, BrowserRouter } from 'react-router-dom';
 import PrivateRoute from './views/components/privateRoute'
 import PublicRoute from "./views/components/publicRoute"
+import ManageUsers from './views/pages/operations/ManageUsers';
+import OpsOverview from './views/pages/operations/OpsOverview';
 
 function App() {
 
@@ -25,7 +27,8 @@ function App() {
         <div className="container pt-4 pb-4">
           <Switch>
             <PrivateRoute exact path="/" auth={auth} component={Profile} />
-            <PrivateRoute exact path="/ops/overview" auth={auth} component={Profile} />
+            <PrivateRoute exact path="/ops/overview" auth={auth} component={OpsOverview} />
+            <PrivateRoute exact path="/ops/manageusers" auth={auth} component={ManageUsers} />
             <PublicRoute path="/login" auth={auth} component={Login} />
             <Redirect from="*" to="/" />
           </Switch>
