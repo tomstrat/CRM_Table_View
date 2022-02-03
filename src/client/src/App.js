@@ -15,7 +15,7 @@ function App() {
 
   const checkAuth = async () => {
     const response = await fetch("/auth/current-session")
-    const role = await response.text()
+    const role = await response.json()
     setAuth(role)
   }
 
