@@ -25,6 +25,7 @@ function App() {
         <div className="container pt-4 pb-4">
           <Switch>
             <PrivateRoute exact path="/" auth={auth} component={Profile} />
+            <PrivateRoute exact path="/ops/overview" auth={auth} component={Profile} />
             <PublicRoute path="/login" auth={auth} component={Login} />
             <Redirect from="*" to="/" />
           </Switch>
