@@ -31,25 +31,25 @@ export function tableViewBuilder(sfdata: InternalDataFormat) {
 	const renderedHeaders = getTableData(records[0], { excludes, type: "header" })
 	const renderedData = records.map(record => {
 		return `
-				<div class="row">
-					${getTableData(record, { excludes, type: "row" })}
-				</div>
-		`
+        <div class="row">
+          ${getTableData(record, { excludes, type: "row" })}
+        </div>
+    `
 	}).join("")
 
 	const page = `
-		${controls()}
-		<div class="ttmtable">
-			<div class="thead">
-				<div class="row">
-					${renderedHeaders}
-				</div>
-			</div>
-			<div class="tbody">
-				${renderedData}
-			</div>
-		</div>    
-	`
+    ${controls()}
+    <div class="ttmtable">
+      <div class="thead">
+        <div class="row">
+          ${renderedHeaders}
+        </div>
+      </div>
+      <div class="tbody">
+        ${renderedData}
+      </div>
+    </div>    
+  `
 
 	return layout(page)
 }

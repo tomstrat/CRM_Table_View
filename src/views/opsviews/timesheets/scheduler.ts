@@ -11,9 +11,9 @@ export default function scheduler(): string {
     
 
     <div id="default-sidebar" class="visible-sidebar">
-				${sidebar("Employee Search", schedulecontrols)}
-			</div>
-			
+        ${sidebar("Employee Search", schedulecontrols)}
+      </div>
+      
       ${opstimenav()}
       <div class="schedule-content-container">
       <div class="junkie-search-container">
@@ -21,11 +21,11 @@ export default function scheduler(): string {
       </div>
       Dynamic employee search results here (can click on, and add employees to routes from here based on desired search results)
       </div>
-			<div class="schedule-planner-container">
+      <div class="schedule-planner-container">
         ${scheduletopbar()}
         ${routebox("Everyday routes", "Ask Mike")}
         </form>
         </div>
-        <script type="text/javascript" src="/js/scheduler.js"></script>	
+        <script type="text/javascript" src="/js/scheduler.js"></script>  
         `)
 }

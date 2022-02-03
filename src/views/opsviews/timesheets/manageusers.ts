@@ -10,29 +10,29 @@ import { Result, ValidationError } from "express-validator"
 export default function manageusers({ errors }: { errors?: Result<ValidationError> | undefined }): string {
 
 	// const users = data
-	// 	? data.map(user => JSON.stringify(user))
-	// 	: "<div>No Users Found</div>"
+	//   ? data.map(user => JSON.stringify(user))
+	//   : "<div>No Users Found</div>"
 
 	return layout(`
-			
-			<div hidden id="dataLoad">users/new</div>
-			<div id="default-sidebar" class="visible-sidebar">
-				${sidebar("Select users", usercontrols)}
-			</div>
-			<div id="secondary-sidebar" class="invisible-sidebar">
-				${sidebar("New user", newuserpanel, errors)}
-			</div>
+      
+      <div hidden id="dataLoad">users/new</div>
+      <div id="default-sidebar" class="visible-sidebar">
+        ${sidebar("Select users", usercontrols)}
+      </div>
+      <div id="secondary-sidebar" class="invisible-sidebar">
+        ${sidebar("New user", newuserpanel, errors)}
+      </div>
       ${opstimenav()}
-			<div class="table-content-container" onload="loadPageData('users/new')">
-				<div class="table">
-					<div class="theaders">
-					</div>
-					<div class="tbody">
-					</div>
-				</div>
-			<script type="text/javascript" src="/js/index.js"></script>
-			<script type="text/javascript" src="/js/requests.js"></script>
-			
-			
+      <div class="table-content-container" onload="loadPageData('users/new')">
+        <div class="table">
+          <div class="theaders">
+          </div>
+          <div class="tbody">
+          </div>
+        </div>
+      <script type="text/javascript" src="/js/index.js"></script>
+      <script type="text/javascript" src="/js/requests.js"></script>
+      
+      
     `)
 }

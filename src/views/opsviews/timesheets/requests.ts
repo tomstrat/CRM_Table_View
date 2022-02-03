@@ -4,11 +4,12 @@ import sidebar from "../../components/layout/sidebar"
 import requestscontrols from "../../components/timepage/requestscontrols"
 
 export default function requests(): string {
-    return layout(`	
+  return layout(`  
     <div id="default-sidebar" class="visible-sidebar">
-				${sidebar("Requests", requestscontrols)}
-			</div>
-			
+        ${sidebar("Requests", requestscontrols)}
+      </div>
+      
       ${opstimenav()}
-			<div class="table-content-container">
-            </div>`)}
+      <div class="table-content-container">
+            </div>`)
+}
