@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { handleSubmitFactory } from '../../utilities/requests'
 import { formatErrors } from '../../utilities/errors'
 import ValError from '../components/valError'
@@ -7,15 +7,24 @@ import '../styles/Login.css'
 function Login(props) {
 
   const [errors, setErrors] = useState({});
+  const [auth, setAuth] = useState({role: false})
 
   const handleSubmit = handleSubmitFactory(async response => {
-    const data = await response.json()
-    if(data.errors) {
-      setErrors(formatErrors(data.errors))
+    const auth = await response.json()
+    if(auth.errors) {
+      setErrors(formatErrors(auth.errors))
     } else {
-      props.history.push("/")
+      setAuth(auth)
     }
   })
+
+  useEffect(() => {
+    if(auth.role) {
+      props.history.push("/")
+    }
+  }, [auth, props])
+
+
 
   return (
     <>

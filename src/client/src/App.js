@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import Login from "./views/pages/login"
 import Profile from './views/pages/profile'
 import './views/styles/App.css'
@@ -10,26 +10,15 @@ import OpsOverview from './views/pages/operations/OpsOverview';
 
 function App() {
 
-  const [auth, setAuth] = useState(false);
-  useEffect(() => {
-    checkAuth()
-  }, [])
-
-  const checkAuth = async () => {
-    const response = await fetch("/auth/current-session")
-    const role = await response.json()
-    setAuth(role)
-  }
-
   return (
     <div className="app-container bg-light">
       <BrowserRouter>
         <div className="container pt-4 pb-4">
           <Switch>
-            <PrivateRoute exact path="/" auth={auth} component={Profile} />
-            <PrivateRoute exact path="/ops/overview" auth={auth} component={OpsOverview} />
-            <PrivateRoute exact path="/ops/manageusers" auth={auth} component={ManageUsers} />
-            <PublicRoute path="/login" auth={auth} component={Login} />
+            <PrivateRoute exact path="/" component={Profile} />
+            <PrivateRoute exact path="/ops/overview" component={OpsOverview} />
+            <PrivateRoute exact path="/ops/manageusers" component={ManageUsers} />
+            <PublicRoute path="/login" component={Login} />
             <Redirect from="*" to="/" />
           </Switch>
         </div>
