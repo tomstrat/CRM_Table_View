@@ -8,12 +8,10 @@ import jwt from "jsonwebtoken"
 
 
 export default function authRouteFactory(
-  { loginPage,
-    userValidators,
+  { userValidators,
     handleValErrors,
     userClient
   }: {
-    loginPage: ViewWithErrors,
     userValidators: UserValType,
     handleValErrors: (template?: ViewWithErrors) => RequestHandler,
     userClient: UserClient
@@ -22,9 +20,6 @@ export default function authRouteFactory(
   const authRouter = Router()
   const { requireUsername, requirePassword } = userValidators
 
-  authRouter.get("/login", (req: Request, res: Response) => {
-    return res.send(loginPage({}))
-  })
 
   authRouter.post(
     "/login",
@@ -41,8 +36,8 @@ export default function authRouteFactory(
     if (req.session && req.session.jwt) {
       const decoded = jwt.verify(req.session!.jwt, process.env.JWT_SECRET_KEY!)
       return ((<any>decoded).role)
-        ? res.json((<any>decoded).role)
-        : res.json(false)
+        ? res.json({ role: (<any>decoded).role })
+        : res.json({ role: false })
     }
     return res.send(false)
   })

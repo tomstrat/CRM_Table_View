@@ -9,7 +9,7 @@ export default function handleValErrors(template?: ViewWithErrors): RequestHandl
       console.log(`Errors: ${JSON.stringify(errors)}`)
       return template
         ? res.status(400).send(template({ errors }))
-        : res.status(400).send(errors)
+        : res.status(400).json(errors)
     }
     next()
   }

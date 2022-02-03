@@ -26,14 +26,6 @@ describe("GET /login", () => {
     DB.close()
   })
 
-  describe("GET /auth/login", () => {
-    it("sends 200 code", async () => {
-      await request(parentApp)
-        .get("/auth/login")
-        .expect(200)
-    })
-  })
-
   describe("POST /auth/login", () => {
     describe("Posting correct data", () => {
       it("allows login with correct user", async () => {
