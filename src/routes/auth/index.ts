@@ -29,17 +29,18 @@ export default function authRouteFactory(
       req.session = {
         jwt: jwt.sign({ username, role }, process.env.JWT_SECRET_KEY!),
       }
-      return res.send(role)
+      return res.json({ role })
     })
 
   authRouter.get("/current-session", (req: Request, res: Response) => {
+    console.log(req.session)
     if (req.session && req.session.jwt) {
       const decoded = jwt.verify(req.session!.jwt, process.env.JWT_SECRET_KEY!)
       return ((<any>decoded).role)
         ? res.json({ role: (<any>decoded).role })
         : res.json({ role: false })
     }
-    return res.send(false)
+    return res.json({ role: false })
   })
 
   authRouter.get("/logout", (req: Request, res: Response) => {
