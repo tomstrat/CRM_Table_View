@@ -1,12 +1,13 @@
-import React, {useEffect, useState} from 'react'
-import { handleSubmitFactory } from '../../utilities/requests'
-import { formatErrors } from '../../utilities/errors'
-import ValError from '../components/valError'
-import '../styles/Login.css'
+import React, {useEffect, useState} from "react"
+import { handleSubmitFactory } from "../../utilities/requests"
+import { formatErrors } from "../../utilities/errors"
+import ValError from "../components/valError"
+import "../styles/Login.css"
+import PropTypes from "prop-types"
 
-function Login(props) {
+export default function Login(props) {
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({})
   const [auth, setAuth] = useState({role: false})
 
   const handleSubmit = handleSubmitFactory(async response => {
@@ -28,21 +29,23 @@ function Login(props) {
 
   return (
     <>
-    <div className="login-container">
-      <form method="POST" action="/auth/login" onSubmit={handleSubmit}>
-        <input className="user-name" type="text" placeholder="Enter Username" name="username" required /><br />
-        <input className="password" type="password" placeholder="Enter Password" name="password" required />
-        <ValError message={
-          errors["password"] ? errors["password"] : errors["username"]
-        }/>
-        <input className="submit-button" type="submit" value="Login" />
-        <label className="remember-me-container">
-          <input className="remember-me" type="checkbox" name="remember" /> Remember me
-        </label>
-      </form>
-    </div>
+      <div className="login-container">
+        <form method="POST" action="/auth/login" onSubmit={handleSubmit}>
+          <input className="user-name" type="text" placeholder="Enter Username" name="username" required /><br />
+          <input className="password" type="password" placeholder="Enter Password" name="password" required />
+          <ValError message={
+            errors["password"] ? errors["password"] : errors["username"]
+          }/>
+          <input className="submit-button" type="submit" value="Login" />
+          <label className="remember-me-container">
+            <input className="remember-me" type="checkbox" name="remember" /> Remember me
+          </label>
+        </form>
+      </div>
     </>
   )
 }
 
-export default Login;
+Login.propTypes = {
+  history: PropTypes.history
+}

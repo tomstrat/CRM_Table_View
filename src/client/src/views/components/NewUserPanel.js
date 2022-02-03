@@ -1,9 +1,11 @@
 import { handleSubmitFactory } from "../../utilities/requests"
+import React from "react"
+
 
 const NewUserPanel = () => {
   return (
     <div className="new-user-container">
-      <form method="POST" action="users/new" className="new-user-form" id="new-user-form" onsubmit={handleSubmitFactory()}>
+      <form method="POST" action="users/new" className="new-user-form" id="new-user-form" onSubmit={handleSubmitFactory()}>
         <label className="new-user-label new-user-element">Required fields</label>
         <div className="user-button-container">
           <select name="contract" id="contract" className="new-user-drop new-user-element">
@@ -13,30 +15,30 @@ const NewUserPanel = () => {
             <option value="temp">Temp</option>
           </select>
           <select name="role" id="role" className="new-user-drop new-user-element">
-              <option value="user">User</option>
-              <option value="operations">Operations</option>
-              <option value="admin">Admin</option>
+            <option value="user">User</option>
+            <option value="operations">Operations</option>
+            <option value="admin">Admin</option>
           </select>
         </div>
       
-        <input className="user-name new-user-element new-user-auth-form" type="text" placeholder="Enter Username" name="username" autocomplete="off" required/>
+        <input className="user-name new-user-element new-user-auth-form" type="text" placeholder="Enter Username" name="username" autoComplete="off" required/>
         <div className="valError" data-error="username"></div>
         
-        <input className="password new-user-element new-user-auth-form" type="password" placeholder="Enter Password" name="password" autocomplete="off" required/>
+        <input className="password new-user-element new-user-auth-form" type="password" placeholder="Enter Password" name="password" autoComplete="off" required/>
         <div className="valError" data-error="password"></div>
         
-        <input className="password new-user-element new-user-auth-form" type="password" placeholder="Confirm Password" name="confirmPassword" autocomplete="off" required/>
+        <input className="password new-user-element new-user-auth-form" type="password" placeholder="Confirm Password" name="confirmPassword" autoComplete="off" required/>
         <div className="valError" data-error="confirmPassword"></div>
         <label className="new-user-label new-user-element">Optional fields</label>
         <div className="user-button-container">
-        <label className="checkbox-label" new-user-element>Certified
-          <input name="certified" type="checkbox" className="new-user-element controls-checkbox" value="true"/>
-          <span className="checkmark"></span>
-        </label>
-        <label className="checkbox-label new-user-element controls-checkbox">Injured
-          <input name="injured" type="checkbox" className="new-user-element" value="true"/>
-          <span className="checkmark"></span>
-        </label>
+          <label className="checkbox-label" new-user-element>Certified
+            <input name="certified" type="checkbox" className="new-user-element controls-checkbox" value="true"/>
+            <span className="checkmark"></span>
+          </label>
+          <label className="checkbox-label new-user-element controls-checkbox">Injured
+            <input name="injured" type="checkbox" className="new-user-element" value="true"/>
+            <span className="checkmark"></span>
+          </label>
         </div>
         <div className="roster-toggle roster-toggle-off new-user-element">Set roster</div>
         <div className="user-button-container avail-display-off new-user-element" id="roster-container">
@@ -54,7 +56,7 @@ const NewUserPanel = () => {
           <input type="text" className="hidden-value" id="invis-sat" name="rosterSaturday" value="unselected"></input>
         </div>
         <div className="search-button-container">
-        <input className="new-user-submit-button" type="submit" value="Submit"/>
+          <input className="new-user-submit-button" type="submit" value="Submit"/>
         </div>
       </form>
       <div className="cancel-button-container">
@@ -64,4 +66,4 @@ const NewUserPanel = () => {
   )
 }
 
-export default NewUserPanel;
+export default NewUserPanel

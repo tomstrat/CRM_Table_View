@@ -1,12 +1,12 @@
-import React from 'react'
+import React from "react"
 import Login from "./views/pages/login"
-import Profile from './views/pages/profile'
-import './views/styles/App.css'
-import { Switch, Redirect, BrowserRouter } from 'react-router-dom';
-import PrivateRoute from './views/components/privateRoute'
+import Profile from "./views/pages/profile"
+import "./views/styles/App.css"
+import { Switch, Redirect, BrowserRouter } from "react-router-dom"
+import PrivateRoute from "./views/components/privateRoute"
 import PublicRoute from "./views/components/publicRoute"
-import ManageUsers from './views/pages/operations/ManageUsers';
-import OpsOverview from './views/pages/operations/OpsOverview';
+import ManageUsers from "./views/pages/operations/ManageUsers"
+import OpsOverview from "./views/pages/operations/OpsOverview"
 
 function App() {
 
@@ -27,4 +27,4 @@ function App() {
   )
 }
 
-export default App;
+export default App

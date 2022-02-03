@@ -1,7 +1,9 @@
-import SideBar from "../../components/SideBar";
-import OpsTimeNav from "../../components/OpsTimeNav";
-import UserControls from "../../components/UserControls";
-import NewUserPanel from "../../components/NewUserPanel";
+import SideBar from "../../components/SideBar"
+import OpsTimeNav from "../../components/OpsTimeNav"
+import UserControls from "../../components/UserControls"
+import NewUserPanel from "../../components/NewUserPanel"
+import React from "react"
+
 
 const ManageUsers = () => {
   return (
@@ -25,4 +27,4 @@ const ManageUsers = () => {
   )
 }
 
-export default ManageUsers;
+export default ManageUsers

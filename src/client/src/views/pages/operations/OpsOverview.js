@@ -1,3 +1,4 @@
+import React from "react"
 
 
 const OpsOverview = () => {
@@ -8,4 +9,4 @@ const OpsOverview = () => {
   )
 }
 
-export default OpsOverview;
+export default OpsOverview

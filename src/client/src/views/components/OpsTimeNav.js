@@ -1,4 +1,6 @@
 import { NavLink } from "react-router-dom"
+import React from "react"
+
 
 const OpsTimeNav = () => {
   return (
@@ -15,4 +17,4 @@ const OpsTimeNav = () => {
   )  
 }
 
-export default OpsTimeNav;
+export default OpsTimeNav

@@ -1,4 +1,6 @@
-import OpsTimeNav from "../../components/OpsTimeNav";
+import OpsTimeNav from "../../components/OpsTimeNav"
+import React from "react"
+
 
 const EditHours = () => {
   return (
@@ -8,4 +10,4 @@ const EditHours = () => {
   )
 }
 
-export default EditHours;
+export default EditHours

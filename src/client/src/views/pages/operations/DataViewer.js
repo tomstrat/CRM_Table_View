@@ -1,4 +1,5 @@
-import OpsTimeNav from "../../components/OpsTimeNav";
+import React from "react"
+
 
 const DataViewer = () => {
   return (
@@ -7,4 +8,4 @@ const DataViewer = () => {
   )
 }
 
-export default DataViewer;
+export default DataViewer

@@ -1,4 +1,5 @@
-import OpsTimeNav from "../../components/OpsTimeNav";
+import OpsTimeNav from "../../components/OpsTimeNav"
+import React from "react"
 
 const Requests = () => {
   return (
@@ -8,4 +9,4 @@ const Requests = () => {
   )
 }
 
-export default Requests;
+export default Requests

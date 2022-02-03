@@ -1,3 +1,5 @@
+import React from "react"
+
 const UserControls = () => {
   return (
     <div className="sidebar-components-container">        
@@ -22,4 +24,4 @@ const UserControls = () => {
   )
 } 
 
-export default UserControls;
+export default UserControls

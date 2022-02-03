@@ -1,5 +1,5 @@
-import React from 'react';
-import '../styles/App.css';
+import React from "react"
+import "../styles/App.css"
 
 function Profile() {
   return (
@@ -16,7 +16,7 @@ function Profile() {
         </a>
       </header>
     </div>
-  );
+  )
 }
 
-export default Profile;
+export default Profile

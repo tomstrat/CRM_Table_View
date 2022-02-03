@@ -1,3 +1,5 @@
+import React from "react"
+
 const SideBar = (title, components) => {
   return (
     <div className="sidebar">
@@ -11,4 +13,4 @@ const SideBar = (title, components) => {
   )
 }
 
-export default SideBar;
+export default SideBar

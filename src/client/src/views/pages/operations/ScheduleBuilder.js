@@ -1,4 +1,6 @@
-import OpsTimeNav from "../../components/OpsTimeNav";
+import OpsTimeNav from "../../components/OpsTimeNav"
+import React from "react"
+
 
 const ScheduleBuilder = () => {
   return (
@@ -8,4 +10,4 @@ const ScheduleBuilder = () => {
   )
 }
 
-export default ScheduleBuilder;
+export default ScheduleBuilder
