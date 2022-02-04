@@ -4,7 +4,7 @@ const UserControls = () => {
   return (
     <div className="sidebar-components-container">        
       <div className="user-button-container">
-        <button className="controlsbutton" id="allusers">All users</button>
+        <button className="controls-button-clicked" id="allusers">All users</button>
       </div>
       <div className="user-button-container">
         <button className="controlsbutton" id="operations">Operations</button>
