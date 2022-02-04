@@ -3,7 +3,7 @@ import UserValType from "../../middleware/validation/types/users"
 import { ViewWithErrors } from "../../views/types/views"
 import { RouteDefinition } from "../../models/route"
 import UserClient from "../../database/clients/UserClient"
-import { Role, User } from "../../database/models/User"
+import { User } from "../../database/models/User"
 import jwt from "jsonwebtoken"
 
 
@@ -44,8 +44,8 @@ export default function authRouteFactory(
   })
 
   authRouter.get("/logout", (req: Request, res: Response) => {
-    req.session = {}
-    res.redirect("/auth/login")
+    req.session = null
+    return res.json({ role: false })
   })
 
   return ["/auth", authRouter] // NO ROLE NEEDED
