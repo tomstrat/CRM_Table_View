@@ -1,12 +1,14 @@
-import OpsTimeNav from "../../components/OpsTimeNav"
+import Nav from "../../components/Nav"
 import React from "react"
 
 
 const ScheduleBuilder = () => {
   return (
-    {OpsTimeNav},
-    <div className="page-container">
-    </div>
+    <>
+      <Nav auth={true}/>
+      <div className="page-container">
+      </div>
+    </>
   )
 }
 

@@ -25,8 +25,6 @@ export default function Login(props) {
     }
   }, [auth, props])
 
-
-
   return (
     <>
       <div className="login-container">
