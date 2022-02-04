@@ -6,19 +6,16 @@ import UserValType from "../../middleware/validation/types/users"
 import { Role } from "../../database/models/User"
 import { ViewWithErrors } from "../../views/types/views"
 import { formatUser } from "../formatters/user.formatters"
-import usercard from "../../views/opsviews/timesheets/usercard"
 
 export default function usersRouteFactory(
   {
     userClient,
     userValidators,
     handleValErrors,
-    manageusers
   }: {
     userClient: Client<User>,
     userValidators: UserValType,
     handleValErrors: (template?: ViewWithErrors) => RequestHandler
-    manageusers: ViewWithErrors
   }): RouteDefinition {
 
   const usersRouter = Router()
@@ -37,15 +34,14 @@ export default function usersRouteFactory(
   } = userValidators
 
   usersRouter.get("/", async (req: Request, res: Response) => {
-    return res.send(manageusers({}))
+    const users = await userClient.getAll()
+    return res.status(200).json(users)
   })
 
-  usersRouter.get("/:id", (req: Request, res: Response) => {
-    return res.send(usercard())
-  })
-
-  usersRouter.get("/new", async (req: Request, res: Response) => {
-    return res.json(await userClient.getAll())
+  usersRouter.get("/:id", async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id)
+    const user = await userClient.getOne(id)
+    return res.status(200).json(user)
   })
 
   usersRouter.post(
@@ -60,10 +56,8 @@ export default function usersRouteFactory(
     ],
     handleValErrors(),
     async (req: Request, res: Response) => {
-
-      const newUser = await userClient.addRecord(formatUser(req.body))
-      res.status(200).json({ newUser })
-
+      const user = await userClient.addRecord(formatUser(req.body))
+      res.status(200).json(user)
     })
 
   usersRouter.patch("/:id", (req: Request, res: Response) => {

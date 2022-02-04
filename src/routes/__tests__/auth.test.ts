@@ -39,7 +39,7 @@ describe("Authentication Routes", () => {
           .expect("Content-Type", /json/)
           .expect("set-cookie", /.*/)
           .expect(200)
-          .expect(res => res.body = { role: "admin" })
+          .expect(res => res.body === { role: "admin" })
       })
     })
     describe("Posting wrong password", () => {
@@ -94,7 +94,7 @@ describe("Authentication Routes", () => {
           .get("/auth/current-session")
           .expect("Content-Type", /json/)
           .expect(200)
-          .expect(res => res.body = { role: "admin" })
+          .expect(res => res.body === { role: "admin" })
       })
     })
     describe("Requesting without auth", () => {
@@ -103,7 +103,7 @@ describe("Authentication Routes", () => {
           .get("/auth/current-session")
           .expect("Content-Type", /json/)
           .expect(200)
-          .expect(res => res.body = { role: false })
+          .expect(res => res.body === { role: false })
       })
     })
   })
@@ -112,7 +112,7 @@ describe("Authentication Routes", () => {
       await agent
         .get("/auth/logout")
         .expect("Content-Type", /json/)
-        .expect(res => res.body = { role: false })
+        .expect(res => res.body === { role: false })
     })
   })
 })
