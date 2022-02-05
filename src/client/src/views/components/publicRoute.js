@@ -35,6 +35,6 @@ export default function PublicRoute({ component: Component, ...rest }) {
 }
 
 PublicRoute.propTypes = {
-  component: PropTypes.Component,
-  location: PropTypes.location
+  component: PropTypes.func,
+  location: PropTypes.object
 }

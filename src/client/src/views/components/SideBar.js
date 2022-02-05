@@ -16,7 +16,7 @@ const SideBar = ({component: Component, title, ...rest}) => {
 
 SideBar.propTypes = {
   title: PropTypes.string,
-  component: PropTypes.Component
+  component: PropTypes.func
 }
 
 export default SideBar
