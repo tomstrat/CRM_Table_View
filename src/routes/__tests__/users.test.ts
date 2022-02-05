@@ -31,36 +31,21 @@ afterAll(async () => {
 })
 
 describe("Routes for Users", () => {
-  describe("GET /ops/users", () => {
+  describe("GET /ops/users/:id", () => {
     describe("Without Auth", () => {
       it("sends 401 code", async () => {
         await request(parentApp)
-          .get("/ops/users")
+          .get("/ops/users/1")
           .expect(401)
       })
     })
     describe("With Auth", () => {
-      it("sends 200 code", async () => {
+      it("sends 200 code and user", async () => {
         await agent
-          .get("/ops/users")
+          .get("/ops/users/1")
           .expect(200)
-      })
-    })
-  })
-  describe("GET /ops/users/new", () => {
-    describe("Without Auth", () => {
-      it("sends 401 code", async () => {
-        await request(parentApp)
-          .get("/ops/users/new")
-          .expect(401)
-      })
-    })
-    describe("With Auth", () => {
-      it("sends 200 code", async () => {
-        await agent
-          .get("/ops/users/new")
-          .expect(200)
-          .expect([testUser])
+          .expect("Content-Type", /json/)
+          .expect(testUser)
       })
     })
   })
@@ -80,7 +65,8 @@ describe("Routes for Users", () => {
             .post("/ops/users/new")
             .send(correctPostUser)
             .expect(200)
-            .expect({ newUser: correctUser })
+            .expect("Content-Type", /json/)
+            .expect(correctUser)
         })
       })
       describe("And incorrect data", () => {
@@ -99,6 +85,24 @@ describe("Routes for Users", () => {
             .send({})
             .expect(400)
         })
+      })
+    })
+  })
+  describe("GET /ops/users", () => {
+    describe("Without Auth", () => {
+      it("sends 401 code", async () => {
+        await request(parentApp)
+          .get("/ops/users")
+          .expect(401)
+      })
+    })
+    describe("With Auth", () => {
+      it("sends 200 code and users", async () => {
+        await agent
+          .get("/ops/users")
+          .expect(200)
+          .expect("Content-Type", /json/)
+          .expect([testUser, correctUser])
       })
     })
   })
