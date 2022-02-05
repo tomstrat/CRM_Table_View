@@ -4,7 +4,7 @@ import UserControls from "../../components/UserControls"
 import NewUserPanel from "../../components/NewUserPanel"
 import React, {useState, useEffect} from "react"
 import TableContents from "../../components/TableContents"
-
+import "../../styles/ManageUsers.css"
 
 
 

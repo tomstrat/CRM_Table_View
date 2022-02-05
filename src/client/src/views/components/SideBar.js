@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import "../styles/SideBar.css"
 
 const SideBar = ({component: Component, title, ...rest}) => {
   return (

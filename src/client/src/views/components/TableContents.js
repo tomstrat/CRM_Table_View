@@ -2,6 +2,7 @@ import React from "react"
 import { omit } from "ramda"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
+import "../styles/TableContents.css"
 
 const TableContents = (props) => {
   return (
@@ -27,7 +28,6 @@ const TableContents = (props) => {
 export default TableContents
 
 function formatHeaders(data) {
-  console.log(data)
   const formatted = omit(["password", "roster"], data[0]) 
   return Object.keys(formatted).map(header => <div key={header} className="column">{header.charAt(0).toUpperCase() + header.slice(1)}</div>)
 }
