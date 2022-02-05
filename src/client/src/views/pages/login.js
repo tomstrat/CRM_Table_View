@@ -45,5 +45,5 @@ export default function Login(props) {
 }
 
 Login.propTypes = {
-  history: PropTypes.history
+  history: PropTypes.func
 }

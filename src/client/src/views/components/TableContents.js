@@ -11,7 +11,13 @@ const TableContents = (props) => {
           {formatHeaders(props.data)}
         </div>
         <div className="tbody">
-          {props.data.map(obj => formatRow(obj))}
+          {props.data.map(obj => {
+            return (
+              <Link key={obj.id} to={`/ops/users/${obj.id}`} className="row-link">
+                {formatRow(obj)}
+              </Link>
+            )
+          })}
         </div>
       </div>
     </div>
@@ -21,24 +27,15 @@ const TableContents = (props) => {
 export default TableContents
 
 function formatHeaders(data) {
-  console.log(data[0])
-  const noIdea = omit(["password", "roster"], data[0]) 
-	
-  return Object.keys(noIdea).map(header => <div key={header} className="column">{header.charAt(0).toUpperCase() + header.slice(1)}</div>).join("")
-  
+  console.log(data)
+  const formatted = omit(["password", "roster"], data[0]) 
+  return Object.keys(formatted).map(header => <div key={header} className="column">{header.charAt(0).toUpperCase() + header.slice(1)}</div>)
 }
 
 function formatRow(obj) {
-  let row = []
-  for(const prop in obj) {
-    row.push(
-      <div className="column">{obj[prop]}</div>
-    )
-  }
+  const formatted = omit(["password", "roster"], obj) 
   return (
-    <Link key={obj.id} to={`/ops/users/${obj.id}`} className="row-link">
-      {row.join("")}
-    </Link>
+    Object.keys(formatted).map((oneKey) => <div key={formatted[oneKey]} className="column">{formatted[oneKey]}</div>)
   )
 }
 

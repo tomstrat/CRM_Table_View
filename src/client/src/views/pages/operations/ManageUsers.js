@@ -12,11 +12,12 @@ const ManageUsers = () => {
   const [data, setData] = useState([{}])
 
   useEffect(() => {
-    (async () => {
+    const getData = async () => {
       const result = await fetch("/ops/users")
       const parsedResult = await result.json()
-      setData(parsedResult.body)
-    })()
+      setData(parsedResult)
+    }
+    if(!data[0].username) getData()
   }, [data])
   return (
     <>
