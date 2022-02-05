@@ -8,21 +8,30 @@ import NewUserPanel from "../../components/NewUserPanel"
 
 const ManageUsers = () => {
   const [data, setData] = useState([{}])
+  const [populated, setPopulated] = useState(false)
 
   useEffect(() => {
     const getData = async () => {
       const result = await fetch("/ops/users")
       const parsedResult = await result.json()
       setData(parsedResult)
+      setPopulated(true)
     }
-    if(!data[0].username) getData()
-  }, [data])
+    if(!populated) getData()
+  }, [data, populated])
  
   return (
     <>
       <Nav auth={true}/>
       <div id="default-sidebar" className="visible-sidebar">
-        {SideBarSelect(UserControls, NewUserPanel, "Search Users", "Add New User")}
+        <SideBarSelect 
+          component1={
+            UserControls
+          } 
+          component2={NewUserPanel} 
+          title1="Search Users"
+          title2="Add New User"
+        />
       </div>
       <TableContents data={data}/>  
     </>
