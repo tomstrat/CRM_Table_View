@@ -9,14 +9,13 @@ import TableContents from "../../components/TableContents"
 
 
 const ManageUsers = () => {
-  const [data, setData] = useState([])
+  const [data, setData] = useState([{}])
 
   useEffect(() => {
     (async () => {
       const result = await fetch("/ops/users")
-      console.log(result)
       const parsedResult = await result.json()
-      setData(parsedResult)
+      setData(parsedResult.body)
     })()
   }, [data])
   return (

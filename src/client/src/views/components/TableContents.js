@@ -21,6 +21,7 @@ const TableContents = (props) => {
 export default TableContents
 
 function formatHeaders(data) {
+  console.log(data[0])
   const noIdea = omit(["password", "roster"], data[0]) 
 	
   return Object.keys(noIdea).map(header => <div key={header} className="column">{header.charAt(0).toUpperCase() + header.slice(1)}</div>).join("")
@@ -35,7 +36,7 @@ function formatRow(obj) {
     )
   }
   return (
-    <Link to={`/ops/users/${obj.id}`} className="row-link">
+    <Link key={obj.id} to={`/ops/users/${obj.id}`} className="row-link">
       {row.join("")}
     </Link>
   )
