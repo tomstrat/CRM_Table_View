@@ -1,12 +1,10 @@
-import SideBar from "../../components/SideBar"
 import Nav from "../../components/Nav"
-import UserControls from "../../components/UserControls"
-import NewUserPanel from "../../components/NewUserPanel"
 import React, {useState, useEffect} from "react"
 import TableContents from "../../components/TableContents"
 import "../../styles/ManageUsers.css"
-
-
+import SideBarSelect from "../../components/SideBarSelect"
+import UserControls from "../../components/UserControls"
+import NewUserPanel from "../../components/NewUserPanel" 
 
 const ManageUsers = () => {
   const [data, setData] = useState([{}])
@@ -19,18 +17,17 @@ const ManageUsers = () => {
     }
     if(!data[0].username) getData()
   }, [data])
+ 
   return (
     <>
       <Nav auth={true}/>
       <div id="default-sidebar" className="visible-sidebar">
-        <SideBar title="Select Users" component={UserControls}/>
-      </div>
-      <div id="secondary-sidebar" className="invisible-sidebar">
-        <SideBar title="Select Users" component={NewUserPanel}/>
+        {SideBarSelect(UserControls, NewUserPanel, "Search Users", "Add New User")}
       </div>
       <TableContents data={data}/>  
     </>
   )
+  
 }
 
 export default ManageUsers

@@ -1,28 +1,32 @@
 import React from "react"
 import "../styles/UserControls.css"
+import ToggleButton from "./ToggleButton"
+
 
 const UserControls = () => {
   return (
     <div className="sidebar-components-container">        
       <div className="user-button-container">
-        <button className="controls-button-clicked" id="allusers">All users</button>
+        {ToggleButton("All Users")}
       </div>
       <div className="user-button-container">
-        <button className="controlsbutton" id="operations">Operations</button>
-        <button className="controlsbutton" id="trainers">Trainers</button>
-      </div><div className="user-button-container">
-        <button className="controlsbutton" id="drivers">Drivers</button>
-        <button className="controlsbutton" id="navigators">Navigators</button>
-        <button className="controlsbutton" id="temp">Temps</button>
-      </div><div className="user-controls-container">
+        {ToggleButton("Operations")}
+        {ToggleButton("Trainers")}
+      </div>
+      <div className="user-button-container">
+        {ToggleButton("Drivers")}
+        {ToggleButton("Navigators")}
+        {ToggleButton("Temp")}
+      </div>
+      <div className="user-controls-container">
         <div className="controls-label">Include Inactive</div>
         <input type="checkbox" className="controls-checkbox"></input>
         <button className="search-button" id="search">Search</button>
-      </div><div className="new-user-button-container">
-        <button className="new-user-button">Add new user</button>
       </div>
+      
     </div>
   )
 } 
+
 
 export default UserControls

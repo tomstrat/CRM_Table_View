@@ -3,7 +3,6 @@
   flex-direction: column;
   background-color: #00539f;
   width: 20vw;
-  height: 84vh;
   justify-content: flex-start;
   align-items: center;
   background-color: aliceblue;
@@ -20,7 +19,6 @@
   flex-direction: column;
   background-color: #00539f;
   width: 20vw;
-  height: 80vh;
   justify-content: flex-start;
   align-items: center;
   background-color: aliceblue;
@@ -35,7 +33,7 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   background-color: aliceblue;
   height: 100%;
@@ -53,7 +51,7 @@
 .sidebar-components {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 90%;
   height: 100%;

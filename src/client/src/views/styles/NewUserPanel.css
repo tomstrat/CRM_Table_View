@@ -1,0 +1,155 @@
+.new-user-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+.new-user-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+.new-user-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.new-user-button {
+  border: 2px solid #8dc63f; 
+  background-color:#00539f; 
+  color: #ffffff; 
+  border-radius: 12px;
+  width: 6vw;
+  height: 4vh;
+  font-size:11px;
+  margin-bottom: 8px;
+}
+
+.new-user-drop {
+  text-align: center;
+  border: 2px solid #8dc63f;
+  background-color: #ffffff;
+  border-radius: 12px;
+  width: 6vw;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.new-user-auth-form {
+  text-align: center;
+  border: 2px solid #8dc63f;
+  background-color: #ffffff;
+  border-radius: 12px;
+}
+
+.new-user-element {
+  margin: 5px;
+}
+.new-user-label {
+  font-size: 11px;
+  border-top: 2px solid #00539f;
+  width: 100%;
+  text-align: center;
+}
+
+.checkbox-label {
+  width: 100%;
+  text-align: center;
+  font-size: 11px;
+}
+
+.availability-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 12px;
+  width: 30px;
+  height: 30px;
+  user-select: none;
+}
+
+.roster-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  font-size: 12px;
+  width: 6vw;
+  height: 5vh;
+  font-size:11px;
+  cursor: pointer;
+}
+
+.hidden-value {
+  display: none;
+}
+
+.controls-checkbox {
+  cursor: pointer;
+}
+
+.avail-display-box {
+  display: flex;
+  justify-content: space-evenly;
+  border: 2px solid #8dc63f;
+  background-color: #ffffff;
+  border-radius: 12px;
+  width: 90%;
+}
+
+.avail-none {
+  background-color: #ffffff;
+}
+
+.user-button-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 5px;
+}
+
+.new-user-submit-button {
+  border: 2px solid #8dc63f; 
+  background-color:#00539f; 
+  color: #ffffff; 
+  border-radius: 12px;
+  width: 14vw;
+  height: 10vh;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.box-merge {
+  margin-top: -15px;
+  width: 50%;
+  border-top: none;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  z-index: 1;
+}
+
+.basic-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.basic-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.inj-cert {
+  justify-content: center;
+}
