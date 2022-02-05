@@ -1,22 +1,22 @@
 import React from "react"
 import "../styles/UserControls.css"
 import ToggleButton from "./ToggleButton"
-
+import MasterToggleButton from "./MasterToggleButton"
 
 const UserControls = () => {
   return (
     <div className="sidebar-components-container">        
       <div className="user-button-container">
-        {ToggleButton("All Users")}
+        <MasterToggleButton title="All Users"/>
       </div>
       <div className="user-button-container">
-        {ToggleButton("Operations")}
-        {ToggleButton("Trainers")}
+        <ToggleButton title="Operations"/>
+        <ToggleButton title="Trainers"/>
       </div>
       <div className="user-button-container">
-        {ToggleButton("Drivers")}
-        {ToggleButton("Navigators")}
-        {ToggleButton("Temp")}
+        <ToggleButton title="Drivers"/>
+        <ToggleButton title="Navigators"/>
+        <ToggleButton title="Temp"/> 
       </div>
       <div className="user-controls-container">
         <div className="controls-label">Include Inactive</div>
