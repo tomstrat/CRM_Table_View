@@ -33,7 +33,6 @@ export default function authRouteFactory(
     })
 
   authRouter.get("/current-session", (req: Request, res: Response) => {
-    console.log(req.session)
     if (req.session && req.session.jwt) {
       const decoded = jwt.verify(req.session!.jwt, process.env.JWT_SECRET_KEY!)
       return ((<any>decoded).role)

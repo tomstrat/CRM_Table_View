@@ -11,6 +11,8 @@ import { NotFound } from "./models/error"
 import { RouteDefinition } from "./models/route"
 import { Role } from "./database/models/User"
 import { reverse } from "ramda"
+import morgan from "morgan"
+import chalk from "chalk"
 
 export default function appFactory({ Config, Routes, handleErrors, requireAuth }:
   { Config: ConfigType, Routes: RouteDefinition[], handleErrors: ErrorRequestHandler, requireAuth: (role?: Role) => RequestHandler }):
@@ -35,6 +37,21 @@ export default function appFactory({ Config, Routes, handleErrors, requireAuth }
     maxAge: 1 * 60 * 60 * 1000, // 1 Hour
     secure: environment.secure,
   }))
+  app.use(morgan((tokens, req, res) => {
+    return [
+      "\n\n\n",
+      chalk.hex("#ff4757").bold("🍄  Morgan --> "),
+      chalk.hex("#34ace0").bold(tokens.method(req, res)),
+      chalk.hex("#ffb142").bold(tokens.status(req, res)),
+      chalk.hex("#ff5252").bold(tokens.url(req, res)),
+      chalk.hex("#2ed573").bold(tokens["response-time"](req, res) + " ms"),
+      chalk.hex("#f78fb3").bold("@ " + tokens.date(req, res)),
+      chalk.yellow(tokens["remote-addr"](req, res)),
+      chalk.hex("#fffa65").bold("from " + tokens.referrer(req, res)),
+      chalk.hex("#1e90ff")(tokens["user-agent"](req, res)),
+      "\n\n\n",
+    ].join(" ")
+  }))
   // app.use(csurf({ cookie: false }))
   app.use(limiter)
   app.use(bodyParser.urlencoded({ extended: false }))
@@ -45,10 +62,6 @@ export default function appFactory({ Config, Routes, handleErrors, requireAuth }
     route[1].use(requireAuth(route[2]))
     route[1].stack = reverse(route[1].stack) // Reverse stack to put auth on top
     app.use(route[0], route[1])
-  })
-
-  app.get("/", (req: Request, res: Response) => {
-    res.redirect("/auth/login")
   })
 
   app.all("*", (req: Request, res: Response) => {
