@@ -2,29 +2,31 @@ import SideBar from "../../components/SideBar"
 import Nav from "../../components/Nav"
 import UserControls from "../../components/UserControls"
 import NewUserPanel from "../../components/NewUserPanel"
-import React from "react"
+import React, {useState, useEffect} from "react"
+import TableContents from "../../components/TableContents"
 
+
+
+const [data, setData] = useState({})
+
+useEffect(() => {
+  (async () => {
+    const result = await fetch("/ops/users")
+    setData(result)
+  })()
+}, [data])
 
 const ManageUsers = () => {
   return (
     <>
       <Nav auth={true}/>
-      <div className="page-container">
-        <div id="default-sidebar" className="visible-sidebar">
-          {SideBar("Select users", UserControls)}
-        </div>
-        <div id="secondary-sidebar" className="invisible-sidebar">
-          {SideBar("New user", NewUserPanel)}
-        </div>
-        <div className="table-content-container">
-          <div className="table">
-            <div className="theaders">
-            </div>
-            <div className="tbody">
-            </div>
-          </div>
-        </div>
+      <div id="default-sidebar" className="visible-sidebar">
+        <SideBar title="Select Users" component={UserControls}/>
       </div>
+      <div id="secondary-sidebar" className="invisible-sidebar">
+        <SideBar title="Select Users" component={NewUserPanel}/>
+      </div>
+      <TableContents data={data}/>  
     </>
   )
 }
