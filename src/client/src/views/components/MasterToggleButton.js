@@ -1,23 +1,45 @@
-import React from "react"
-import {useState} from "react"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
 
 const MasterToggleButton = (props) => {
-  const [MasterToggleButtonBool, setToggleButtonBool] = useState(true)
+  const [curClass, setCurClass] = useState("controls-button-clicked")
   const idParsed = props.title.replace(" ", "").toLowerCase()
-  if ( MasterToggleButtonBool == true ) {
-    return (
-      <button className="controls-button-clicked" id={idParsed} onClick={() => setToggleButtonBool(false)}>{props.title}</button>
-    )} else { return (
-    <button className="controlsbutton" id={idParsed} onClick={() => setToggleButtonBool(true)}>{props.title}</button>
-  )}
-    
-    
-}
+  const handleOnClick = (event) => {
+    event.persist()
+    curClass == "controls-button-clicked" ? setCurClass("controlsbutton") : setCurClass("controls-button-clicked")
+    props.setToggleButton(values => {
+      const currentVal = values[idParsed] ? false : true
+      return {
+        ...values,
+        [idParsed]: currentVal
+      
+      }
+    })
+  }
+   
+  return (
+    <button 
+      className={curClass} 
+      id={idParsed} 
+      onClick={() => handleOnClick}
+    >
+      {props.title}
+    </button>
   
+  )
+}
+    
+    
+
+ 
 export default MasterToggleButton
 
 MasterToggleButton.propTypes = {
-  title: PropTypes.string
+  title: PropTypes.string,
+  setToggleButton: PropTypes.func,
+  ToggleButtons: PropTypes.object,
+  master: PropTypes.bool
 }
+
+
   
