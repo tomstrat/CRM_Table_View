@@ -1,19 +1,19 @@
-export function handleSubmitFactory(callback) {
+import { filter } from "ramda"
+
+export function handleSubmitFactory(data, callback) {
   return async function handleSubmit(event) {
     event.preventDefault()
     try {
       const form = event.currentTarget
       const {action, method} = form
-      const formData = new FormData(form)
-      const plainFormData = Object.fromEntries(formData.entries())
-      const body = JSON.stringify(plainFormData)
+      const body = filter((val) => val != "", data)
       const response = await fetch(action, {
         method,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body,
+        body: JSON.stringify(body),
       })
       callback(response)
     } catch (error) {

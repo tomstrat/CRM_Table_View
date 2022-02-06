@@ -5,11 +5,11 @@ export default function ValError(props) {
   const { message } = props
   return (
     <div className="valError">
-      {typeof message === Array ? message.join("\n"): message}
+      {message}
     </div>
   )
 }
 
 ValError.propTypes = {
-  message: PropTypes.string | PropTypes.array
+  message: PropTypes.string
 }

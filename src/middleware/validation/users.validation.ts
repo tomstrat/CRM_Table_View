@@ -60,13 +60,13 @@ export default function userValidatorFactory({ userClient }:
     requireCert: body("certified")
       .optional()
       .custom(cert => {
-        if (cert != "true") throw new Error("Certified not valid")
+        if (cert != "true" && cert != "false") throw new Error("Certified not valid")
         return true
       }),
     requireInjured: body("injured")
       .optional()
       .custom(inj => {
-        if (inj != "true") throw new Error("Injured not valid")
+        if (inj != "true" && inj != "false") throw new Error("Injured not valid")
         return true
       }),
     requireRoster: body(["rosterMonday", "rosterTuesday", "rosterWednesday", "rosterThursday", "rosterFriday", "rosterSaturday"])

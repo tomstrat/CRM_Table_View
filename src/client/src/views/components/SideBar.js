@@ -11,7 +11,7 @@ const SideBar = ({component: Component, title, ...rest}) => {
         <h2>{title}</h2>
       </div>
       <div className="sidebar-components">
-        <Component {...rest}/>
+        <Component {...rest} />
       </div>
     </div>
   )

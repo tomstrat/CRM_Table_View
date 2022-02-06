@@ -9,8 +9,22 @@ export default function Login(props) {
 
   const [errors, setErrors] = useState({})
   const [auth, setAuth] = useState({role: false})
+  const [values, setValues] = useState({
+    username: "",
+    password: ""
+  })
 
-  const handleSubmit = handleSubmitFactory(async response => {
+  const handleOnChange = (event) => {
+    event.persist()
+    setValues(values => {
+      return {
+        ...values,
+        [event.target.name]: event.target.value,
+      }
+    })
+  }
+
+  const handleSubmit = handleSubmitFactory(values, async response => {
     const auth = await response.json()
     if(auth.errors) {
       setErrors(formatErrors(auth.errors))
@@ -29,8 +43,8 @@ export default function Login(props) {
     <>
       <div className="login-container">
         <form method="POST" action="/auth/login" onSubmit={handleSubmit}>
-          <input className="user-name" type="text" placeholder="Enter Username" name="username" required /><br />
-          <input className="password" type="password" placeholder="Enter Password" name="password" required />
+          <input value={values.username} onChange={handleOnChange} className="user-name" type="text" placeholder="Enter Username" name="username" required /><br />
+          <input value={values.password} onChange={handleOnChange} className="password" type="password" placeholder="Enter Password" name="password" required />
           <ValError message={
             errors["password"] ? errors["password"] : errors["username"]
           }/>
@@ -45,5 +59,5 @@ export default function Login(props) {
 }
 
 Login.propTypes = {
-  history: PropTypes.func
+  history: PropTypes.object
 }

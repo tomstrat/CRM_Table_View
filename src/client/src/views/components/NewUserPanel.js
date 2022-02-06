@@ -1,73 +1,132 @@
-import React from "react"
+import React, {useState} from "react"
 import getCurrentDate from "./getCurrentDate"
 import "../styles/NewUserPanel.css"
+import { handleSubmitFactory } from "../../utilities/requests"
+import { formatErrors } from "../../utilities/errors"
+import ValError from "../components/valError"
+import PropTypes from "prop-types"
 
-const NewUserPanel = () => {
+
+const NewUserPanel = (props) => {
+
+  const [errors, setErrors] = useState({})
+  const [values, setValues] = useState({
+    username: "",
+    password: "",
+    confirmPassword: "",
+    contract: "fullTime",
+    role: "user",
+    operations: "",
+    trainer: "",
+    driver: "",
+    navigator: "",
+    temp: "",
+    certified: "false",
+    injured: "false",
+    joinDate: getCurrentDate(),
+    rosterMonday: "unselected",
+    rosterTuesday: "unselected",
+    rosterWednesday: "unselected",
+    rosterThursday: "unselected",
+    rosterFriday: "unselected",
+    rosterSaturday: "unselected",
+    employeeType: ""
+  })
+
+  const handleOnChange = (event) => {
+    event.persist()
+    setValues(values => {
+      return {
+        ...values,
+        [event.target.name]: event.target.value,
+        employeeType:
+        values.operations ? values.operations + "," : "" + 
+        values.trainer ? values.trainer + "," : "" + 
+        values.driver ? values.driver + "," : "" + 
+        values.navigator ? values.navigator + "," : "" + 
+        values.temp ? values.temp : ""
+      }
+    })
+  }
+
+
+
+  const handleSubmit = handleSubmitFactory(values, async response => {
+    const data = await response.json()
+    if(data.errors) {
+      setErrors(formatErrors(data.errors))
+    } else {
+      props.props.populate(false)
+    }
+  })
+
+
   return (
     <>
       <div className="new-user-container">
-        <form method="POST" action="users/new" className="new-user-form" id="new-user-form">
+        <form method="POST" action="users/new" className="new-user-form" id="new-user-form" onSubmit={handleSubmit}>
           <div className="user-button-container">
-            <select name="contract" id="contract" className="new-user-drop new-user-element">
-              <option defaultValue="fullTime">Full-time</option>
-              <option defaultValue="partTime">Part-time</option>
-              <option defaultValue="casual">Casual</option>
-              <option defaultValue="temp">Temp</option>
+            <select onChange={handleOnChange} value={values.contract} name="contract" id="contract" className="new-user-drop new-user-element">
+              <option value="fullTime">Full-time</option>
+              <option value="partTime">Part-time</option>
+              <option value="casual">Casual</option>
+              <option value="temp">Temp</option>
             </select>
-            <select name="role" id="role" className="new-user-drop new-user-element">
-              <option defaultValue="user">User</option>
-              <option defaultValue="operations">Operations</option>
-              <option defaultValue="admin">Admin</option>
+            <select onChange={handleOnChange} value={values.role} name="role" id="role" className="new-user-drop new-user-element">
+              <option value="user">User</option>
+              <option value="operations">Operations</option>
+              <option value="admin">Admin</option>
             </select>
           </div>
         
-          <input className="user-name new-user-element new-user-auth-form" type="text" placeholder="Enter Username" name="username" autoComplete="off" required/>
-          <div className="valError" data-error="username"></div>
+          <input onChange={handleOnChange} value={values.username} className="user-name new-user-element new-user-auth-form" type="text" placeholder="Enter Username" name="username" autoComplete="off" required/>
+          <ValError message={errors["username"]}/>
           
-          <input className="password new-user-element new-user-auth-form" type="password" placeholder="Enter Password" name="password" autoComplete="off" required/>
-          <div className="valError" data-error="password"></div>
+          <input onChange={handleOnChange} value={values.password} className="password new-user-element new-user-auth-form" type="password" placeholder="Enter Password" name="password" autoComplete="off" required/>
+          <ValError message={errors["password"]}/>
           
-          <input className="password new-user-element new-user-auth-form" type="password" placeholder="Confirm Password" name="confirmPassword" autoComplete="off" required/>
-          <div className="valError" data-error="confirmPassword"></div>
+          <input onChange={handleOnChange} value={values.confirmPassword} className="password new-user-element new-user-auth-form" type="password" placeholder="Confirm Password" name="confirmPassword" autoComplete="off" required/>
+          <ValError message={errors["confirmPassword"]}/>
+
           <div className="basic-column avail-display-box new-user-element">
             <div className="basic-row">
               
               <div className="new-user-button-container">
-                <label className="checkbox-label" new-user-element>Ops</label>
-                <input name="operations" type="checkbox" className="new-user-element controls-checkbox" value="false"/>
+                <label className="checkbox-label new-user-element">Ops</label>
+                <input onChange={handleOnChange} name="operations" type="checkbox" className="new-user-element controls-checkbox"  value={values.operations}/>
                 <span className="checkmark"></span>
               </div>
               <div className="new-user-button-container">
-                <label className="checkbox-label" new-user-element>Trainer</label>
-                <input name="trainer" type="checkbox" className="new-user-element controls-checkbox" value="false"/>
+                <label className="checkbox-label new-user-element">Trainer</label>
+                <input onChange={handleOnChange} name="trainer" type="checkbox" className="new-user-element controls-checkbox"  value={values.trainer}/>
                 <span className="checkmark"></span>
               </div>
               <div className="new-user-button-container">
-                <label className="checkbox-label" new-user-element>Driver</label>
-                <input name="driver" type="checkbox" className="new-user-element controls-checkbox" value="false"/>
+                <label className="checkbox-label new-user-element">Driver</label>
+                <input onChange={handleOnChange} name="driver" type="checkbox" className="new-user-element controls-checkbox"  value={values.driver}/>
                 <span className="checkmark"></span>
               </div>
               <div className="new-user-button-container">
-                <label className="checkbox-label" new-user-element>Navi</label>
-                <input name="navigator" type="checkbox" className="new-user-element controls-checkbox" value="false"/>
+                <label className="checkbox-label new-user-element">Navi</label>
+                <input onChange={handleOnChange} name="navigator" type="checkbox" className="new-user-element controls-checkbox"  value={values.navigator}/>
                 <span className="checkmark"></span>
               </div>
               <div className="new-user-button-container">
                 <label className="checkbox-label">Temp</label>
-                <input name="temp" type="checkbox" className="new-user-element controls-checkbox" value="false"/>
+                <input onChange={handleOnChange} name="temp" type="checkbox" className="new-user-element controls-checkbox"  value={values.temp}/>
                 <span className="checkmark"></span>
               </div>
             
             </div>
             <div className="basic-row inj-cert">
               <div className="new-user-button-container">
-                <label className="checkbox-label" new-user-element>Certified</label>
-                <input name="certified" type="checkbox" className="new-user-element controls-checkbox" value="false"/>
+                <label className="checkbox-label new-user-element">Certified</label>
+                <input name="certified" type="checkbox" className="new-user-element controls-checkbox"  value={values.certified}/>
                 <span className="checkmark"></span>
               </div>
               <div className="new-user-button-container">
-                <label className="checkbox-label" new-user-element>Injured</label>
-                <input name="injured" type="checkbox" className="new-user-element controls-checkbox" value="false"/>
+                <label className="checkbox-label new-user-element">Injured</label>
+                <input onChange={handleOnChange} name="injured" type="checkbox" className="new-user-element controls-checkbox"  value={values.injured}/>
                 <span className="checkmark"></span>
               </div>
               
@@ -77,8 +136,9 @@ const NewUserPanel = () => {
           </div>
           <div className="user-button-container">
             <label className="new-user-element">Join date:</label>
-            <input type="date" id="join-date-select" name="join-date"
-              defaultValue={getCurrentDate()}
+            <input type="date" id="join-date-select" name="joinDate"
+              onChange={handleOnChange} 
+              value={values.joinDate}
               min="2005-01-01" max={getCurrentDate()}></input>
           </div>
           <div className="user-button-container avail-display-box new-user-element" id="roster-container">
@@ -88,20 +148,25 @@ const NewUserPanel = () => {
             <div className="availability-button new-user-element avail-none" id="avail-thu">T</div>
             <div className="availability-button new-user-element avail-none" id="avail-fri">F</div>
             <div className="availability-button new-user-element avail-none" id="avail-sat">S</div>
-            <input type="text" className="hidden-value" id="invis-mon" name="rosterMonday" value="unselected"></input>
-            <input type="text" className="hidden-value" id="invis-tue" name="rosterTuesday" value="unselected"></input>
-            <input type="text" className="hidden-value" id="invis-wed" name="rosterWednesday" value="unselected"></input>
-            <input type="text" className="hidden-value" id="invis-thu" name="rosterThursday" value="unselected"></input>
-            <input type="text" className="hidden-value" id="invis-fri" name="rosterFriday" value="unselected"></input>
-            <input type="text" className="hidden-value" id="invis-sat" name="rosterSaturday" value="unselected"></input>
+            <input onChange={handleOnChange} type="text" className="hidden-value" id="invis-mon" name="rosterMonday"  value={values.rosterMonday}></input>
+            <input onChange={handleOnChange} type="text" className="hidden-value" id="invis-tue" name="rosterTuesday"  value={values.rosterTuesday}></input>
+            <input onChange={handleOnChange} type="text" className="hidden-value" id="invis-wed" name="rosterWednesday"  value={values.rosterWednesday}></input>
+            <input onChange={handleOnChange} type="text" className="hidden-value" id="invis-thu" name="rosterThursday"  value={values.rosterThursday}></input>
+            <input onChange={handleOnChange} type="text" className="hidden-value" id="invis-fri" name="rosterFriday"  value={values.rosterFriday}></input>
+            <input onChange={handleOnChange} type="text" className="hidden-value" id="invis-sat" name="rosterSaturday"  value={values.rosterSaturday}></input>
           </div>
           <div className="search-button-container">
-            <input className="new-user-submit-button" type="submit" value="Submit"/>
+            <input className="new-user-submit-button" type="submit"  value={"submit"}/>
           </div>
         </form>
       </div>
     </>
   )
+}
+
+NewUserPanel.propTypes = {
+  props: PropTypes.object,
+  populate: PropTypes.func
 }
 
 export default NewUserPanel
