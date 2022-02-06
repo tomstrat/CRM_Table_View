@@ -39,7 +39,7 @@ export default function appFactory({ Config, Routes, handleErrors, requireAuth }
   }))
   app.use(morgan((tokens, req, res) => {
     return [
-      "\n\n\n",
+      "\n",
       chalk.hex("#ff4757").bold("🍄  Morgan --> "),
       chalk.hex("#34ace0").bold(tokens.method(req, res)),
       chalk.hex("#ffb142").bold(tokens.status(req, res)),
@@ -49,15 +49,15 @@ export default function appFactory({ Config, Routes, handleErrors, requireAuth }
       chalk.yellow(tokens["remote-addr"](req, res)),
       chalk.hex("#fffa65").bold("from " + tokens.referrer(req, res)),
       chalk.hex("#1e90ff")(tokens["user-agent"](req, res)),
-      "\n\n\n",
+      "\n",
     ].join(" ")
   }))
   // app.use(csurf({ cookie: false }))
   app.use(limiter)
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(bodyParser.json())
-  app.use(express.static(__dirname + "/public"))
-  app.get("/favicon.ico", (req: Request, res: Response) => res.status(204))
+  // app.use(express.static(__dirname + "/public"))
+  // app.get("/favicon.ico", (req: Request, res: Response) => res.status(204))
   Routes.map(route => {
     route[1].use(requireAuth(route[2]))
     route[1].stack = reverse(route[1].stack) // Reverse stack to put auth on top

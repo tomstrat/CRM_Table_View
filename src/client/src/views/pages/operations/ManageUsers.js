@@ -3,24 +3,21 @@ import React, {useState, useEffect} from "react"
 import TableContents from "../../components/TableContents"
 import "../../styles/ManageUsers.css"
 import SideBar from "../../components/SideBar"
-// import SideBarSelect from "../../components/SideBarSelect"
 import UserControls from "../../components/UserControls"
 import NewUserPanel from "../../components/NewUserPanel" 
 
 const ManageUsers = () => {
-  const [data, setData] = useState([{}])
-  const [populated, setPopulated] = useState(false)
+  const [data, setData] = useState({data: [{}], populated: false})
   const [clickBool, setClickBool] = useState(false)
 
   useEffect(() => {
     const getData = async () => {
       const result = await fetch("/ops/users")
       const parsedResult = await result.json()
-      setData(parsedResult)
-      setPopulated(true)
+      setData({data: parsedResult, populated: true})
     }
-    if(!populated) getData()
-  }, [data, populated])
+    if(!data.populated) getData()
+  }, [data])
  
   return (
     <>
@@ -42,7 +39,7 @@ const ManageUsers = () => {
             <SideBar 
               title={"Add New User"} 
               component={NewUserPanel}
-              props={{populate: setPopulated}}
+              setData={setData}
             />
             <div className="new-user-button-container">
               <button className="new-user-button" onClick={() => setClickBool(false)}>Cancel</button>
@@ -50,22 +47,10 @@ const ManageUsers = () => {
           </>
         }
       </div>
-      <TableContents data={data}/>  
+      <TableContents data={data.data}/>  
     </>
   )
   
 }
 
 export default ManageUsers
-
-/* <SideBarSelect 
-  component1={
-    NewUserPanel
-  } 
-  component2={
-    // <NewUserPanel populate={setPopulated}/>
-    NewUserPanel
-  } 
-  title1="Search Users"
-  title2="Add New User"
-/> */
