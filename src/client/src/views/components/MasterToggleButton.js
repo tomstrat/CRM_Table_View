@@ -6,9 +6,10 @@ const MasterToggleButton = (props) => {
   const idParsed = props.title.replace(" ", "").toLowerCase()
   const handleOnClick = (event) => {
     event.persist()
-    curClass == "controls-button-clicked" ? setCurClass("controlsbutton") : setCurClass("controls-button-clicked")
+    
     props.setToggleButton(values => {
       const currentVal = values[idParsed] ? false : true
+      currentVal ? setCurClass("controls-button-clicked") : setCurClass("controlsbutton")
       return {
         ...values,
         [idParsed]: currentVal
