@@ -56,7 +56,12 @@ const NewUserPanel = (props) => {
     if(data.errors) {
       setErrors(formatErrors(data.errors))
     } else {
-      props.props.populate(false)
+      props.setData((values) => {
+        return {
+          ...values,
+          populated: false
+        }
+      })
     }
   })
 
@@ -166,7 +171,7 @@ const NewUserPanel = (props) => {
 
 NewUserPanel.propTypes = {
   props: PropTypes.object,
-  populate: PropTypes.func
+  setData: PropTypes.func
 }
 
 export default NewUserPanel
