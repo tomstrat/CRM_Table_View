@@ -44,6 +44,7 @@ export default function Login(props) {
   return (
     <div className="outer-login-container">
       <div className="login-container">
+        <div className="login-logo" style={{backgroundImage: "url('/junk_logo.png')"}}></div>
         <h2>LOG IN</h2>
         <form method="POST" action="/auth/login" onSubmit={handleSubmit}>
           <div className="input-container">
