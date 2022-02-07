@@ -6,12 +6,16 @@ import MasterToggleButton from "./MasterToggleButton"
 
 const UserControls = () => {
   const [ToggleButtons, setToggleButtons] = useState({
-    allusers: true, 
-    operations: false, 
-    trainers: false, 
-    drivers: false, 
-    navigators: false, 
-    temp: false
+    master: {
+      allusers: true
+    },
+    children: {
+      operations: false, 
+      trainers: false, 
+      drivers: false, 
+      navigators: false, 
+      temp: false
+    }
   })
   
   return (
@@ -21,13 +25,13 @@ const UserControls = () => {
           <MasterToggleButton title="All Users" toggleButtons={ToggleButtons} setToggleButtons={setToggleButtons}/>
         </div>
         <div className="user-button-container">
-          <ToggleButton title="Operations" setToggleButtons={setToggleButtons}/>
-          <ToggleButton title="Trainers" setToggleButtons={setToggleButtons}/>
+          <ToggleButton title="Operations" ToggleButtons={ToggleButtons} setToggleButtons={setToggleButtons}/>
+          <ToggleButton title="Trainers" ToggleButtons={ToggleButtons} setToggleButtons={setToggleButtons}/>
         </div>
         <div className="user-button-container">
-          <ToggleButton title="Drivers" setToggleButtons={setToggleButtons}/>
-          <ToggleButton title="Navigators" setToggleButtons={setToggleButtons}/>
-          <ToggleButton title="Temp" setToggleButtons={setToggleButtons}/> 
+          <ToggleButton title="Drivers" ToggleButtons={ToggleButtons} setToggleButtons={setToggleButtons}/>
+          <ToggleButton title="Navigators" ToggleButtons={ToggleButtons} setToggleButtons={setToggleButtons}/>
+          <ToggleButton title="Temp" ToggleButtons={ToggleButtons} setToggleButtons={setToggleButtons}/> 
         </div>
         <div className="user-controls-container">
           <div className="controls-label">Include Inactive</div>
