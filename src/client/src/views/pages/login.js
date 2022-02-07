@@ -4,6 +4,8 @@ import { formatErrors } from "../../utilities/errors"
 import ValError from "../components/valError"
 import "../styles/Login.css"
 import PropTypes from "prop-types"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faAsterisk, faIdBadge } from "@fortawesome/free-solid-svg-icons"
 
 export default function Login(props) {
 
@@ -40,21 +42,33 @@ export default function Login(props) {
   }, [auth, props])
 
   return (
-    <>
+    <div className="outer-login-container">
       <div className="login-container">
+        <h2>LOG IN</h2>
         <form method="POST" action="/auth/login" onSubmit={handleSubmit}>
-          <input value={values.username} onChange={handleOnChange} className="user-name" type="text" placeholder="Enter Username" name="username" required /><br />
-          <input value={values.password} onChange={handleOnChange} className="password" type="password" placeholder="Enter Password" name="password" required />
+          <div className="input-container">
+            <div className="icon-container">
+              <FontAwesomeIcon icon={faIdBadge} size="xs" />
+            </div>
+            <input value={values.username} onChange={handleOnChange} className="login-input user-name" type="text" placeholder="Enter Username" name="username" required />
+          </div>
+          <br />
+          <div className="input-container">
+            <div className="icon-container">
+              <FontAwesomeIcon icon={faAsterisk} size="xs" />
+            </div>
+            <input value={values.password} onChange={handleOnChange} className="login-input password" type="password" placeholder="Enter Password" name="password" required />
+          </div>
           <ValError message={
             errors["password"] ? errors["password"] : errors["username"]
           }/>
-          <input className="submit-button" type="submit" value="Login" />
           <label className="remember-me-container">
             <input className="remember-me" type="checkbox" name="remember" /> Remember me
           </label>
+          <input className="submit-button" type="submit" value="Login" /><br/>
         </form>
       </div>
-    </>
+    </div>
   )
 }
 
