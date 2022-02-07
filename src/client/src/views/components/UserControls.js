@@ -13,12 +13,12 @@ const UserControls = () => {
     navigators: false, 
     temp: false
   })
-
+  
   return (
     <>
       <div className="sidebar-components-container">        
         <div className="user-button-container">
-          <MasterToggleButton title="All Users" setToggleButtons={setToggleButtons}/>
+          <MasterToggleButton title="All Users" toggleButtons={ToggleButtons} setToggleButtons={setToggleButtons}/>
         </div>
         <div className="user-button-container">
           <ToggleButton title="Operations" setToggleButtons={setToggleButtons}/>
