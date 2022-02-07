@@ -6,12 +6,16 @@ import MasterToggleButton from "./MasterToggleButton"
 
 const UserControls = () => {
   const [ToggleButtons, setToggleButtons] = useState({
-    allusers: true, 
-    operations: false, 
-    trainers: false, 
-    drivers: false, 
-    navigators: false, 
-    temp: false
+    master: {
+      allusers: true
+    },
+    children: {
+      operations: false, 
+      trainers: false, 
+      drivers: false, 
+      navigators: false, 
+      temp: false
+    }
   })
 
   return (
