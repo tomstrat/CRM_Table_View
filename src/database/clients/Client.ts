@@ -50,11 +50,15 @@ export default class Client<Model> {
     }
   }
 
-  async deleteRecord(id: number): Promise<void> {
+  async deleteRecord(id: number): Promise<boolean | void> {
     try {
       const record = await this.repository.findOne(id)
-      if (record) await this.repository.remove(record)
-      console.log(`Deleted ${this.clientName}: ${id}`)
+      if (record) {
+        await this.repository.remove(record)
+        console.log(`Deleted ${this.clientName}: ${id}`)
+        return true
+      }
+      return false
     } catch (err) {
       if (err instanceof Error) throw new BadRequest(err.message)
     }

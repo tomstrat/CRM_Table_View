@@ -24,16 +24,19 @@ export default class UserClient extends Client<User> {
     }
   }
 
-  async getOne(unameOrId: string | number): Promise<User | undefined> {
+  async getOne(unameOrId: string | number, complete?: boolean): Promise<User | undefined> {
     const key = typeof unameOrId === "string"
       ? "username"
       : "id"
+
+    const hideOrShowPass =
+      (user: User) => complete ? user : this.hidePassword(user)
 
     return await pipeWithPromise([
       this.findOne,
       R.ifElse(
         R.has("username"),
-        this.hidePassword,
+        hideOrShowPass,
         (user) => user
       )
     ])({ [key]: unameOrId }, { relations: ["roster"] })
@@ -47,10 +50,10 @@ export default class UserClient extends Client<User> {
 
   async updateRecord(id: number, fieldsToUpdate: Partial<User>): Promise<User | undefined> {
     const isHashed = (password: string) => /\w{128}\.\w{32}/.test(password)
-    const user = await this.findOne({ id })
+    const user = await this.getOne(id, true)
     if (!user) return user
     return await pipeWithPromise([
-      R.mergeLeft(fieldsToUpdate),
+      R.mergeDeepLeft(fieldsToUpdate),
       R.ifElse(
         R.pathSatisfies(isHashed, ["password"]),
         (user) => user,
@@ -59,6 +62,13 @@ export default class UserClient extends Client<User> {
       this.save,
       this.hidePassword
     ])(user)
+  }
+
+  async deleteRecord(id: number): Promise<boolean | undefined> {
+    const user = await this.getOne(id)
+    if (!user) return user
+    await this.repository.remove(user)
+    return true
   }
 
   async comparePasswords(username: string, supplied: string): Promise<boolean | undefined> {

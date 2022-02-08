@@ -44,7 +44,11 @@ export default function usersRouteFactory(
   usersRouter.get("/:id", async (req: Request, res: Response) => {
     const id = parseInt(req.params.id)
     const user = await userClient.getOne(id)
-    return res.status(200).json(user)
+    if (user) {
+      return res.status(200).json(user)
+    } else {
+      return res.status(404).json(undefined)
+    }
   })
 
   usersRouter.post(
@@ -82,8 +86,10 @@ export default function usersRouteFactory(
       res.status(200).json(user)
     })
 
-  usersRouter.delete("/:id", (req: Request, res: Response) => {
-
+  usersRouter.delete("/:id", async (req: Request, res: Response) => {
+    const response = await userClient.deleteRecord(parseInt(req.params.id))
+    if (response) res.status(200).json(response)
+    if (!response) res.status(404).json(false)
   })
 
   return ["/ops/users", usersRouter, Role.operations]

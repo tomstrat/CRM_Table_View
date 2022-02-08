@@ -14,7 +14,9 @@ export class Roster {
   @PrimaryGeneratedColumn()
   id?: number
 
-  @OneToOne(type => User, user => user.roster)
+  @OneToOne(type => User, user => user.roster, {
+    onDelete: "CASCADE"
+  })
   @JoinColumn()
   user?: User
 
