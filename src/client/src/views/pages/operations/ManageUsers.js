@@ -31,6 +31,7 @@ const ManageUsers = () => {
       const parsedResult = await result.json()
       const formattedResult = formatUsers(parsedResult)
       setData({data: formattedResult, populated: true})
+      
     }
     if(!data.populated) getData()
   }, [data])

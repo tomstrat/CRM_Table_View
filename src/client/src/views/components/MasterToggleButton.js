@@ -1,43 +1,43 @@
-import React, { useEffect, useState } from "react"
+import React, {  useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import * as R from "ramda"
 
 const MasterToggleButton = (props) => {
-  const [curClass, setCurClass] = useState("controls-button-clicked")
+  const [masterCurClass, setMasterCurClass] = useState(true)
   const idParsed = props.title.replace(" ", "").toLowerCase()
-  useEffect(() => {
-
-    if(R.isEmpty(R.filter(prop => prop, props.ToggleButtons.children))){
-      setCurClass("controls-button-clicked")
-    } else {
-      setCurClass("controlsbutton")
-    }
-    
-  }, [props, R]) 
-
   
 
-  const handleOnClick = (event) => {
-    event.persist()
+
+  const handleOnClick = () => {
+    masterCurClass
+      ? setMasterCurClass(false)
+      : setMasterCurClass(true)
     
-    props.setToggleButtons(values => {
-      const currentVal = values[idParsed] ? false : true
-      currentVal ? setCurClass("controls-button-clicked") : setCurClass("controlsbutton")
-      return {
-        ...values,
-        master:{[idParsed]: currentVal}
-      
-      }
-    })
+    console.log("click")
   }
+  
+  
+  useEffect(() => {
+    props.setToggleButtons(values => {
+      
+      return R.assocPath(["master", idParsed], masterCurClass, values)
+    })
+
+  }, [masterCurClass])
+    
    
   return (
     <button 
-      className={curClass} 
+      className={masterCurClass
+        ? "controls-button-clicked"
+        : "controlsbutton"
+      } 
       id={idParsed} 
       onClick={handleOnClick}
+      
     >
       {props.title}
+      
     </button>
   
   )
@@ -52,7 +52,7 @@ MasterToggleButton.propTypes = {
   title: PropTypes.string,
   setToggleButtons: PropTypes.func,
   ToggleButtons: PropTypes.object,
-  master: PropTypes.bool
+  master: PropTypes.bool,
 }
 
 
