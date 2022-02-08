@@ -7,23 +7,25 @@ import PrivateRoute from "./views/components/privateRoute"
 import PublicRoute from "./views/components/publicRoute"
 import ManageUsers from "./views/pages/operations/ManageUsers"
 import OpsOverview from "./views/pages/operations/OpsOverview"
+import Logout from "./views/pages/logout"
 
 function App() {
 
   return (
-    <div className="app-container bg-light">
-      <BrowserRouter>
-        <div className="container pt-4 pb-4">
-          <Switch>
-            <PrivateRoute exact path="/" component={Profile} />
-            <PrivateRoute exact path="/ops/overview" component={OpsOverview} />
-            <PrivateRoute exact path="/ops/manageusers" component={ManageUsers} />
-            <PublicRoute path="/login" component={Login} />
-            <Redirect from="*" to="/" />
-          </Switch>
-        </div>
-      </BrowserRouter>
-    </div>
+
+    <BrowserRouter>
+      <div className="container pt-4 pb-4">
+        <Switch>
+          <PrivateRoute exact path="/" component={Profile} />
+          <PrivateRoute exact path="/ops/overview" component={OpsOverview} />
+          <PrivateRoute exact path="/ops/manageusers" component={ManageUsers} />
+          <PrivateRoute exact path="/logout" component={Logout} />
+          <PublicRoute path="/login" component={Login} />
+          <Redirect from="*" to="/" />
+        </Switch>
+      </div>
+    </BrowserRouter>
+
   )
 }
 

@@ -1,5 +1,6 @@
 import { ExternalInputUser } from "../../models/external.interfaces"
 import { EmployeeType, User } from "../../database/models/User"
+import { filter } from "ramda"
 
 export function formatUser(user: ExternalInputUser): User {
   return {
@@ -23,8 +24,12 @@ export function formatUser(user: ExternalInputUser): User {
   }
 }
 
-function convertCheckBox(result: string | undefined): boolean {
-  return result ? true : false
+export function cleanObject(user: User): User | Partial<User> {
+  return filter((n: any) => n !== undefined, user)
+}
+
+function convertCheckBox(result: string): boolean {
+  return (result === "true")
 }
 
 function convertDate(date: string | undefined): Date | undefined {

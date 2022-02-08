@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
 body {
   background-color: #00539f;
   display: flex;
@@ -11,11 +13,17 @@ body {
 }
 
 #root {
-  display: flex
+  display: flex;
+  width: 100%;
+}
+
+.container {
+  overflow: hidden;
+  width: 100%;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -29,8 +37,8 @@ code {
   width: 100%;
   justify-content: center;
   border-bottom: 2px solid #8dc63f;
-  position: fixed; 
-  top: 0; 
+  position: fixed;
+  top: 0;
   z-index: 10;
 }
 
@@ -62,4 +70,40 @@ code {
   height: 10vh;
   margin-top: 5px;
   cursor: pointer;
+}
+
+input {
+  font-family: "Open Sans", sans-serif;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: aliceblue;
+  border-radius: 10px;
+}
+
+/* Corner */
+::-webkit-scrollbar-corner {
+  background: aliceblue;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    90deg,
+    rgba(63, 198, 125, 1) 0%,
+    rgba(0, 83, 159, 1) 100%
+  );
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, rgb(44, 139, 89) 0%, rgb(1, 45, 87) 100%);
 }

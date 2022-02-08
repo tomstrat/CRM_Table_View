@@ -14,6 +14,7 @@ const Nav = (props) => {
           <NavLink to="/ops/timesheets/dataviewer">Dataviewer</NavLink>
           <NavLink to="/ops/timesheets/requests">Requests</NavLink>
           <NavLink to="/ops/users">Manage users</NavLink>
+          <NavLink to="/logout">Logout</NavLink>
         </div>
       ) : (
         <div className="link-container">

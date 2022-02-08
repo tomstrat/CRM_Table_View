@@ -31,16 +31,42 @@ export default function userValidatorFactory({ userClient }:
         const user = await userClient.getOne(username)
         if (user) throw new Error("Username already exists")
       }),
+    requireEditUsername: body("username")
+      .trim()
+      .escape()
+      .optional()
+      .isLength({ min: 3, max: 20 })
+      .withMessage("Must be between 3 and 20 characters")
+      .custom(async username => {
+        const user = await userClient.getOne(username)
+        if (user) throw new Error("Username already exists")
+      }),
     requireNewPassword: body("password")
       .trim()
       .escape()
       .exists()
       .isLength({ min: 5, max: 30 })
       .withMessage("Must be between 5 and 30 characters"),
+    requireEditPassword: body("password")
+      .trim()
+      .escape()
+      .optional()
+      .isLength({ min: 5, max: 30 })
+      .withMessage("Must be between 5 and 30 characters"),
     requirePasswordConfirmation: body("confirmPassword")
       .trim()
       .escape()
       .exists()
+      .isLength({ min: 5, max: 30 })
+      .withMessage("Must be between 5 and 30 characters")
+      .custom((password, { req }) => {
+        if (password != req.body.password) throw new Error("Passwords dont match")
+        return true
+      }),
+    requireEditPasswordConfirmation: body("confirmPassword")
+      .trim()
+      .escape()
+      .optional()
       .isLength({ min: 5, max: 30 })
       .withMessage("Must be between 5 and 30 characters")
       .custom((password, { req }) => {

@@ -39,32 +39,34 @@ const ManageUsers = () => {
   return (
     <>
       <Nav auth={true}/>
-      <div id="default-sidebar" className="visible-sidebar">
-        {clickBool == false 
-          ? 
-          <>
-            <SideBar 
-              title={"Search Users"} 
-              component={UserControls}
-            />
-            <div className="new-user-button-container">
-              <button className="new-user-button" onClick={() => setClickBool(true)}>Add new user</button>
-            </div>
-          </>
-          : 
-          <>
-            <SideBar 
-              title={"Add New User"} 
-              component={NewUserPanel}
-              setData={setData}
-            />
-            <div className="new-user-button-container">
-              <button className="new-user-button" onClick={() => setClickBool(false)}>Cancel</button>
-            </div>
-          </>
-        }
+      <div className="manage-user-container">
+        <div id="default-sidebar" className="visible-sidebar">
+          {clickBool == false 
+            ? 
+            <>
+              <SideBar 
+                title={"Search Users"} 
+                component={UserControls}
+              />
+              <div className="new-user-button-container">
+                <button className="new-user-button" onClick={() => setClickBool(true)}>Add new user</button>
+              </div>
+            </>
+            : 
+            <>
+              <SideBar 
+                title={"Add New User"} 
+                component={NewUserPanel}
+                setData={setData}
+              />
+              <div className="new-user-button-container">
+                <button className="new-user-button" onClick={() => setClickBool(false)}>Cancel</button>
+              </div>
+            </>
+          }
+        </div>
+        <TableContents data={data.data}/>
       </div>
-      <TableContents data={data.data}/>  
     </>
   )
   
