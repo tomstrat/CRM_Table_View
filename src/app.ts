@@ -51,7 +51,7 @@ export default function appFactory({ Config, Routes, handleErrors, requireAuth }
       chalk.hex("#1e90ff")(tokens["user-agent"](req, res)),
       "\n",
     ].join(" ")
-  }))
+  }, { skip: (req, res) => process.env.NODE_ENV === "test" }))
   // app.use(csurf({ cookie: false }))
   app.use(limiter)
   app.use(bodyParser.urlencoded({ extended: false }))

@@ -46,6 +46,28 @@ export const correctUser: ExternalOutputUser = {
   }
 }
 
+export const updatedUser: ExternalOutputUser = {
+  id: 2,
+  username: "editUser",
+  password: "",
+  employeeType: [EmployeeType.operations, EmployeeType.driver, EmployeeType.trainer],
+  role: Role.operations,
+  contract: Contract.partTime,
+  certified: false,
+  injured: false,
+  location: Location.cbd,
+  joinDate: "2018-09-22T00:00:00.000Z",
+  roster: {
+    id: 2,
+    monday: RosterStatus.working,
+    tuesday: RosterStatus.notWorking,
+    wednesday: RosterStatus.working,
+    thursday: RosterStatus.working,
+    friday: RosterStatus.contactable,
+    saturday: RosterStatus.working,
+  }
+}
+
 export const correctPostUser: ExternalInputUser = {
   username: "newUser",
   password: "password",
@@ -82,6 +104,25 @@ export const incorrectPostUser = {
   rosterThursday: "unselected",
   rosterFriday: "unselected",
   rosterSaturday: "unselected",
+}
+
+export const correctPatchUser: ExternalInputUser = {
+  username: "editUser",
+  password: "password2",
+  confirmPassword: "password2",
+  employeeType: "operations,driver,trainer",
+  role: Role.operations,
+  contract: Contract.partTime,
+  certified: "false",
+  injured: "false",
+  location: Location.cbd,
+  joinDate: "2018-09-22",
+  rosterMonday: RosterStatus.working,
+  rosterTuesday: RosterStatus.notWorking,
+  rosterWednesday: RosterStatus.working,
+  rosterThursday: RosterStatus.working,
+  rosterFriday: RosterStatus.contactable,
+  rosterSaturday: RosterStatus.working,
 }
 
 export const errorObject = {

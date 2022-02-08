@@ -2,7 +2,7 @@ import React, {  useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import * as R from "ramda"
 
-const MasterToggleButton = (props) => {
+const ToggleButton = (props) => {
   const [CurClass, setCurClass] = useState(false)
   const idParsed = props.title.replace(" ", "").toLowerCase()
   
@@ -39,9 +39,9 @@ const MasterToggleButton = (props) => {
   )
 }
     
-export default MasterToggleButton
+export default ToggleButton
 
-MasterToggleButton.propTypes = {
+ToggleButton.propTypes = {
   title: PropTypes.string,
   setToggleButtons: PropTypes.func,
   ToggleButtons: PropTypes.object,

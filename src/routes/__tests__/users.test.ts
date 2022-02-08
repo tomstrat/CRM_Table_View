@@ -5,7 +5,14 @@ import Config from "../../config/config"
 import cookieSession from "cookie-session"
 import express, { Express } from "express"
 import { Connection } from "typeorm"
-import { testUser, correctUser, correctPostUser, incorrectPostUser, errorObject } from "../../testing/dummy-data/userdata"
+import {
+  testUser, correctUser,
+  updatedUser,
+  correctPostUser,
+  incorrectPostUser,
+  correctPatchUser,
+  errorObject
+} from "../../testing/dummy-data/userdata"
 
 let parentApp: Express
 let DB: Connection
@@ -40,15 +47,25 @@ describe("Routes for Users", () => {
       })
     })
     describe("With Auth", () => {
-      it("sends 200 code and user", async () => {
-        await agent
-          .get("/ops/users/1")
-          .expect(200)
-          .expect("Content-Type", /json/)
-          .expect(testUser)
+      describe("And existing user", () => {
+        it("sends 200 code and user", async () => {
+          await agent
+            .get("/ops/users/1")
+            .expect(200)
+            .expect("Content-Type", /json/)
+            .expect(testUser)
+        })
+      })
+      describe("And non-existent user", () => {
+        it("sends 404 code", async () => {
+          await agent
+            .get("/ops/users/100")
+            .expect(404)
+        })
       })
     })
   })
+
   describe("POST /ops/users/new", () => {
     describe("Without Auth", () => {
       it("sends 401 code", async () => {
@@ -88,6 +105,7 @@ describe("Routes for Users", () => {
       })
     })
   })
+
   describe("GET /ops/users", () => {
     describe("Without Auth", () => {
       it("sends 401 code", async () => {
@@ -103,6 +121,79 @@ describe("Routes for Users", () => {
           .expect(200)
           .expect("Content-Type", /json/)
           .expect([testUser, correctUser])
+      })
+    })
+  })
+
+  describe("PATCH /ops/users/:id", () => {
+    describe("Without Auth", () => {
+      it("sends 401 code", async () => {
+        await request(parentApp)
+          .patch("/ops/users/2")
+          .send(correctPatchUser)
+          .expect(401)
+      })
+    })
+    describe("With Auth", () => {
+      describe("And correct data", () => {
+        it("sends 200 code", async () => {
+          await agent
+            .patch("/ops/users/2")
+            .send(correctPatchUser)
+            .expect(200)
+            .expect("Content-Type", /json/)
+            .expect(updatedUser)
+        })
+      })
+      describe("And incorrect data", () => {
+        it("sends 400 code", async () => {
+          await agent
+            .patch("/ops/users/2")
+            .send(incorrectPostUser)
+            .expect(400)
+            .expect(errorObject)
+        })
+      })
+      describe("And empty data", () => {
+        it("sends 400 code", async () => {
+          await agent
+            .patch("/ops/users/2")
+            .send({})
+            .expect(400)
+        })
+      })
+    })
+  })
+
+  describe("DELETE /ops/users/:id", () => {
+    describe("Without Auth", () => {
+      it("sends 401 code", async () => {
+        await request(parentApp)
+          .delete("/ops/users/2")
+          .expect(401)
+      })
+    })
+    describe("With Auth", () => {
+      describe("And existing user", () => {
+        it("sends 200 code and deletes user", async () => {
+          await agent
+            .delete("/ops/users/2")
+            .expect(200)
+            .expect("Content-Type", /json/)
+            .expect("true")
+          await agent
+            .get("/ops/users/2")
+            .expect(404)
+            .expect("Content-Type", /json/)
+        })
+      })
+      describe("And non-existent user", () => {
+        it("sends 401 code", async () => {
+          await agent
+            .get("/ops/users/100")
+            .expect(404)
+            .expect("Content-Type", /json/)
+        })
       })
     })
   })
