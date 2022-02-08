@@ -40,8 +40,8 @@ export interface ExternalInputUser {
   employeeType?: string
   contract: Contract
   role: Role
-  certified?: string
-  injured?: string
+  certified: string
+  injured: string
   location?: Location
   joinDate?: string
   rosterMonday: RosterStatus

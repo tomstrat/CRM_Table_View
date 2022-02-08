@@ -23,7 +23,7 @@ const NewUserPanel = (props) => {
     temp: "",
     certified: "false",
     injured: "false",
-    joinDate: getCurrentDate(),
+    joinDate: "",
     rosterMonday: "unselected",
     rosterTuesday: "unselected",
     rosterWednesday: "unselected",

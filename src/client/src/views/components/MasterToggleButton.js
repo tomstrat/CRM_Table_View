@@ -7,7 +7,7 @@ const MasterToggleButton = (props) => {
   const idParsed = props.title.replace(" ", "").toLowerCase()
   useEffect(() => {
 
-    if(R.isEmpty(R.filter(prop => prop, props.ToggleButtons.children))){
+    if(R.isEmpty(R.filter(prop => prop, props.toggleButtons.children))){
       setCurClass("controls-button-clicked")
     } else {
       setCurClass("controlsbutton")
@@ -51,7 +51,7 @@ export default MasterToggleButton
 MasterToggleButton.propTypes = {
   title: PropTypes.string,
   setToggleButtons: PropTypes.func,
-  ToggleButtons: PropTypes.object,
+  toggleButtons: PropTypes.object,
   master: PropTypes.bool
 }
 

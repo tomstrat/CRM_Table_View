@@ -8,7 +8,7 @@ const ToggleButton = (props) => {
   const idParsed = props.title.replace(" ", "").toLowerCase()
   useEffect(() => {
 
-    if(Object.values(props.ToggleButtons.master)[0] == true){
+    if(Object.values(props.toggleButtons.master)[0] == true){
       setCurClass("controlsbutton")
     } else {
       setCurClass("controls-button-clicked")
@@ -44,7 +44,7 @@ export default ToggleButton
 ToggleButton.propTypes = {
   title: PropTypes.string,
   setToggleButtons: PropTypes.func,
-  ToggleButtons: PropTypes.object,
+  toggleButtons: PropTypes.object,
 }
 
 

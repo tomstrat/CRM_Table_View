@@ -5,7 +5,7 @@ import { RouteDefinition } from "../../models/route"
 import UserValType from "../../middleware/validation/types/users"
 import { Role } from "../../database/models/User"
 import { ViewWithErrors } from "../../views/types/views"
-import { formatUser } from "../formatters/user.formatters"
+import { formatUser, cleanObject } from "../formatters/user.formatters"
 
 export default function usersRouteFactory(
   {
@@ -21,8 +21,11 @@ export default function usersRouteFactory(
   const usersRouter = Router()
   const {
     requireNewUsername,
+    requireEditUsername,
     requireNewPassword,
+    requireEditPassword,
     requirePasswordConfirmation,
+    requireEditPasswordConfirmation,
     requireContract,
     requireRole,
     requireCert,
@@ -60,9 +63,24 @@ export default function usersRouteFactory(
       res.status(200).json(user)
     })
 
-  usersRouter.patch("/:id", (req: Request, res: Response) => {
-
-  })
+  usersRouter.patch(
+    "/:id",
+    [
+      requireEditUsername, requireEditPassword,
+      requireEditPasswordConfirmation,
+      requireContract, requireRole,
+      requireCert, requireInjured, requireRoster,
+      requireEmployeeType, requireJoinDate,
+      requireLocation
+    ],
+    handleValErrors(),
+    async (req: Request, res: Response) => {
+      const user = await userClient.updateRecord(
+        parseInt(req.params.id),
+        cleanObject(formatUser(req.body))
+      )
+      res.status(200).json(user)
+    })
 
   usersRouter.delete("/:id", (req: Request, res: Response) => {
 
