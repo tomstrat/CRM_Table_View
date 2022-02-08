@@ -22,16 +22,16 @@ const UserControls = () => {
     <>
       <div className="sidebar-components-container">        
         <div className="user-button-container">
-          <MasterToggleButton title="All Users" toggleButtons={ToggleButtons} setToggleButtons={setToggleButtons}/>
+          <MasterToggleButton title="All Users" ToggleButtons={ToggleButtons} setToggleButtons={setToggleButtons}/>
         </div>
         <div className="user-button-container">
-          <ToggleButton title="Operations" toggleButtons={ToggleButtons} setToggleButtons={setToggleButtons}/>
-          <ToggleButton title="Trainers" toggleButtons={ToggleButtons} setToggleButtons={setToggleButtons}/>
+          <ToggleButton title="Operations" ToggleButtons={ToggleButtons} setToggleButtons={setToggleButtons}/>
+          <ToggleButton title="Trainers" ToggleButtons={ToggleButtons} setToggleButtons={setToggleButtons}/>
         </div>
         <div className="user-button-container">
-          <ToggleButton title="Drivers" toggleButtons={ToggleButtons} setToggleButtons={setToggleButtons}/>
-          <ToggleButton title="Navigators" toggleButtons={ToggleButtons} setToggleButtons={setToggleButtons}/>
-          <ToggleButton title="Temp" toggleButtons={ToggleButtons} setToggleButtons={setToggleButtons}/> 
+          <ToggleButton title="Drivers" ToggleButtons={ToggleButtons} setToggleButtons={setToggleButtons}/>
+          <ToggleButton title="Navigators" ToggleButtons={ToggleButtons} setToggleButtons={setToggleButtons}/>
+          <ToggleButton title="Temp" ToggleButtons={ToggleButtons} setToggleButtons={setToggleButtons}/> 
         </div>
         <div className="user-controls-container">
           <div className="controls-label">Include Inactive</div>
