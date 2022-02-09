@@ -118,7 +118,7 @@ const NewUserPanel = (props) => {
                 <span className="checkmark"></span>
               </div>
               <div className="new-user-button-container">
-                <label className="checkbox-label">Temp</label>
+                <label className="checkbox-label new-user-element">Temp</label>
                 <input onChange={handleOnChange} name="temp" type="checkbox" className="new-user-element controls-checkbox"  value={values.temp}/>
                 <span className="checkmark"></span>
               </div>
@@ -141,14 +141,15 @@ const NewUserPanel = (props) => {
             
           </div>
           <div className="user-button-container">
-            <label className="new-user-element">Join date:</label>
+            <label className="new-user-element checkbox-label">Join date:</label>
             <input type="date" id="join-date-select" name="joinDate"
               onChange={handleOnChange} 
-              value={values.joinDate}
+              value={values.joinDate} 
               min="2005-01-01" max={getCurrentDate()}></input>
           </div>
+          
           <RosterPanel rosterButtons={props.rosterButtons} setRosterButtons={props.setRosterButtons}/>
-          <div className="search-button-container">
+          <div className="search-button-container new-user-element">
             <input className="new-user-submit-button" type="submit"  value={"submit"}/>
           </div>
         </form>

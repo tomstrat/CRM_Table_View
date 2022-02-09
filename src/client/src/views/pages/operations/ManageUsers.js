@@ -42,7 +42,13 @@ const ManageUsers = () => {
         joinDate: (date) => {
           const newDate = new Date(date)
           return newDate.toLocaleDateString("en-GB")
-        }
+        },
+        employeeType: (types) => {
+          if(types){
+            return R.map(type => {
+              return type[0] + type[1]
+            }, types).join(", ")
+          }}
       })
     ), data)
   }

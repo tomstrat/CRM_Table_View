@@ -8,7 +8,6 @@
   background-color: aliceblue;
   border: 2px solid #8dc63f;
   border-radius: 12px;
-  left: 0;
   z-index: 5;
   margin-left: 2vw;
 }
@@ -17,7 +16,7 @@
   display: none;
   flex-direction: column;
   background-color: #00539f;
-  width: 20vw;
+  width: 20%;
   justify-content: flex-start;
   align-items: center;
   background-color: aliceblue;

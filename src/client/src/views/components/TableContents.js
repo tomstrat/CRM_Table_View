@@ -3,11 +3,6 @@ import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 import "../styles/TableContents.css"
 import uniqid from "uniqid"
-// import * as R from "ramda"
-
-
-
-
 
 
 const TableContents = (props) => {
