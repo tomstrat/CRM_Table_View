@@ -5,6 +5,7 @@ import { handleSubmitFactory } from "../../utilities/requests"
 import { formatErrors } from "../../utilities/errors"
 import ValError from "../components/valError"
 import PropTypes from "prop-types"
+import RosterPanel from "./RosterPanel"
 
 
 const NewUserPanel = (props) => {
@@ -146,20 +147,7 @@ const NewUserPanel = (props) => {
               value={values.joinDate}
               min="2005-01-01" max={getCurrentDate()}></input>
           </div>
-          <div className="user-button-container avail-display-box new-user-element" id="roster-container">
-            <div className="availability-button new-user-element avail-none" id="avail-mon">M</div>
-            <div className="availability-button new-user-element avail-none" id="avail-tue">T</div>
-            <div className="availability-button new-user-element avail-none" id="avail-wed">W</div>
-            <div className="availability-button new-user-element avail-none" id="avail-thu">T</div>
-            <div className="availability-button new-user-element avail-none" id="avail-fri">F</div>
-            <div className="availability-button new-user-element avail-none" id="avail-sat">S</div>
-            <input onChange={handleOnChange} type="text" className="hidden-value" id="invis-mon" name="rosterMonday"  value={values.rosterMonday}></input>
-            <input onChange={handleOnChange} type="text" className="hidden-value" id="invis-tue" name="rosterTuesday"  value={values.rosterTuesday}></input>
-            <input onChange={handleOnChange} type="text" className="hidden-value" id="invis-wed" name="rosterWednesday"  value={values.rosterWednesday}></input>
-            <input onChange={handleOnChange} type="text" className="hidden-value" id="invis-thu" name="rosterThursday"  value={values.rosterThursday}></input>
-            <input onChange={handleOnChange} type="text" className="hidden-value" id="invis-fri" name="rosterFriday"  value={values.rosterFriday}></input>
-            <input onChange={handleOnChange} type="text" className="hidden-value" id="invis-sat" name="rosterSaturday"  value={values.rosterSaturday}></input>
-          </div>
+          <RosterPanel/>
           <div className="search-button-container">
             <input className="new-user-submit-button" type="submit"  value={"submit"}/>
           </div>

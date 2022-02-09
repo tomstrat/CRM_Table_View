@@ -1,0 +1,89 @@
+import React, { useState } from "react"
+import PropTypes from "prop-types"
+import * as R from "ramda"
+
+
+const RosterPanel = () => {
+  
+  const [rosterButtons, setRosterButtons] = useState(
+    {
+      rosterMonday: "unselected",
+      rosterTuesday: "unselected",
+      rosterWednesday: "unselected",
+      rosterThursday: "unselected",
+      rosterFriday: "unselected",
+      rosterSaturday: "unselected",
+    })
+  
+  return (
+    <div className="user-button-container avail-display-box new-user-element" id="roster-container">
+      <RosterButton title={"rosterMonday"} rosterButtons={rosterButtons} setRosterButtons={setRosterButtons}/>
+      <RosterButton title={"rosterTuesday"} rosterButtons={rosterButtons} setRosterButtons={setRosterButtons}/>
+      <RosterButton title={"rosterWednesday"} rosterButtons={rosterButtons} setRosterButtons={setRosterButtons}/>
+      <RosterButton title={"rosterThursday"} rosterButtons={rosterButtons} setRosterButtons={setRosterButtons}/>
+      <RosterButton title={"rosterFriday"} rosterButtons={rosterButtons} setRosterButtons={setRosterButtons}/>
+      <RosterButton title={"rosterSaturday"} rosterButtons={rosterButtons} setRosterButtons={setRosterButtons}/>
+    </div>
+  )     
+  
+}
+    
+export default RosterPanel
+
+
+const RosterButton = (props) => {
+  
+  const titleParsed = props.title.charAt(6)
+  
+  const classSelect = (props) => {
+    if(props.rosterButtons[props.title] == "unselected"){
+      return "avail-none"
+    } else if(props.rosterButtons[props.title] == "working"){
+      return "avail-green"
+    } else if (props.rosterButtons[props.title] == "contactable"){
+      return "avail-yellow"
+    }
+  } 
+  
+  const classSelected = classSelect(props) + " availability-button new-user-element"
+
+  const clickHandler = () => {
+
+    console.log(props.title)
+    if(props.rosterButtons[props.title] == "unselected") {
+      props.setRosterButtons(values => {
+        return R.assocPath([props.title], "working", values)
+      })
+    } 
+    else if(props.rosterButtons[props.title] == "working") {
+      props.setRosterButtons(values => {
+        return R.assocPath([props.title], "contactable", values)
+      })
+    } 
+    else if(props.rosterButtons[props.title] == "contactable") {
+      props.setRosterButtons(values => {
+        return R.assocPath([props.title], "unselected", values)
+      })
+    }
+  }
+
+  return (
+    <div
+      onClick={clickHandler}
+      className={classSelected}
+    >
+      {titleParsed}
+    </div>
+  )
+}
+
+RosterButton.propTypes = {
+  title: PropTypes.string,
+  rosterButtons: PropTypes.object,
+  setRosterButtons: PropTypes.func
+}
+
+RosterPanel.propTypes = {
+  title: PropTypes.string
+}
+
