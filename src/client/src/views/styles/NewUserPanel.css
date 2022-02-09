@@ -33,7 +33,7 @@
 }
 
 .new-user-element {
-  margin: 5px;
+  margin: 3px;
 }
 .new-user-label {
   font-size: 11px;
@@ -43,7 +43,7 @@
 }
 
 .checkbox-label {
-  width: 100%;
+  
   text-align: center;
   font-size: 11px;
 }
@@ -106,7 +106,6 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 5px;
 }
 
 .new-user-submit-button {

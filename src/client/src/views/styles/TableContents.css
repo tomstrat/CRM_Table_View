@@ -1,22 +1,26 @@
 .table-content-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
   padding: 10px;
+  margin-right: 2%;
   background-color: aliceblue;
   border: 2px solid #8dc63f;
   border-radius: 12px;
   overflow: scroll;
-  width: 70%;
-  margin-right: 2vw;
+  width: fit-content;
+  font-size: 11px;
+  height: fit-content;
+
 }
 
 .table {
   display: flex;
   flex-direction: column;
   height: 100%;
+  margin-left: 10px;
 }
 
 .theaders {
@@ -41,6 +45,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  vertical-align: center;
   height: fit-content;
   background-color: #ffffff;
   color: #000000;
@@ -56,7 +61,7 @@
   flex-direction: column;
   flex-wrap: nowrap;
   max-width: 125px;
-  min-width: 125px;
+  min-width: 118px;
   text-align: center;
   box-shadow: 1px 0 0 0 #000000, 0 1px 0 0 #000000, 1px 1px 0 0 #000000,
     /* Just to fix the corner */ 1px 0 0 0 #000000 inset,
