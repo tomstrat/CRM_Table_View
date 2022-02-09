@@ -7,6 +7,7 @@ import ValError from "../components/valError"
 import PropTypes from "prop-types"
 import { initialUserState } from "../../utilities/userdata"
 import RosterPanel from "./RosterPanel"
+import * as R from "ramda"
 
 
 const NewUserPanel = (props) => {
@@ -16,22 +17,37 @@ const NewUserPanel = (props) => {
 
   const handleOnChange = (event) => {
     event.persist()
-    const value = event.target.type === "checkbox"
-      ? event.target.checked
-      : event.target.value
+    const { target } = event
+    const empTypes = ["operations", "trainer", "driver", "navigator", "temp"]
+    const value = target.type === "checkbox"
+      ? target.checked
+      : target.value
+    const typeTarget = R.includes(target.name, empTypes)
+      ? true
+      : false
+
 
     setValues(values => {
+      const refreshed = typeTarget
+        ? refreshEmployeeType(
+          values.employeeType, target.name, value
+        )
+        : values.employeeType
       return {
         ...values,
-        [event.target.name]: value,
-        employeeType:
-        values.operations ? values.operations + "," : "" + 
-        values.trainer ? values.trainer + "," : "" + 
-        values.driver ? values.driver + "," : "" + 
-        values.navigator ? values.navigator + "," : "" + 
-        values.temp ? values.temp : ""
+        [target.name]: value,
+        employeeType: refreshed
       }
     })
+  }
+
+  const refreshEmployeeType = (types, type, value) => {
+    const arr = types ? types.split(",") : []
+    if(value && R.not(R.includes(type, arr))) {
+      return R.join(",", R.append(type, arr))
+    } else{
+      return R.join(",", R.remove(type, arr))
+    }
   }
 
 

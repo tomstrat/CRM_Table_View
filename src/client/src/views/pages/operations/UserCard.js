@@ -7,6 +7,8 @@ import * as R from "ramda"
 import PropTypes from "prop-types"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUserEdit, faEye } from "@fortawesome/free-solid-svg-icons"
+import uniqid from "uniqid"
+import { formatUser } from "../../../utilities/formatters/users.formatters"
 
 
 const UserCard = (props) => {
@@ -28,18 +30,7 @@ const UserCard = (props) => {
     if(!values.populated) getData()
   })
 
-  function formatUser(user) {
-    return R.pipe(
-      R.omit(["password"]),
-      R.evolve({
-        certified: R.toString,
-        injured: R.toString,
-        joinDate: (date) => {
-          const newDate = new Date(date)
-          return newDate.toLocaleDateString("en-GB")
-        }
-      }))(user)
-  }
+
 
   function makeTextInput(name){
     return (
@@ -65,13 +56,36 @@ const UserCard = (props) => {
       />
     )
   }
+
+  function makeSelectInput(name, options){
+    return (
+      <div className="select">
+        <select
+          type="text"
+          value={values.data[name]}
+          onChange={handleOnChange}
+          className="edit-user-select"
+          name={name}
+        >
+          {options.map(option => {
+            return <option key={uniqid("option-")} value={option.value}>{option.value}</option>
+          })}
+        </select>
+        <span className="focus"></span>
+      </div>
+    )
+  }
   
   const handleOnChange = (event) => {
     event.persist()
+    const { target } = event
+    const value = target.type === "checkbox"
+      ? target.checked.toString()
+      : target.value
     setValues(values => {
       return R.mergeDeepLeft(
         {populated: values.populated, data:{
-          [event.target.name]: event.target.value
+          [target.name]: value
         }},
         values
       )
@@ -100,10 +114,37 @@ const UserCard = (props) => {
             input={makeTextInput("username")}
           />
           <UserField 
+            title="Contract" 
+            content={values.data.contract}
+            edit={edit}
+            input={makeSelectInput("contract", [
+              {value:"Full Time"},
+              {value:"Part Time"},
+              {value:"Casual"},
+              {value:"Temp"},
+            ])}
+          />
+          <UserField 
+            title="Role" 
+            content={values.data.role}
+            edit={edit}
+            input={makeSelectInput("role", [
+              {value:"User"},
+              {value:"Operations"},
+              {value:"Admin"},
+            ])}
+          />
+          <UserField 
             title="Certified" 
             content={values.data.certified}
             edit={edit}
             input={makeCheckboxInput("certified")}
+          />
+          <UserField 
+            title="Injured" 
+            content={values.data.injured}
+            edit={edit}
+            input={makeCheckboxInput("injured")}
           />
           
           

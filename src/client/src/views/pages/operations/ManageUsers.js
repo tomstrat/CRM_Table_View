@@ -5,7 +5,7 @@ import "../../styles/ManageUsers.css"
 import SideBar from "../../components/SideBar"
 import UserControls from "../../components/UserControls"
 import NewUserPanel from "../../components/NewUserPanel"
-import * as R from "ramda"
+import { formatUsers } from "../../../utilities/formatters/users.formatters"
 
 
 const ManageUsers = () => {
@@ -33,25 +33,7 @@ const ManageUsers = () => {
       temp: false
     }
   })
-  function formatUsers(data) {
-    return R.map(R.pipe(
-      R.omit(["password", "roster"]),
-      R.evolve({
-        certified: R.toString,
-        injured: R.toString,
-        joinDate: (date) => {
-          const newDate = new Date(date)
-          return newDate.toLocaleDateString("en-GB")
-        },
-        employeeType: (types) => {
-          if(types){
-            return R.map(type => {
-              return type[0] + type[1]
-            }, types).join(", ")
-          }}
-      })
-    ), data)
-  }
+
 
   useEffect(() => {
     const getData = async () => {
@@ -59,7 +41,6 @@ const ManageUsers = () => {
       const parsedResult = await result.json()
       const formattedResult = formatUsers(parsedResult)
       setData({data: formattedResult, populated: true})
-      
     }
     if(!data.populated) getData()
   }, [data])
