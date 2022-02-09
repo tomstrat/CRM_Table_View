@@ -92,6 +92,14 @@
   background-color: #ffffff;
 }
 
+.avail-green {
+  background-color: rgb(0, 219, 0);
+}
+
+.avail-yellow {
+  background-color: yellow;
+}
+
 .user-button-container {
   display: flex;
   flex-direction: row;
