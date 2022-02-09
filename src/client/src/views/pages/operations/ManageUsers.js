@@ -7,10 +7,32 @@ import UserControls from "../../components/UserControls"
 import NewUserPanel from "../../components/NewUserPanel"
 import * as R from "ramda"
 
+
 const ManageUsers = () => {
   const [data, setData] = useState({data: [{}], populated: false})
   const [clickBool, setClickBool] = useState(false)
-
+  const [rosterButtons, setRosterButtons] = useState(
+    {
+      rosterMonday: "unselected",
+      rosterTuesday: "unselected",
+      rosterWednesday: "unselected",
+      rosterThursday: "unselected",
+      rosterFriday: "unselected",
+      rosterSaturday: "unselected"
+    })
+  
+  const [ToggleButtons, setToggleButtons] = useState({
+    master: {
+      allusers: true
+    },
+    children: {
+      operations: false, 
+      trainers: false, 
+      drivers: false, 
+      navigators: false, 
+      temp: false
+    }
+  })
   function formatUsers(data) {
     return R.map(R.pipe(
       R.omit(["password", "roster"]),
@@ -47,6 +69,8 @@ const ManageUsers = () => {
               <SideBar 
                 title={"Search Users"} 
                 component={UserControls}
+                ToggleButtons={ToggleButtons}
+                setToggleButtons={setToggleButtons}
               />
               <div className="new-user-button-container">
                 <button className="new-user-button" onClick={() => setClickBool(true)}>Add new user</button>
@@ -58,6 +82,8 @@ const ManageUsers = () => {
                 title={"Add New User"} 
                 component={NewUserPanel}
                 setData={setData}
+                setRosterButtons={setRosterButtons}
+                rosterButtons={rosterButtons}
               />
               <div className="new-user-button-container">
                 <button className="new-user-button" onClick={() => setClickBool(false)}>Cancel</button>
@@ -65,7 +91,7 @@ const ManageUsers = () => {
             </>
           }
         </div>
-        <TableContents data={data.data}/>
+        <TableContents ToggleButtons={ToggleButtons} data={data.data}/>
       </div>
     </>
   )

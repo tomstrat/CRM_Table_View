@@ -147,7 +147,7 @@ const NewUserPanel = (props) => {
               value={values.joinDate}
               min="2005-01-01" max={getCurrentDate()}></input>
           </div>
-          <RosterPanel/>
+          <RosterPanel rosterButtons={props.rosterButtons} setRosterButtons={props.setRosterButtons}/>
           <div className="search-button-container">
             <input className="new-user-submit-button" type="submit"  value={"submit"}/>
           </div>
@@ -159,7 +159,9 @@ const NewUserPanel = (props) => {
 
 NewUserPanel.propTypes = {
   props: PropTypes.object,
-  setData: PropTypes.func
+  setData: PropTypes.func,
+  rosterButtons: PropTypes.object,
+  setRosterButtons: PropTypes.func
 }
 
 export default NewUserPanel

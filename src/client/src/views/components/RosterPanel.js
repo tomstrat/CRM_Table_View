@@ -1,28 +1,17 @@
-import React, { useState } from "react"
+import React from "react"
 import PropTypes from "prop-types"
 import * as R from "ramda"
 
 
-const RosterPanel = () => {
-  
-  const [rosterButtons, setRosterButtons] = useState(
-    {
-      rosterMonday: "unselected",
-      rosterTuesday: "unselected",
-      rosterWednesday: "unselected",
-      rosterThursday: "unselected",
-      rosterFriday: "unselected",
-      rosterSaturday: "unselected",
-    })
-  
+const RosterPanel = (props) => {
   return (
     <div className="user-button-container avail-display-box new-user-element" id="roster-container">
-      <RosterButton title={"rosterMonday"} rosterButtons={rosterButtons} setRosterButtons={setRosterButtons}/>
-      <RosterButton title={"rosterTuesday"} rosterButtons={rosterButtons} setRosterButtons={setRosterButtons}/>
-      <RosterButton title={"rosterWednesday"} rosterButtons={rosterButtons} setRosterButtons={setRosterButtons}/>
-      <RosterButton title={"rosterThursday"} rosterButtons={rosterButtons} setRosterButtons={setRosterButtons}/>
-      <RosterButton title={"rosterFriday"} rosterButtons={rosterButtons} setRosterButtons={setRosterButtons}/>
-      <RosterButton title={"rosterSaturday"} rosterButtons={rosterButtons} setRosterButtons={setRosterButtons}/>
+      <RosterButton title={"rosterMonday"} rosterButtons={props.rosterButtons} setRosterButtons={props.setRosterButtons}/>
+      <RosterButton title={"rosterTuesday"} rosterButtons={props.rosterButtons} setRosterButtons={props.setRosterButtons}/>
+      <RosterButton title={"rosterWednesday"} rosterButtons={props.rosterButtons} setRosterButtons={props.setRosterButtons}/>
+      <RosterButton title={"rosterThursday"} rosterButtons={props.rosterButtons} setRosterButtons={props.setRosterButtons}/>
+      <RosterButton title={"rosterFriday"} rosterButtons={props.rosterButtons} setRosterButtons={props.setRosterButtons}/>
+      <RosterButton title={"rosterSaturday"} rosterButtons={props.rosterButtons} setRosterButtons={props.setRosterButtons}/>
     </div>
   )     
   
@@ -48,8 +37,6 @@ const RosterButton = (props) => {
   const classSelected = classSelect(props) + " availability-button new-user-element"
 
   const clickHandler = () => {
-
-    console.log(props.title)
     if(props.rosterButtons[props.title] == "unselected") {
       props.setRosterButtons(values => {
         return R.assocPath([props.title], "working", values)
@@ -84,6 +71,10 @@ RosterButton.propTypes = {
 }
 
 RosterPanel.propTypes = {
-  title: PropTypes.string
+  title: PropTypes.string,
+  rosterButtons: PropTypes.object,
+  setRosterButtons: PropTypes.func
 }
 
+
+  
