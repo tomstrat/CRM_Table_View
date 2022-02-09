@@ -5,33 +5,13 @@ import { handleSubmitFactory } from "../../utilities/requests"
 import { formatErrors } from "../../utilities/errors"
 import ValError from "../components/valError"
 import PropTypes from "prop-types"
+import { initialUserState } from "../../utilities/userdata"
 
 
 const NewUserPanel = (props) => {
 
   const [errors, setErrors] = useState({})
-  const [values, setValues] = useState({
-    username: "",
-    password: "",
-    confirmPassword: "",
-    contract: "fullTime",
-    role: "user",
-    operations: "",
-    trainer: "",
-    driver: "",
-    navigator: "",
-    temp: "",
-    certified: "false",
-    injured: "false",
-    joinDate: "",
-    rosterMonday: "unselected",
-    rosterTuesday: "unselected",
-    rosterWednesday: "unselected",
-    rosterThursday: "unselected",
-    rosterFriday: "unselected",
-    rosterSaturday: "unselected",
-    employeeType: ""
-  })
+  const [values, setValues] = useState(initialUserState)
 
   const handleOnChange = (event) => {
     event.persist()

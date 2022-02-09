@@ -1,0 +1,22 @@
+export const initialUserState = {
+  username: "",
+  password: "",
+  confirmPassword: "",
+  contract: "fullTime",
+  role: "user",
+  operations: "",
+  trainer: "",
+  driver: "",
+  navigator: "",
+  temp: "",
+  certified: "false",
+  injured: "false",
+  joinDate: "",
+  rosterMonday: "unselected",
+  rosterTuesday: "unselected",
+  rosterWednesday: "unselected",
+  rosterThursday: "unselected",
+  rosterFriday: "unselected",
+  rosterSaturday: "unselected",
+  employeeType: ""
+}
