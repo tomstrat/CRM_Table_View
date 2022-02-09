@@ -20,10 +20,20 @@
   border: 2px solid #8dc63f;
   background-color: #ffffff;
   border-radius: 12px;
-  width: 6vw;
+  width: 150px;
   margin-left: 4px;
   margin-right: 4px;
 }
+
+.new-user-date-select {
+  display: flex;
+  text-align: center;
+  border: 2px solid #8dc63f;
+  background-color: #ffffff;
+  border-radius: 12px;
+  word-spacing: 4px;
+}
+
 
 .new-user-auth-form {
   text-align: center;

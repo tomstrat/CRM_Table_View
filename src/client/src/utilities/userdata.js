@@ -12,6 +12,7 @@ export const initialUserState = {
   certified: "false",
   injured: "false",
   joinDate: "",
+  location: "",
   rosterMonday: "unselected",
   rosterTuesday: "unselected",
   rosterWednesday: "unselected",

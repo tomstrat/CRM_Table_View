@@ -124,9 +124,23 @@ const NewUserPanel = (props) => {
             
             
           </div>
-          <div className="user-button-container">
-            <label className="new-user-element checkbox-label">Join date:</label>
-            <input type="date" id="join-date-select" name="joinDate"
+          <div className="basic-column">
+            <label className="checkbox-label">Location</label>
+            <select onChange={handleOnChange} value={values.location} name="location" id="location" className="new-user-drop new-user-element">
+              <option value="cbd">CBD</option>
+              <option value="innerEast">Inner-east</option>
+              <option value="outerEast">Outer-east</option>
+              <option value="innerNorth">Inner-north</option>
+              <option value="outerNorth">Outer-north</option>
+              <option value="innerWest">Inner-west</option>
+              <option value="outerWest">Outer-west</option>
+              <option value="innerSouth">Inner-south</option>
+              <option value="outerSouth">Outer-south</option>
+            </select>   
+          </div>
+          <div className="basic-column">
+            <label className="checkbox-label">Join date</label>
+            <input className="new-user-element new-user-date-select" type="date" id="join-date-select" name="joinDate"
               onChange={handleOnChange} 
               value={values.joinDate} 
               min="2005-01-01" max={getCurrentDate()}></input>
