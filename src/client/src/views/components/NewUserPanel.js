@@ -16,10 +16,14 @@ const NewUserPanel = (props) => {
 
   const handleOnChange = (event) => {
     event.persist()
+    const value = event.target.type === "checkbox"
+      ? event.target.checked
+      : event.target.value
+
     setValues(values => {
       return {
         ...values,
-        [event.target.name]: event.target.value,
+        [event.target.name]: value,
         employeeType:
         values.operations ? values.operations + "," : "" + 
         values.trainer ? values.trainer + "," : "" + 

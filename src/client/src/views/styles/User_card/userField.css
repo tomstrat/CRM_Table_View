@@ -1,11 +1,15 @@
 .user-field-container {
   display: flex;
+  align-items: center;
   font-size: 20px;
   color: white;
+  margin-bottom: 10px;
 }
 .user-field-title {
   margin-right: 10px;
   font-weight: 700;
+  min-width: 30%;
+  border-right: 1px solid white;
 }
 .user-field-content {
   border-bottom: 1px solid rgba(0, 0, 0, 0);
@@ -40,11 +44,10 @@
   margin: 0;
   font: inherit;
   color: currentColor;
-  width: 1.15em;
-  height: 1.15em;
+  width: 1em;
+  height: 1em;
   border: 0.15em solid currentColor;
   border-radius: 0.15em;
-  transform: translateY(-0.075em);
   display: grid;
   place-content: center;
 }
@@ -61,8 +64,4 @@
 }
 .edit-user-checkbox:checked::before {
   transform: scale(1);
-}
-.edit-user-checkbox:focus {
-  outline: max(2px, 0.15em) solid currentColor;
-  outline-offset: max(2px, 0.15em);
 }

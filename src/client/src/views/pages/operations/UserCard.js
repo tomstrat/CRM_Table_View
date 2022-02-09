@@ -58,7 +58,7 @@ const UserCard = (props) => {
     return (
       <input
         type="checkbox"
-        value={values.data[name]}
+        checked={(values.data[name] === "true")}
         onChange={handleOnChange}
         className="edit-user-checkbox"
         name={name}
