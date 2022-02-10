@@ -38,10 +38,25 @@
 }
 .user-card-icon {
   color: inherit;
-  font-size: 24px;
+  font-size: 20px;
+  -webkit-filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.7));
+  filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.7));
+}
+.user-icon-green {
+  color: rgb(31, 221, 31);
+}
+.user-icon-red {
+  color: rgb(196, 31, 25);
 }
 
 .user-card-controls:hover {
   background-color: rgb(255, 255, 255);
   color: black;
+}
+
+.user-card-container h3 {
+  color: white;
+  text-align: center;
+  border-bottom: 1px solid white;
+  padding-bottom: 5px;
 }

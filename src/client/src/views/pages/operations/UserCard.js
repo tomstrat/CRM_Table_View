@@ -2,11 +2,12 @@ import Nav from "../../components/Nav"
 import React, { useState, useEffect } from "react"
 import "../../styles/User_card/userCard.css"
 import UserField from "../../components/User_Card/UserField"
+import UserTypeField from "../../components/User_Card/UserTypeField"
 import { initialUserState } from "../../../utilities/userdata"
 import * as R from "ramda"
 import PropTypes from "prop-types"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faUserEdit, faEye } from "@fortawesome/free-solid-svg-icons"
+import { faUserEdit, faEye, faTimesCircle, faCheckCircle } from "@fortawesome/free-solid-svg-icons"
 import uniqid from "uniqid"
 import { formatUser } from "../../../utilities/formatters/users.formatters"
 
@@ -30,7 +31,11 @@ const UserCard = (props) => {
     if(!values.populated) getData()
   })
 
-
+  function getTypeIcon(type) {
+    return type
+      ? <FontAwesomeIcon className="user-card-icon user-icon-green" icon={faCheckCircle} size="lg" />
+      : <FontAwesomeIcon className="user-card-icon user-icon-red" icon={faTimesCircle} size="lg" />
+  }
 
   function makeTextInput(name){
     return (
@@ -57,6 +62,18 @@ const UserCard = (props) => {
     )
   }
 
+  function makeEmpTypeInput(name){
+    return (
+      <input
+        type="checkbox"
+        checked={R.includes(name, values.data.employeeType)}
+        onChange={handleEmpTypeOnChange}
+        className="edit-user-checkbox"
+        name={name}
+      />
+    )
+  }
+
   function makeSelectInput(name, options){
     return (
       <div className="select">
@@ -74,6 +91,23 @@ const UserCard = (props) => {
         <span className="focus"></span>
       </div>
     )
+  }
+
+  const handleEmpTypeOnChange = (event) => {
+    event.persist()
+    const { target } = event
+    setValues(values => {
+      const newTypes = target.checked
+        ? R.append(target.name, values.data.employeeType)
+        : R.without(target.name, values.data.employeeType)
+
+      return R.mergeDeepLeft(
+        {populated: values.populated, data:{
+          employeeType: newTypes
+        }},
+        values
+      )
+    })
   }
   
   const handleOnChange = (event) => {
@@ -135,19 +169,66 @@ const UserCard = (props) => {
             ])}
           />
           <UserField 
+            title="Location" 
+            content={values.data.location || "Unspecified"}
+            edit={edit}
+            input={makeSelectInput("location", [
+              {value:"cbd"},
+              {value:"innerNorth"},
+              {value:"outerNorth"},
+              {value:"innerEast"},
+              {value:"outerEast"},
+              {value:"innerSouth"},
+              {value:"outerSouth"},
+              {value:"innerWest"},
+              {value:"outerWest"}
+            ])}
+          />
+          <UserField 
             title="Certified" 
-            content={values.data.certified}
+            content={getTypeIcon((values.data.certified === "true"))}
             edit={edit}
             input={makeCheckboxInput("certified")}
           />
           <UserField 
             title="Injured" 
-            content={values.data.injured}
+            content={getTypeIcon((values.data.injured === "true"))}
             edit={edit}
             input={makeCheckboxInput("injured")}
           />
-          
-          
+          <h3>User Types</h3>
+          <div className="user-employee-types">
+            <UserTypeField 
+              title="OP" 
+              content={getTypeIcon(R.includes("operations", values.data.employeeType))}
+              edit={edit}
+              input={makeEmpTypeInput("operations")}
+            />
+            <UserTypeField 
+              title="DR" 
+              content={getTypeIcon(R.includes("driver", values.data.employeeType))}
+              edit={edit}
+              input={makeEmpTypeInput("driver")}
+            />
+            <UserTypeField 
+              title="NA" 
+              content={getTypeIcon(R.includes("navigator", values.data.employeeType))}
+              edit={edit}
+              input={makeEmpTypeInput("navigator")}
+            />
+            <UserTypeField 
+              title="TR" 
+              content={getTypeIcon(R.includes("trainer", values.data.employeeType))}
+              edit={edit}
+              input={makeEmpTypeInput("trainer")}
+            />
+            <UserTypeField 
+              title="TE" 
+              content={getTypeIcon(R.includes("temp", values.data.employeeType))}
+              edit={edit}
+              input={makeEmpTypeInput("temp")}
+            />
+          </div>
         </div>
       </div>
     </>

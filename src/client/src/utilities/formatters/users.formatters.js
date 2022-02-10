@@ -14,12 +14,12 @@ export function formatUser(user, omissions) {
         const newDate = new Date(date)
         return newDate.toLocaleDateString("en-GB")
       },
-      employeeType: (types) => {
-        if(types){
-          return R.map(type => {
-            return type[0] + type[1]
-          }, types).join(", ")
-        }},
+      // employeeType: (types) => {
+      //   if(types){
+      //     return R.map(type => {
+      //       return type[0] + type[1]
+      //     }, types).join(", ")
+      //   }},
       role: (role) => {
         return role.charAt(0).toUpperCase() + role.slice(1)
       },
