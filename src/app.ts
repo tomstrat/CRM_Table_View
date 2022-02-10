@@ -34,7 +34,7 @@ export default function appFactory({ Config, Routes, handleErrors, requireAuth }
   app.use(cookieSession({
     name: "session",
     keys: [process.env.COOKIE_SECRET_KEY!],
-    maxAge: 1 * 60 * 60 * 1000, // 1 Hour
+    maxAge: 3 * 60 * 60 * 1000, // 1 Hour
     secure: environment.secure,
   }))
   app.use(morgan((tokens, req, res) => {

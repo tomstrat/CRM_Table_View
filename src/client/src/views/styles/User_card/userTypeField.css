@@ -1,0 +1,17 @@
+.user-type-field-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 0px;
+}
+.user-type-field-title {
+  color: white;
+}
+.user-type-field-content {
+  color: white;
+  display: flex;
+}
+.user-employee-types {
+  display: flex;
+  justify-content: space-evenly;
+}
