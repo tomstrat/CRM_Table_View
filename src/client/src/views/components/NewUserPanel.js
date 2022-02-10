@@ -46,7 +46,7 @@ const NewUserPanel = (props) => {
     if(value && R.not(R.includes(type, arr))) {
       return R.join(",", R.append(type, arr))
     } else{
-      return R.join(",", R.remove(type, arr))
+      return R.join(",", R.without(type, arr))
     }
   }
 
