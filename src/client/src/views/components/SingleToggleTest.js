@@ -1,40 +1,38 @@
-// import React, { useState } from "react"
-// import PropTypes from "prop-types"
+import React from "react"
+import PropTypes from "prop-types"
 
 
-// const SingleToggleTest = (props) => {
-//   const [ToggleButton, setToggleButton] = useState(null)
-//   const idParsed = props.title.replace(" ", "").toLowerCase()
 
-//   const handleOnClick = () => {
-//     if(ToggleButton){
-//       setToggleButton(false)
-//     } else {
-//       setToggleButton(true)
-//     }
-//     props.announceChange(idParsed, ToggleButton)
-//   }
-
-//   return (
-//     <button 
-//       className={ToggleButton
-//         ? "controls-button-clicked"
-//         : "controlsbutton"
-//       } 
-//       id={idParsed} 
-//       onClick={handleOnClick}
-//     >
-//       {props.title}
-//     </button>
-//   )
-// }
+const SingleToggleTest = (props) => {
   
-// export default SingleToggleTest
+  return (
+    <button 
+      className={props.value
+        ? "controls-button-clicked"
+        : "controlsbutton"}
+      id={props.name} 
+      onClick={props.onClick}
+      value={props.value}
+      name={props.name}
+    >
+      {props.name}
+    </button>
+  )
+}
+  
+export default SingleToggleTest
 
-// SingleToggleTest.propTypes = {
-//   title: PropTypes.string,
-//   setToggleButtons: PropTypes.func,
-//   ToggleButtons: PropTypes.object,
-//   children: PropTypes.bool,
-// }
+SingleToggleTest.propTypes = {
+  buttonTitle: PropTypes.string,
+  loadState: PropTypes.bool,
+  buttons: PropTypes.object,
+  index: PropTypes.number,
+  name: PropTypes.string,
+  value: PropTypes.bool,
+  setToggleGroup: PropTypes.func,
+  onClick: PropTypes.func,
+  groupId: PropTypes.string,
+  ToggleGroup: PropTypes.array,
+  className: PropTypes.string
+}
 

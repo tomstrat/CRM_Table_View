@@ -1,47 +1,30 @@
-import Nav from "../../components/Nav"
-import React, { useState } from "react"
-import SideBar from "../../components/SideBar"
-import StaffSearchControls from "../../components/StaffSearchControls"
 
-
+import React from "react"
+import TestToggleContainer from "../../components/TestToggleContainer"
 
 const ScheduleBuilder = () => {
   
-  const [ToggleButtons, setToggleButtons] = useState({
-    master: {
-      alljunkies: true
-    },
-    children: {
-      trainers: false, 
-      drivers: false, 
-      navigators: false,
-      trainees: false,  
-      temps: false
-    },
-    free: {
-      fulltime: true,
-      casual: false,
-      temp: false
-    }
-  })
+  
+  
+  
   return (
     <>
+      <TestToggleContainer 
+        buttons={
+          [
+            {name: "button1", loadState: true}, 
+            {name: "button2", loadState: false}, 
+            {name: "button3", loadState: true}, 
+            {name: "button4", loadState: true}
+          ]
+        }
+        groupId={"testgroup"}
+      />
         
-      <Nav auth={true}/>
-      <div className="manage-user-container">
-        <div id="default-sidebar" className="visible-sidebar"> 
-          <>
-            <SideBar 
-              title={"Search Staff"} 
-              component={StaffSearchControls}
-              ToggleButtons={ToggleButtons}
-              setToggleButtons={setToggleButtons}
-            />
-          </>
-        </div>
-      </div>
+      
     </>
   )
 }
 
 export default ScheduleBuilder
+
