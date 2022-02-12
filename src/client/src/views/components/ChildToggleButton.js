@@ -2,24 +2,28 @@ import React from "react"
 import PropTypes from "prop-types"
 import * as R from "ramda"
 
-const ToggleButton = (props) => {
+const ChildToggleButton = (props) => {
  
   const idParsed = props.title.replace(" ", "").toLowerCase()
   
   const handleOnClick = () => {
-    if(props.ToggleButtons.free[idParsed] !== true){
+    if(props.ToggleButtons.children[idParsed] !== true){
       props.setToggleButtons(values => {
-        return R.assocPath(["free", idParsed], true, values)
-      })} else {
+        const masterProp = Object.keys(values.master)[0]
+        return R.mergeDeepLeft(
+          {master: {[masterProp]: false}, children: {[idParsed]: true}},
+          values
+        )
+      })}
+    else {
       props.setToggleButtons(values => {
-        return R.assocPath(["free", idParsed], false, values)
+        return R.assocPath(["children", idParsed], false, values)
       })
     }
   }
-
   return (
     <button 
-      className={props.ToggleButtons.free[idParsed]
+      className={props.ToggleButtons.children[idParsed]
         ? "controls-button-clicked"
         : "controlsbutton"
       } 
@@ -30,10 +34,10 @@ const ToggleButton = (props) => {
     </button>
   )
 }
-  
-export default ToggleButton
+    
+export default ChildToggleButton
 
-ToggleButton.propTypes = {
+ChildToggleButton.propTypes = {
   title: PropTypes.string,
   setToggleButtons: PropTypes.func,
   ToggleButtons: PropTypes.object,

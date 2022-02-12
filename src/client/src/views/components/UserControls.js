@@ -1,6 +1,6 @@
 import React from "react"
 import "../styles/UserControls.css"
-import ToggleButton from "./ToggleButton"
+import ChildToggleButton from "./ChildToggleButton"
 import MasterToggleButton from "./MasterToggleButton"
 import PropTypes from "prop-types"
 
@@ -12,13 +12,13 @@ const UserControls = (props) => {
           <MasterToggleButton title="All Users" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
         </div>
         <div className="user-button-container">
-          <ToggleButton title="Operations" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-          <ToggleButton title="Trainers" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
+          <ChildToggleButton title="Operations" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
+          <ChildToggleButton title="Trainers" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
         </div>
         <div className="user-button-container">
-          <ToggleButton title="Drivers" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-          <ToggleButton title="Navigators" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-          <ToggleButton title="Temp" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/> 
+          <ChildToggleButton title="Drivers" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
+          <ChildToggleButton title="Navigators" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
+          <ChildToggleButton title="Temp" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/> 
         </div>
         <div className="user-controls-container">
           <div className="controls-label">Include Inactive</div>

@@ -1,21 +1,30 @@
-import Nav from "../../components/Nav"
+
 import React from "react"
-import SideBar from "../../components/SideBar"
+import TestToggleContainer from "../../components/TestToggleContainer"
 
 const ScheduleBuilder = () => {
+  
+  
+  
+  
   return (
     <>
-      <Nav auth={true}/>
-      <div className="page-container">
-        <div id="default-sidebar" className="visible-sidebar">
-          <SideBar 
-            title={"Search Staff"} 
-            
-          />
-        </div>
-      </div>
+      <TestToggleContainer 
+        buttons={
+          [
+            {name: "button1", loadState: true}, 
+            {name: "button2", loadState: false}, 
+            {name: "button3", loadState: true}, 
+            {name: "button4", loadState: true}
+          ]
+        }
+        groupId={"testgroup"}
+      />
+        
+      
     </>
   )
 }
 
 export default ScheduleBuilder
+
