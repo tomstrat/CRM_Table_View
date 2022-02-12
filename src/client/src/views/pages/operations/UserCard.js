@@ -3,13 +3,15 @@ import React, { useState, useEffect } from "react"
 import "../../styles/User_card/userCard.css"
 import UserField from "../../components/User_Card/UserField"
 import UserTypeField from "../../components/User_Card/UserTypeField"
+import UserRosterField from "../../components/User_Card/UserRosterField"
 import { initialUserState } from "../../../utilities/userdata"
 import * as R from "ramda"
 import PropTypes from "prop-types"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faUserEdit, faEye, faTimesCircle, faCheckCircle } from "@fortawesome/free-solid-svg-icons"
+import { faUserEdit, faEye, faTimesCircle, faCheckCircle, faBan, faCalendarCheck, faCalendarTimes } from "@fortawesome/free-solid-svg-icons"
 import uniqid from "uniqid"
 import { formatUser } from "../../../utilities/formatters/users.formatters"
+import getCurrentDate from "../../../utilities/getCurrentDate"
 
 
 const UserCard = (props) => {
@@ -37,6 +39,17 @@ const UserCard = (props) => {
       : <FontAwesomeIcon className="user-card-icon user-icon-red" icon={faTimesCircle} size="lg" />
   }
 
+  function getRosterIcon(roster) {
+    switch(roster) {
+    case "notWorking":
+      return <FontAwesomeIcon className="user-card-icon user-icon-red" icon={faCalendarTimes} size="lg" />
+    case "working":
+      return <FontAwesomeIcon className="user-card-icon user-icon-green" icon={faCalendarCheck} size="lg" />
+    default:
+      return <FontAwesomeIcon className="user-card-icon user-icon-grey" icon={faBan} size="lg" />
+    }
+  }
+
   function makeTextInput(name){
     return (
       <input
@@ -45,6 +58,20 @@ const UserCard = (props) => {
         onChange={handleOnChange}
         className="edit-user-input"
         placeholder={values.data[name]}
+        name={name}
+      />
+    )
+  }
+
+  function makeDateInput(name){
+    return (
+      <input
+        type="date"
+        value={getCurrentDate(values.data[name])}
+        onChange={handleOnChange}
+        className="edit-user-input"
+        min="2005-01-01"
+        max={getCurrentDate()}
         name={name}
       />
     )
@@ -90,6 +117,22 @@ const UserCard = (props) => {
         </select>
         <span className="focus"></span>
       </div>
+    )
+  }
+
+  function makeRosterInput(name){
+    const options = ["unselected", "working", "notWorking"]
+    return (options.map(option => {
+      return <input
+        type="radio"
+        key={uniqid("radio-")}
+        checked={(values.data[name] === option)}
+        onChange={handleOnChange}
+        className="edit-user-radio"
+        value={option}
+        name={name}
+      />
+    })
     )
   }
 
@@ -196,6 +239,12 @@ const UserCard = (props) => {
             edit={edit}
             input={makeCheckboxInput("injured")}
           />
+          <UserField 
+            title="Join Date" 
+            content={values.data.joinDate}
+            edit={edit}
+            input={makeDateInput("joinDate")}
+          />
           <h3>User Types</h3>
           <div className="user-employee-types">
             <UserTypeField 
@@ -227,6 +276,54 @@ const UserCard = (props) => {
               content={getTypeIcon(R.includes("temp", values.data.employeeType))}
               edit={edit}
               input={makeEmpTypeInput("temp")}
+            />
+          </div>
+          <h3>Roster</h3>
+          <div className="user-employee-types">
+            {edit
+              ? <div className="roster-key-container">
+                <div className="roster-spacer"></div>
+                <div className="roster-key">Unselected</div>
+                <div className="roster-key">Working</div>
+                <div className="roster-key">Not Working</div>
+              </div>
+              : ""
+            }
+            <UserRosterField 
+              title="M"
+              content={getRosterIcon(values.data.rosterMonday)}
+              edit={edit}
+              input={makeRosterInput("rosterMonday")}
+            />
+            <UserRosterField 
+              title="T"
+              content={getRosterIcon(values.data.rosterTuesday)}
+              edit={edit}
+              input={makeRosterInput("rosterTuesday")}
+            />
+            <UserRosterField 
+              title="W"
+              content={getRosterIcon(values.data.rosterWednesday)}
+              edit={edit}
+              input={makeRosterInput("rosterWednesday")}
+            />
+            <UserRosterField 
+              title="T"
+              content={getRosterIcon(values.data.rosterThursday)}
+              edit={edit}
+              input={makeRosterInput("rosterThursday")}
+            />
+            <UserRosterField 
+              title="F"
+              content={getRosterIcon(values.data.rosterFriday)}
+              edit={edit}
+              input={makeRosterInput("rosterFriday")}
+            />
+            <UserRosterField 
+              title="S"
+              content={getRosterIcon(values.data.rosterSaturday)}
+              edit={edit}
+              input={makeRosterInput("rosterSaturday")}
             />
           </div>
         </div>

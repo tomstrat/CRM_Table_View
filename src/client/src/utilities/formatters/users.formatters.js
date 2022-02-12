@@ -28,6 +28,16 @@ export function formatUser(user, omissions) {
           contract.charAt(0)
             .toUpperCase() + contract.slice(1)
         return uppercase.replace(/([a-z])([A-Z])/g, "$1 $2")
-      }
-    }))(user)
+      },
+    }),
+    (userObject) => {
+      userObject.rosterMonday = userObject.roster.monday
+      userObject.rosterTuesday = userObject.roster.tuesday
+      userObject.rosterWednesday = userObject.roster.wednesday
+      userObject.rosterThursday = userObject.roster.thursday
+      userObject.rosterFriday = userObject.roster.friday
+      userObject.rosterSaturday = userObject.roster.saturday
+      return userObject
+    }
+  )(user)
 }

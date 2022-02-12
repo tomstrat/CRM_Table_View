@@ -48,6 +48,9 @@
 .user-icon-red {
   color: rgb(196, 31, 25);
 }
+.user-icon-grey {
+  color: rgb(99, 99, 99);
+}
 
 .user-card-controls:hover {
   background-color: rgb(255, 255, 255);
@@ -59,4 +62,16 @@
   text-align: center;
   border-bottom: 1px solid white;
   padding-bottom: 5px;
+}
+
+.roster-key-container {
+  color: white;
+  border-right: 1px solid white;
+  padding-right: 10px;
+}
+.roster-key {
+  margin-top: 10px;
+}
+.roster-spacer {
+  height: 20px;
 }

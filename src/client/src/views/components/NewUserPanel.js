@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import getCurrentDate from "./getCurrentDate"
+import getCurrentDate from "../../utilities/getCurrentDate"
 import "../styles/NewUserPanel.css"
 import { handleSubmitFactory } from "../../utilities/requests"
 import { formatErrors } from "../../utilities/errors"
