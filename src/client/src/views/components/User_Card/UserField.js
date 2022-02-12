@@ -27,7 +27,10 @@ export default UserField
 
 UserField.propTypes = {
   title: PropTypes.string,
-  content: PropTypes.string | PropTypes.object,
+  content: PropTypes.oneOfType([
+    PropTypes.string, 
+    PropTypes.object
+  ]),
   input: PropTypes.element,
   edit: PropTypes.bool
 }
