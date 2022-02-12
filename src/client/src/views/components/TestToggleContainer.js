@@ -8,23 +8,66 @@ const TestToggleContainer = (props) => {
   const [ToggleGroup, setToggleGroup] = useState(props.buttons)
 
   const handleOnClick = (e) => {
-    const {name, value} = e.target
+    const {name, value, className} = e.target
     const bool = (value !== "true")
-    setToggleGroup(values => {
-      return values.map(obj => {
-        if(obj.name === name) return {name, loadState: bool}
-        return obj
+    const buttonRole = className.split(" ")[0]
+    switch(buttonRole){
+    case "free" : 
+      setToggleGroup(values => {
+        return values.map(obj => {
+          if(obj.name === name) return {name, currState: bool, buttonRole: "free"}
+          return obj
+        })
       })
-    })
-  }
+      break
+    case "master" : 
+      setToggleGroup(values => {
+        return values.map(obj => {
+          if(obj.name === name) {
+            return (
+              {name, currState: bool, buttonRole: "master"}
+              
+            )} if (bool && obj.buttonRole == "child") {
+            return (
+              {name: obj.name, currState: false, buttonRole: "child"}
+            )
+          } else {
+            return(
+              obj
+            ) 
+          }
+        })
+      })
+      break
+    case "child" : 
+      setToggleGroup(values => {
+        return values.map(obj => {
+          if(obj.name === name) {
+            return (
+              {name, currState: bool, buttonRole: "child"}
+              
+            )} if (bool == true && obj.buttonRole == "master") {
+            return (
+              {name: obj.name, currState: false, buttonRole: "master"}
+            )
+          } else { 
+            return(
+              obj
+            ) 
+          }}
+        )
+      })
+      break
+    }}
  
-  function makeButton(name, loadState){
+  function makeButton(name, currState, buttonRole){
     return (
       <SingleToggleTest
         key={uniqid("button-")}
         name={name}
-        value={loadState}
+        value={currState}
         onClick={handleOnClick}
+        buttonRole={buttonRole}
       />
     )
   }
@@ -33,7 +76,7 @@ const TestToggleContainer = (props) => {
       
       {ToggleGroup.map(button => {
 
-        return makeButton(button.name, button.loadState)
+        return makeButton(button.name, button.currState, button.buttonRole)
       })}
        
     </div>
@@ -44,11 +87,7 @@ const TestToggleContainer = (props) => {
 
 export default TestToggleContainer
 TestToggleContainer.propTypes = {
-  component: PropTypes.func,
   buttons: PropTypes.array,
-  loadState: PropTypes.bool,
-  buttonTitle: PropTypes.string,
-  index: PropTypes.number,
   handleOnClick: PropTypes.func,
   ToggleGroup: PropTypes.array,
   setToggleGroup: PropTypes.func,
