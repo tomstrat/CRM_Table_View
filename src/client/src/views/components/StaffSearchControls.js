@@ -12,9 +12,9 @@ const StaffSearchControls = () => {
           <ToggleContainer 
             buttons={
               [
-                {name: "All", currState: true, buttonRole: "master"}, 
-                {name: "Rostered", currState: false, buttonRole: "child"},
-                {name: "Possible", currState: false, buttonRole: "child"},  
+                {name: "All", currState: true, buttonRole: "master", classInject: ""}, 
+                {name: "Rostered", currState: false, buttonRole: "child", classInject: ""},
+                {name: "Possible", currState: false, buttonRole: "child", classInject: ""},  
               ]
             }
             groupId={"avail-search"}
@@ -23,9 +23,9 @@ const StaffSearchControls = () => {
           <ToggleContainer 
             buttons={
               [
-                {name: "All", currState: true, buttonRole: "master"}, 
-                {name: "Contracted", currState: false, buttonRole: "child"},
-                {name: "Casual", currState: false, buttonRole: "child"},  
+                {name: "All", currState: true, buttonRole: "master", classInject: ""}, 
+                {name: "Contracted", currState: false, buttonRole: "child", classInject: ""},
+                {name: "Casual", currState: false, buttonRole: "child", classInject: ""},  
               ]
             }
             groupId={"hours-search"}
@@ -34,12 +34,12 @@ const StaffSearchControls = () => {
           <ToggleContainer 
             buttons={
               [
-                {name: "All Roles", currState: true, buttonRole: "master"}, 
-                {name: "Drivers", currState: false, buttonRole: "child"},
-                {name: "Navigators", currState: false, buttonRole: "child"},
-                {name: "Trainers", currState: false, buttonRole: "child"},
-                {name: "Trainees", currState: false, buttonRole: "child"}, 
-                {name: "Temps", currState: false, buttonRole: "child"},  
+                {name: "All Roles", currState: true, buttonRole: "master", classInject: ""}, 
+                {name: "Drivers", currState: false, buttonRole: "child", classInject: ""},
+                {name: "Navigators", currState: false, buttonRole: "child", classInject: ""},
+                {name: "Trainers", currState: false, buttonRole: "child", classInject: ""},
+                {name: "Trainees", currState: false, buttonRole: "child", classInject: ""}, 
+                {name: "Temps", currState: false, buttonRole: "child", classInject: ""},  
               ]
             }
             groupId={"role-search"}
@@ -48,25 +48,23 @@ const StaffSearchControls = () => {
           <ToggleContainer 
             buttons={
               [
-                {name: "Both", currState: true, buttonRole: "master"}, 
-                {name: "Inner", currState: false, buttonRole: "child"},
-                {name: "Outer", currState: false, buttonRole: "child"}
+                {name: "Inner", currState: true, buttonRole: "free", classInject: ""},
+                {name: "Outer", currState: true, buttonRole: "free", classInject: ""}
               ]
             }
-            groupId={"role-search"}
+            groupId={"location-search"}
           />
-          <label className="search-label">Direction</label> 
           <ToggleContainer 
             buttons={
               [
-                {name: "All", currState: true, buttonRole: "master"}, 
-                {name: "North", currState: false, buttonRole: "child"},
-                {name: "East", currState: false, buttonRole: "child"},
-                {name: "South", currState: false, buttonRole: "child"},
-                {name: "West", currState: false, buttonRole: "child"}
+                {name: "North", currState: false, buttonRole: "child", classInject: "single-row"},
+                {name: "East", currState: false, buttonRole: "child", classInject: ""},
+                {name: "All", currState: true, buttonRole: "master", classInject: ""}, 
+                {name: "West", currState: false, buttonRole: "child", classInject: ""},
+                {name: "South", currState: false, buttonRole: "child", classInject: "single-row"}
               ]
             }
-            groupId={"role-search"}
+            groupId={"direction-search"}
           />
         </div>  
       </div>

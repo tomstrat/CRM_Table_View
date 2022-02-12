@@ -1,9 +1,11 @@
 import React from "react"
 import PropTypes from "prop-types"
 
+//Component for a toggleable button, mainly used in search panels
+//for better understanding of functionality, see 'ToggleContainer'
 
-
-
+//Injected classes, buttonType and 'toggled' and 'untoggled' classes are passed through the button class property,
+// and parsed in the click handler function found in ToggleContainer.
 const ToggleButton = (props) => {
   return (
     <button 
@@ -29,4 +31,3 @@ ToggleButton.propTypes = {
   buttonRole: PropTypes.string,
   classInject: PropTypes.string
 }
-

@@ -4,3 +4,15 @@
   justify-content: center;
   width: 100%;
 }
+ .single-row {
+   margin-left: 30%;
+   margin-right: 30%;
+ }
+
+ .double-row-left {
+   margin-left: 15%;
+ }
+ 
+ .double-row-right {
+  margin-right: 15%;
+ }

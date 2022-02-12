@@ -10,9 +10,9 @@ const UserControls = () => {
         <ToggleContainer 
           buttons={
             [
-              {name: "All users", currState: true, buttonRole: "master", classInject: "injectAttempt"}, 
-              {name: "Operations", currState: false, buttonRole: "child", classInject: "attempt2"}, 
-              {name: "Trainers", currState: false, buttonRole: "child", classInject: "attempt3"},
+              {name: "All users", currState: true, buttonRole: "master", classInject: "single-row"}, 
+              {name: "Operations", currState: false, buttonRole: "child", classInject: "double-row-left"}, 
+              {name: "Trainers", currState: false, buttonRole: "child", classInject: "double-row-right"},
               {name: "Drivers", currState: false, buttonRole: "child", classInject: ""},
               {name: "Navigators", currState: false, buttonRole: "child", classInject: ""}, 
               {name: "Temp", currState: false, buttonRole: "child", classInject: ""}

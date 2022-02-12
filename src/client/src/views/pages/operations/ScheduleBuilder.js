@@ -1,45 +1,41 @@
-import React, { useState } from "react"
+import React from "react"
 import SideBar from "../../components/SideBar"
 import StaffSearchControls from "../../components/StaffSearchControls"
-
-
+import "../../styles/ScheduleBuilder.css"
+import StaffSearchResults from "../../components/StaffSearchResults"
+import RoutePlanner from "../../components/RoutePlanner"
+import getCurrentDate from "../../../utilities/getCurrentDate"
 
 
 
 const ScheduleBuilder = () => {
-  const [clickBool, setClickBool] = useState(false)
   return (
     <>
       
       <div className="schedule-builder-container">
-        <div id="default-sidebar" className="visible-sidebar">
-          {clickBool == false 
-            ? 
-            <>
-              <SideBar 
-                title={"Search Staff"} 
-                component={StaffSearchControls}
-              />
-              <div className="new-user-button-container">
-                <button className="new-user-button" onClick={() => setClickBool(true)}>Add new user</button>
-              </div>
-            </>
-            : 
-            <>
-              <SideBar 
-                title={"Add New User"} 
-                // component={NewUserPanel}
-                // setData={setData}
-                // setRosterButtons={setRosterButtons}
-                // rosterButtons={rosterButtons}
-              />
-              <div className="new-user-button-container">
-                <button className="new-user-button" onClick={() => setClickBool(false)}>Cancel</button>
-              </div>
-            </>
-          }
+        <div className="centralise-sidebar">
+          <div className="day-select-container">
+            <div>Select Date</div>
+            <div className="checkbox-label">(Placeholder)</div>
+            <input className="new-user-element new-user-date-select" type="date" id="select-date" name="selectdate"
+                
+              min="2005-01-01" max={getCurrentDate()}></input>
+          </div>
+          <div id="default-sidebar" className="visible-sidebar">
+            <SideBar 
+              title={"Search Staff"} 
+              component={StaffSearchControls}
+            />
+          </div>
         </div>
-        
+        <div className="column-page">
+          <StaffSearchResults>
+
+          </StaffSearchResults>
+          <RoutePlanner>
+            
+          </RoutePlanner>
+        </div>
       </div>
     </>
   )
