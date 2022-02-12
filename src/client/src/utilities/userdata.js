@@ -11,7 +11,7 @@ export const initialUserState = {
   temp: "",
   certified: "false",
   injured: "false",
-  joinDate: "",
+  joinDate: "10/10/2010",
   location: "",
   rosterMonday: "unselected",
   rosterTuesday: "unselected",

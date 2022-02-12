@@ -10,7 +10,6 @@ const UserRosterField = (props) => {
     edit,
     input
   } = props
-  console.log(input)
   return (
     <div className="user-roster-field-container">
       <span className="user-roster-field-title">{title}</span>
