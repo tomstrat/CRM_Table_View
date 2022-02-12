@@ -3,12 +3,13 @@ import PropTypes from "prop-types"
 
 
 
+
 const ToggleButton = (props) => {
   return (
     <button 
       className={props.value
-        ? props.buttonRole + " controls-button-clicked"
-        : props.buttonRole + " controlsbutton"}
+        ? `${props.buttonRole} controls-button-clicked ${props.classInject}`
+        : `${props.buttonRole} controlsbutton ${props.classInject}`}
       id={props.name} 
       onClick={props.onClick}
       value={props.value}
@@ -25,6 +26,7 @@ ToggleButton.propTypes = {
   name: PropTypes.string,
   value: PropTypes.bool,
   onClick: PropTypes.func,
-  buttonRole: PropTypes.string
+  buttonRole: PropTypes.string,
+  classInject: PropTypes.string
 }
 

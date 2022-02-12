@@ -10,12 +10,12 @@ const UserControls = () => {
         <ToggleContainer 
           buttons={
             [
-              {name: "All users", currState: true, buttonRole: "master"}, 
-              {name: "Operations", currState: false, buttonRole: "child"}, 
-              {name: "Trainers", currState: false, buttonRole: "child"},
-              {name: "Drivers", currState: false, buttonRole: "child"},
-              {name: "Navigators", currState: false, buttonRole: "child"}, 
-              {name: "Temp", currState: false, buttonRole: "child"}
+              {name: "All users", currState: true, buttonRole: "master", classInject: "injectAttempt"}, 
+              {name: "Operations", currState: false, buttonRole: "child", classInject: "attempt2"}, 
+              {name: "Trainers", currState: false, buttonRole: "child", classInject: "attempt3"},
+              {name: "Drivers", currState: false, buttonRole: "child", classInject: ""},
+              {name: "Navigators", currState: false, buttonRole: "child", classInject: ""}, 
+              {name: "Temp", currState: false, buttonRole: "child", classInject: ""}
             ]
           }
           groupId={"userSearch"}

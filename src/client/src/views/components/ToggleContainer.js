@@ -6,16 +6,20 @@ import "../styles/ToggleContainer.css"
 
 const ToggleContainer = (props) => {
   const [ToggleGroup, setToggleGroup] = useState(props.buttons)
-
+  
   const handleOnClick = (e) => {
     const {name, value, className} = e.target
     const bool = (value !== "true")
-    const buttonRole = className.split(" ")[0]
+    
+    const buttonRole = className.split("con")[0]
+
+    const classInject = true
+      
     switch(buttonRole){
     case "free" : 
       setToggleGroup(values => {
         return values.map(obj => {
-          if(obj.name === name) return {name, currState: bool, buttonRole: "free"}
+          if(obj.name === name) return {name, currState: bool, buttonRole: "free", classInject: classInject}
           return obj
         })
       })
@@ -25,11 +29,11 @@ const ToggleContainer = (props) => {
         return values.map(obj => {
           if(obj.name === name) {
             return (
-              {name, currState: bool, buttonRole: "master"}
+              {name, currState: bool, buttonRole: "master", classInject: classInject}
               
             )} if (bool && obj.buttonRole == "child") {
             return (
-              {name: obj.name, currState: false, buttonRole: "child"}
+              {name: obj.name, currState: false, buttonRole: "child", classInject: obj.classInject}
             )
           } else {
             return(
@@ -44,11 +48,11 @@ const ToggleContainer = (props) => {
         return values.map(obj => {
           if(obj.name === name) {
             return (
-              {name, currState: bool, buttonRole: "child"}
+              {name, currState: bool, buttonRole: "child", classInject: classInject}
               
             )} if (bool == true && obj.buttonRole == "master") {
             return (
-              {name: obj.name, currState: false, buttonRole: "master"}
+              {name: obj.name, currState: false, buttonRole: "master", classInject: obj.classInject}
             )
           } else { 
             return(
@@ -59,8 +63,8 @@ const ToggleContainer = (props) => {
       })
       break
     }}
- 
-  function makeButton(name, currState, buttonRole){
+  
+  function makeButton(name, currState, buttonRole, classInject){
     return (
       <ToggleButton
         key={uniqid("button-")}
@@ -68,15 +72,17 @@ const ToggleContainer = (props) => {
         value={currState}
         onClick={handleOnClick}
         buttonRole={buttonRole}
+        classInject={classInject}
       />
     )
   }
+  
   return (
     <div className="toggle-container">
       
       {ToggleGroup.map(button => {
 
-        return makeButton(button.name, button.currState, button.buttonRole)
+        return makeButton(button.name, button.currState, button.buttonRole, button.classInject)
       })}
        
     </div>
