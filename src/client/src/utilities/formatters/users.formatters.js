@@ -1,11 +1,29 @@
 import * as R from "ramda"
 
 export function formatUsers(data) {
-  return R.map(obj => formatUser(obj, ["password", "roster"]), data)
+  return R.map(obj => formatUser(obj, [
+    "password",
+    "roster", 
+    "rosterMonday",
+    "rosterTuesday",
+    "rosterWednesday",
+    "rosterThursday",
+    "rosterFriday",
+    "rosterSaturday",
+  ]), data)
 }
 
 export function formatUser(user, omissions) {
   return R.pipe(
+    (userObject) => {
+      userObject.rosterMonday = R.path(["roster", "monday"], userObject)
+      userObject.rosterTuesday = R.path(["roster", "tuesday"], userObject)
+      userObject.rosterWednesday = R.path(["roster", "wednesday"], userObject)
+      userObject.rosterThursday = R.path(["roster", "thursday"], userObject)
+      userObject.rosterFriday = R.path(["roster", "friday"], userObject)
+      userObject.rosterSaturday = R.path(["roster", "saturday"], userObject)
+      return userObject
+    },
     R.omit(omissions || ["password"]),
     R.evolve({
       certified: R.toString,
@@ -29,15 +47,6 @@ export function formatUser(user, omissions) {
             .toUpperCase() + contract.slice(1)
         return uppercase.replace(/([a-z])([A-Z])/g, "$1 $2")
       },
-    }),
-    (userObject) => {
-      userObject.rosterMonday = userObject.roster.monday
-      userObject.rosterTuesday = userObject.roster.tuesday
-      userObject.rosterWednesday = userObject.roster.wednesday
-      userObject.rosterThursday = userObject.roster.thursday
-      userObject.rosterFriday = userObject.roster.friday
-      userObject.rosterSaturday = userObject.roster.saturday
-      return userObject
-    }
+    })
   )(user)
 }

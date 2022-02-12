@@ -1,5 +1,5 @@
 export default function getCurrentDate(date) {
   return date
-    ? new Date(date).toISOString().slice(0,10)
+    ? date
     : new Date().toISOString().slice(0,10)
 }
