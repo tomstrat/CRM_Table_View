@@ -1,10 +1,10 @@
 import React, {useState} from "react"
 import PropTypes from "prop-types"
 import uniqid from "uniqid"
-import SingleToggleTest from "./SingleToggleTest"
+import ToggleButton from "./ToggleButton"
+import "../styles/ToggleContainer.css"
 
-
-const TestToggleContainer = (props) => {
+const ToggleContainer = (props) => {
   const [ToggleGroup, setToggleGroup] = useState(props.buttons)
 
   const handleOnClick = (e) => {
@@ -62,7 +62,7 @@ const TestToggleContainer = (props) => {
  
   function makeButton(name, currState, buttonRole){
     return (
-      <SingleToggleTest
+      <ToggleButton
         key={uniqid("button-")}
         name={name}
         value={currState}
@@ -72,7 +72,7 @@ const TestToggleContainer = (props) => {
     )
   }
   return (
-    <div className="user-button-container">
+    <div className="toggle-container">
       
       {ToggleGroup.map(button => {
 
@@ -85,8 +85,8 @@ const TestToggleContainer = (props) => {
 
 
 
-export default TestToggleContainer
-TestToggleContainer.propTypes = {
+export default ToggleContainer
+ToggleContainer.propTypes = {
   buttons: PropTypes.array,
   handleOnClick: PropTypes.func,
   ToggleGroup: PropTypes.array,

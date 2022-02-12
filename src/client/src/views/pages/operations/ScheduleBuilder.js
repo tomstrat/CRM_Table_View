@@ -1,61 +1,46 @@
+import React, { useState } from "react"
+import SideBar from "../../components/SideBar"
+import StaffSearchControls from "../../components/StaffSearchControls"
 
-import React from "react"
-import TestToggleContainer from "../../components/TestToggleContainer"
+
+
+
 
 const ScheduleBuilder = () => {
-  
-  
-  
-  
+  const [clickBool, setClickBool] = useState(false)
   return (
     <>
-      <TestToggleContainer 
-        buttons={
-          [
-            {name: "master", currState: true, buttonRole: "master"}, 
-            {name: "kid1", currState: false, buttonRole: "child"}, 
-            {name: "kid2", currState: false, buttonRole: "child"}, 
-            {name: "kid3", currState: false, buttonRole: "child"}
-          ]
-        }
-        groupId={"testgroup"}
-      />
-      <TestToggleContainer 
-        buttons={
-          [
-            {name: "f0", currState: false, buttonRole: "free"}, 
-            {name: "f1", currState: false, buttonRole: "free"},
-            {name: "f2", currState: false, buttonRole: "free"}, 
-            {name: "f3", currState: false, buttonRole: "free"}, 
-            {name: "f4", currState: false, buttonRole: "free"},
-            {name: "master", currState: true, buttonRole: "master"}, 
-            {name: "kid1", currState: false, buttonRole: "child"}, 
-            {name: "kid2", currState: false, buttonRole: "child"}, 
-            {name: "kid3", currState: false, buttonRole: "child"}
-          ]
-        }
-        groupId={"testgroup"}
-      />
-      <TestToggleContainer 
-        buttons={
-          [
-            
-            {name: "kid1", currState: false, buttonRole: "child"}, 
-            {name: "kid2", currState: false, buttonRole: "child"}, 
-            {name: "kid3", currState: false, buttonRole: "child"},
-            {name: "master", currState: true, buttonRole: "master"}, 
-            {name: "jesus", currState: false, buttonRole: "child"}, 
-            {name: "twat", currState: false, buttonRole: "child"}, 
-            {name: "test", currState: false, buttonRole: "child"},
-            {name: "guitar", currState: false, buttonRole: "child"}, 
-            {name: "murder", currState: false, buttonRole: "child"}, 
-            {name: "yes", currState: false, buttonRole: "child"}
-          ]
-        }
-        groupId={"testgroup"}
-      />
-        
       
+      <div className="schedule-builder-container">
+        <div id="default-sidebar" className="visible-sidebar">
+          {clickBool == false 
+            ? 
+            <>
+              <SideBar 
+                title={"Search Staff"} 
+                component={StaffSearchControls}
+              />
+              <div className="new-user-button-container">
+                <button className="new-user-button" onClick={() => setClickBool(true)}>Add new user</button>
+              </div>
+            </>
+            : 
+            <>
+              <SideBar 
+                title={"Add New User"} 
+                // component={NewUserPanel}
+                // setData={setData}
+                // setRosterButtons={setRosterButtons}
+                // rosterButtons={rosterButtons}
+              />
+              <div className="new-user-button-container">
+                <button className="new-user-button" onClick={() => setClickBool(false)}>Cancel</button>
+              </div>
+            </>
+          }
+        </div>
+        
+      </div>
     </>
   )
 }

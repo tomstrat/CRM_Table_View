@@ -1,31 +1,32 @@
 import React from "react"
 import "../styles/UserControls.css"
-import ChildToggleButton from "./ChildToggleButton"
-import MasterToggleButton from "./MasterToggleButton"
 import PropTypes from "prop-types"
+import ToggleContainer from "./ToggleContainer"
 
-const UserControls = (props) => {
+const UserControls = () => {
   return (
     <>
       <div className="sidebar-components-container">        
-        <div className="user-button-container">
-          <MasterToggleButton title="All Users" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-        </div>
-        <div className="user-button-container">
-          <ChildToggleButton title="Operations" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-          <ChildToggleButton title="Trainers" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-        </div>
-        <div className="user-button-container">
-          <ChildToggleButton title="Drivers" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-          <ChildToggleButton title="Navigators" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-          <ChildToggleButton title="Temp" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/> 
-        </div>
-        <div className="user-controls-container">
-          <div className="controls-label">Include Inactive</div>
-          <input type="checkbox" className="controls-checkbox"></input>
-          <button className="search-button" id="search">Search</button>
-        </div>
+        <ToggleContainer 
+          buttons={
+            [
+              {name: "All users", currState: true, buttonRole: "master"}, 
+              {name: "Operations", currState: false, buttonRole: "child"}, 
+              {name: "Trainers", currState: false, buttonRole: "child"},
+              {name: "Drivers", currState: false, buttonRole: "child"},
+              {name: "Navigators", currState: false, buttonRole: "child"}, 
+              {name: "Temp", currState: false, buttonRole: "child"}
+            ]
+          }
+          groupId={"userSearch"}
+        />
       </div>
+      <div className="user-controls-container">
+        <div className="controls-label">Include Inactive</div>
+        <input type="checkbox" className="controls-checkbox"></input>
+        <button className="search-button" id="search">Search</button>
+      </div>
+      
     </>
   )
 } 

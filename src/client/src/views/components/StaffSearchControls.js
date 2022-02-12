@@ -1,61 +1,73 @@
 import React from "react"
 import "../styles/StaffSearchControls.css"
 import PropTypes from "prop-types"
-import ToggleButton from "./ToggleButton"
-import MasterToggleButton from "./MasterToggleButton"
-import ChildToggleButton from "./ChildToggleButton"
+import ToggleContainer from "./ToggleContainer"
 
-
-const StaffSearchControls = (props) => {
+const StaffSearchControls = () => {
   return (
     <>
       <div className="sidebar-components-container">
         <div className="basic-column">
           <label className="search-label">Availability</label> 
-          <div className="user-button-container"> 
-            <ChildToggleButton title="Rostered" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-            <ChildToggleButton title="Potential" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-            <MasterToggleButton title="All" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-          </div>   
-          <label className="search-label">Contract</label>  
-          <div className="user-button-container">
-            <ToggleButton title="Full time" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-            <ToggleButton title="Casual" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-            <ToggleButton title="Temp" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-          </div>
-        </div>  
-        <div className="basic-column">
+          <ToggleContainer 
+            buttons={
+              [
+                {name: "All", currState: true, buttonRole: "master"}, 
+                {name: "Rostered", currState: false, buttonRole: "child"},
+                {name: "Possible", currState: false, buttonRole: "child"},  
+              ]
+            }
+            groupId={"avail-search"}
+          />
+          <label className="search-label">Hours</label> 
+          <ToggleContainer 
+            buttons={
+              [
+                {name: "All", currState: true, buttonRole: "master"}, 
+                {name: "Contracted", currState: false, buttonRole: "child"},
+                {name: "Casual", currState: false, buttonRole: "child"},  
+              ]
+            }
+            groupId={"hours-search"}
+          />
           <label className="search-label">Role</label> 
-          <div className="user-button-container">
-            <MasterToggleButton title="All Junkies" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-          </div>
-          <div className="user-button-container">
-            <ChildToggleButton title="Trainers" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-            <ChildToggleButton title="Drivers" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-          </div>
-          <div className="user-button-container">
-            <ChildToggleButton title="Navis" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-            <ChildToggleButton title="Trainees" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-            <ChildToggleButton title="Temps" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-          </div>
-        </div>  
-        <div className="basic-column">
-          <label className="search-label">Suburb</label> 
-          <div className="user-button-container">
-            <ChildToggleButton title="Inner" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-            <ChildToggleButton title="Outer" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-          </div>
-          <div className="user-button-container">
-            <ChildToggleButton title="North" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-          </div>
-          <div className="user-button-container">
-            <ChildToggleButton title="West" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-            <ChildToggleButton title="All" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-            <ChildToggleButton title="East" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-          </div>
-          <div className="user-button-container">
-            <ChildToggleButton title="South" ToggleButtons={props.ToggleButtons} setToggleButtons={props.setToggleButtons}/>
-          </div>
+          <ToggleContainer 
+            buttons={
+              [
+                {name: "All Roles", currState: true, buttonRole: "master"}, 
+                {name: "Drivers", currState: false, buttonRole: "child"},
+                {name: "Navigators", currState: false, buttonRole: "child"},
+                {name: "Trainers", currState: false, buttonRole: "child"},
+                {name: "Trainees", currState: false, buttonRole: "child"}, 
+                {name: "Temps", currState: false, buttonRole: "child"},  
+              ]
+            }
+            groupId={"role-search"}
+          />
+          <label className="search-label">Location</label> 
+          <ToggleContainer 
+            buttons={
+              [
+                {name: "Both", currState: true, buttonRole: "master"}, 
+                {name: "Inner", currState: false, buttonRole: "child"},
+                {name: "Outer", currState: false, buttonRole: "child"}
+              ]
+            }
+            groupId={"role-search"}
+          />
+          <label className="search-label">Direction</label> 
+          <ToggleContainer 
+            buttons={
+              [
+                {name: "All", currState: true, buttonRole: "master"}, 
+                {name: "North", currState: false, buttonRole: "child"},
+                {name: "East", currState: false, buttonRole: "child"},
+                {name: "South", currState: false, buttonRole: "child"},
+                {name: "West", currState: false, buttonRole: "child"}
+              ]
+            }
+            groupId={"role-search"}
+          />
         </div>  
       </div>
     </>

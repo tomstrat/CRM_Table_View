@@ -30,11 +30,11 @@
   border: 2px solid #8dc63f;
   background-color: #ffffff;
   border-radius: 12px;
-  width: 5.5vw;
+  width: 30%;
   height: 5vh;
-  margin-left: 4px;
-  margin-right: 4px;
+  margin: 5px;
   cursor: pointer;
+  text-align: center;
 }
 
 .controls-button-clicked {
@@ -42,11 +42,11 @@
   background-color: #8dc63f;
   color: #ffffff;
   border-radius: 12px;
-  width: 5vw;
+  min-width: 30%;
   height: 5vh;
-  margin-left: 4px;
-  margin-right: 4px;
+  margin: 5px;
   cursor: pointer;
+  text-align: center;
 }
 
 .controls-label {

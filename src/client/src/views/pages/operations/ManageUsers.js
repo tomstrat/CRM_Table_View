@@ -21,18 +21,7 @@ const ManageUsers = () => {
       rosterSaturday: "unselected"
     })
   
-  const [ToggleButtons, setToggleButtons] = useState({
-    master: {
-      allusers: true
-    },
-    children: {
-      operations: false, 
-      trainers: false, 
-      drivers: false, 
-      navigators: false, 
-      temp: false
-    }
-  })
+
 
 
   useEffect(() => {
@@ -56,8 +45,6 @@ const ManageUsers = () => {
               <SideBar 
                 title={"Search Users"} 
                 component={UserControls}
-                ToggleButtons={ToggleButtons}
-                setToggleButtons={setToggleButtons}
               />
               <div className="new-user-button-container">
                 <button className="new-user-button" onClick={() => setClickBool(true)}>Add new user</button>
@@ -78,7 +65,7 @@ const ManageUsers = () => {
             </>
           }
         </div>
-        <TableContents ToggleButtons={ToggleButtons} data={data.data}/>
+        <TableContents data={data.data}/>
       </div>
     </>
   )
