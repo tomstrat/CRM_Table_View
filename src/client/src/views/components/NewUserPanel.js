@@ -42,7 +42,7 @@ const NewUserPanel = (props) => {
   }
 
   const refreshEmployeeType = (types, type, value) => {
-    const arr = types ? types.split(",") : []
+    const arr = types.length ? types.split(",") : []
     if(value && R.not(R.includes(type, arr))) {
       return R.join(",", R.append(type, arr))
     } else{

@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import ValError from "../valError"
 import "../../styles/User_card/userField.css"
 
 const UserField = (props) => {
@@ -8,7 +9,8 @@ const UserField = (props) => {
     title,
     content,
     edit,
-    input
+    input,
+    error
   } = props
 
   return (
@@ -17,6 +19,10 @@ const UserField = (props) => {
       {edit
         ? input
         :<span className="user-field-content">{content}</span>
+      }
+      {edit
+        ? error ? <ValError message={error}/> : ""
+        : ""
       }
     </div>
   )
@@ -32,5 +38,6 @@ UserField.propTypes = {
     PropTypes.object
   ]),
   input: PropTypes.element,
-  edit: PropTypes.bool
+  edit: PropTypes.bool,
+  error: PropTypes.string
 }

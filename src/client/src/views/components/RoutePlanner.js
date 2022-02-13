@@ -26,11 +26,9 @@ const RoutePlanner = (props) => {
   }
   
   // eslint-disable-next-line no-unused-vars
-  function routeBoxHandleClick (event) {
+  function toggleOnClick (event) {
     const { value } = event.target
     const targetIndex = parseInt(value.split(",")[0])
-    // eslint-disable-next-line no-unused-vars
-    const currState = value.includes("true")
     setRoutePlannerState(values => {
       return values.map((obj, index) => {
         console.log(index)
@@ -94,7 +92,7 @@ const RoutePlanner = (props) => {
         name1="name1"
         name2="name2"
         routeNotes="routeNotes"
-        onClick={routeBoxHandleClick}
+        onClick={toggleOnClick}
         toggleState={toggleState}
       />
     )
