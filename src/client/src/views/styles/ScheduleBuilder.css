@@ -110,6 +110,21 @@
   padding: 0px;
 }
 
+.route-box-clicked {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border: 2px solid #8dc63f;
+  background-color: #ffffff;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 10.5%;
+  height: 13vh;
+  margin: 1%;
+  padding: 0px;
+}
+
 .unclickable {
   pointer-events: none;
 }
@@ -143,17 +158,4 @@
   font-weight: bold;
 }
 
-.route-box-clicked {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  border: 2px solid #8dc63f;
-  background-color: #ffffff;
-  border-radius: 12px;
-  cursor: pointer;
-  width: 11%;
-  height: 24%;
-  margin: 1%;
-  padding: 0px;
-}
+
