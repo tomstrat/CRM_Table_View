@@ -1,13 +1,14 @@
 import React from "react"
 import PropTypes from "prop-types"
+import CommentToggle from "./CommentToggle"
 
 const RouteBox = (props) => {
   return (
-    <button className={
+    <div onClick={props.onClick} className={
       props.toggleState
         ? "route-box-clicked"
         : "route-box"
-    } value={[props.index, props.toggleState]} onClick={props.onClick} id={props.routeName}>
+    }  id={`routeBox${props.index}`}>
       <div className={
         props.toggleState
           ? "route-title-box-clicked unclickable"
@@ -21,8 +22,11 @@ const RouteBox = (props) => {
         <div className="unclickable">{props.name1}</div>
         <div className="unclickable">{props.name2}</div>
       </div>
-      <div className="unclickable">{props.routeNotes}</div> 
-    </button>
+      <CommentToggle 
+        commentName={"Test"} 
+        toggleState={props.toggleState} 
+        routeNotes={props.routeNotes}/>
+    </div>
   )
 }
   

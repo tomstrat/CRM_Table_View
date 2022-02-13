@@ -25,15 +25,10 @@ const RoutePlanner = (props) => {
     SetAddRouteState({routeName: null, routeType: addRouteState.routeType, toggleState: false})
   }
   
-  //Toggles route boxes, index passed through value of routebox,
-  //the routebox component is currently a button although this will have to change,
-  //as we would need buttons within buttons, and buttonception returns undefined.
-  //currently getting error when either changing from button, or removing toggleState artifact,
-  //which is still currently being passed into value, however another route has been found and it's no longer neccessary. 
-  //will look into it. Oss.
   function toggleOnClick (event) {
-    const { value } = event.target
-    const targetIndex = parseInt(value.split(",")[0])
+    const { id } = event.target
+    
+    const targetIndex = parseInt(id.split("x")[1])
     setRoutePlannerState(values => {
       return values.map((obj, index) => {
         if(targetIndex == index)
