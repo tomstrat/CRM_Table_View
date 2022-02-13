@@ -29,7 +29,7 @@ const RoutePlanner = (props) => {
   //the routebox component is currently a button although this will have to change,
   //as we would need buttons within buttons, and buttonception returns undefined.
   //currently getting error when either changing from button, or removing toggleState artifact,
-  //which is still currently being passed into value, however is no longer neccessary. 
+  //which is still currently being passed into value, however another route has been found and it's no longer neccessary. 
   //will look into it. Oss.
   function toggleOnClick (event) {
     const { value } = event.target
