@@ -53,8 +53,19 @@ const RoutePlanner = (props) => {
               name2: routePlannerState[targetIndex].name2,
               routeNotes: routePlannerState[targetIndex].routeNotes,
               toggleState: true
-            }}
-        return obj
+            }
+          } if(targetIndex !== index) {
+          return {
+            routeName: routePlannerState[targetIndex].routeName,
+            routeType: routePlannerState[targetIndex].routeType,
+            startTime: routePlannerState[targetIndex].startTime,
+            name1: routePlannerState[targetIndex].name1,
+            name2: routePlannerState[targetIndex].name2,
+            routeNotes: routePlannerState[targetIndex].routeNotes,
+            toggleState: false
+          }
+        }
+        
       }) 
       
     })

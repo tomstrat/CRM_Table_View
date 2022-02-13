@@ -7,7 +7,7 @@ import "../styles/ToggleContainer.css"
 //component for rendering and holding togglebuttons
 //number per row can be customised by injecting relevant css classes
 //Requires specific props in the form of an array of objects to be called succesfully
-//See bottom of page for example object
+//See bottom of page for example array
 
 
 const ToggleContainer = (props) => {
@@ -111,7 +111,7 @@ ToggleContainer.propTypes = {
 //buttonRole requires either 'master', child' or 'free'
 //any number of buttons can be added
 //if class injection is not required, an empty string must be added to the 'classInject' property
-//example of array shape and required props. 
+//example of array shape and required props: 
 // [
 //   {name: "All users", currState: true, buttonRole: "master", classInject: "single-row"}, 
 //   {name: "Operations", currState: false, buttonRole: "child", classInject: "double-row-left"}, 
