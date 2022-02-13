@@ -17,8 +17,8 @@
 
 .route-planner-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: flex-start;
   justify-content: flex-start;
   flex-wrap: wrap;
   margin: 1%;
@@ -67,3 +67,65 @@
   width: 60%;
 }
 
+.route-top-bar {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: fit-content;
+  background-color: black;
+}
+
+.route-name-input {
+  border: 2px solid #8dc63f;
+  background-color: #ffffff;
+  border-radius: 12px;
+  text-align: center;
+  height: fit-content;
+}
+
+.add-route-button {
+  border: 2px solid #8dc63f;
+  background-color: #ffffff;
+  border-radius: 12px;
+  width: 30%;
+  height: 5vh;
+  margin: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.route-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border: 2px solid #8dc63f;
+  background-color: #ffffff;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 10%;
+  min-height: 20%;
+  margin: 1%;
+  padding: 0px;
+}
+
+.unclickable {
+  pointer-events: none;
+}
+
+.route-title-box {
+  display: flex;
+  flex-direction: column;
+  background-color: #8dc63f;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #8dc63f;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+
+}
+
+.route-title {
+  font-size: medium;
+  font-weight: bold;
+}

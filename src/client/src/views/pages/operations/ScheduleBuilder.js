@@ -32,7 +32,101 @@ const ScheduleBuilder = () => {
           <StaffSearchResults>
 
           </StaffSearchResults>
-          <RoutePlanner>
+          <RoutePlanner
+            defaultRoutes={[
+              {
+                routeName: "D1",
+                routeType: "Standard",
+                startTime: "Not set",
+                name1: "unassigned",
+                name2: "unassigned",
+                routeNotes: "routeNotes",
+                toggleState: false
+              },
+              {
+                routeName: "D2",
+                routeType: "Standard",
+                startTime: "Not set",
+                name1: "unassigned",
+                name2: "unassigned",
+                routeNotes: "routeNotes",
+                toggleState: false
+              },
+              {
+                routeName: "E1",
+                routeType: "Standard",
+                startTime: "Not set",
+                name1: "unassigned",
+                name2: "unassigned",
+                routeNotes: "routeNotes",
+                toggleState: false
+              },
+              {
+                routeName: "E2",
+                routeType: "Standard",
+                startTime: "Not set",
+                name1: "unassigned",
+                name2: "unassigned",
+                routeNotes: "routeNotes",
+                toggleState: false
+              },
+              {
+                routeName: "S1",
+                routeType: "Standard",
+                startTime: "Not set",
+                name1: "unassigned",
+                name2: "unassigned",
+                routeNotes: "routeNotes",
+                toggleState: false
+              },
+              {
+                routeName: "S2",
+                routeType: "Standard",
+                startTime: "Not set",
+                name1: "unassigned",
+                name2: "unassigned",
+                routeNotes: "routeNotes",
+                toggleState: false
+              },
+              {
+                routeName: "W1",
+                routeType: "Standard",
+                startTime: "Not set",
+                name1: "unassigned",
+                name2: "unassigned",
+                routeNotes: "routeNotes",
+                toggleState: false
+              },
+              {
+                routeName: "W2",
+                routeType: "Standard",
+                startTime: "Not set",
+                name1: "unassigned",
+                name2: "unassigned",
+                routeNotes: "routeNotes",
+                toggleState: false
+              },
+              {
+                routeName: "F1",
+                routeType: "Standard",
+                startTime: "Not set",
+                name1: "unassigned",
+                name2: "unassigned",
+                routeNotes: "routeNotes",
+                toggleState: false
+              },
+              {
+                routeName: "F2",
+                routeType: "Standard",
+                startTime: "Not set",
+                name1: "unassigned",
+                name2: "unassigned",
+                routeNotes: "routeNotes",
+                toggleState: false
+              },
+            ]}
+          
+          >
             
           </RoutePlanner>
         </div>
