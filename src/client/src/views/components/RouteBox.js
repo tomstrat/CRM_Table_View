@@ -3,8 +3,16 @@ import PropTypes from "prop-types"
 
 const RouteBox = (props) => {
   return (
-    <button className="route-box" value={[props.index, props.toggleState]} onClick={props.onClick} id={props.routeName}>
-      <div className="route-title-box unclickable">
+    <button className={
+      props.toggleState
+        ? "route-box-clicked"
+        : "route-box"
+    } value={[props.index, props.toggleState]} onClick={props.onClick} id={props.routeName}>
+      <div className={
+        props.toggleState
+          ? "route-title-box-clicked unclickable"
+          : "route-title-box unclickable"
+      }>
         <div className="route-title unclickable">{props.routeName}</div>
         <div className="route-type unclickable">{props.routeType}</div>
       </div>

@@ -31,7 +31,6 @@ const RoutePlanner = (props) => {
     const targetIndex = parseInt(value.split(",")[0])
     setRoutePlannerState(values => {
       return values.map((obj, index) => {
-        console.log(index)
         if(targetIndex == index)
           if(obj.toggleState) {
             return {
@@ -54,12 +53,12 @@ const RoutePlanner = (props) => {
             }
           } if(targetIndex !== index) {
           return {
-            routeName: routePlannerState[targetIndex].routeName,
-            routeType: routePlannerState[targetIndex].routeType,
-            startTime: routePlannerState[targetIndex].startTime,
-            name1: routePlannerState[targetIndex].name1,
-            name2: routePlannerState[targetIndex].name2,
-            routeNotes: routePlannerState[targetIndex].routeNotes,
+            routeName: routePlannerState[index].routeName,
+            routeType: routePlannerState[index].routeType,
+            startTime: routePlannerState[index].startTime,
+            name1: routePlannerState[index].name1,
+            name2: routePlannerState[index].name2,
+            routeNotes: routePlannerState[index].routeNotes,
             toggleState: false
           }
         }

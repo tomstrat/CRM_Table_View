@@ -100,7 +100,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  border: 2px solid #8dc63f;
+  border: 2px solid #00539f;
   background-color: #ffffff;
   border-radius: 12px;
   cursor: pointer;
@@ -117,16 +117,41 @@
 .route-title-box {
   display: flex;
   flex-direction: column;
+  background-color: #00539f;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #00539f;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.route-title-box-clicked {
+  display: flex;
+  flex-direction: column;
   background-color: #8dc63f;
   width: 100%;
   height: 100%;
   border: 2px solid #8dc63f;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
-
 }
 
 .route-title {
   font-size: medium;
   font-weight: bold;
+}
+
+.route-box-clicked {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border: 2px solid #8dc63f;
+  background-color: #ffffff;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 10%;
+  min-height: 20%;
+  margin: 1%;
+  padding: 0px;
 }
