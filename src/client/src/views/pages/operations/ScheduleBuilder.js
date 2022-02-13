@@ -1,8 +1,8 @@
 import React from "react"
 import SideBar from "../../components/SideBar"
-import StaffSearchControls from "../../components/StaffSearchControls"
+import StaffSearchControls from "../../components/Staff_Search/StaffSearchControls"
 import "../../styles/ScheduleBuilder.css"
-import StaffSearchResults from "../../components/StaffSearchResults"
+import StaffSearchResults from "../../components/Staff_Search/StaffSearchResults"
 import RoutePlanner from "../../components/RoutePlanner"
 import getCurrentDate from "../../../utilities/getCurrentDate"
 

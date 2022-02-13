@@ -19,5 +19,5 @@ export const initialUserState = {
   rosterThursday: "unselected",
   rosterFriday: "unselected",
   rosterSaturday: "unselected",
-  employeeType: ""
+  employeeType: []
 }

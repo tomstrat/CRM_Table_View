@@ -1,7 +1,7 @@
 import React from "react"
-import "../styles/StaffSearchControls.css"
+import "../../styles/StaffSearchControls.css"
 import PropTypes from "prop-types"
-import ToggleContainer from "./ToggleContainer"
+import ToggleContainer from "../ToggleContainer"
 
 const StaffSearchControls = () => {
   return (
