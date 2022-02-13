@@ -25,7 +25,12 @@ const RoutePlanner = (props) => {
     SetAddRouteState({routeName: null, routeType: addRouteState.routeType, toggleState: false})
   }
   
-  // eslint-disable-next-line no-unused-vars
+  //Toggles route boxes, index passed through value of routebox,
+  //the routebox component is currently a button although this will have to change,
+  //as we would need buttons within buttons, and buttonception returns undefined.
+  //currently getting error when either changing from button, or removing toggleState artifact,
+  //which is still currently being passed into value, however is no longer neccessary. 
+  //will look into it. Oss.
   function toggleOnClick (event) {
     const { value } = event.target
     const targetIndex = parseInt(value.split(",")[0])
