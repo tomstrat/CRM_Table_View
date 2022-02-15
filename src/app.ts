@@ -57,7 +57,7 @@ export default function appFactory({ Config, Routes, handleErrors, requireAuth }
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(bodyParser.json())
   // app.use(express.static(__dirname + "/public"))
-  // app.get("/favicon.ico", (req: Request, res: Response) => res.status(204))
+  app.get("/favicon.ico", (req: Request, res: Response) => res.status(204))
   Routes.map(route => {
     route[1].use(requireAuth(route[2]))
     route[1].stack = reverse(route[1].stack) // Reverse stack to put auth on top
