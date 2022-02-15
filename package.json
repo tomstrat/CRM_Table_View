@@ -10,7 +10,8 @@
     "test": "jest --maxWorkers=50% --silent --verbose",
     "test-log": "jest --maxWorkers=50%",
     "lint": "eslint ./src/**/*.ts",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "repository": {
     "type": "git",
