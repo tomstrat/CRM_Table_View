@@ -146,13 +146,13 @@ const RoutePlanner = (props) => {
   return (
     <div className="route-planner-container">
       <div className="route-top-bar">
-        <select placeholder="Standard" name="routeType" id="routeType" onChange={handleChange} className="new-user-drop route-top-bar-element">
+        <select placeholder="Standard" name="routeType" id="routeType"  onChange={handleChange} className="new-user-drop route-top-bar-element">
           <option value="Standard">Standard</option>
           <option value="Float">Float</option>
           <option value="Training">Training</option>
           <option value="Depot">Depot</option>
         </select>
-        <input type="text" name="routeName" className="route-name-input route-top-bar-element" onChange={handleChange} placeholder="Add route name" ></input>  
+        <input type="text" name="routeName" value={addRouteState.routeName} className="route-name-input route-top-bar-element" onChange={handleChange} placeholder="Add route name" ></input>  
         <button className="add-route-button route-top-bar-element" onClick={addRoutehandleClick}>Add Route</button>
       </div>  
       {
