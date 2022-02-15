@@ -70,5 +70,10 @@
     "sqlite3": "^5.0.2",
     "typeorm": "^0.2.41",
     "uniqid": "^5.4.0"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "modulePathIgnorePatterns": ["<rootDir>/src/client"]
   }
 }
