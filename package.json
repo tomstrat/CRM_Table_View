@@ -11,7 +11,7 @@
     "test-log": "jest --maxWorkers=50%",
     "lint": "eslint ./src/**/*.ts",
     "prepare": "husky install",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd ./src/client && npm install && npm run build"
   },
   "repository": {
     "type": "git",
