@@ -144,7 +144,8 @@
 
 .route-title-box-clicked {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   flex-wrap: wrap;
   background-color: #8dc63f;
   width: 100%;
@@ -158,6 +159,12 @@
 .route-title {
   font-size: medium;
   font-weight: bold;
+}
+
+.route-top-column {
+  display: flex;
+  flex-direction: column;
+
 }
 
 .hidden {

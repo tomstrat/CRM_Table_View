@@ -86,8 +86,16 @@ const RouteBox = (props) => {
             : "route-title-box"
         }
       >
-        <div className="route-title unclickable">{routeName}</div>
-        <div className="route-type unclickable">{routeType}</div>
+        <div className="route-top-column unclickable">
+          <div className="route-title unclickable">{routeName}</div>
+          <div className="route-type unclickable">{routeType}</div>
+        </div>
+        <button className={
+          toggleState
+            ? "xbutton"
+            : "hidden"
+        }>x</button>
+        
       </div>
       <div 
         className={

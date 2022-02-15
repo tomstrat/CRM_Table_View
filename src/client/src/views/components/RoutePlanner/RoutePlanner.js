@@ -113,8 +113,9 @@ const RoutePlanner = (props) => {
       [target.name]: target.value,
       toggleState: false 
     })
-  } 
+  }
 
+  
   
   function makeRoute(routeInfo, index){
     const {routeName, routeType, startHours, startMins, name1, name2, name3, routeNotes, toggleState} = routeInfo
