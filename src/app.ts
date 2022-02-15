@@ -4,6 +4,7 @@ import cookieSession from "cookie-session"
 import helmet from "helmet"
 import hpp from "hpp"
 import csurf from "csurf"
+import path from "path"
 import { rateLimit } from "express-rate-limit"
 import bodyParser from "body-parser"
 import ConfigType from "./config/type"
@@ -56,7 +57,7 @@ export default function appFactory({ Config, Routes, handleErrors, requireAuth }
   app.use(limiter)
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(bodyParser.json())
-  // app.use(express.static(__dirname + "/public"))
+  app.use(express.static(path.join(__dirname, "client/build")))
   app.get("/favicon.ico", (req: Request, res: Response) => res.status(204))
   Routes.map(route => {
     route[1].use(requireAuth(route[2]))
