@@ -167,11 +167,85 @@
 .visible{
   display: flex;
 }
-.comment-buttons {
+.expand-comments-button {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: fit-content;
-  font-size: 8px;
+  font-size: 9px;
+  width: 4vw;
+  height: 1.5vw;
+  z-index: 6;
+  color: #ffffff;
+  background-color: #00539f;
+  border-radius: 8px;
+  border: 2px solid #ffffff;
+}
 
+.comment-box {
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 10vw;
+  min-height: 8vh;
+  z-index: 5;
+  border-radius: 12px;
+  padding: 1%;
+  border: 2px solid #8dc63f;
+}
+
+.commit-comments-button {
+  z-index: 6;
+  color: #ffffff;
+  width: 35%;
+  background-color: #00539f;
+  border-radius: 12px;
+}
+
+.notes-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.start-time-box {
+  margin-top: 2%;
+  display: flex;
+  flex-direction: row; 
+}
+
+.start-time-select {
+  font-size: 12px;
+  border-radius: 12px;
+  border: 1px solid #8dc63f;
+}
+
+
+.names-container{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+}
+.name-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  
+}
+
+.xbutton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10px;
+  height: 10px;
+  padding: 0px;
+  margin-right: 2%;
+  background-color: red;
+  border-radius: 3px;
+  color: #ffffff;
+  text-align: center;
 }

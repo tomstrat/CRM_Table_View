@@ -58,9 +58,9 @@ const StaffSearchControls = () => {
             buttons={
               [
                 {name: "North", currState: false, buttonRole: "child", classInject: "single-row"},
-                {name: "East", currState: false, buttonRole: "child", classInject: ""},
-                {name: "All", currState: true, buttonRole: "master", classInject: ""}, 
                 {name: "West", currState: false, buttonRole: "child", classInject: ""},
+                {name: "All", currState: true, buttonRole: "master", classInject: ""}, 
+                {name: "East", currState: false, buttonRole: "child", classInject: ""},
                 {name: "South", currState: false, buttonRole: "child", classInject: "single-row"}
               ]
             }
