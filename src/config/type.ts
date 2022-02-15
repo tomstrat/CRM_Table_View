@@ -11,10 +11,7 @@ export default interface ConfigType {
     secure: boolean
   }
   database: {
-    host: string
-    port: number
-    username: string
-    password: string
+    url: string
     database: string
     synchronize: boolean
     logging: boolean

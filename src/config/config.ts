@@ -15,11 +15,8 @@ export default {
     secure: false
   },
   database: {
-    host: "localhost",
-    port: 3001,
-    username: "test",
-    password: "test",
-    database: "test",
+    url: `postgres://${process.env.PROD_DB_USER}:${process.env.PROD_DB_PASS}@rosie.db.elephantsql.com/${process.env.PROD_DB_USER}`,
+    database: "postgres",
     synchronize: true,
     logging: false,
     entities: [
