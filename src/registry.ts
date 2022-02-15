@@ -1,4 +1,5 @@
 import UserClient from "./database/clients/UserClient"
+import dotenv from "dotenv"
 import { Connection } from "typeorm"
 import { createDatabase } from "./database"
 import Config from "./config/config"
@@ -15,7 +16,9 @@ import userValidatorFactory from "./middleware/validation/users.validation"
 import makeTestUser from "./routes/auth/testUser"
 
 export default async function inject(testDB?: Connection) {
-  const DB = testDB || await createDatabase({ Config, testdb: true })
+  dotenv.config()
+  const prodDB = (process.env.PROD_DATABASE !== "true")
+  const DB = testDB || await createDatabase({ Config, testdb: prodDB })
   const userClient = new UserClient(DB)
   const userValidators = userValidatorFactory({ userClient })
   const Routes = [
