@@ -1,7 +1,6 @@
 {
   "name": "crm_table_view",
   "version": "1.0.0",
-  "main": "index.ts",
   "scripts": {
     "tsc": "tsc",
     "server": "nodemon --watch './**/*.ts' --exec 'ts-node' ./src/index.ts",

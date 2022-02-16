@@ -20,13 +20,13 @@ export default {
     synchronize: true,
     logging: false,
     entities: [
-      "src/database/models/**/*.ts"
+      "dist/database/models/**/*.js"
     ],
     migrations: [
-      "src/database/migrations/**/*.ts"
+      "dist/database/migrations/**/*.js"
     ],
     subscribers: [
-      "src/database/subscribers/**/*.ts"
+      "dist/database/subscribers/**/*.js"
     ],
   },
   testDatabase: {
