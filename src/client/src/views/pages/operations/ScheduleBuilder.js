@@ -63,7 +63,7 @@ const ScheduleBuilder = () => {
                 startMins: "00",
                 name1: "Sean Humphreys",
                 name2: "Tom Copestake",
-                name3: "Luke Bailey",
+                name3: "",
                 routeNotes: "",
                 toggleState: false
               },

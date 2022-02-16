@@ -25,7 +25,7 @@ const CommentToggle = (props) => {
   return (
     <div className={
       props.toggleState
-        ? "visible"
+        ? "visible comments-parent"
         : "hidden"
     }>
       <button onClick={onClick}

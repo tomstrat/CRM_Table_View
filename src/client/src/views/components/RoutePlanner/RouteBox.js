@@ -70,80 +70,80 @@ const RouteBox = (props) => {
   
 
   return (
-    
-    <div index={props.index} className={
-      toggleState
-        ? "route-box-clicked"
-        : "route-box"
-    }
-    >
-      <div
-        onClick={props.onClick}
-        id={`routeBox${props.index}`}
-        className={
-          toggleState
-            ? "route-title-box-clicked"
-            : "route-title-box"
-        }
+    <div className="route-box-container">
+      <div index={props.index} className={
+        toggleState
+          ? "route-box-clicked "
+          : "route-box "
+      }
       >
-        <div className="route-top-column unclickable">
-          <div className="route-title unclickable">{routeName}</div>
-          <div className="route-type unclickable">{routeType}</div>
-        </div>
-        <button
-          id={`${props.index}cancel`}
-          onClick={props.removeRoute}
+        <div
+          id={`routeBox${props.index}`}
+          onClick={props.onClick}
           className={
             toggleState
-              ? "xbutton"
-              : "hidden"
-          }>x</button>
-        
-      </div>
-      <div 
-        className={
-          toggleState
-            ? "hidden"
-            : "unclickable"
-        }
-      >
-        {startHours} : {startMins}
-      </div>
-      <div
-        className={
-          toggleState
-            ? "visible"
-            : "hidden"
-        }>
-        <TimeBox 
-          routeGetTime={routeGetTime}
-          startHours={startHours}
-          startMins={startMins}
-          className={
-            toggleState
-              ? "time-box"
-              : "hidden"
+              ? "route-title-box-clicked"
+              : "route-title-box"
           }
         >
-        </TimeBox>
+          <div className="route-top-column unclickable" >
+            <div className="route-title unclickable">{routeName}</div>
+            <div className="route-type unclickable">{routeType}</div>
+          </div>
+          <button
+            id={`${props.index}cancel`}
+            onClick={props.removeRoute}
+            className={
+              toggleState
+                ? "xbutton"
+                : "hidden"
+            }>x</button>
+          
+        </div>
+        <div 
+          className={
+            toggleState
+              ? "hidden"
+              : "unclickable"
+          }
+        >
+          {startHours} : {startMins}
+        </div>
+        <div
+          className={
+            toggleState
+              ? "visible"
+              : "hidden"
+          }>
+          <TimeBox 
+            routeGetTime={routeGetTime}
+            startHours={startHours}
+            startMins={startMins}
+            className={
+              toggleState
+                ? "time-box"
+                : "hidden"
+            }
+          >
+          </TimeBox>
+        </div>
+        <NameContainer
+          routeGetNames={routeGetNames}
+          toggleState={toggleState}
+          name1={name1}
+          name2={name2}
+          name3={name3}
+        />
+        <CommentToggle
+          key={uniqid("comment-")} 
+          commentsName={"Notes"} 
+          toggleState={toggleState} 
+          routeNotes={routeNotes}
+          routeGetNotes={routeGetNotes}
+        />
+          
       </div>
-      <NameContainer
-        routeGetNames={routeGetNames}
-        toggleState={toggleState}
-        name1={name1}
-        name2={name2}
-        name3={name3}
-      />
-      <CommentToggle
-        key={uniqid("comment-")} 
-        commentsName={"Notes"} 
-        toggleState={toggleState} 
-        routeNotes={routeNotes}
-        routeGetNotes={routeGetNotes}
-      />
-        
     </div>
-
   )
 }
   
