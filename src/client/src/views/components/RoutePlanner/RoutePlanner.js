@@ -1,3 +1,4 @@
+
 import React, {useState} from "react"
 import RouteBox from "./RouteBox"
 import uniqid from "uniqid"
@@ -8,6 +9,13 @@ const RoutePlanner = (props) => {
   const [addRouteState, SetAddRouteState] = useState({routeName: "", routeType: "Standard", toggleState: false})
   const [routePlannerState, setRoutePlannerState] = useState(props.defaultRoutes)
   
+  function removeRoute (e) {
+    const indexExtracted = parseInt(e.target.id)
+    let copyState = routePlannerState
+    copyState.splice(indexExtracted, 1)
+    setRoutePlannerState(copyState)
+  }
+    
   function routePlannerGetRoutes (routeState, routeIndex) {
     
     return setRoutePlannerState(values => {
@@ -114,7 +122,11 @@ const RoutePlanner = (props) => {
       toggleState: false 
     })
   }
-
+  
+  
+ 
+    
+   
   
   
   function makeRoute(routeInfo, index){
@@ -136,6 +148,7 @@ const RoutePlanner = (props) => {
         toggleState={toggleState}
         onClick={toggleOnClick}
         routePlannerGetRoutes={routePlannerGetRoutes}
+        removeRoute={removeRoute}
         
       />
     )

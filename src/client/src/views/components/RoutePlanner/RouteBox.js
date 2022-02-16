@@ -71,7 +71,7 @@ const RouteBox = (props) => {
 
   return (
     
-    <div className={
+    <div index={props.index} className={
       toggleState
         ? "route-box-clicked"
         : "route-box"
@@ -90,11 +90,14 @@ const RouteBox = (props) => {
           <div className="route-title unclickable">{routeName}</div>
           <div className="route-type unclickable">{routeType}</div>
         </div>
-        <button className={
-          toggleState
-            ? "xbutton"
-            : "hidden"
-        }>x</button>
+        <button
+          id={`${props.index}cancel`}
+          onClick={props.removeRoute}
+          className={
+            toggleState
+              ? "xbutton"
+              : "hidden"
+          }>x</button>
         
       </div>
       <div 
@@ -152,5 +155,6 @@ RouteBox.propTypes = {
   parentState: PropTypes.object,
   toggleState: PropTypes.bool,
   routePlannerGetRoutes: PropTypes.func,
+  removeRoute: PropTypes.func
 }
 
