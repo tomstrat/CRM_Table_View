@@ -57,7 +57,7 @@ export default function appFactory({ Config, Routes, handleErrors, requireAuth }
   app.use(limiter)
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(bodyParser.json())
-  app.use(express.static(path.join(__dirname, "client/build")))
+  app.use(express.static(path.join(__dirname + "/../src/client/build")))
   Routes.map(route => {
     route[1].use(requireAuth(route[2]))
     route[1].stack = reverse(route[1].stack) // Reverse stack to put auth on top
