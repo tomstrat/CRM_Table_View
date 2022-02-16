@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm"
 import { Roster } from "./Roster"
 import dotenv from "dotenv"
 
+
 dotenv.config()
 
 const datetime = process.env.PROD_DATABASE === "true"
@@ -56,7 +57,7 @@ export class User {
   @Column({ length: 20 })
   username!: string
 
-  @Column({ length: 40 })
+  @Column()
   password!: string
 
   @Column({ type: "simple-array", nullable: true })
