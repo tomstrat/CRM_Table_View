@@ -8,8 +8,6 @@ const datetime = process.env.PROD_DATABASE === "true"
   ? "timestamp"
   : "datetime"
 
-console.log("PDB", process.env.PROD_DATABASE)
-
 export enum Role {
   user = "user",
   operations = "operations",

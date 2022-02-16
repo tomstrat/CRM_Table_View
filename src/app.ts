@@ -65,7 +65,7 @@ export default function appFactory({ Config, Routes, handleErrors, requireAuth }
   })
 
   app.all("*", (req: Request, res: Response) => {
-    res.sendFile(path.join(__dirname + "../src/client/build/index.html"))
+    res.sendFile(path.join(__dirname + "/../src/client/build/index.html"))
   })
 
   app.use(handleErrors)
