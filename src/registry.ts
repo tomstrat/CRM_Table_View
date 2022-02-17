@@ -30,7 +30,7 @@ export default async function inject(testDB?: Connection) {
   ]
 
   const app = appFactory({ Config, Routes, handleErrors, requireAuth })
-  await makeTestUser({ userClient })
+  if (prodDB) await makeTestUser({ userClient })
   return app
 
 
