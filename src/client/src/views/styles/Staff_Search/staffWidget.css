@@ -50,3 +50,7 @@
   filter: drop-shadow(0px 0px 1px rgb(80, 80, 80));
   color: rgb(255, 255, 255);
 }
+
+.staff-widget-toggled {
+  border: 2px solid #8dc63f;
+}

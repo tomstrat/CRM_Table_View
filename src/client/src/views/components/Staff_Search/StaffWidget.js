@@ -1,11 +1,15 @@
-import React from "react"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
 import uniqid from "uniqid"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBus, faCompass, faChalkboardTeacher, faBookReader, faCalendarDay, faKey } from "@fortawesome/free-solid-svg-icons"
 import "../../styles/Staff_Search/staffWidget.css"
 
+
 const StaffWidget = (props) => {
+  const [ownState, setOwnState] = useState(false)
+
+  
 
   const {
     username,
@@ -16,6 +20,7 @@ const StaffWidget = (props) => {
   const updatedTypes = certified
     ? employeeType
     : [...employeeType, "uncertified"]
+
 
   const getTypeIcon = type => {
     switch(type) {
@@ -33,9 +38,21 @@ const StaffWidget = (props) => {
       return <FontAwesomeIcon className="staff-widget-icon" icon={faKey} size="lg" />
     }
   }
+  
 
+  function toggleOnClick () {
+    if(ownState) setOwnState(false)
+    else setOwnState(true)
+    props.resultsGetName(username)
+  }
   return (
-    <div className="staff-widget">
+    <div className={
+      ownState
+        ? "staff-widget-toggled staff-widget"
+        : "staff-widget"
+    }
+    onClick={toggleOnClick} 
+    >
       <div className="staff-widget-username">{username}</div>
       {updatedTypes.map(type => {
         return <span key={uniqid("type-")} className="staff-widget-type">
@@ -51,5 +68,7 @@ const StaffWidget = (props) => {
 export default StaffWidget
 
 StaffWidget.propTypes = {
-  user: PropTypes.object
+  user: PropTypes.object,
+  toggleState: PropTypes.array,
+  resultsGetName: PropTypes.func
 }
