@@ -1,14 +1,13 @@
-/* eslint-disable no-unused-vars */
 import React, {useState, useEffect} from "react"
 import { initialUserState } from "../../../utilities/userdata"
 import * as R from "ramda"
 import "../../styles/ScheduleBuilder.css"
 import StaffWidget from "./StaffWidget"
 import uniqid from "uniqid"
-import ToggleButton from "../ToggleButton"
+import PropTypes from "prop-types"
 
 
-const StaffSearchResults = () => {
+const StaffSearchResults = (props) => {
 
   const [users, setUsers] = useState({
     data: [initialUserState], populated: false
@@ -16,6 +15,18 @@ const StaffSearchResults = () => {
 
   const [toggleState, setToggleState] = useState(null)
   const [toggleCount, setToggleCount] = useState(0)
+
+
+
+  function passNamesClick() {
+    if(toggleState){
+      let passNames = toggleState.map((obj) => {
+        if(obj.state == true) return(obj.username)
+      })
+      const passNamesParsed = passNames.filter(name => name !== undefined)
+      props.pageGetNames(passNamesParsed)
+    }
+  }
 
   const resultsGetName = (name) => {
     const updateState = toggleState.map((obj) => {
@@ -31,6 +42,7 @@ const StaffSearchResults = () => {
     })
     setToggleState(updateState)
   }
+  
 
   useEffect(() => {
     const getData = async () => {
@@ -57,7 +69,6 @@ const StaffSearchResults = () => {
 
   return (
     <div className="staff-search-results-container">
-      <h1>Staff Search Results</h1>
       <div className="staff-search-results-widgets">
         {users.data.map(user => {
           return <StaffWidget 
@@ -68,8 +79,14 @@ const StaffSearchResults = () => {
           />
         })}
       </div>
+      <button className="add-staff-button route-top-bar-element" onClick={passNamesClick}>Add Staff</button>
     </div>
   )
 }
 
 export default StaffSearchResults
+
+
+StaffSearchResults.propTypes = {
+  pageGetNames: PropTypes.func
+}

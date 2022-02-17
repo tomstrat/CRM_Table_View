@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import SideBar from "../../components/SideBar"
 import StaffSearchControls from "../../components/Staff_Search/StaffSearchControls"
 import "../../styles/ScheduleBuilder.css"
@@ -9,6 +9,13 @@ import getCurrentDate from "../../../utilities/getCurrentDate"
 
 
 const ScheduleBuilder = () => {
+  // eslint-disable-next-line no-unused-vars
+  const [insertNames, setInsertNames] = useState(["", ""])
+
+  function pageGetNames(names) {
+    setInsertNames([names])
+  }
+
   return (
     <>
       
@@ -29,10 +36,11 @@ const ScheduleBuilder = () => {
           </div>
         </div>
         <div className="column-page">
-          <StaffSearchResults>
+          <StaffSearchResults pageGetNames={pageGetNames}>
 
           </StaffSearchResults>
           <RoutePlanner
+            insertNames={insertNames}
             defaultRoutes={[
               {
                 routeName: "D1",

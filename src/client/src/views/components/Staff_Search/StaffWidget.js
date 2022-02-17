@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import uniqid from "uniqid"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -9,7 +9,18 @@ import "../../styles/Staff_Search/staffWidget.css"
 const StaffWidget = (props) => {
   const [ownState, setOwnState] = useState(false)
 
+  useEffect(() => {
+    if(props.toggleState){
+      props.toggleState.map((obj) => {
+        if(obj.username == username && obj.state !== ownState){
+          if(ownState) setOwnState(false)
+          else setOwnState(true)
+        }
+      })
+    }
+  }), []
   
+
 
   const {
     username,
@@ -41,8 +52,6 @@ const StaffWidget = (props) => {
   
 
   function toggleOnClick () {
-    if(ownState) setOwnState(false)
-    else setOwnState(true)
     props.resultsGetName(username)
   }
   return (

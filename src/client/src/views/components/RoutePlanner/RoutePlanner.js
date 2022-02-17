@@ -1,5 +1,5 @@
 
-import React, {useState} from "react"
+import React, { useState } from "react"
 import RouteBox from "./RouteBox"
 import uniqid from "uniqid"
 import PropTypes from "prop-types"
@@ -9,13 +9,40 @@ const RoutePlanner = (props) => {
   const [addRouteState, SetAddRouteState] = useState({routeName: "", routeType: "Standard", toggleState: false})
   const [routePlannerState, setRoutePlannerState] = useState(props.defaultRoutes)
   
+
   function removeRoute (e) {
     const indexExtracted = parseInt(e.target.id)
     let copyState = routePlannerState
     copyState.splice(indexExtracted, 1)
     setRoutePlannerState(copyState)
   }
+  
+
+
+  // function nameToRoute (props) {
+  //   if (newDamnNames !== ["", ""] && newDamnNames !== undefined){
+  //     const [newName1, newName2] = newDamnNames
+  //     return setRoutePlannerState(values => {
+  //       return values.map((obj) => {
+  //         if(obj.toggleState)
+  //           return  {
+  //             ...obj,
+  //             name1: newName1,
+  //             name2: newName2,
+  //           }
+  //         else return obj
+  //       })
+  //     })
+  //   }
+  // }
+
+
     
+     
+    
+  
+  
+
   function routePlannerGetRoutes (routeState, routeIndex) {
     
     return setRoutePlannerState(values => {
@@ -168,7 +195,7 @@ const RoutePlanner = (props) => {
         </select>
         <input type="text" name="routeName" value={addRouteState.routeName} className="route-name-input route-top-bar-element" onChange={handleChange} placeholder="Add route name..." ></input>  
         <button className="add-route-button route-top-bar-element" onClick={addRoutehandleClick}>Add Route</button>
-        <button className="add-staff-button route-top-bar-element">Add Staff</button>
+        
       </div> 
       <div className="container-of-the-routes">
         {
@@ -188,5 +215,6 @@ const RoutePlanner = (props) => {
 export default RoutePlanner
 
 RoutePlanner.propTypes = {
-  defaultRoutes: PropTypes.array
+  defaultRoutes: PropTypes.array,
+  insertNames: PropTypes.array
 }
