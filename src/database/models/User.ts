@@ -1,5 +1,13 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm"
 import { Roster } from "./Roster"
+import dotenv from "dotenv"
+
+
+dotenv.config()
+
+const datetime = process.env.PROD_DATABASE === "true"
+  ? "timestamp"
+  : "datetime"
 
 export enum Role {
   user = "user",
@@ -49,7 +57,7 @@ export class User {
   @Column({ length: 20 })
   username!: string
 
-  @Column({ length: 40 })
+  @Column()
   password!: string
 
   @Column({ type: "simple-array", nullable: true })
@@ -75,7 +83,7 @@ export class User {
   @Column()
   injured!: Boolean
 
-  @Column({ type: "datetime", nullable: true })
+  @Column({ type: datetime, nullable: true })
   joinDate?: Date
 
   @Column({

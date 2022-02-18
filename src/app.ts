@@ -4,6 +4,7 @@ import cookieSession from "cookie-session"
 import helmet from "helmet"
 import hpp from "hpp"
 import csurf from "csurf"
+import path from "path"
 import { rateLimit } from "express-rate-limit"
 import bodyParser from "body-parser"
 import ConfigType from "./config/type"
@@ -56,8 +57,7 @@ export default function appFactory({ Config, Routes, handleErrors, requireAuth }
   app.use(limiter)
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(bodyParser.json())
-  // app.use(express.static(__dirname + "/public"))
-  // app.get("/favicon.ico", (req: Request, res: Response) => res.status(204))
+  app.use(express.static(path.join(__dirname + "/../src/client/build")))
   Routes.map(route => {
     route[1].use(requireAuth(route[2]))
     route[1].stack = reverse(route[1].stack) // Reverse stack to put auth on top
@@ -65,7 +65,7 @@ export default function appFactory({ Config, Routes, handleErrors, requireAuth }
   })
 
   app.all("*", (req: Request, res: Response) => {
-    throw new NotFound("Page does not exist")
+    res.sendFile(path.join(__dirname + "/../src/client/build/index.html"))
   })
 
   app.use(handleErrors)
