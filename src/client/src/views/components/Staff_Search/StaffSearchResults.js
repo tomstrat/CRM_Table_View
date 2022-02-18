@@ -14,31 +14,28 @@ const StaffSearchResults = (props) => {
   })
 
   const [toggleState, setToggleState] = useState(null)
-  const [toggleCount, setToggleCount] = useState(0)
 
-
-
-  function passNamesClick() {
+  useEffect(() => {
     if(toggleState){
       let passNames = toggleState.map((obj) => {
         if(obj.state == true) return(obj.username)
       })
       const passNamesParsed = passNames.filter(name => name !== undefined)
-      props.pageGetNames(passNamesParsed)
-    }
-  }
+      const passNamesParsedString = passNamesParsed[0]
+      props.pageGetName(passNamesParsedString)
+    }}), [toggleState]
+
+
 
   const resultsGetName = (name) => {
     const updateState = toggleState.map((obj) => {
-      if(obj.username == name && obj.state == false && toggleCount < 2) {
-        setToggleCount(toggleCount + 1)
+      if(obj.username == name && obj.state == false) {
         return {...obj, state: true}
       } 
       else if(obj.username == name && obj.state == true){
-        setToggleCount(toggleCount - 1)
         return {...obj, state: false}
       } 
-      else return obj
+      else return {...obj, state: false}
     })
     setToggleState(updateState)
   }
@@ -79,7 +76,6 @@ const StaffSearchResults = (props) => {
           />
         })}
       </div>
-      <button className="add-staff-button route-top-bar-element" onClick={passNamesClick}>Add Staff</button>
     </div>
   )
 }
@@ -88,5 +84,5 @@ export default StaffSearchResults
 
 
 StaffSearchResults.propTypes = {
-  pageGetNames: PropTypes.func
+  pageGetName: PropTypes.func
 }

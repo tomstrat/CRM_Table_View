@@ -6,15 +6,24 @@ import StaffSearchResults from "../../components/Staff_Search/StaffSearchResults
 import RoutePlanner from "../../components/RoutePlanner/RoutePlanner"
 import getCurrentDate from "../../../utilities/getCurrentDate"
 
-
-
 const ScheduleBuilder = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [insertNames, setInsertNames] = useState(["", ""])
-
-  function pageGetNames(names) {
-    setInsertNames([names])
+  const [insertName, setInsertName] = useState("")
+  const [addedNames, setAddedNames] = useState([])
+  
+  function pageGetNames(newName) {
+    if(newName == undefined) setInsertName("")
+    else {
+      setInsertName(newName)
+    }
   }
+
+  function getAddedNames(names) {
+    console.log(addedNames)
+    if(names !== addedNames)
+      setAddedNames(names)
+    
+  }
+
 
   return (
     <>
@@ -36,11 +45,13 @@ const ScheduleBuilder = () => {
           </div>
         </div>
         <div className="column-page">
-          <StaffSearchResults pageGetNames={pageGetNames}>
+          <StaffSearchResults pageGetName={pageGetNames} addedNames={addedNames}>
 
           </StaffSearchResults>
           <RoutePlanner
-            insertNames={insertNames}
+            insertName={insertName}
+            addedNames={addedNames}
+            getAddedNames={getAddedNames}
             defaultRoutes={[
               {
                 routeName: "D1",
@@ -59,7 +70,7 @@ const ScheduleBuilder = () => {
                 startHours: "07",
                 startMins: "00",
                 name1: "Tom Copestake",
-                name2: "Luke Bailey",
+                name2: "",
                 name3: "",
                 routeNotes: "",
                 toggleState: false
@@ -70,7 +81,7 @@ const ScheduleBuilder = () => {
                 startHours: "07",
                 startMins: "00",
                 name1: "Sean Humphreys",
-                name2: "Tom Copestake",
+                name2: "",
                 name3: "",
                 routeNotes: "",
                 toggleState: false
