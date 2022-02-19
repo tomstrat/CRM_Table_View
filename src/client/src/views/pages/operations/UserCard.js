@@ -18,7 +18,6 @@ import { formatErrors } from "../../../utilities/errors"
 
 
 const UserCard = (props) => {
-
   const {id} = props.match.params
   const [errors, setErrors] = useState({})
   const [edit, setEdit] = useState(false)

@@ -32,6 +32,12 @@ export function formatUser(user, omissions) {
         const newDate = new Date(date)
         return newDate.toLocaleDateString("en-GB")
       },
+      employeeType: (types) => {
+        if(!types) return []
+      },
+      location: (location) => {
+        if(!location) return "Unspecified"
+      },
       // employeeType: (types) => {
       //   if(types){
       //     return R.map(type => {

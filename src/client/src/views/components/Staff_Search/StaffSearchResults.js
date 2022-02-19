@@ -5,6 +5,7 @@ import "../../styles/ScheduleBuilder.css"
 import StaffWidget from "./StaffWidget"
 import uniqid from "uniqid"
 import PropTypes from "prop-types"
+import { formatUsers } from "../../../utilities/formatters/users.formatters"
 
 
 const StaffSearchResults = (props) => {
@@ -45,10 +46,11 @@ const StaffSearchResults = (props) => {
     const getData = async () => {
       const result = await fetch("/ops/users")
       const parsedResult = await result.json()
+      const formattedResult = formatUsers(parsedResult)
       if (toggleState == null){
         const allPresent = R.map(R.pick([
           "username"
-        ]), parsedResult)
+        ]), formattedResult)
         const allPresentState = allPresent.map((elem) => {
           return {...elem, state : false}
           
@@ -56,10 +58,10 @@ const StaffSearchResults = (props) => {
         setToggleState(allPresentState)
       }
       
-      const formattedResult = R.map(R.pick([
+      const formattedNewResult = R.map(R.pick([
         "username", "employeeType", "location", "contract", "certified"
       ]), parsedResult)
-      setUsers({data: formattedResult, populated: true})
+      setUsers({data: formattedNewResult, populated: true})
     }
     if(!users.populated) getData()
   }, [users])
