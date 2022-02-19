@@ -6,7 +6,6 @@ import StaffWidget from "./StaffWidget"
 import uniqid from "uniqid"
 import PropTypes from "prop-types"
 
-
 const StaffSearchResults = (props) => {
 
   const [users, setUsers] = useState({
@@ -15,6 +14,8 @@ const StaffSearchResults = (props) => {
 
   const [toggleState, setToggleState] = useState(null)
 
+ 
+
   useEffect(() => {
     if(toggleState){
       let passNames = toggleState.map((obj) => {
@@ -22,7 +23,9 @@ const StaffSearchResults = (props) => {
       })
       const passNamesParsed = passNames.filter(name => name !== undefined)
       const passNamesParsedString = passNamesParsed[0]
-      props.pageGetName(passNamesParsedString)
+      if(!props.addedNames.includes(passNamesParsedString)) {
+        props.pageGetName(passNamesParsedString)
+      }
     }}), [toggleState]
 
 
@@ -50,12 +53,10 @@ const StaffSearchResults = (props) => {
           "username"
         ]), parsedResult)
         const allPresentState = allPresent.map((elem) => {
-          return {...elem, state : false}
-          
+          return {...elem, state : false}  
         })
         setToggleState(allPresentState)
       }
-      
       const formattedResult = R.map(R.pick([
         "username", "employeeType", "location", "contract", "certified"
       ]), parsedResult)
@@ -68,12 +69,14 @@ const StaffSearchResults = (props) => {
     <div className="staff-search-results-container">
       <div className="staff-search-results-widgets">
         {users.data.map(user => {
-          return <StaffWidget 
-            key={uniqid("staffwidget-")} 
-            toggleState={toggleState}
-            resultsGetName={resultsGetName} 
-            user={user}
-          />
+          if(!props.addedNames.includes(user.username)){
+            return <StaffWidget 
+              key={uniqid("staffwidget-")} 
+              toggleState={toggleState}
+              resultsGetName={resultsGetName} 
+              user={user}
+            />
+          }
         })}
       </div>
     </div>
@@ -84,5 +87,6 @@ export default StaffSearchResults
 
 
 StaffSearchResults.propTypes = {
-  pageGetName: PropTypes.func
+  pageGetName: PropTypes.func,
+  addedNames: PropTypes.array
 }

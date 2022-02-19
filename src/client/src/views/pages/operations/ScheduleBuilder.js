@@ -5,11 +5,12 @@ import "../../styles/ScheduleBuilder.css"
 import StaffSearchResults from "../../components/Staff_Search/StaffSearchResults"
 import RoutePlanner from "../../components/RoutePlanner/RoutePlanner"
 import getCurrentDate from "../../../utilities/getCurrentDate"
+// import * as R from "ramda"
 
 const ScheduleBuilder = () => {
   const [insertName, setInsertName] = useState("")
   const [addedNames, setAddedNames] = useState([])
-  
+
   function pageGetNames(newName) {
     if(newName == undefined) setInsertName("")
     else {
@@ -17,11 +18,18 @@ const ScheduleBuilder = () => {
     }
   }
 
-  function getAddedNames(names) {
-    console.log(addedNames)
-    if(names !== addedNames)
-      setAddedNames(names)
-    
+  function nameWasAdded() {
+    setAddedNames([...addedNames, insertName])
+    setInsertName("")
+  }
+
+  function nameWasRemoved(removedName){
+    console.log("TRIGGERED!!!!!")
+    console.log(removedName)
+    const tempNameList = addedNames.filter((elem) => {
+      if(elem !== removedName  && elem) return true
+    })
+    setAddedNames(tempNameList)
   }
 
 
@@ -45,20 +53,21 @@ const ScheduleBuilder = () => {
           </div>
         </div>
         <div className="column-page">
-          <StaffSearchResults pageGetName={pageGetNames} addedNames={addedNames}>
-
+          <StaffSearchResults 
+            addedNames={addedNames}
+            pageGetName={pageGetNames}>
           </StaffSearchResults>
           <RoutePlanner
+            nameWasRemoved={nameWasRemoved}
+            nameWasAdded={nameWasAdded}
             insertName={insertName}
-            addedNames={addedNames}
-            getAddedNames={getAddedNames}
             defaultRoutes={[
               {
                 routeName: "D1",
                 routeType: "Standard",
                 startHours: "07",
                 startMins: "00",
-                name1: "Luke Bailey",
+                name1: "Unassigned",
                 name2: "",
                 name3: "",
                 routeNotes: "",
@@ -69,7 +78,7 @@ const ScheduleBuilder = () => {
                 routeType: "Standard",
                 startHours: "07",
                 startMins: "00",
-                name1: "Tom Copestake",
+                name1: "Unassigned",
                 name2: "",
                 name3: "",
                 routeNotes: "",
@@ -80,7 +89,7 @@ const ScheduleBuilder = () => {
                 routeType: "Standard",
                 startHours: "07",
                 startMins: "00",
-                name1: "Sean Humphreys",
+                name1: "Unassigned",
                 name2: "",
                 name3: "",
                 routeNotes: "",

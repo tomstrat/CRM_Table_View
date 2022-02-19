@@ -3,9 +3,10 @@ import PropTypes from "prop-types"
 
 const NameBox = (props) => {
 
+  
   return (
     <div className="name-box">
-      <button
+      <button type="submit"
         onClick={props.removeName}
         name={props.name}
         className={
@@ -29,6 +30,9 @@ export default NameBox
 NameBox.propTypes = {
   name: PropTypes.string,
   toggleState: PropTypes.bool,
-  removeName: PropTypes.func
-  
+  removeName: PropTypes.func,
+  nameWasRemoved: PropTypes.func,
+  currNames: PropTypes.array,
+  index: PropTypes.number
 }
+

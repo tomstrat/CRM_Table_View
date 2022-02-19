@@ -7,6 +7,12 @@ import NameContainer from "./NameContainer"
 
 const RouteBox = (props) => {
   const [currRouteState, setCurrRouteState] = useState(props.parentState)
+  // eslint-disable-next-line no-unused-vars
+  const [currRouteNames, setCurrRouteNames] = useState([
+    props.parentState.name1, props.parentState.name2, props.parentState.name3
+  ])
+
+
   const {routeName, routeType, startHours, startMins, name1, name2, name3, routeNotes, toggleState} = currRouteState
   
   useEffect(() => {
@@ -17,7 +23,19 @@ const RouteBox = (props) => {
   }), [currRouteState, props.parentState]
   
   
-  
+  function nameComparison(){
+    const compareNames = currRouteNames.filter((name) => {
+      if(
+        name !== currRouteState.name1
+      ||
+        name !== currRouteState.name2
+      ||
+        name !== currRouteState.name3
+      ) return true
+    })
+    console.log(compareNames)
+  }
+
   function routeGetNotes (value) {
     return setCurrRouteState(
       {
@@ -53,7 +71,7 @@ const RouteBox = (props) => {
           name1: "Unassigned",
           name2: names[1],
           name3: names[2]
-        }
+        }, nameComparison()
       )
     else return setCurrRouteState(
       {
@@ -61,7 +79,7 @@ const RouteBox = (props) => {
         name1: names[0],
         name2: names[1],
         name3: names[2]
-      }
+      }, nameComparison()
     )
   }
   
@@ -128,6 +146,7 @@ const RouteBox = (props) => {
           </TimeBox>
         </div>
         <NameContainer
+          nameWasRemoved={props.nameWasRemoved}
           routeGetNames={routeGetNames}
           toggleState={toggleState}
           name1={name1}
@@ -155,6 +174,7 @@ RouteBox.propTypes = {
   parentState: PropTypes.object,
   toggleState: PropTypes.bool,
   routePlannerGetRoutes: PropTypes.func,
-  removeRoute: PropTypes.func
+  removeRoute: PropTypes.func,
+  nameWasRemoved: PropTypes.func
 }
 

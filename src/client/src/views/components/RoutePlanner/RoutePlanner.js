@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import RouteBox from "./RouteBox"
 import uniqid from "uniqid"
 import PropTypes from "prop-types"
-// import * as R from "ramda"
-
 
 const RoutePlanner = (props) => {
   const [addRouteState, SetAddRouteState] = useState({routeName: "", routeType: "Standard", toggleState: false})
   const [routePlannerState, setRoutePlannerState] = useState(props.defaultRoutes)
-  // eslint-disable-next-line no-unused-vars
-  const [plsRamda, setPlsRamda] = useState(props.addedNames)
-
+  
   function removeRoute (e) {
     const indexExtracted = parseInt(e.target.id)
     let copyState = routePlannerState
@@ -18,34 +14,9 @@ const RoutePlanner = (props) => {
     setRoutePlannerState(copyState)
   }
   
-  useEffect(() => {
-    
-    // eslint-disable-next-line no-unused-vars
-    const tempCurrNames = routePlannerState.map((obj) => {
-      if (obj.name1 !== "" && obj.name1 !== undefined && obj.name1 !== "Unassigned"){
-        return obj.name1
-      }
-      if(obj.name2 !== "" && obj.name2 !== undefined && obj.name1 !== "Unassigned"){
-        return obj.name2
-      }
-      if(obj.name3 !== "" && obj.name3 !== undefined && obj.name1 !== "Unassigned"){
-        return obj.name3
-      }
-      
-      // const tempCurrNamesFiltered = tempCurrNames.filter(name => name !== undefined)
-      // let getInThere = R.uniq(tempCurrNamesFiltered)
-      // setPlsRamda(getInThere)
-      // if(plsRamda !== props.addedNames){
-      //   props.getAddedNames()
-      // }
-    }) 
-    
-  
-    
-  }), []
-
   function addNameClick () {
     if (props.insertName !== [""] && props.insertName !== undefined){
+      props.nameWasAdded()
       return setRoutePlannerState(values => {
         return values.map((obj) => {
           if(obj.toggleState && obj.name3 == "" ){
@@ -94,7 +65,6 @@ const RoutePlanner = (props) => {
         }
       })
     })}
-  
   
   function addRoutehandleClick () {
     setRoutePlannerState([
@@ -157,9 +127,7 @@ const RoutePlanner = (props) => {
             toggleState: false
           }
         }
-        
       }) 
-      
     })
   }
 
@@ -171,13 +139,7 @@ const RoutePlanner = (props) => {
       toggleState: false 
     })
   }
-  
-  
- 
-    
-   
-  
-  
+
   function makeRoute(routeInfo, index){
     const {routeName, routeType, startHours, startMins, name1, name2, name3, routeNotes, toggleState} = routeInfo
     return (
@@ -198,13 +160,11 @@ const RoutePlanner = (props) => {
         onClick={toggleOnClick}
         routePlannerGetRoutes={routePlannerGetRoutes}
         removeRoute={removeRoute}
+        nameWasRemoved={props.nameWasRemoved}
         
       />
     )
   }
-
-
-
 
   return (
     <div className="route-planner-container">
@@ -240,6 +200,6 @@ export default RoutePlanner
 RoutePlanner.propTypes = {
   defaultRoutes: PropTypes.array,
   insertName: PropTypes.string,
-  getAddedNames: PropTypes.func,
-  addedNames: PropTypes.array
+  nameWasAdded: PropTypes.func,
+  nameWasRemoved: PropTypes.func
 }

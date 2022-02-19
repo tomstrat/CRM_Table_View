@@ -11,7 +11,7 @@ const NameContainer = (props) => {
       props.name3
     ]
   )
-
+  
   useEffect(() => {
     if ( 
       props.name1 !== currNames[0] 
@@ -23,10 +23,10 @@ const NameContainer = (props) => {
     {
       props.routeGetNames(currNames)
     }
+   
   }), [props.name1, props.name2, props.name3]
   
   function removeName(e) {
-    
     setCurrNames(values => {
       return values.map((value) => {
         if(value == e.target.name){
@@ -37,10 +37,8 @@ const NameContainer = (props) => {
         }
       })
     })
-  }
-     
     
-  
+  }
   
   function insertNames(name, index){
     if(name !== ""){
@@ -49,9 +47,11 @@ const NameContainer = (props) => {
         <NameBox 
           toggleState={props.toggleState}
           name={name}
+          currNames={currNames}
           index={index}
           key={uniqid("namebox-")}
           removeName={removeName}
+          nameWasRemoved={props.nameWasRemoved}
         />
       
       )}
@@ -78,5 +78,6 @@ NameContainer.propTypes = {
   name1: PropTypes.string,
   name2: PropTypes.string,
   name3: PropTypes.string,
-  routeGetNames: PropTypes.func
+  routeGetNames: PropTypes.func,
+  nameWasRemoved: PropTypes.func
 }
