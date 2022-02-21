@@ -37,11 +37,6 @@ export function formatUser(user, omissions) {
       },
       location: (location) => {
         if(!location) return "Unspecified"
-      },   employeeType: (types) => {
-        if(!types) return []
-      },
-      location: (location) => {
-        if(!location) return "Unspecified"
       },
       // employeeType: (types) => {
       //   if(types){

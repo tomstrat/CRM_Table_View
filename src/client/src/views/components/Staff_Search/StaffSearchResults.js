@@ -14,7 +14,7 @@ const StaffSearchResults = (props) => {
   })
 
   const [toggleState, setToggleState] = useState(null)
-
+ 
  
 
   useEffect(() => {

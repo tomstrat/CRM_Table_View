@@ -1,8 +1,10 @@
-import React, {useState} from "react"
+import React, { useEffect, useState} from "react"
 import PropTypes from "prop-types"
 import uniqid from "uniqid"
 import ToggleButton from "./ToggleButton"
 import "../styles/ToggleContainer.css"
+
+
 
 //component for rendering and holding togglebuttons
 //number per row can be customised by injecting relevant css classes
@@ -13,13 +15,18 @@ import "../styles/ToggleContainer.css"
 const ToggleContainer = (props) => {
   const [ToggleGroup, setToggleGroup] = useState(props.buttons)
   
+  useEffect(() => {
+    if(props.pState !== ToggleGroup)
+      props.controlsGetButtons(props.groupId, ToggleGroup)
+  }), []
+
   //on click handler for updating and retaining relevant state, state is held solely in ToggleContainer
   const handleOnClick = (e) => {
     const {name, value, className} = e.target
     const bool = (value !== "true")
     const buttonRole = className.split(" ")[0]
     const classInject = className.split(" ")[2]
-      
+     
     switch(buttonRole){
     case "free" : 
       setToggleGroup(values => {
@@ -105,7 +112,9 @@ ToggleContainer.propTypes = {
   handleOnClick: PropTypes.func,
   ToggleGroup: PropTypes.array,
   setToggleGroup: PropTypes.func,
-  groupId: PropTypes.string
+  groupId: PropTypes.string,
+  controlsGetButtons: PropTypes.func,
+  pState: PropTypes.array
 }
 
 //buttonRole requires either 'master', child' or 'free'

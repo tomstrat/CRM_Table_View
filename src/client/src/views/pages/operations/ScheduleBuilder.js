@@ -10,7 +10,17 @@ import getCurrentDate from "../../../utilities/getCurrentDate"
 const ScheduleBuilder = () => {
   const [insertName, setInsertName] = useState("")
   const [addedNames, setAddedNames] = useState([])
-
+  const [availQuery, setAvailQuery] = useState(null)
+  const [hoursQuery, setHoursQuery] = useState(null)
+  const [roleQuery, setRoleQuery] = useState(null)
+  const [locationQuery, setLocationQuery] = useState(null)
+  
+  function pageGetButtons(avail, hours, role, location) {
+    setAvailQuery(avail)
+    setHoursQuery(hours)
+    setRoleQuery(role)
+    setLocationQuery(location)
+  }
   function pageGetNames(newName) {
     if(newName == undefined) setInsertName("")
     else {
@@ -49,11 +59,16 @@ const ScheduleBuilder = () => {
             <SideBar 
               title={"Search Staff"} 
               component={StaffSearchControls}
+              pageGetButtons={pageGetButtons}
             />
           </div>
         </div>
         <div className="column-page">
           <StaffSearchResults 
+            availQuery={availQuery}
+            hoursQuery={hoursQuery}
+            roleQuery={roleQuery}
+            locationQuery={locationQuery}
             addedNames={addedNames}
             pageGetName={pageGetNames}>
           </StaffSearchResults>
