@@ -1,12 +1,13 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import RouteBox from "./RouteBox"
 import uniqid from "uniqid"
 import PropTypes from "prop-types"
+// import * as R from "ramda"
 
 const RoutePlanner = (props) => {
   const [addRouteState, SetAddRouteState] = useState({routeName: "", routeType: "Standard", toggleState: false})
   const [routePlannerState, setRoutePlannerState] = useState(props.defaultRoutes)
-  
+ 
   function removeRoute (e) {
     const indexExtracted = parseInt(e.target.id)
     let copyState = routePlannerState
@@ -14,8 +15,26 @@ const RoutePlanner = (props) => {
     setRoutePlannerState(copyState)
   }
   
+  useEffect(() => {
+    const namesCheckList = []
+    routePlannerState.map((obj) => {
+      namesCheckList.push(obj.name1, obj.name2, obj.name3)
+    })
+    const namesFiltered = namesCheckList.filter((name) => {
+      if(name !== "Unassigned"  && name) return true
+    })
+    const difference = props.addedNames.filter(x => !namesFiltered.includes(x)).concat(namesFiltered.filter(x => !props.addedNames.includes(x)))
+    const removedName = difference.filter((elem) => {
+      if(elem !== "Unassigned" && elem) return true
+    })
+    if(removedName){
+      props.nameWasRemoved(removedName[0])
+    }
+  }), []
+
   function addNameClick () {
-    if (props.insertName !== [""] && props.insertName !== undefined){
+    
+    if (props.insertName){
       props.nameWasAdded()
       return setRoutePlannerState(values => {
         return values.map((obj) => {
@@ -201,5 +220,6 @@ RoutePlanner.propTypes = {
   defaultRoutes: PropTypes.array,
   insertName: PropTypes.string,
   nameWasAdded: PropTypes.func,
-  nameWasRemoved: PropTypes.func
+  nameWasRemoved: PropTypes.func,
+  addedNames: PropTypes.array
 }

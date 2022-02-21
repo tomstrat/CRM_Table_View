@@ -5,7 +5,7 @@ import "../../styles/ScheduleBuilder.css"
 import StaffSearchResults from "../../components/Staff_Search/StaffSearchResults"
 import RoutePlanner from "../../components/RoutePlanner/RoutePlanner"
 import getCurrentDate from "../../../utilities/getCurrentDate"
-// import * as R from "ramda"
+
 
 const ScheduleBuilder = () => {
   const [insertName, setInsertName] = useState("")
@@ -18,9 +18,7 @@ const ScheduleBuilder = () => {
       "innerNorth", "innerWest", "innerEast", "innerSouth", "outerNorth", "outerWest", "outerEast", "outerSouth"
     ]
   )
-
-  
-
+  console.log(getCurrentDate())
   function pageGetButtons(avail, hours, role, location) {
     setAvailQuery(avail)
     setHoursQuery(hours)
@@ -35,17 +33,19 @@ const ScheduleBuilder = () => {
   }
 
   function nameWasAdded() {
-    setAddedNames([...addedNames, insertName])
-    setInsertName("")
+    if(insertName){
+      setAddedNames([...addedNames, insertName])
+      setInsertName("")
+    }
   }
 
   function nameWasRemoved(removedName){
-    console.log("TRIGGERED!!!!!")
-    console.log(removedName)
-    const tempNameList = addedNames.filter((elem) => {
-      if(elem !== removedName  && elem) return true
-    })
-    setAddedNames(tempNameList)
+    if(removedName) {
+      const tempNameList = addedNames.filter((elem) => {
+        if(elem !== removedName  && elem) return true
+      })
+      setAddedNames(tempNameList)
+    }
   }
 
 
@@ -79,6 +79,7 @@ const ScheduleBuilder = () => {
             pageGetName={pageGetNames}>
           </StaffSearchResults>
           <RoutePlanner
+            addedNames={addedNames}
             nameWasRemoved={nameWasRemoved}
             nameWasAdded={nameWasAdded}
             insertName={insertName}
