@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import SideBar from "../../components/SideBar"
+import SideBar from "../../components/SideBarComponents/SideBar"
 import StaffSearchControls from "../../components/Staff_Search/StaffSearchControls"
 import "../../styles/ScheduleBuilder.css"
 import StaffSearchResults from "../../components/Staff_Search/StaffSearchResults"

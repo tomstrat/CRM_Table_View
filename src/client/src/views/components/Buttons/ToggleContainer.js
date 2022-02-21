@@ -2,7 +2,7 @@ import React, { useEffect, useState} from "react"
 import PropTypes from "prop-types"
 import uniqid from "uniqid"
 import ToggleButton from "./ToggleButton"
-import "../styles/ToggleContainer.css"
+import "../../styles/ToggleContainer.css"
 
 
 
@@ -111,6 +111,7 @@ const ToggleContainer = (props) => {
 
 
 export default ToggleContainer
+
 ToggleContainer.propTypes = {
   buttons: PropTypes.array,
   handleOnClick: PropTypes.func,

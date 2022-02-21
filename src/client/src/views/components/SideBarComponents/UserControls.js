@@ -1,7 +1,7 @@
 import React, {useState} from "react"
-import "../styles/UserControls.css"
+import "../../styles/UserControls.css"
 import PropTypes from "prop-types"
-import ToggleContainer from "./ToggleContainer"
+import ToggleContainer from "../Buttons/ToggleContainer"
 
 const UserControls = (props) => {
   const [eType, setEType] = useState(["operations" ,"driver", "navigator", "trainer", "temp"])

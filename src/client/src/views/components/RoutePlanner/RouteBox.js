@@ -7,10 +7,6 @@ import NameContainer from "./NameContainer"
 
 const RouteBox = (props) => {
   const [currRouteState, setCurrRouteState] = useState(props.parentState)
-  // eslint-disable-next-line no-unused-vars
-  
-
-
   const {routeName, routeType, startHours, startMins, name1, name2, name3, routeNotes, toggleState} = currRouteState
   
   useEffect(() => {

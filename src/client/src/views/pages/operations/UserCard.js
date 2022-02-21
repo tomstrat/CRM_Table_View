@@ -1,4 +1,4 @@
-import Nav from "../../components/Nav"
+import Nav from "../../components/Nav/Nav.js"
 import React, { useState, useEffect } from "react"
 import "../../styles/User_card/userCard.css"
 import UserField from "../../components/User_Card/UserField"

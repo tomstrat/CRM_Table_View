@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react"
 import RouteBox from "./RouteBox"
 import uniqid from "uniqid"
 import PropTypes from "prop-types"
-// import * as R from "ramda"
+
 
 const RoutePlanner = (props) => {
+  //top bar state for adding routes 
   const [addRouteState, SetAddRouteState] = useState({routeName: "", routeType: "Standard", toggleState: false})
+  //main state holding all route info
   const [routePlannerState, setRoutePlannerState] = useState(props.defaultRoutes)
  
   function removeRoute (e) {
@@ -15,6 +17,11 @@ const RoutePlanner = (props) => {
     setRoutePlannerState(copyState)
   }
   
+  //runs on every render, generates and formats a list of all current names attached to routes and compares it against 
+  //the addedNames state (held in the page), which is a list that recieves a name each time one is added to the route.
+  //the lists are compared, and if a difference is found, it is returned to the page, and removed from added names. Although
+  //names are techcially only removed one by one currently, this does not seem to stop multiple names being removed, for example, 
+  //when an entire route is removed, as the function will run until there is no differencei n the lists. 
   useEffect(() => {
     const namesCheckList = []
     routePlannerState.map((obj) => {
@@ -33,7 +40,6 @@ const RoutePlanner = (props) => {
   }), []
 
   function addNameClick () {
-    
     if (props.insertName){
       props.nameWasAdded()
       return setRoutePlannerState(values => {

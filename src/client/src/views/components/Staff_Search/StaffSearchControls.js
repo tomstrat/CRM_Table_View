@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import "../../styles/StaffSearchControls.css"
 import PropTypes from "prop-types"
-import ToggleContainer from "../ToggleContainer"
+import ToggleContainer from "../Buttons/ToggleContainer"
 
 const StaffSearchControls = (props) => {
   const [avail, setAvail] = useState(null)

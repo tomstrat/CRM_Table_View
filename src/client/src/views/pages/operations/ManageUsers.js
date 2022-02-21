@@ -1,10 +1,9 @@
-import Nav from "../../components/Nav"
 import React, {useState, useEffect} from "react"
 import TableContents from "../../components/TableContents"
 import "../../styles/ManageUsers.css"
-import SideBar from "../../components/SideBar"
-import UserControls from "../../components/UserControls"
-import NewUserPanel from "../../components/NewUserPanel"
+import SideBar from "../../components/SideBarComponents/SideBar"
+import UserControls from "../../components/SideBarComponents/UserControls"
+import NewUserPanel from "../../components/SideBarComponents/NewUserPanel"
 import { formatUsers } from "../../../utilities/formatters/users.formatters"
 
 
@@ -39,7 +38,7 @@ const ManageUsers = () => {
  
   return (
     <>
-      <Nav auth={true}/>
+      
       <div className="manage-user-container">
         <div id="default-sidebar" className="visible-sidebar">
           {clickBool == false 

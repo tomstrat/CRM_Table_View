@@ -10,7 +10,7 @@ import OpsOverview from "./views/pages/operations/OpsOverview"
 import Logout from "./views/pages/logout"
 import UserCard from "./views/pages/operations/UserCard"
 import ScheduleBuilder from "./views/pages/operations/ScheduleBuilder"
-import Nav from "./views/components/Nav"
+import Nav from "./views/components/Nav/Nav"
 
 function App() {
 
