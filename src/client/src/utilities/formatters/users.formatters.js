@@ -34,9 +34,11 @@ export function formatUser(user, omissions) {
       },
       employeeType: (types) => {
         if(!types) return []
+        return types
       },
       location: (location) => {
         if(!location) return "Unspecified"
+        return location
       },
       // employeeType: (types) => {
       //   if(types){
