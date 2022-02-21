@@ -159,6 +159,16 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  border-radius: 12px;
+  width: 80%;
+  height: 62%;
+  margin: 0%;
+  margin-top: 7%;
+  padding: 0px;
+  z-index: 5;
+}
+
+.color-Standard {
   border: 2px solid #00539f;
   background: linear-gradient(
     to top,
@@ -167,13 +177,43 @@
     #00539f 20%,
     #00539f 100%
   );
-  border-radius: 12px;
-  width: 80%;
-  height: 62%;
-  margin: 0%;
-  margin-top: 7%;
-  padding: 0px;
-  z-index: 5;
+}
+
+.color-Float {
+  border: 2px solid #005c29;
+  background: linear-gradient(
+    to top,
+    #ffffff 0%,
+    #ffffff 70%,
+    #005c29 20%,
+    #005c29 100%
+  );
+}
+
+.color-Training {
+  border: 2px solid #89cff0;
+  background: linear-gradient(
+    to top,
+    #ffffff 0%,
+    #ffffff 70%,
+    #89cff0 20%,
+    #89cff0 100%
+  );
+}
+
+.title-color-Standard {
+  background-color: #00539f;
+  border: 2px solid #00539f;
+}
+
+.title-color-Float {
+  background-color: #005c29;
+  border: 2px solid #005c29;
+}
+
+.title-color-Training {
+  background-color: #89cff0;
+  border: 2px solid #89cff0;
 }
 
 .route-box-clicked {
@@ -206,11 +246,9 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  background-color: #00539f;
   width: 100%;
   margin-bottom: 5%;
   height: 35%;
-  border: 2px solid #00539f;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
   color: #ffffff;

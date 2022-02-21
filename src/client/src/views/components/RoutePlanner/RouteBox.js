@@ -74,7 +74,7 @@ const RouteBox = (props) => {
       <div index={props.index} className={
         toggleState
           ? "route-box-clicked "
-          : "route-box "
+          : `route-box color-${props.routeType}`
       }
       >
         <div
@@ -83,7 +83,7 @@ const RouteBox = (props) => {
           className={
             toggleState
               ? "route-title-box-clicked"
-              : "route-title-box"
+              : `route-title-box title-color-${props.routeType}`
           }
         >
           <div className="route-top-column unclickable" >
@@ -157,6 +157,7 @@ RouteBox.propTypes = {
   toggleState: PropTypes.bool,
   routePlannerGetRoutes: PropTypes.func,
   removeRoute: PropTypes.func,
-  nameWasRemoved: PropTypes.func
+  nameWasRemoved: PropTypes.func,
+  routeType: PropTypes.string
 }
 

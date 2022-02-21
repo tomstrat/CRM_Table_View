@@ -14,13 +14,15 @@ const TableContents = (props) => {
         </div>
         <div className="tbody">
           {props.data.map(obj => {
-            // if(props.typeQuery.some(o => obj.employeeType.includes(o))){
-            return (
-              <Link key={uniqid("rowlink-")} to={`/ops/users/${obj.id}`} className="row-link">
-                {formatRow(obj)}
-              </Link>
-            )
-            // }
+            if(obj.employeeType){
+              if(props.typeQuery.some(o => obj.employeeType.includes(o))){
+                return (
+                  <Link key={uniqid("rowlink-")} to={`/ops/users/${obj.id}`} className="row-link">
+                    {formatRow(obj)}
+                  </Link>
+                )
+              }
+            }
           })}
         </div>
       </div>
