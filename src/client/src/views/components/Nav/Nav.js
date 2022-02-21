@@ -8,7 +8,7 @@ const Nav = (props) => {
     <div className="nav">
       {auth ? (
         <div className="link-container">
-          <NavLink to="/ops/opsoverview">Overview</NavLink>
+          <NavLink to="/ops/overview">Overview</NavLink>
           <NavLink to="/ops/scheduler">Scheduler</NavLink>
           <NavLink to="/ops/edithours">Edit hours</NavLink>
           <NavLink to="/ops/dataviewer">Dataviewer</NavLink>

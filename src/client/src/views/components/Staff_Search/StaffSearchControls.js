@@ -97,6 +97,7 @@ const StaffSearchControls = (props) => {
       {
         location.map((prox) => {
           if(prox.currState == true){
+            locationQuery.push("cbd")
             direction.map((obj) => {
               if(obj.buttonRole !== "master")
                 locationQuery.push(prox.name.toLowerCase() + obj.name)

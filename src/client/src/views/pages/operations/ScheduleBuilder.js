@@ -15,7 +15,7 @@ const ScheduleBuilder = () => {
   const [roleQuery, setRoleQuery] = useState(["driver", "navigator", "trainer", "trainee", "temp"])
   const [locationQuery, setLocationQuery] = useState(
     [
-      "innerNorth", "innerWest", "innerEast", "innerSouth", "outerNorth", "outerWest", "outerEast", "outerSouth"
+      "cbd", "innerNorth", "innerWest", "innerEast", "innerSouth", "outerNorth", "outerWest", "outerEast", "outerSouth"
     ]
   )
   console.log(getCurrentDate())

@@ -76,9 +76,10 @@ const StaffSearchResults = (props) => {
           if(!props.addedNames.includes(user.username)
             &&
             props.hoursQuery.some(o => user.contract.includes(o))
-            // can add this once user database is working
-            // &&
-            // props.locationQuery.some(o => user.location.includes(o))
+            &&
+            props.locationQuery.some(o => user.location.includes(o))
+            &&
+            props.roleQuery.some(o => user.employeeType.includes(o))
           ){
             return <StaffWidget 
               key={uniqid("staffwidget-")} 
