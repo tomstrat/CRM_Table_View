@@ -8,7 +8,7 @@ const SideBar = ({component: Component, title, ...rest}) => {
   return (
     <div className="sidebar">
       <div className="sidebar-title">
-        <h2>{title}</h2>
+        {title}
       </div>
       <div className="sidebar-components">
         <Component {...rest} />

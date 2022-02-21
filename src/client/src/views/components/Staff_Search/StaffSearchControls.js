@@ -193,7 +193,7 @@ const StaffSearchControls = (props) => {
             }
             groupId={"direction"}
           />
-          <button className="search-Button" onClick={searchOnClick}>Search</button>
+          <button className="search-button" onClick={searchOnClick}>Search</button>
         </div>  
       </div>
     </>

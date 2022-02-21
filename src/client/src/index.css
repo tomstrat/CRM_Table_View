@@ -66,9 +66,10 @@ code {
   color: #ffffff;
   font-size: 22px;
   border-radius: 12px;
-  width: 14vw;
-  height: 10vh;
-  margin-top: 5px;
+  width: 80%;
+  height: 8vh;
+  margin-top: 1%;
+  margin-bottom: 2%;
   cursor: pointer;
 }
 

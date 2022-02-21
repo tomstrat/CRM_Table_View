@@ -11,6 +11,7 @@ import { formatUsers } from "../../../utilities/formatters/users.formatters"
 const ManageUsers = () => {
   const [data, setData] = useState({data: [{}], populated: false})
   const [clickBool, setClickBool] = useState(false)
+  const [typeQuery, setTypeQuery] = useState(["operations" ,"driver", "navigator", "trainer", "temp"])
   const [rosterButtons, setRosterButtons] = useState(
     {
       rosterMonday: "unselected",
@@ -21,7 +22,9 @@ const ManageUsers = () => {
       rosterSaturday: "unselected"
     })
   
-
+  function pageGetQuery (query) {
+    setTypeQuery(query)
+  }
 
 
   useEffect(() => {
@@ -45,6 +48,7 @@ const ManageUsers = () => {
               <SideBar 
                 title={"Search Users"} 
                 component={UserControls}
+                pageGetQuery={pageGetQuery}
               />
               <div className="new-user-button-container">
                 <button className="new-user-button" onClick={() => setClickBool(true)}>Add new user</button>
@@ -65,7 +69,10 @@ const ManageUsers = () => {
             </>
           }
         </div>
-        <TableContents data={data.data}/>
+        <TableContents 
+          data={data.data}
+          typeQuery={typeQuery}
+        />
       </div>
     </>
   )

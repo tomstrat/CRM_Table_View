@@ -76,7 +76,7 @@ const StaffSearchResults = (props) => {
           if(!props.addedNames.includes(user.username)
             &&
             props.hoursQuery.some(o => user.contract.includes(o))
-            // can add this once database user location is working
+            // can add this once user database is working
             // &&
             // props.locationQuery.some(o => user.location.includes(o))
           ){
