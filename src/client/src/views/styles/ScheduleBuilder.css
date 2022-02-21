@@ -8,6 +8,7 @@
   border: 2px solid #8dc63f;
   border-radius: 12px;
   width: 100%;
+  min-height: 60px;
   font-size: 11px;
 }
 
@@ -30,8 +31,6 @@
   padding-right: 0px;
   font-size: 11px;
   height: 90%;
-  
-  
 }
 
 .container-of-the-routes {
@@ -55,7 +54,6 @@
   flex-direction: column;
   width: 75.5%;
   height: 100%;
-
 }
 
 .centralise-sidebar {
@@ -100,7 +98,6 @@
   background-color: #00539f;
   border: solid 1px #00539f;
   border-radius: 12px;
-
 }
 
 .route-box-container {
@@ -116,7 +113,6 @@
   text-align: center;
   height: 59%;
   background-color: #00539f;
-  
 }
 
 .route-name-input::placeholder {
@@ -145,16 +141,14 @@
   width: 20%;
   height: 75%;
   cursor: pointer;
-  margin-left: 1%
+  margin-left: 1%;
 }
 
 .add-staff-button {
   cursor: pointer;
 }
 
-
 .new-route-drop {
-
   margin: 5px;
   cursor: pointer;
   text-align: center;
@@ -167,17 +161,17 @@
   align-items: center;
   border: 2px solid #00539f;
   background: linear-gradient(
-    to top, 
-    #ffffff 0%, 
-    #ffffff 70%, 
-    #00539f 20%, 
+    to top,
+    #ffffff 0%,
+    #ffffff 70%,
+    #00539f 20%,
     #00539f 100%
   );
   border-radius: 12px;
   width: 80%;
   height: 62%;
   margin: 0%;
-  margin-top: 7% ;
+  margin-top: 7%;
   padding: 0px;
   z-index: 5;
 }
@@ -189,10 +183,10 @@
   align-items: center;
   border: 2px solid #8dc63f;
   background: linear-gradient(
-    to top, 
-    #ffffff 0%, 
-    #ffffff 63%, 
-    #8dc63f 27%, 
+    to top,
+    #ffffff 0%,
+    #ffffff 63%,
+    #8dc63f 27%,
     #8dc63f 100%
   );
   border-radius: 12px;
@@ -202,7 +196,6 @@
   margin-top: 5%;
   padding: 0px;
   z-index: 0;
-
 }
 
 .unclickable {
@@ -253,14 +246,13 @@
   border-top-right-radius: 12px;
   height: 100%;
   margin-left: 3%;
-
 }
 
 .hidden {
   display: none;
 }
 
-.visible{
+.visible {
   display: flex;
 }
 
@@ -323,7 +315,7 @@
 .start-time-box {
   margin-top: 10%;
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   z-index: 3;
 }
 
@@ -335,9 +327,7 @@
   z-index: 5;
 }
 
-
-
-.names-container{
+.names-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -347,24 +337,37 @@
 }
 .name-box {
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   justify-content: center;
   align-items: center;
   width: 100%;
-  
+  box-sizing: border-box;
+}
+.route-box-clicked .name-box {
+  margin-top: 5px;
+  border: 1px solid #00539f;
+  border-left: 3px solid #00539f;
+  background-color: #8dc63f;
+  justify-content: space-between;
+  padding-left: 10px;
 }
 
 .xbutton {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 10px;
-  height: 10px;
+  width: 15px;
+  height: 15px;
   padding: 0px;
-  margin-right: 2%;
-  background-color: red;
-  border-radius: 3px;
+  background-color: rgb(233, 60, 47);
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
   color: #ffffff;
   text-align: center;
   z-index: 2;
+}
+
+.name-box .xbutton {
+  border-radius: 0;
 }

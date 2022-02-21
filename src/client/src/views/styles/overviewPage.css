@@ -1,0 +1,10 @@
+.overview-page-container {
+  background-color: white;
+  width: 50%;
+  margin: 10px auto;
+  padding: 10px;
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  border: 2px solid #8dc63f;
+  border-radius: 10px;
+}

@@ -1,23 +1,21 @@
 .staff-widget {
-  border: 1px solid rgb(213, 219, 224);
+  border: 1px solid #00539f;
   border-left: 4px solid #00539f;
-  background: rgb(243, 243, 243);
-  background: linear-gradient(
-    90deg,
-    rgba(243, 243, 243, 1) 0%,
-    rgba(240, 248, 255, 1) 50%
-  );
+  border-radius: 0 10px 10px 0;
+  background-color: rgba(240, 248, 255, 1);
   display: flex;
   align-items: center;
-  margin: 20px;
+  margin: 10px;
+  height: 40px;
   transition: all ease-in 0.2s;
   cursor: pointer;
+  color: black;
 }
 .staff-widget:hover {
-  box-shadow: 1px 1px 2px;
+  background-color: #cedef0;
+  border-left: 10px solid #00539f;
 }
 .staff-widget-username {
-  color: black;
   font-size: 20px;
   font-weight: 700;
   margin: 10px;
@@ -52,5 +50,9 @@
 }
 
 .staff-widget-toggled {
-  border: 2px solid #8dc63f;
+  background-color: #8dc63f;
+  border-left: 10px solid #00539f;
+}
+.staff-widget-toggled:hover {
+  background-color: #cde7a9;
 }
