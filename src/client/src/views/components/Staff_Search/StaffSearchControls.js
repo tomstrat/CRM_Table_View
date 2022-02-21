@@ -38,9 +38,8 @@ const StaffSearchControls = (props) => {
 
   function formatHours (name) {
     if(name == "Contracted")
-      return name.replace("Contracted", "fullTime")
-    if(name == "Casual")
-      return name.toLowerCase()
+      return name.replace("Contracted", "Full Time")
+    else return name
   }
   
   function searchOnClick() {

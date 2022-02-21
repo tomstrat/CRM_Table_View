@@ -63,7 +63,7 @@ const StaffSearchResults = (props) => {
       
       const formattedNewResult = R.map(R.pick([
         "username", "employeeType", "location", "contract", "certified"
-      ]), parsedResult)
+      ]), formattedResult)
       setUsers({data: formattedNewResult, populated: true})
     }
     if(!users.populated) getData()

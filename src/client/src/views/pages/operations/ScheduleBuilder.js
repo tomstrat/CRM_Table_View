@@ -11,7 +11,7 @@ const ScheduleBuilder = () => {
   const [insertName, setInsertName] = useState("")
   const [addedNames, setAddedNames] = useState([])
   const [availQuery, setAvailQuery] = useState(["working", "contactable"])
-  const [hoursQuery, setHoursQuery] = useState(["temp", "fullTime", "casual"])
+  const [hoursQuery, setHoursQuery] = useState(["Temp", "Full Time", "Casual"])
   const [roleQuery, setRoleQuery] = useState(["driver", "navigator", "trainer", "trainee", "temp"])
   const [locationQuery, setLocationQuery] = useState(
     [
