@@ -14,7 +14,7 @@ import "../styles/ToggleContainer.css"
 
 const ToggleContainer = (props) => {
   const [ToggleGroup, setToggleGroup] = useState(props.buttons)
-  //pState (parent state) and passState are used to check state consistancy with parent and pass data up
+  //pState (parent state) and passState are used to check state consistency with parent and pass data up
   //parent declared and passes in a function which returns state of the child, parent then calls setState with the data
   
   useEffect(() => {

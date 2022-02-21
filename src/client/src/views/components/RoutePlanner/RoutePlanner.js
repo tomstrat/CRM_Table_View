@@ -197,7 +197,8 @@ const RoutePlanner = (props) => {
         <input type="text" name="routeName" value={addRouteState.routeName} className="route-name-input route-top-bar-element" onChange={handleChange} placeholder="Add route name..." ></input>  
         <button className="add-route-button route-top-bar-element" onClick={addRoutehandleClick}>Add Route</button>
         <button className="add-staff-button route-top-bar-element" onClick={addNameClick}>Add Staff</button>
-        
+        <button className="save-button route-top-bar-element">Save Schedule</button>
+        <button className="publish-button">Publish Schedule</button>
       </div> 
       <div className="container-of-the-routes">
         {

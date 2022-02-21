@@ -45,7 +45,7 @@ const CommentToggle = (props) => {
             : "hidden"
         }
       >
-        <textarea ref={props.commentRef} type="text" className="comment-box" onChange={onChange} value={commentValue} placeholder="add route notes..."/>
+        <textarea ref={props.commentRef} type="text" className="comment-box" onChange={onChange} value={commentValue} placeholder="Add TTM message..."/>
         <button className="commit-comments-button" onClick={closeComments}>
           Save
         </button>
