@@ -7,6 +7,7 @@ import uniqid from "uniqid"
 import PropTypes from "prop-types"
 import { formatUsers } from "../../../utilities/formatters/users.formatters"
 
+
 const StaffSearchResults = (props) => {
 
   const [users, setUsers] = useState({
@@ -67,12 +68,18 @@ const StaffSearchResults = (props) => {
     }
     if(!users.populated) getData()
   }, [users])
-
+  
   return (
     <div className="staff-search-results-container">
       <div className="staff-search-results-widgets">
         {users.data.map(user => {
-          if(!props.addedNames.includes(user.username)){
+          if(!props.addedNames.includes(user.username)
+            &&
+            props.hoursQuery.some(o => user.contract.includes(o))
+            // can add this once database user location is working
+            // &&
+            // props.locationQuery.some(o => user.location.includes(o))
+          ){
             return <StaffWidget 
               key={uniqid("staffwidget-")} 
               toggleState={toggleState}
@@ -80,7 +87,8 @@ const StaffSearchResults = (props) => {
               user={user}
             />
           }
-        })}
+        }
+        )}
       </div>
     </div>
   )
@@ -91,5 +99,9 @@ export default StaffSearchResults
 
 StaffSearchResults.propTypes = {
   pageGetName: PropTypes.func,
-  addedNames: PropTypes.array
+  addedNames: PropTypes.array,
+  availQuery: PropTypes.array,
+  hoursQuery: PropTypes.array,
+  roleQuery: PropTypes.array,
+  locationQuery: PropTypes.array
 }

@@ -45,20 +45,51 @@ const StaffSearchControls = (props) => {
   
   function searchOnClick() {
     const availQuery = []
-    avail.map((obj) => {
-      if(obj.buttonRole == "child" && obj.currState)
-        availQuery.push(formatAvail(obj.name))
-    })
+    if(avail[0].currState)
+    {
+      avail.map((obj) => {
+        if(obj.buttonRole == "child")
+          availQuery.push(formatAvail(obj.name))
+      })
+    }
+    else 
+    {
+      avail.map((obj) => {
+        if(obj.buttonRole == "child" && obj.currState)
+          availQuery.push(formatAvail(obj.name))
+      })
+    }
     const hoursQuery = []
-    hours.map((obj) => {
-      if(obj.buttonRole == "child" && obj.currState)
-        hoursQuery.push(formatHours(obj.name))
-    })
+    if(hours[0].currState)
+    {
+      hoursQuery.push("temp")
+      hours.map((obj) => {
+        if(obj.buttonRole == "child")
+          hoursQuery.push(formatHours(obj.name))
+      })
+    }
+    else 
+    {
+      hours.map((obj) => {
+        if(obj.buttonRole == "child" && obj.currState)
+          hoursQuery.push(formatHours(obj.name))
+      })
+    }
     const roleQuery = []
-    role.map((obj) => {
-      if(obj.buttonRole == "child" && obj.currState)
-        roleQuery.push(formatRole(obj.name))
-    })
+    if(role[0].currState)
+    {
+      role.map((obj) => {
+        if(obj.buttonRole == "child")
+          roleQuery.push(formatRole(obj.name))
+      })
+    }
+    else 
+    {
+      role.map((obj) => {
+        if(obj.buttonRole == "child" && obj.currState)
+          roleQuery.push(formatRole(obj.name))
+      })
+    }
     const locationQuery = []
 
     if(location) {
@@ -89,6 +120,7 @@ const StaffSearchControls = (props) => {
     props.pageGetButtons(availQuery, hoursQuery, roleQuery, locationQuery)
     
   }
+  
   return (
     <>
       <div className="sidebar-components-container">
@@ -96,7 +128,7 @@ const StaffSearchControls = (props) => {
           <label className="search-label">Availability</label> 
           <ToggleContainer
             pState={avail}
-            controlsGetButtons={controlsGetButtons} 
+            passState={controlsGetButtons} 
             buttons={
               [
                 {name: "All", currState: true, buttonRole: "master", classInject: ""}, 
@@ -109,7 +141,7 @@ const StaffSearchControls = (props) => {
           <label className="search-label">Hours</label> 
           <ToggleContainer
             pState={hours}
-            controlsGetButtons={controlsGetButtons}  
+            passState={controlsGetButtons}  
             buttons={
               [
                 {name: "Any", currState: true, buttonRole: "master", classInject: ""}, 
@@ -122,7 +154,7 @@ const StaffSearchControls = (props) => {
           <label className="search-label">Role</label> 
           <ToggleContainer
             pState={role}
-            controlsGetButtons={controlsGetButtons}  
+            passState={controlsGetButtons}  
             buttons={
               [
                 {name: "All Roles", currState: true, buttonRole: "master", classInject: ""}, 
@@ -138,7 +170,7 @@ const StaffSearchControls = (props) => {
           <label className="search-label">Location</label> 
           <ToggleContainer
             pState={location}
-            controlsGetButtons={controlsGetButtons}  
+            passState={controlsGetButtons}  
             buttons={
               [
                 {name: "Inner", currState: true, buttonRole: "free", classInject: ""},
@@ -149,7 +181,7 @@ const StaffSearchControls = (props) => {
           />
           <ToggleContainer
             pState={direction}
-            controlsGetButtons={controlsGetButtons}  
+            passState={controlsGetButtons}  
             buttons={
               [
                 {name: "North", currState: false, buttonRole: "child", classInject: "single-row"},

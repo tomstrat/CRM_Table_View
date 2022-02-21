@@ -10,11 +10,17 @@ import getCurrentDate from "../../../utilities/getCurrentDate"
 const ScheduleBuilder = () => {
   const [insertName, setInsertName] = useState("")
   const [addedNames, setAddedNames] = useState([])
-  const [availQuery, setAvailQuery] = useState(null)
-  const [hoursQuery, setHoursQuery] = useState(null)
-  const [roleQuery, setRoleQuery] = useState(null)
-  const [locationQuery, setLocationQuery] = useState(null)
+  const [availQuery, setAvailQuery] = useState(["working", "contactable"])
+  const [hoursQuery, setHoursQuery] = useState(["temp", "fullTime", "casual"])
+  const [roleQuery, setRoleQuery] = useState(["driver", "navigator", "trainer", "trainee", "temp"])
+  const [locationQuery, setLocationQuery] = useState(
+    [
+      "innerNorth", "innerWest", "innerEast", "innerSouth", "outerNorth", "outerWest", "outerEast", "outerSouth"
+    ]
+  )
+
   
+
   function pageGetButtons(avail, hours, role, location) {
     setAvailQuery(avail)
     setHoursQuery(hours)

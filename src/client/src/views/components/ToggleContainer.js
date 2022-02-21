@@ -16,8 +16,10 @@ const ToggleContainer = (props) => {
   const [ToggleGroup, setToggleGroup] = useState(props.buttons)
   
   useEffect(() => {
-    if(props.pState !== ToggleGroup)
-      props.controlsGetButtons(props.groupId, ToggleGroup)
+    if(props.passState){
+      if(props.pState !== ToggleGroup)
+        props.passState(props.groupId, ToggleGroup)
+    }
   }), []
 
   //on click handler for updating and retaining relevant state, state is held solely in ToggleContainer
@@ -113,7 +115,7 @@ ToggleContainer.propTypes = {
   ToggleGroup: PropTypes.array,
   setToggleGroup: PropTypes.func,
   groupId: PropTypes.string,
-  controlsGetButtons: PropTypes.func,
+  passState: PropTypes.func,
   pState: PropTypes.array
 }
 
