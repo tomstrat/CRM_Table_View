@@ -18,7 +18,7 @@ const ScheduleBuilder = () => {
       "cbd", "innerNorth", "innerWest", "innerEast", "innerSouth", "outerNorth", "outerWest", "outerEast", "outerSouth"
     ]
   )
-  console.log(getCurrentDate())
+  
   function pageGetButtons(avail, hours, role, location) {
     setAvailQuery(avail)
     setHoursQuery(hours)
@@ -56,7 +56,7 @@ const ScheduleBuilder = () => {
         <div className="centralise-sidebar">
           <div className="day-select-container">
             <div>Select Date</div>
-            <div className="checkbox-label">(Placeholder)</div>
+            <div className="checkbox-label">(P)</div>
             <input className="new-user-element new-user-date-select" type="date" id="select-date" name="selectdate"
                 
               min="2005-01-01" max={getCurrentDate()}></input>

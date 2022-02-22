@@ -1,4 +1,4 @@
-import Nav from "../../components/Nav"
+import Nav from "../../components/Nav/Nav"
 import React from "react"
 
 const Requests = () => {

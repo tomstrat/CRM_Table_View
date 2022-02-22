@@ -404,12 +404,12 @@
   width: 100%;
   box-sizing: border-box;
 }
-.route-box-clicked .name-box {
-  margin-top: 5px;
-  border: 1px solid #00539f;
+.route-box-clicked .name-box{
+  margin-top: 1px;
+  border: 1px solid #8dc63f;
   border-left: 3px solid #00539f;
-  background-color: #8dc63f;
-  justify-content: space-between;
+  background-color: aliceblue;
+  justify-content: center;
   padding-left: 10px;
 }
 
