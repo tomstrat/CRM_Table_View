@@ -8,8 +8,9 @@
   border: 2px solid #8dc63f;
   border-radius: 12px;
   width: 100%;
-  min-height: 60px;
+  height: 20vh;;
   font-size: 11px;
+  overflow: scroll;
 }
 
 .staff-search-results-widgets {
@@ -30,17 +31,18 @@
   width: 100%;
   padding-right: 0px;
   font-size: 11px;
-  height: 90%;
+  height: 66vh;
 }
 
 .container-of-the-routes {
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: fit-content;
+  height: 100%;
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: flex-start;
+  overflow: scroll;
 }
 
 .schedule-builder-container {
@@ -83,9 +85,8 @@
   justify-content: baseline;
   align-items: center;
   width: 100%;
-  height: 10%;
-  min-height: 10%;
-  margin-bottom: 2%;
+  min-height: 6vh;
+  max-height: 6vh;
   background-color: black;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
@@ -179,6 +180,11 @@
   );
 }
 
+.title-color-Standard {
+  background-color: #00539f;
+  border: 2px solid #00539f;
+}
+
 .color-Float {
   border: 2px solid #005c29;
   background: linear-gradient(
@@ -188,6 +194,11 @@
     #005c29 20%,
     #005c29 100%
   );
+}
+
+.title-color-Float {
+  background-color: #005c29;
+  border: 2px solid #005c29;
 }
 
 .color-Training {
@@ -201,20 +212,31 @@
   );
 }
 
-.title-color-Standard {
-  background-color: #00539f;
-  border: 2px solid #00539f;
-}
-
-.title-color-Float {
-  background-color: #005c29;
-  border: 2px solid #005c29;
-}
-
 .title-color-Training {
   background-color: #89cff0;
   border: 2px solid #89cff0;
 }
+
+.color-Depot {
+  border: 2px solid #BC544B;
+  background: linear-gradient(
+    to top,
+    #ffffff 0%,
+    #ffffff 70%,
+    #BC544B 20%,
+    #BC544B 100%
+  );
+}
+
+.title-color-Depot{
+  background-color: #BC544B;
+  border: 2px solid #BC544B;
+}
+
+
+
+
+
 
 .route-box-clicked {
   display: flex;
@@ -319,7 +341,7 @@
   border-radius: 8px;
   padding: 1%;
   width: 110%;
-  height: 11vh;
+  height: 9.5vh;
   border: 2px solid #8dc63f;
   font-size: 11px;
 }
@@ -376,6 +398,7 @@
 .name-box {
   display: flex;
   flex-direction: row-reverse;
+  align-items: center;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -390,17 +413,37 @@
   padding-left: 10px;
 }
 
-.xbutton {
+.xbutton-route {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 15px;
-  height: 15px;
+  flex-wrap: wrap;
+  font-size: smaller;
+  width: 11px;
+  height: 11px;
+  margin-right: 1.5%;
   padding: 0px;
   background-color: rgb(233, 60, 47);
   cursor: pointer;
   border: none;
   border-radius: 50%;
+  color: #ffffff;
+  text-align: center;
+  z-index: 2;
+}
+
+.xbutton-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: smaller;
+  width: 10%;
+  height: 100%;
+  padding: 0px;
+  background-color: rgb(233, 60, 47);
+  cursor: pointer;
+  border: none;
   color: #ffffff;
   text-align: center;
   z-index: 2;

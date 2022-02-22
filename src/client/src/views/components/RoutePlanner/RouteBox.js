@@ -95,9 +95,9 @@ const RouteBox = (props) => {
             onClick={props.removeRoute}
             className={
               toggleState
-                ? "xbutton"
+                ? "xbutton-route"
                 : "hidden"
-            }>x</button>
+            }>X</button>
           
         </div>
         <div 

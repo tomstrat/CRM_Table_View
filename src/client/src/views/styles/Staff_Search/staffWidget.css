@@ -5,8 +5,8 @@
   background-color: rgba(240, 248, 255, 1);
   display: flex;
   align-items: center;
-  margin: 10px;
-  height: 40px;
+  margin: 5px;
+  height: 20px;
   transition: all ease-in 0.2s;
   cursor: pointer;
   color: black;
@@ -16,10 +16,10 @@
   border-left: 10px solid #00539f;
 }
 .staff-widget-username {
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 550;
   margin: 10px;
-  min-width: 150px;
+  min-width: 40px;
 }
 .staff-widget-type {
   padding: 0 5px;
@@ -43,7 +43,7 @@
 }
 .staff-widget-icon {
   color: inherit;
-  font-size: 20px;
+  font-size: 12px;
   -webkit-filter: drop-shadow(0px 0px 1px rgb(80, 80, 80));
   filter: drop-shadow(0px 0px 1px rgb(80, 80, 80));
   color: rgb(255, 255, 255);

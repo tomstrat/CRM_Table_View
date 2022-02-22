@@ -15,7 +15,7 @@ const NameBox = (props) => {
           && props.name !== "Unassigned"
           && props.name !== undefined
           && props.name !== null  
-            ? "xbutton"
+            ? "xbutton-name"
             : "hidden"
         }
       >x

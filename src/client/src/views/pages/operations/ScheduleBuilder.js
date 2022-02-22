@@ -85,7 +85,7 @@ const ScheduleBuilder = () => {
             insertName={insertName}
             defaultRoutes={[
               {
-                routeName: "D1",
+                routeName: "N1",
                 routeType: "Standard",
                 startHours: "07",
                 startMins: "00",
@@ -96,7 +96,7 @@ const ScheduleBuilder = () => {
                 toggleState: false
               },
               {
-                routeName: "D2",
+                routeName: "N2",
                 routeType: "Standard",
                 startHours: "07",
                 startMins: "00",
@@ -162,19 +162,8 @@ const ScheduleBuilder = () => {
                 toggleState: false
               },
               {
-                routeName: "W2",
-                routeType: "Standard",
-                startHours: "07",
-                startMins: "00",
-                name1: "Unassigned",
-                name2: "",
-                name3: "",
-                routeNotes: "",
-                toggleState: false
-              },
-              {
                 routeName: "F1",
-                routeType: "Standard",
+                routeType: "Float",
                 startHours: "07",
                 startMins: "00",
                 name1: "Unassigned",
@@ -184,8 +173,8 @@ const ScheduleBuilder = () => {
                 toggleState: false
               },
               {
-                routeName: "F2",
-                routeType: "Standard",
+                routeName: "W2",
+                routeType: "Training",
                 startHours: "07",
                 startMins: "00",
                 name1: "Unassigned",
@@ -194,6 +183,17 @@ const ScheduleBuilder = () => {
                 routeNotes: "",
                 toggleState: false
               },
+              {
+                routeName: "D1",
+                routeType: "Depot",
+                startHours: "07",
+                startMins: "00",
+                name1: "Unassigned",
+                name2: "",
+                name3: "",
+                routeNotes: "",
+                toggleState: false
+              }
             ]}
           
           >
