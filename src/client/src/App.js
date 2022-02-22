@@ -25,11 +25,11 @@ function App() {
         <Switch>
           <PrivateRoute exact path="/" component={Profile} />
           <PrivateRoute exact path="/ops/overview" component={OpsOverview} />
+          <PrivateRoute exact path="/ops/scheduler" component={ScheduleBuilder} />
           <PrivateRoute exact path="/ops/edithours" component={EditHours} />
           <PrivateRoute exact path="/ops/dataviewer" component={DataViewer} />
           <PrivateRoute exact path="/ops/requests" component={Requests} />
           <PrivateRoute exact path="/ops/manageusers" component={ManageUsers} />
-          <PrivateRoute exact path="/ops/scheduler" component={ScheduleBuilder} />
           <PrivateRoute exact path="/ops/users/:id" component={UserCard} />
           <PrivateRoute exact path="/logout" component={Logout} />
           <PublicRoute path="/login" component={Login} />

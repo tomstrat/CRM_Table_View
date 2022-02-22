@@ -15,10 +15,10 @@ const OpsOverview = () => {
       and communication needs of <i>any</i> 1800GOTJUNK franchise. We may even (definitely) help out Bella with some payroll integration
       down the line =)</p>
 
-      <p>This intial demo will serve as a proof of concept for our main early flagship feature of the app: the schedule builder.
+      <p>This intial demo will serve as a proof of concept for our early flagship feature of the app: the schedule builder.
       We sincerely hope you all will find this feature useful as operations managers. The schedule builder is designed to save
       the end of day ops manager a <em>significant</em> amount of time whilst planning out the next day&apos;s schedule.
-      If you have any other ideas to futher improve this process, definitely let us know, and we&apos;ll make it happen</p>
+      If you have any other ideas to futher improve this process, definitely let us know, and we&apos;ll make it happen.</p>
 
       <p>The web-app section that you&apos;re currently logged in to will be solely for operations and office use. The completed 
       app will also have a phone app companion, where TTMs can clock on at the start of a day, add their hours/breaks, view their 
@@ -52,9 +52,9 @@ const OpsOverview = () => {
       
       <b>&quot;rostered, contracted, drivers, inner-east suburbs&quot;</b>
 
-      <p>Each user has a roster attached, to make it super easy to search rostered (or non-rostered) users on any given
-      day. We have not yet hooked this page up to our database, so the date select, save and publish features are placeholders
-      currently (Marked with P).</p>
+      <p>Each user has a roster attached, to make it super easy to search rostered (or non-rostered) 
+      users on any givenday. We have not yet hooked this page up to our database, so the date select, save and publish features 
+      are placeholders currently (Marked with P).</p>
 
       <p>Staff members are added to routes by highlighting the staff member, highlighting the route, and clicking the add 
       staff button. In the near future, we&apos;ll be allowing you to click and drag names onto routes. 
