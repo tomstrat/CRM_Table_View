@@ -159,7 +159,7 @@ const NewUserPanel = (props) => {
             <input className="new-user-element new-user-date-select" type="date" id="join-date-select" name="joinDate"
               onChange={handleOnChange} 
               value={values.joinDate} 
-              min="2005-01-01" max={getCurrentDate()}></input>
+              min="2005-01-01" max={getCurrentDate("form")}></input>
           </div>
           
           <RosterPanel rosterButtons={props.rosterButtons} setRosterButtons={props.setRosterButtons}/>

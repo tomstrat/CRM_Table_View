@@ -76,8 +76,8 @@ const OpsOverview = () => {
 
       <h2>Manage Users</h2>
 
-      <p>The manage users page is where new users can be added, and where existing users can be editing. Upon release, for
-      security purposes this page will most likely be used only by Admin accounts (Likely Mike and one or two others).
+      <p>The manage users page is where new users can be added, and where existing users can be edited. For
+      security purposes, upon release this page will most likely be used only by Admin accounts (Likely Mike and one or two others).
       That said, for the demo, feel free to have a look around!</p>
       
       <p><b>Please note:</b> The app is currently optimised for desktop size screen resolutions only, as our focus this last month
@@ -92,7 +92,7 @@ const OpsOverview = () => {
       
       <p>Thanks again, and enjoy!</p>
 
-      <p>Bailey x</p>
+      <p className="signed">Bailey</p>
     </div>
 
     

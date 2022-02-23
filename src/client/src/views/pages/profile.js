@@ -5,6 +5,7 @@ function Profile() {
   return (
     <div className="App">
       <header className="App-header">
+        
         <p>
           You are logged in :)
         </p>

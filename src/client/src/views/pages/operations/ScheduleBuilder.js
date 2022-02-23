@@ -47,7 +47,7 @@ const ScheduleBuilder = () => {
       setAddedNames(tempNameList)
     }
   }
-
+  
 
   return (
     <>
@@ -55,11 +55,9 @@ const ScheduleBuilder = () => {
       <div className="schedule-builder-container">
         <div className="centralise-sidebar">
           <div className="day-select-container">
-            <div>Select Date</div>
-            <div className="checkbox-label">(P)</div>
-            <input className="new-user-element new-user-date-select" type="date" id="select-date" name="selectdate"
-                
-              min="2005-01-01" max={getCurrentDate()}></input>
+            <div className="tiny-title">Schedule for:</div>
+            <div className="day-title">{getCurrentDate("day", 1)}</div>
+            <div className="date-title">{getCurrentDate("date", 1)}</div>
           </div>
           <div id="default-sidebar" className="visible-sidebar">
             <SideBar 

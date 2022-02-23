@@ -12,6 +12,19 @@
   font-size: 11px;
   overflow: scroll;
 }
+.tiny-title {
+  margin-top: 2%;
+  font-size: 11px;
+}
+
+.day-title {
+  font-size: 26px;
+}
+
+.date-title {
+  font-size: 11px;
+  margin-bottom: 2%;
+}
 
 .staff-search-results-widgets {
   display: flex;

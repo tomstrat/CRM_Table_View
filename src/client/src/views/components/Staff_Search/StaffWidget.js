@@ -4,7 +4,7 @@ import uniqid from "uniqid"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBus, faCompass, faChalkboardTeacher, faBookReader, faCalendarDay, faKey } from "@fortawesome/free-solid-svg-icons"
 import "../../styles/Staff_Search/staffWidget.css"
-
+import { formatStaffName } from "../../../utilities/formatters/util"
 
 const StaffWidget = (props) => {
   const [ownState, setOwnState] = useState(false)
@@ -62,7 +62,7 @@ const StaffWidget = (props) => {
     }
     onClick={toggleOnClick} 
     >
-      <div className="staff-widget-username">{username}</div>
+      <div className="staff-widget-username">{formatStaffName(username, ".")}</div>
       {updatedTypes.map(type => {
         return <span key={uniqid("type-")} className="staff-widget-type">
           <div className="staff-widget-tooltip">{type}</div>

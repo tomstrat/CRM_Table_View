@@ -6,6 +6,8 @@ import StaffWidget from "./StaffWidget"
 import uniqid from "uniqid"
 import PropTypes from "prop-types"
 import { formatUsers } from "../../../utilities/formatters/users.formatters"
+// import getCurrentDate from "../../../utilities/getCurrentDate"
+
 
 
 const StaffSearchResults = (props) => {
@@ -15,8 +17,8 @@ const StaffSearchResults = (props) => {
   })
 
   const [toggleState, setToggleState] = useState(null)
- 
- 
+  
+  // const thisDay = "roster" + getCurrentDate("day")
 
   useEffect(() => {
     if(toggleState){
@@ -29,8 +31,6 @@ const StaffSearchResults = (props) => {
         props.pageGetName(passNamesParsedString)
       }
     }}), [toggleState]
-
-
 
   const resultsGetName = (name) => {
     const updateState = toggleState.map((obj) => {
@@ -45,7 +45,6 @@ const StaffSearchResults = (props) => {
     setToggleState(updateState)
   }
   
-
   useEffect(() => {
     const getData = async () => {
       const result = await fetch("/ops/users")
@@ -73,7 +72,10 @@ const StaffSearchResults = (props) => {
     <div className="staff-search-results-container">
       <div className="staff-search-results-widgets">
         {users.data.map(user => {
+          if(user.username == "testThurwork") console.log(user.rosterMonday, user.rosterTuesday, user.rosterWednesday, user.rosterThursday, user.rosterFriday, user.rosterSaturday)
           if(!props.addedNames.includes(user.username)
+            // &&
+            // props.availQuery.some(o => user[thisDay].includes(o))
             &&
             props.hoursQuery.some(o => user.contract.includes(o))
             &&
