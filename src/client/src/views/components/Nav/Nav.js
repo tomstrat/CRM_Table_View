@@ -8,12 +8,12 @@ const Nav = (props) => {
     <div className="nav">
       {auth ? (
         <div className="link-container">
-          <NavLink to="/ops/overview">Overview</NavLink>
-          <NavLink to="/ops/scheduler">Scheduler</NavLink>
-          <NavLink to="/ops/edithours">Edit hours</NavLink>
-          <NavLink to="/ops/dataviewer">Dataviewer</NavLink>
-          <NavLink to="/ops/requests">Requests</NavLink>
-          <NavLink to="/ops/manageusers">Manage users</NavLink>
+          <NavLink to="/ops/overview" >Overview</NavLink>
+          <NavLink to="/ops/scheduler" >Scheduler</NavLink>
+          <NavLink to="/ops/edithours" >Edit hours</NavLink>
+          <NavLink to="/ops/dataviewer" >Dataviewer</NavLink>
+          <NavLink to="/ops/requests" >Requests</NavLink>
+          <NavLink to="/ops/manageusers" >Manage users</NavLink>
           <NavLink to="/logout">Logout</NavLink>
         </div>
       ) : (

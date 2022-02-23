@@ -43,6 +43,10 @@ code {
   height: 3%;
 }
 
+.selectedNav {
+  color: #8dc63f;
+}
+
 .link-container {
   display: flex;
   justify-content: space-evenly;
