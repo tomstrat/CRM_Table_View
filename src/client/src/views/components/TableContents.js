@@ -6,6 +6,8 @@ import uniqid from "uniqid"
 
 const TableContents = (props) => {
   
+  
+
   return (
     <div className="table-content-container">
       <div className="table">
@@ -38,8 +40,39 @@ function formatHeaders(data) {
 }
 
 function formatRow(obj) {
+  function eTypeFormat (types) {
+    
+    const typesFormatted = types.map((type) => {
+      switch(type) {
+      case "operations": return "Ops - "
+      case "driver": return "Drv - "
+      case "trainer": return "Trn - "
+      case "navigator": return "Nav - "
+      case "temp": return "Tmp"
+      }
+    })
+    const lastElem = typesFormatted.pop().replace("-", "")
+    typesFormatted.push(lastElem)
+    return typesFormatted
+  }
   return (
-    Object.keys(obj).map((oneKey) => <div key={uniqid("row-")} className="column">{obj[oneKey]}</div>)
+    Object.keys(obj).map((oneKey) =>
+      oneKey == "employeeType"
+        ?
+        <div 
+          key={uniqid("row-")} 
+          className="column"
+        >
+          {eTypeFormat(obj[oneKey])}
+        </div>
+        :
+        <div 
+          key={uniqid("row-")} 
+          className="column"
+        >
+          {obj[oneKey]}
+        </div>
+    )
   )
 }
 
