@@ -19,7 +19,7 @@ const NewUserPanel = (props) => {
     event.persist()
     const { target } = event
     const empTypes = ["operations", "trainer", "driver", "navigator", "temp"]
-    const value = target.type === "checkbox"
+    const value = target.name === "checkbox"
       ? target.checked
       : target.value
     const typeTarget = R.includes(target.name, empTypes)
@@ -127,7 +127,7 @@ const NewUserPanel = (props) => {
             <div className="basic-row inj-cert">
               <div className="new-user-button-container">
                 <label className="checkbox-label new-user-element">Certified</label>
-                <input name="certified" type="checkbox" className="new-user-element controls-checkbox"  value={values.certified}/>
+                <input onChange={handleOnChange} name="certified" type="checkbox" className="new-user-element controls-checkbox"  value={values.certified}/>
                 <span className="checkmark"></span>
               </div>
               <div className="new-user-button-container">

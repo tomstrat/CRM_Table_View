@@ -49,6 +49,7 @@ const StaffSearchResults = (props) => {
     const getData = async () => {
       const result = await fetch("/ops/users")
       const parsedResult = await result.json()
+      console.log(parsedResult)
       const formattedResult = formatUsers(parsedResult)
       if (toggleState == null){
         const allPresent = R.map(R.pick([
