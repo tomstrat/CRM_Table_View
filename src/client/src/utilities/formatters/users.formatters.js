@@ -1,6 +1,7 @@
 import * as R from "ramda"
 
 export function formatUsers(data, omissions) {
+  const sentOmissions = omissions ? omissions : []
   return R.map(obj => formatUser(obj, [
     "password",
     "roster", 
@@ -10,7 +11,7 @@ export function formatUsers(data, omissions) {
     "rosterThursday",
     "rosterFriday",
     "rosterSaturday",
-    ...omissions
+    ...sentOmissions
   ]), data)
 }
 
@@ -37,8 +38,7 @@ export function formatUser(user, omissions) {
       certified: R.toString,
       injured: R.toString,
       joinDate: (date) => {
-        const newDate = new Date(date)
-        return newDate.toLocaleDateString("en-GB")
+        return new Date(date).toISOString().split("T")[0]
       },
       employeeType: (types) => {
         if(!types) return []

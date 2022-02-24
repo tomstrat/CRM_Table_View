@@ -233,6 +233,7 @@ const UserCard = (props) => {
                   <div className="roster-key">Unselected</div>
                   <div className="roster-key">Working</div>
                   <div className="roster-key">Not Working</div>
+                  <div className="roster-key">Contactable</div>
                 </div>
                 : ""
               }
