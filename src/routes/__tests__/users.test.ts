@@ -11,7 +11,8 @@ import {
   correctPostUser,
   incorrectPostUser,
   correctPatchUser,
-  errorObject
+  errorObject,
+  patchErrorObject
 } from "../../testing/dummy-data/userdata"
 
 let parentApp: Express
@@ -151,7 +152,7 @@ describe("Routes for Users", () => {
             .patch("/ops/users/2")
             .send(incorrectPostUser)
             .expect(400)
-            .expect(errorObject)
+            .expect(patchErrorObject)
         })
       })
       describe("And empty data", () => {

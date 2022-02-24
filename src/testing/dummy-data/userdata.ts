@@ -195,3 +195,68 @@ export const errorObject = {
     }
   ]
 }
+
+export const patchErrorObject = {
+  errors: [
+    {
+      value: "dd",
+      msg: "Must be between 5 and 30 characters",
+      param: "password",
+      location: "body"
+    },
+    {
+      value: "pissword",
+      msg: "Passwords dont match",
+      param: "confirmPassword",
+      location: "body"
+    },
+    {
+      value: "frullTime",
+      msg: "Contract not valid",
+      param: "contract",
+      location: "body"
+    },
+    {
+      value: "dodmin",
+      msg: "Role not valid",
+      param: "role",
+      location: "body"
+    },
+    {
+      value: "blah",
+      msg: "Certified not valid",
+      param: "certified",
+      location: "body"
+    },
+    {
+      value: "blah",
+      msg: "Injured not valid",
+      param: "injured",
+      location: "body"
+    },
+    {
+      value: "nope",
+      msg: "Roster not valid",
+      param: "rosterMonday",
+      location: "body"
+    },
+    {
+      value: "dongo, deeriver",
+      msg: "Employee type not valid",
+      param: "employeeType",
+      location: "body"
+    },
+    {
+      value: "niiin-07-22",
+      msg: "Invalid date",
+      param: "joinDate",
+      location: "body"
+    },
+    {
+      value: "nope",
+      msg: "Location not valid",
+      param: "location",
+      location: "body"
+    }
+  ]
+}
