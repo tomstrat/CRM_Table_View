@@ -53,8 +53,11 @@ const OpsOverview = () => {
       <b>&quot;rostered, contracted, drivers, inner-east suburbs&quot;</b>
 
       <p>Each user has a roster attached, to make it super easy to search rostered (or non-rostered) 
-      users on any givenday. We have not yet hooked this page up to our database, so the date select, save and publish features 
-      are placeholders currently (Marked with P).</p>
+      users on any given day. When this page is properly hooked in to our database, this will also account for staff on 
+      holiday, or long term sick. Feel free to play with switching the day, to have a look who is rostered on each day.
+      If you&apos;re getting stuck with no staff results, you most likely need to reset the search panel to the &apos;all&apos;
+      values and hit the search button again (i&apos;ll likely add a reset button in the next build). The save and publish 
+      features are placeholders and currently marked with (P).</p>
 
       <p>Staff members are added to routes by highlighting the staff member, highlighting the route, and clicking the add 
       staff button. In the near future, we&apos;ll be allowing you to click and drag names onto routes. 
@@ -86,7 +89,11 @@ const OpsOverview = () => {
       that the user experience would be diminished.</p>
 
       <p>Let us know your thoughts about the demo! Being an early build, you may well find an impressive collection of bugs,
-      but be sure to let us know about them, and exactly how you got them. If you have any questions at all, obviously hit me up. 
+      but be sure to let us know about them, and exactly how you got them. Screenshots of any errors you get would be very 
+      helpful, and will help us quickly fix any unnoticed bugs. If you&apos;re in chrome, you can right click the page and 
+      go to &apos;inspect&apos; to see any errors.</p>
+      
+      <p>If you have any questions at all, obviously hit me up. 
       Any feedback you have about the app would be appreciated! If you have an opinion on absolutely any part of the app thus far, 
       we want to hear it.</p>
       
