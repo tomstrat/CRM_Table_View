@@ -92,5 +92,5 @@ export default function usersRouteFactory(
     if (!response) res.status(404).json(false)
   })
 
-  return ["/ops/users", usersRouter, Role.operations]
+  return ["/api/users", usersRouter, Role.operations]
 }

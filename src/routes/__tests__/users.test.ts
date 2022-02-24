@@ -39,11 +39,11 @@ afterAll(async () => {
 })
 
 describe("Routes for Users", () => {
-  describe("GET /ops/users/:id", () => {
+  describe("GET /api/users/:id", () => {
     describe("Without Auth", () => {
       it("sends 401 code", async () => {
         await request(parentApp)
-          .get("/ops/users/1")
+          .get("/api/users/1")
           .expect(401)
       })
     })
@@ -51,7 +51,7 @@ describe("Routes for Users", () => {
       describe("And existing user", () => {
         it("sends 200 code and user", async () => {
           await agent
-            .get("/ops/users/1")
+            .get("/api/users/1")
             .expect(200)
             .expect("Content-Type", /json/)
             .expect(testUser)
@@ -60,18 +60,18 @@ describe("Routes for Users", () => {
       describe("And non-existent user", () => {
         it("sends 404 code", async () => {
           await agent
-            .get("/ops/users/100")
+            .get("/api/users/100")
             .expect(404)
         })
       })
     })
   })
 
-  describe("POST /ops/users/new", () => {
+  describe("POST /api/users/new", () => {
     describe("Without Auth", () => {
       it("sends 401 code", async () => {
         await request(parentApp)
-          .post("/ops/users/new")
+          .post("/api/users/new")
           .send(correctPostUser)
           .expect(401)
       })
@@ -80,7 +80,7 @@ describe("Routes for Users", () => {
       describe("And correct data", () => {
         it("sends 200 code", async () => {
           await agent
-            .post("/ops/users/new")
+            .post("/api/users/new")
             .send(correctPostUser)
             .expect(200)
             .expect("Content-Type", /json/)
@@ -90,7 +90,7 @@ describe("Routes for Users", () => {
       describe("And incorrect data", () => {
         it("sends 400 code", async () => {
           await agent
-            .post("/ops/users/new")
+            .post("/api/users/new")
             .send(incorrectPostUser)
             .expect(400)
             .expect(errorObject)
@@ -99,7 +99,7 @@ describe("Routes for Users", () => {
       describe("And empty data", () => {
         it("sends 400 code", async () => {
           await agent
-            .post("/ops/users/new")
+            .post("/api/users/new")
             .send({})
             .expect(400)
         })
@@ -107,18 +107,18 @@ describe("Routes for Users", () => {
     })
   })
 
-  describe("GET /ops/users", () => {
+  describe("GET /api/users", () => {
     describe("Without Auth", () => {
       it("sends 401 code", async () => {
         await request(parentApp)
-          .get("/ops/users")
+          .get("/api/users")
           .expect(401)
       })
     })
     describe("With Auth", () => {
       it("sends 200 code and users", async () => {
         await agent
-          .get("/ops/users")
+          .get("/api/users")
           .expect(200)
           .expect("Content-Type", /json/)
           .expect([testUser, correctUser])
@@ -126,11 +126,11 @@ describe("Routes for Users", () => {
     })
   })
 
-  describe("PATCH /ops/users/:id", () => {
+  describe("PATCH /api/users/:id", () => {
     describe("Without Auth", () => {
       it("sends 401 code", async () => {
         await request(parentApp)
-          .patch("/ops/users/2")
+          .patch("/api/users/2")
           .send(correctPatchUser)
           .expect(401)
       })
@@ -139,7 +139,7 @@ describe("Routes for Users", () => {
       describe("And correct data", () => {
         it("sends 200 code", async () => {
           await agent
-            .patch("/ops/users/2")
+            .patch("/api/users/2")
             .send(correctPatchUser)
             .expect(200)
             .expect("Content-Type", /json/)
@@ -149,7 +149,7 @@ describe("Routes for Users", () => {
       describe("And incorrect data", () => {
         it("sends 400 code", async () => {
           await agent
-            .patch("/ops/users/2")
+            .patch("/api/users/2")
             .send(incorrectPostUser)
             .expect(400)
             .expect(patchErrorObject)
@@ -158,7 +158,7 @@ describe("Routes for Users", () => {
       describe("And empty data", () => {
         it("sends 400 code", async () => {
           await agent
-            .patch("/ops/users/2")
+            .patch("/api/users/2")
             .send({})
             .expect(400)
         })
@@ -166,11 +166,11 @@ describe("Routes for Users", () => {
     })
   })
 
-  describe("DELETE /ops/users/:id", () => {
+  describe("DELETE /api/users/:id", () => {
     describe("Without Auth", () => {
       it("sends 401 code", async () => {
         await request(parentApp)
-          .delete("/ops/users/2")
+          .delete("/api/users/2")
           .expect(401)
       })
     })
@@ -178,12 +178,12 @@ describe("Routes for Users", () => {
       describe("And existing user", () => {
         it("sends 200 code and deletes user", async () => {
           await agent
-            .delete("/ops/users/2")
+            .delete("/api/users/2")
             .expect(200)
             .expect("Content-Type", /json/)
             .expect("true")
           await agent
-            .get("/ops/users/2")
+            .get("/api/users/2")
             .expect(404)
             .expect("Content-Type", /json/)
         })
@@ -191,7 +191,7 @@ describe("Routes for Users", () => {
       describe("And non-existent user", () => {
         it("sends 401 code", async () => {
           await agent
-            .get("/ops/users/100")
+            .get("/api/users/100")
             .expect(404)
             .expect("Content-Type", /json/)
         })

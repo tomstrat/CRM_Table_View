@@ -75,7 +75,7 @@ const NewUserPanel = (props) => {
   return (
     <>
       <div className="new-user-container">
-        <form data-method="POST" data-action="users/new" className="new-user-form" id="new-user-form" onSubmit={handleSubmit}>
+        <form data-method="POST" data-action="api/users/new" className="new-user-form" id="new-user-form" onSubmit={handleSubmit}>
           <div className="user-button-container">
             <select onChange={handleOnChange} value={values.contract} name="contract" id="contract" className="new-user-drop new-user-element">
               <option value="fullTime">Full-time</option>
