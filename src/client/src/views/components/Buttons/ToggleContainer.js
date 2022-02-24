@@ -4,13 +4,10 @@ import uniqid from "uniqid"
 import ToggleButton from "./ToggleButton"
 import "../../styles/ToggleContainer.css"
 
-
-
 //component for rendering and holding togglebuttons
 //number per row can be customised by injecting relevant css classes
 //Requires specific props in the form of an array of objects to be called succesfully
 //See bottom of page for example array
-
 
 const ToggleContainer = (props) => {
   const [ToggleGroup, setToggleGroup] = useState(props.buttons)
@@ -94,7 +91,6 @@ const ToggleContainer = (props) => {
     )
   }
   
-
   //render calls button rendering function inside a single container
   return (
     <div className="toggle-container">
