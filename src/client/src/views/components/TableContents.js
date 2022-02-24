@@ -44,10 +44,10 @@ function formatRow(obj) {
     
     const typesFormatted = types.map((type) => {
       switch(type) {
-      case "operations": return "Ops - "
-      case "driver": return "Drv - "
-      case "trainer": return "Trn - "
-      case "navigator": return "Nav - "
+      case "operations": return "Ops-"
+      case "driver": return "Drv-"
+      case "trainer": return "Trn-"
+      case "navigator": return "Nav-"
       case "temp": return "Tmp"
       }
     })
