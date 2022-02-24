@@ -5,8 +5,9 @@ export function handleSubmitFactory(data, callback) {
     event.preventDefault()
     try {
       const form = event.currentTarget
-      const {action, method} = form
+      const {action, method} = form.dataset
       const body = filter((val) => val != "", data)
+      console.log(action, method, form)
       const response = await fetch(action, {
         method,
         headers: {

@@ -11,12 +11,12 @@ import ConfigType from "./config/type"
 import { NotFound } from "./models/error"
 import { RouteDefinition } from "./models/route"
 import { Role } from "./database/models/User"
-import { reverse } from "ramda"
+import { not, reverse } from "ramda"
 import morgan from "morgan"
 import chalk from "chalk"
 
-export default function appFactory({ Config, Routes, handleErrors, requireAuth }:
-  { Config: ConfigType, Routes: RouteDefinition[], handleErrors: ErrorRequestHandler, requireAuth: (role?: Role) => RequestHandler }):
+export default function appFactory({ notProduction, Config, Routes, handleErrors, requireAuth }:
+  { notProduction: boolean, Config: ConfigType, Routes: RouteDefinition[], handleErrors: ErrorRequestHandler, requireAuth: (role?: Role) => RequestHandler }):
   Express {
 
   const limiter = rateLimit({
@@ -65,7 +65,7 @@ export default function appFactory({ Config, Routes, handleErrors, requireAuth }
   })
 
   app.all("*", (req: Request, res: Response) => {
-    res.sendFile(path.join(__dirname + "/../src/client/build/index.html"))
+    if (!notProduction) return res.sendFile(path.join(__dirname + "/../src/client/build/index.html"))
   })
 
   app.use(handleErrors)

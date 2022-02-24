@@ -86,7 +86,7 @@ const UserCard = (props) => {
 
   const getSubmitButton = () => {
     return (
-      <div className="user-card-submit" onClick={() => handleOnSubmit()}>    
+      <div className="user-card-submit">    
         <input type="submit" value={"Submit"} />
         <FontAwesomeIcon className="user-card-icon" icon={faCheck} size="lg" />
       </div>
@@ -100,7 +100,7 @@ const UserCard = (props) => {
     makeEmpTypeInput,
     makeSelectInput,
     makeRosterInput
-  } = makeInputFactory({values, handleOnChange, handleEmpTypeOnChange})
+  } = makeInputFactory({values: values.data, handleOnChange, handleEmpTypeOnChange})
 
   return (
     <>
@@ -117,7 +117,7 @@ const UserCard = (props) => {
               : <FontAwesomeIcon className="user-card-icon" icon={faUserEdit} size="lg" />
             }
           </div>
-          <form method="POST" action={`users/${id}`}  onSubmit={handleOnSubmit}>
+          <form data-method="PATCH" data-action={`/ops/users/${id}`}  onSubmit={handleOnSubmit}>
             <UserField 
               title="Username" 
               content={values.data.username}
@@ -130,10 +130,10 @@ const UserCard = (props) => {
               content={values.data.contract}
               edit={edit}
               input={makeSelectInput("contract", [
-                {value:"Full Time"},
-                {value:"Part Time"},
-                {value:"Casual"},
-                {value:"Temp"},
+                {value:"fullTime"},
+                {value:"partTime"},
+                {value:"casual"},
+                {value:"temp"},
               ])}
             />
             <UserField 
@@ -141,9 +141,9 @@ const UserCard = (props) => {
               content={values.data.role}
               edit={edit}
               input={makeSelectInput("role", [
-                {value:"User"},
-                {value:"Operations"},
-                {value:"Admin"},
+                {value:"user"},
+                {value:"operations"},
+                {value:"admin"},
               ])}
             />
             <UserField 

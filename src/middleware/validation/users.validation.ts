@@ -37,9 +37,10 @@ export default function userValidatorFactory({ userClient }:
       .optional()
       .isLength({ min: 3, max: 20 })
       .withMessage("Must be between 3 and 20 characters")
-      .custom(async username => {
+      .custom(async (username, { req }) => {
+        const id = req.params ? req.params.id : undefined
         const user = await userClient.getOne(username)
-        if (user) throw new Error("Username already exists")
+        if (user && user.id === id) throw new Error("Username already exists")
       }),
     requireNewPassword: body("password")
       .trim()
@@ -103,7 +104,9 @@ export default function userValidatorFactory({ userClient }:
     requireEmployeeType: body("employeeType")
       .optional()
       .custom(types => {
-        const typesArr: string[] = types.split(",")
+        const typesArr: string[] = (typeof types === "string")
+          ? types.split(",")
+          : types
         typesArr.forEach(type => {
           if (!(type in EmployeeType)) throw new Error("Employee type not valid")
         })

@@ -6,7 +6,8 @@ import { formatErrors } from "../../../utilities/errors"
 import ValError from "../../components/valError"
 import PropTypes from "prop-types"
 import { initialUserState } from "../../../utilities/userdata"
-import RosterPanel from "./RosterPanel"
+import { makeInputFactory } from "../User_Card/makeInputs"
+import UserNewRosterField from "../User_Card/UserNewRosterField"
 import * as R from "ramda"
 
 
@@ -20,7 +21,7 @@ const NewUserPanel = (props) => {
     const { target } = event
     const empTypes = ["operations", "trainer", "driver", "navigator", "temp"]
     const value = target.type === "checkbox"
-      ? target.checked
+      ? target.checked.toString()
       : target.value
     const typeTarget = R.includes(target.name, empTypes)
       ? true
@@ -57,6 +58,7 @@ const NewUserPanel = (props) => {
     if(data.errors) {
       setErrors(formatErrors(data.errors))
     } else {
+      setErrors({})
       props.setData((values) => {
         return {
           ...values,
@@ -66,11 +68,15 @@ const NewUserPanel = (props) => {
     }
   })
 
+  const {
+    makeRosterInput
+  } = makeInputFactory({values, handleOnChange})
+
 
   return (
     <>
       <div className="new-user-container">
-        <form method="POST" action="users/new" className="new-user-form" id="new-user-form" onSubmit={handleSubmit}>
+        <form data-method="POST" data-action="users/new" className="new-user-form" id="new-user-form" onSubmit={handleSubmit}>
           <div className="user-button-container">
             <select onChange={handleOnChange} value={values.contract} name="contract" id="contract" className="new-user-drop new-user-element">
               <option value="fullTime">Full-time</option>
@@ -127,7 +133,7 @@ const NewUserPanel = (props) => {
             <div className="basic-row inj-cert">
               <div className="new-user-button-container">
                 <label className="checkbox-label new-user-element">Certified</label>
-                <input name="certified" type="checkbox" className="new-user-element controls-checkbox"  value={values.certified}/>
+                <input onChange={handleOnChange} name="certified" type="checkbox" className="new-user-element controls-checkbox"  value={values.certified}/>
                 <span className="checkmark"></span>
               </div>
               <div className="new-user-button-container">
@@ -161,8 +167,43 @@ const NewUserPanel = (props) => {
               value={values.joinDate} 
               min="2005-01-01" max={getCurrentDate("form")}></input>
           </div>
-          
-          <RosterPanel rosterButtons={props.rosterButtons} setRosterButtons={props.setRosterButtons}/>
+          <h3>Roster</h3>
+          <div className="user-employee-types"> 
+            <div className="roster-key-container">
+              <div className="roster-spacer"></div>
+              <div className="roster-key">Unselected</div>
+              <div className="roster-key">Working</div>
+              <div className="roster-key">Not Working</div>
+            </div>
+            <UserNewRosterField 
+              title="M"
+              input={makeRosterInput("rosterMonday")}
+            />
+            <UserNewRosterField 
+              title="T"
+              input={makeRosterInput("rosterTuesday")}
+            />
+            <UserNewRosterField 
+              title="W"
+              input={makeRosterInput("rosterWednesday")}
+            />
+            <UserNewRosterField 
+              title="T"
+              input={makeRosterInput("rosterThursday")}
+            />
+            <UserNewRosterField 
+              title="F"
+              input={makeRosterInput("rosterFriday")}
+            />
+            <UserNewRosterField 
+              title="S"
+              input={makeRosterInput("rosterSaturday")}
+            />
+          </div>
+
+
+
+          {/* <RosterPanel rosterButtons={props.rosterButtons} setRosterButtons={props.setRosterButtons}/> */}
           <div className="search-button-container new-user-element">
             <input className="new-user-submit-button" type="submit"  value={"submit"}/>
           </div>

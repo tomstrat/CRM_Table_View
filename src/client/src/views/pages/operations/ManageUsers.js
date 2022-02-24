@@ -30,7 +30,7 @@ const ManageUsers = () => {
     const getData = async () => {
       const result = await fetch("/ops/users")
       const parsedResult = await result.json()
-      const formattedResult = formatUsers(parsedResult)
+      const formattedResult = formatUsers(parsedResult, ["passwordConfirm"])
       setData({data: formattedResult, populated: true})
     }
     if(!data.populated) getData()

@@ -10,20 +10,21 @@ export function makeInputFactory({values, handleOnChange, handleEmpTypeOnChange}
     return (
       <input
         type="text"
-        value={values.data[name]}
+        value={values[name]}
         onChange={handleOnChange}
         className="edit-user-input"
-        placeholder={values.data[name]}
+        placeholder={values[name]}
         name={name}
       />
     )
   }
 
   function makeDateInput(name){
+    const isoDate = new Date(values[name]).toISOString().split("T")[0]
     return (
       <input
         type="date"
-        value={getCurrentDate(values.data[name])}
+        value={isoDate}
         onChange={handleOnChange}
         className="edit-user-input"
         min="2005-01-01"
@@ -37,7 +38,7 @@ export function makeInputFactory({values, handleOnChange, handleEmpTypeOnChange}
     return (
       <input
         type="checkbox"
-        checked={(values.data[name] === "true")}
+        checked={(values[name] === "true")}
         onChange={handleOnChange}
         className="edit-user-checkbox"
         name={name}
@@ -49,7 +50,7 @@ export function makeInputFactory({values, handleOnChange, handleEmpTypeOnChange}
     return (
       <input
         type="checkbox"
-        checked={R.includes(name, values.data.employeeType)}
+        checked={R.includes(name, values.employeeType)}
         onChange={handleEmpTypeOnChange}
         className="edit-user-checkbox"
         name={name}
@@ -62,7 +63,7 @@ export function makeInputFactory({values, handleOnChange, handleEmpTypeOnChange}
       <div className="select">
         <select
           type="text"
-          value={values.data[name]}
+          value={values[name]}
           onChange={handleOnChange}
           className="edit-user-select"
           name={name}
@@ -82,7 +83,7 @@ export function makeInputFactory({values, handleOnChange, handleEmpTypeOnChange}
       return <input
         type="radio"
         key={uniqid("radio-")}
-        checked={(values.data[name] === option)}
+        checked={(values[name] === option)}
         onChange={handleOnChange}
         className="edit-user-radio"
         value={option}

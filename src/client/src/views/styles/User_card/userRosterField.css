@@ -18,6 +18,10 @@
   color: white;
   display: flex;
 }
+.new-user-container .user-roster-field-title,
+.new-user-container .user-roster-field-content {
+  color: black;
+}
 .edit-user-radio {
   margin-top: 10px;
   height: 20px;

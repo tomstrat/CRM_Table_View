@@ -17,8 +17,8 @@ import makeTestUser from "./routes/auth/testUser"
 
 export default async function inject(testDB?: Connection) {
   dotenv.config()
-  const prodDB = (process.env.PROD_DATABASE !== "true")
-  const DB = testDB || await createDatabase({ Config, testdb: prodDB })
+  const notProduction = (process.env.PROD_DATABASE !== "true")
+  const DB = testDB || await createDatabase({ Config, testdb: notProduction })
   const userClient = new UserClient(DB)
   const userValidators = userValidatorFactory({ userClient })
   const Routes = [
@@ -29,8 +29,8 @@ export default async function inject(testDB?: Connection) {
     opstimesheetsRouteFactory({ userClient, opsoverview, scheduler, edithours, dataviewer, requests, manageusers }),
   ]
 
-  const app = appFactory({ Config, Routes, handleErrors, requireAuth })
-  if (prodDB) await makeTestUser({ userClient })
+  const app = appFactory({ notProduction, Config, Routes, handleErrors, requireAuth })
+  if (notProduction) await makeTestUser({ userClient })
   return app
 
 

@@ -97,6 +97,10 @@
   border-right: 1px solid white;
   padding-right: 10px;
 }
+.new-user-container .roster-key-container {
+  color: black;
+  border-color: black;
+}
 .roster-key {
   margin-top: 10px;
 }

@@ -36,9 +36,12 @@ function convertDate(date: string | undefined): Date | undefined {
   return date ? new Date(date) : undefined
 }
 
-function formatTypes(types: string | undefined): EmployeeType[] | undefined {
+function formatTypes(types: string | string[] | undefined): EmployeeType[] | undefined {
   if (types === undefined) return types
-  return types.split(",").filter(type => {
+  const newTypes: string[] = (typeof types === "string")
+    ? types.split(",")
+    : types
+  return newTypes.filter(type => {
     return type in EmployeeType
   }) as EmployeeType[]
 }
