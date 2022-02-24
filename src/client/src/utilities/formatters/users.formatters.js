@@ -4,13 +4,7 @@ export function formatUsers(data, omissions) {
   const sentOmissions = omissions ? omissions : []
   return R.map(obj => formatUser(obj, [
     "password",
-    "roster", 
-    "rosterMonday",
-    "rosterTuesday",
-    "rosterWednesday",
-    "rosterThursday",
-    "rosterFriday",
-    "rosterSaturday",
+
     ...sentOmissions
   ]), data)
 }
@@ -25,6 +19,7 @@ export function formatUser(user, omissions) {
       userObject.rosterThursday = R.path(["roster", "thursday"], userObject)
       userObject.rosterFriday = R.path(["roster", "friday"], userObject)
       userObject.rosterSaturday = R.path(["roster", "saturday"], userObject)
+      userObject.rosterSunday = ""
       userObject.passwordConfirm = ""
       return userObject
     },

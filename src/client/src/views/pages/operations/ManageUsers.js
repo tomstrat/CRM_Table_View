@@ -30,7 +30,19 @@ const ManageUsers = () => {
     const getData = async () => {
       const result = await fetch("/ops/users")
       const parsedResult = await result.json()
-      const formattedResult = formatUsers(parsedResult, ["passwordConfirm"])
+      const formattedResult = formatUsers(parsedResult, 
+        [
+          "passwordConfirm",
+          "roster", 
+          "rosterMonday",
+          "rosterTuesday",
+          "rosterWednesday",
+          "rosterThursday",
+          "rosterFriday",
+          "rosterSaturday",
+          "rosterSunday"
+        ]
+      )
       setData({data: formattedResult, populated: true})
     }
     if(!data.populated) getData()

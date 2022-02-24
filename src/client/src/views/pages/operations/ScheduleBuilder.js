@@ -10,9 +10,10 @@ import getCurrentDate from "../../../utilities/getCurrentDate"
 const ScheduleBuilder = () => {
   const [insertName, setInsertName] = useState("")
   const [addedNames, setAddedNames] = useState([])
-  const [availQuery, setAvailQuery] = useState(["working", "contactable"])
-  const [hoursQuery, setHoursQuery] = useState(["Temp", "Full Time", "Casual"])
+  const [availQuery, setAvailQuery] = useState(["notWorking", "working", "contactable", "unselected"])
+  const [hoursQuery, setHoursQuery] = useState(["temp", "fullTime", "casual"])
   const [roleQuery, setRoleQuery] = useState(["driver", "navigator", "trainer", "trainee", "temp"])
+  const [currDay, setCurrday] = useState(1)
   const [locationQuery, setLocationQuery] = useState(
     [
       "cbd", "innerNorth", "innerWest", "innerEast", "innerSouth", "outerNorth", "outerWest", "outerEast", "outerSouth"
@@ -48,6 +49,14 @@ const ScheduleBuilder = () => {
     }
   }
   
+  function increaseDay(){
+    setCurrday(currDay + 1)
+  }
+
+  function decreaseDay(){
+    setCurrday(currDay - 1)
+  }
+
 
   return (
     <>
@@ -56,8 +65,12 @@ const ScheduleBuilder = () => {
         <div className="centralise-sidebar">
           <div className="day-select-container">
             <div className="tiny-title">Schedule for:</div>
-            <div className="day-title">{getCurrentDate("day", 1)}</div>
-            <div className="date-title">{getCurrentDate("date", 1)}</div>
+            <div className="date-container">
+              <button className={"arrow-button"} onClick={decreaseDay}>&#60;</button>
+              <div className="day-title">{getCurrentDate("day", currDay)}</div>
+              <button className={"arrow-button"} onClick={increaseDay}>&#62;</button>
+            </div>
+            <div className="date-title">{getCurrentDate("date", currDay)}</div>
           </div>
           <div id="default-sidebar" className="visible-sidebar">
             <SideBar 
@@ -69,6 +82,7 @@ const ScheduleBuilder = () => {
         </div>
         <div className="column-page">
           <StaffSearchResults 
+            currDay={currDay}
             availQuery={availQuery}
             hoursQuery={hoursQuery}
             roleQuery={roleQuery}

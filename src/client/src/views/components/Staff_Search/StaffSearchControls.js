@@ -38,14 +38,18 @@ const StaffSearchControls = (props) => {
 
   function formatHours (name) {
     if(name == "Contracted")
-      return name.replace("Contracted", "Full Time")
-    else return name
+      return name.replace("Contracted", "fullTime")
+    else if (name == "Temps")
+      return name.replace("Temps", "temp")
+    else return name.toLowerCase()
   }
   
   function searchOnClick() {
     const availQuery = []
     if(avail[0].currState)
     {
+      availQuery.push("unselected")
+      availQuery.push("notWorking")
       avail.map((obj) => {
         if(obj.buttonRole == "child")
           availQuery.push(formatAvail(obj.name))

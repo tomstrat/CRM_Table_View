@@ -16,10 +16,6 @@ const DataViewer = () => {
 
           <p>In essence, in the early days this will be individual and group TTM statistics over adjustable time periods, 
           mainly for the purposes of data analytics.</p>
-
-          <p>In the words of Neo:</p>
-
-          <p>&#34;Graphs, <i>lots</i> of graphs.&#34;</p>
         </div>
   )
       </div>
