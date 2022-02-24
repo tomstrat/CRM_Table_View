@@ -11,7 +11,7 @@ import ConfigType from "./config/type"
 import { NotFound } from "./models/error"
 import { RouteDefinition } from "./models/route"
 import { Role } from "./database/models/User"
-import { not, reverse } from "ramda"
+import { reverse } from "ramda"
 import morgan from "morgan"
 import chalk from "chalk"
 
@@ -65,7 +65,7 @@ export default function appFactory({ notProduction, Config, Routes, handleErrors
   })
 
   app.all("*", (req: Request, res: Response) => {
-    if (!notProduction) return res.sendFile(path.join(__dirname + "/../src/client/build/index.html"))
+    return res.sendFile(path.join(__dirname + "/../src/client/build/index.html"))
   })
 
   app.use(handleErrors)
