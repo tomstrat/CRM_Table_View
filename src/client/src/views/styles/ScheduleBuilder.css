@@ -422,7 +422,7 @@
   border: 1px solid #8dc63f;
   border-left: 3px solid #00539f;
   background-color: aliceblue;
-  justify-content: center;
+  justify-content: space-between;
   padding-left: 10px;
 }
 

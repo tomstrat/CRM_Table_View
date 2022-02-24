@@ -1,6 +1,6 @@
-//Function for returning date information in various formats
+//Function for getting current date information in various formats
 
-//1st argument currently takes:
+//1st argument options include:
 
 //"day" to return a string of the weekday for displaying to users
 //"date" to return a date for displaying to users (DD-MM-YYYY)

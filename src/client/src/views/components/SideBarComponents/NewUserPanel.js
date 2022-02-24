@@ -10,7 +10,6 @@ import { makeInputFactory } from "../User_Card/makeInputs"
 import UserNewRosterField from "../User_Card/UserNewRosterField"
 import * as R from "ramda"
 
-
 const NewUserPanel = (props) => {
 
   const [errors, setErrors] = useState({})
