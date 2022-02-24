@@ -6,7 +6,7 @@ import StaffWidget from "./StaffWidget"
 import uniqid from "uniqid"
 import PropTypes from "prop-types"
 import { formatUsers } from "../../../utilities/formatters/users.formatters"
-// import getCurrentDate from "../../../utilities/getCurrentDate"
+import getCurrentDate from "../../../utilities/getCurrentDate"
 
 
 
@@ -18,8 +18,7 @@ const StaffSearchResults = (props) => {
 
   const [toggleState, setToggleState] = useState(null)
   
-  // const thisDay = "roster" + getCurrentDate("day")
-
+  const thisDay = "roster" + getCurrentDate("day", props.currDay)
   useEffect(() => {
     if(toggleState){
       let passNames = toggleState.map((obj) => {
@@ -49,7 +48,6 @@ const StaffSearchResults = (props) => {
     const getData = async () => {
       const result = await fetch("/ops/users")
       const parsedResult = await result.json()
-      console.log(parsedResult)
       const formattedResult = formatUsers(parsedResult)
       if (toggleState == null){
         const allPresent = R.map(R.pick([
@@ -62,7 +60,9 @@ const StaffSearchResults = (props) => {
       }
       
       const formattedNewResult = R.map(R.pick([
-        "username", "employeeType", "location", "contract", "certified"
+        "username", "employeeType", "location", "contract", "certified", 
+        "rosterMonday", "rosterTuesday", "rosterWednesday", 
+        "rosterThursday", "rosterFriday", "rosterSaturday", "rosterSunday"
       ]), formattedResult)
       setUsers({data: formattedNewResult, populated: true})
     }
@@ -73,10 +73,9 @@ const StaffSearchResults = (props) => {
     <div className="staff-search-results-container">
       <div className="staff-search-results-widgets">
         {users.data.map(user => {
-          if(user.username == "testThurwork") console.log(user.rosterMonday, user.rosterTuesday, user.rosterWednesday, user.rosterThursday, user.rosterFriday, user.rosterSaturday)
           if(!props.addedNames.includes(user.username)
-            // &&
-            // props.availQuery.some(o => user[thisDay].includes(o))
+            &&
+            props.availQuery.some(o => user[thisDay].includes(o))
             &&
             props.hoursQuery.some(o => user.contract.includes(o))
             &&
@@ -107,5 +106,6 @@ StaffSearchResults.propTypes = {
   availQuery: PropTypes.array,
   hoursQuery: PropTypes.array,
   roleQuery: PropTypes.array,
-  locationQuery: PropTypes.array
+  locationQuery: PropTypes.array,
+  currDay: PropTypes.number
 }

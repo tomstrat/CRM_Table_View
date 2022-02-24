@@ -20,11 +20,11 @@ export function makeInputFactory({values, handleOnChange, handleEmpTypeOnChange}
   }
 
   function makeDateInput(name){
-    const isoDate = new Date(values[name]).toISOString().split("T")[0]
+    // const isoDate = new Date(values[name]).toISOString().split("T")[0]
     return (
       <input
         type="date"
-        value={isoDate}
+        value={values[name]}
         onChange={handleOnChange}
         className="edit-user-input"
         min="2005-01-01"
@@ -78,7 +78,7 @@ export function makeInputFactory({values, handleOnChange, handleEmpTypeOnChange}
   }
 
   function makeRosterInput(name){
-    const options = ["unselected", "working", "notWorking"]
+    const options = ["unselected", "working", "notWorking", "contactable"]
     return (options.map(option => {
       return <input
         type="radio"
