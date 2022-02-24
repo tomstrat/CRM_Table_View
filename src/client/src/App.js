@@ -1,6 +1,6 @@
 import React from "react"
 import Login from "./views/pages/login"
-import Profile from "./views/pages/profile"
+// import Profile from "./views/pages/profile"
 import "./views/styles/App.css"
 import { Switch, Redirect, BrowserRouter } from "react-router-dom"
 import PrivateRoute from "./views/components/privateRoute"
@@ -23,7 +23,7 @@ function App() {
       <div className="container pt-4 pb-4">
         <Nav auth={true}/>
         <Switch>
-          <PrivateRoute exact path="/" component={Profile} />
+          <PrivateRoute exact path="/" component={OpsOverview} />
           <PrivateRoute exact path="/ops/overview" component={OpsOverview} />
           <PrivateRoute exact path="/ops/scheduler" component={ScheduleBuilder} />
           <PrivateRoute exact path="/ops/edithours" component={EditHours} />
