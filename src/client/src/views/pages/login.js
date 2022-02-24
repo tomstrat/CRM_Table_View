@@ -46,7 +46,7 @@ export default function Login(props) {
       <div className="login-container">
         <div className="login-logo" style={{backgroundImage: "url('/junk_logo.png')"}}></div>
         <h2>LOG IN</h2>
-        <form method="POST" action="/auth/login" onSubmit={handleSubmit}>
+        <form data-method="POST" data-action="/auth/login" onSubmit={handleSubmit}>
           <div className="input-container">
             <div className="icon-container">
               <FontAwesomeIcon icon={faIdBadge} size="xs" />
