@@ -64,8 +64,15 @@ export default function appFactory({ notProduction, Config, Routes, handleErrors
     app.use(route[0], route[1])
   })
 
-  app.all("*", (req: Request, res: Response) => {
-    return res.sendFile(path.join(__dirname + "/../src/client/build/index.html"))
+  // app.all("*", (req: Request, res: Response) => {
+  //   return res.sendFile(path.join(__dirname + "/../src/client/build/index.html"))
+  // })
+
+  app.get("/*", (req: Request, res: Response) => {
+    let url = path.join(__dirname, "/../src/client/build", "index.html")
+    if (!url.startsWith("/app/"))
+      url = url.substring(1)
+    res.sendFile(url)
   })
 
   app.use(handleErrors)
