@@ -195,7 +195,6 @@ export const errorObject = {
     }
   ]
 }
-
 export const patchErrorObject = {
   errors: [
     {

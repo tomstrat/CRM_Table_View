@@ -29,7 +29,7 @@ const UserCard = (props) => {
 
   useEffect(() => {
     const getData = async () => {
-      const result = await fetch(`/ops/users/${id}`)
+      const result = await fetch(`/api/users/${id}`)
       const parsedResult = await result.json()
       const formattedResult = formatUser(parsedResult)
       setValues({data: formattedResult, populated: true})
@@ -117,7 +117,7 @@ const UserCard = (props) => {
               : <FontAwesomeIcon className="user-card-icon" icon={faUserEdit} size="lg" />
             }
           </div>
-          <form data-method="PATCH" data-action={`/ops/users/${id}`}  onSubmit={handleOnSubmit}>
+          <form data-method="PATCH" data-action={`/api/users/${id}`}  onSubmit={handleOnSubmit}>
             <UserField 
               title="Username" 
               content={values.data.username}

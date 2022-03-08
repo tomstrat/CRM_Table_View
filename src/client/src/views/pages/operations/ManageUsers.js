@@ -28,7 +28,7 @@ const ManageUsers = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const result = await fetch("/ops/users")
+      const result = await fetch("/api/users")
       const parsedResult = await result.json()
       const formattedResult = formatUsers(parsedResult, 
         [
