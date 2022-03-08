@@ -10,7 +10,6 @@ import OpsOverview from "./views/pages/operations/OpsOverview"
 import Logout from "./views/pages/logout"
 import UserCard from "./views/pages/operations/UserCard"
 import ScheduleBuilder from "./views/pages/operations/ScheduleBuilder"
-import Nav from "./views/components/Nav/Nav"
 import EditHours from "./views/pages/operations/EditHours"
 import DataViewer from "./views/pages/operations/DataViewer"
 import Requests from "./views/pages/operations/Requests"
@@ -21,7 +20,6 @@ function App() {
     
     <BrowserRouter>
       <div className="container pt-4 pb-4">
-        <Nav auth={true}/>
         <Switch>
           <PrivateRoute exact path="/" component={OpsOverview} />
           <PrivateRoute exact path="/ops/overview" component={OpsOverview} />

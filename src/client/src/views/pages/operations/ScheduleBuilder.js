@@ -5,6 +5,7 @@ import "../../styles/ScheduleBuilder.css"
 import StaffSearchResults from "../../components/Staff_Search/StaffSearchResults"
 import RoutePlanner from "../../components/RoutePlanner/RoutePlanner"
 import getCurrentDate from "../../../utilities/getCurrentDate"
+import Nav from "../../components/Nav/Nav"
 
 
 const ScheduleBuilder = () => {
@@ -60,7 +61,7 @@ const ScheduleBuilder = () => {
 
   return (
     <>
-      
+      <Nav auth={true}/>
       <div className="schedule-builder-container">
         <div className="centralise-sidebar">
           <div className="day-select-container">

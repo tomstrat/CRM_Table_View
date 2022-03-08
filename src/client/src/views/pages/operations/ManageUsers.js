@@ -5,7 +5,7 @@ import SideBar from "../../components/SideBarComponents/SideBar"
 import UserControls from "../../components/SideBarComponents/UserControls"
 import NewUserPanel from "../../components/SideBarComponents/NewUserPanel"
 import { formatUsers } from "../../../utilities/formatters/users.formatters"
-
+import Nav from "../../components/Nav/Nav"
 
 const ManageUsers = () => {
   const [data, setData] = useState({data: [{}], populated: false})
@@ -50,7 +50,7 @@ const ManageUsers = () => {
  
   return (
     <>
-      
+      <Nav auth={true}/>
       <div className="manage-user-container">
         <div id="default-sidebar" className="visible-sidebar">
           {clickBool == false 

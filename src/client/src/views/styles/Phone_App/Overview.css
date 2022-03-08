@@ -1,0 +1,36 @@
+.phone-title-container {
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  align-items: center;
+  background-color: aliceblue;
+  margin-top: none;
+  padding-top: 10%;
+  padding: 2%;
+  margin-bottom: 2%;
+}
+
+.ops-post {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  height: 40vh;
+  padding: 1%;
+  margin: 1%;
+  background-color: aliceblue;
+  border-radius: 12px;
+}
+
+.phone-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100vw;
+  margin-top: 20%;
+}
