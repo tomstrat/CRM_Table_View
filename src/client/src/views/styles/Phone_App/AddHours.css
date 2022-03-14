@@ -1,3 +1,13 @@
+.add-hours-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100vw;
+
+}
+
 .phone-day-select-container {
   display: flex;
   flex-direction: column;
@@ -36,5 +46,23 @@
 
 .phone-tiny-title {
   font-size: 12px;
+}
+
+.form-section-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: aliceblue;
+  border: 2px solid #8dc63f;
+  border-radius: 12px;
+  width: 100%;
+  
+}
+
+.add-hours-form {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  
 }
 

@@ -7,10 +7,9 @@ const Nav = () => {
   return (
     <div className="phone-nav">
       <div className="phone-link-container">
-        <NavLink to="/ttm/overview" >Overview</NavLink>
-        <NavLink to="/ttm/addhours" >Add Hours</NavLink>
-        <NavLink to="/ttm/requests" >Requests</NavLink>
-        <NavLink to="/ttm/forms" >Forms</NavLink>
+        <NavLink to="/overview" >Overview</NavLink>
+        <NavLink to="/addhours" >Add Hours</NavLink>
+        <NavLink to="/forms" >Forms</NavLink>
       </div>
     </div>
    

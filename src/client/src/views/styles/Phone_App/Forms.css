@@ -1,0 +1,13 @@
+.form-link-container {
+  display: flex;
+  flex-direction: column;
+  background-color: aliceblue;
+  border: 2px solid #8dc63f;
+  border-radius: 12px;
+  width: 60%;
+  margin-right: 0px;
+}
+
+.form-link {
+  padding: 10%;
+}

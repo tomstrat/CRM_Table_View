@@ -13,6 +13,10 @@ import ScheduleBuilder from "./views/pages/operations/ScheduleBuilder"
 import EditHours from "./views/pages/operations/EditHours"
 import DataViewer from "./views/pages/operations/DataViewer"
 import Requests from "./views/pages/operations/Requests"
+import Overview from "./views/pages/user/Overview"
+import AddHours from "./views/pages/user/AddHours"
+import TimeOff from "./views/pages/user/TimeOff"
+import Forms from "./views/pages/user/Forms"
 
 function App() {
 
@@ -30,6 +34,10 @@ function App() {
           <PrivateRoute exact path="/ops/manageusers" component={ManageUsers} />
           <PrivateRoute exact path="/ops/users/:id" component={UserCard} />
           <PrivateRoute exact path="/logout" component={Logout} />
+          <PrivateRoute exact path="/overview" component={Overview} />
+          <PrivateRoute exact path="/addhours" component={AddHours} />
+          <PrivateRoute exact path="/timeoff" component={TimeOff} />
+          <PrivateRoute exact path="/forms" component={Forms} />
           <PublicRoute path="/login" component={Login} />
           <Redirect from="*" to="/" />
         </Switch>
