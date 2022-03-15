@@ -135,8 +135,8 @@ const StaffSearchControls = (props) => {
             passState={controlsGetButtons} 
             buttons={
               [
-                {name: "All", currState: true, buttonRole: "master", classInject: ""}, 
-                {name: "Rostered", currState: false, buttonRole: "child", classInject: ""},
+                {name: "All", currState: false, buttonRole: "master", classInject: ""}, 
+                {name: "Rostered", currState: true, buttonRole: "child", classInject: ""},
                 {name: "Possible", currState: false, buttonRole: "child", classInject: ""}, 
               ]
             }

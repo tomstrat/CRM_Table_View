@@ -465,3 +465,11 @@
 .name-box .xbutton {
   border-radius: 0;
 }
+
+.switch-button {
+  font-size: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+
