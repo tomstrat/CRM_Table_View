@@ -3,6 +3,8 @@ import React, {useState} from "react"
 import PropTypes from "prop-types"
 import "../../styles/TruckContents.css"
 import TextBox from "../TextBox"
+import uniqid from "uniqid"
+
 const TruckContents = (props) => {
 
   // eslint-disable-next-line no-unused-vars
@@ -13,12 +15,12 @@ const TruckContents = (props) => {
   function makeTruckRow(truck) {
     return (
       <>
-        <div className="truck-row">
-          <div className="truck-name">{truck.name}</div>
+        <div key={uniqid("row-")} className="truck-row">
+          <div key={uniqid("name-")} className="truck-name">{truck.name}</div>
      
-          <TextBox passedClass={"contents"}/>
-          <TextBox passedClass={"location"}/>
-          <TextBox passedClass={"tools"}/>
+          <TextBox passedClass={"contents"} key={uniqid("textbox-")}/>
+          <TextBox passedClass={"location"} key={uniqid("textbox-")}/>
+          <TextBox passedClass={"tools"} key={uniqid("textbox-")}/>
     
         
         
@@ -28,17 +30,19 @@ const TruckContents = (props) => {
   }
 
   return <>
+
     <div className="contents-headers">
       <div className="cont-header contents-head">Contents</div>
       <div className="cont-header location-head">Location</div>
       <div className="cont-header tools-head">Tools</div>
     </div>
+
     {
       trucks.map((row) => {
         return makeTruckRow(row)
       })
     }
-    <button>Save</button>
+    <button key={uniqid("button-")}>Save</button>
   </>
 }
 
