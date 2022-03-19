@@ -13,7 +13,7 @@ const ScheduleBuilder = () => {
   // eslint-disable-next-line no-unused-vars
   const [sideFlip, setSideFlip] = useState(false)
   const [insertName, setInsertName] = useState("")
-  const [addedNames, setAddedNames] = useState([])
+  const [addedNames, setAddedNames] = useState([""])
   const [availQuery, setAvailQuery] = useState(["notWorking", "working", "contactable", "unselected"])
   const [hoursQuery, setHoursQuery] = useState(["temp", "fullTime", "casual"])
   const [roleQuery, setRoleQuery] = useState(["driver", "navigator", "trainer", "trainee", "temp"])
