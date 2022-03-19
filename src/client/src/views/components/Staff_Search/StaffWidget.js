@@ -36,8 +36,6 @@ const StaffWidget = (props) => {
     ? employeeType
     : [...employeeType, "uncertified"]
 
-  
-  console.log(updatedTypes)
   function toggleOnClick () {
     props.resultsGetName(username)
   }

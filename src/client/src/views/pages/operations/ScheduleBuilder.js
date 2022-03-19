@@ -20,7 +20,7 @@ const ScheduleBuilder = () => {
   const [currDay, setCurrday] = useState(1)
   const [locationQuery, setLocationQuery] = useState(
     [
-      "cbd", "innerNorth", "innerWest", "innerEast", "innerSouth", "outerNorth", "outerWest", "outerEast", "outerSouth"
+      "cbd", "Unspecified", "innerNorth", "innerWest", "innerEast", "innerSouth", "outerNorth", "outerWest", "outerEast", "outerSouth"
     ]
   )
   
