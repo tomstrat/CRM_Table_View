@@ -1,6 +1,8 @@
 import React, { useState } from "react"
 import PhoneNav from "../../components/Nav/PhoneNav"
 import getCurrentDate from "../../../utilities/getCurrentDate"
+import BinarySelect from "../../components/Buttons/BinarySelect"
+
 
 const AddHours = () => {
 
@@ -33,7 +35,7 @@ const AddHours = () => {
             <div className="label-box">
               <div className="phone-tiny-title">Start Time</div>
               <div className="time-box">
-                <select type="select" name="start-hours" className="start-time-select start-time-hours">
+                <select type="select" name="start-hours" className="ttm-time ttm-hours">
                   <option value="05">05</option>
                   <option value="06">06</option>
                   <option value="07">07</option>
@@ -48,7 +50,7 @@ const AddHours = () => {
                   <option value="16">16</option>
                   <option value="17">17</option>
                 </select>
-                <select type="select" name="start-mins" className="start-time-select start-time-minutes">
+                <select type="select" name="start-mins" className="ttm-time ttm-minutes">
                   <option value="00">00</option>
                   <option value="15">15</option>
                   <option value="30">30</option>
@@ -59,7 +61,7 @@ const AddHours = () => {
             <div className="label-box">
               <div className="phone-tiny-title">End Time</div>
               <div className="time-box">
-                <select type="select" name="end-hours" className="start-time-select start-time-hours">
+                <select type="select" name="end-hours" className="ttm-time ttm-hours">
                   <option value="05">05</option>
                   <option value="06">06</option>
                   <option value="07">07</option>
@@ -74,39 +76,7 @@ const AddHours = () => {
                   <option value="16">16</option>
                   <option value="17">17</option>
                 </select>
-                <select type="select" name="end-mins" className="start-time-select start-time-minutes">
-                  <option value="00">00</option>
-                  <option value="15">15</option>
-                  <option value="30">30</option>
-                  <option value="45">45</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div className={
-            hadBreak
-              ? "form-section-container" 
-              : "hidden"
-          }>
-            <div className="label-box">
-              <div className="phone-tiny-title">Break Start Time</div>
-              <div className="time-box">
-                <select type="select" name="end-hours" className="start-time-select start-time-hours">
-                  <option value="05">05</option>
-                  <option value="06">06</option>
-                  <option value="07">07</option>
-                  <option value="08">08</option>
-                  <option value="09">09</option>
-                  <option value="10">10</option>
-                  <option value="11">11</option>
-                  <option value="12">12</option>
-                  <option value="13">13</option>
-                  <option value="14">14</option>
-                  <option value="15">15</option>
-                  <option value="16">16</option>
-                  <option value="17">17</option>
-                </select>
-                <select type="select" name="end-mins" className="start-time-select start-time-minutes">
+                <select type="select" name="end-mins" className="ttm-time ttm-minutes">
                   <option value="00">00</option>
                   <option value="15">15</option>
                   <option value="30">30</option>
@@ -116,7 +86,64 @@ const AddHours = () => {
             </div>
           </div>
           <div className="form-section-container">
-            <button type="submit" className="submit-button">Submit</button>
+            <div className="label-box">
+              <div className="phone-tiny-title">Break?</div>
+              <BinarySelect
+                changeState={setHadBreak}
+                stateBool={hadBreak}
+                onName="Yes"
+                offName="No"
+              />
+              <div className="separator-div"></div>
+              <div className={
+                hadBreak
+                  ? "form-section-container"
+                  : "hidden"
+              }>
+                <div className="label-box">
+                  <div className="phone-tiny-title">Break Start Time</div>
+                  <div className="time-box">
+                    <select type="select" name="end-hours" className="ttm-time ttm-hours">
+                      <option value="05">05</option>
+                      <option value="06">06</option>
+                      <option value="07">07</option>
+                      <option value="08">08</option>
+                      <option value="09">09</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                      <option value="13">13</option>
+                      <option value="14">14</option>
+                      <option value="15">15</option>
+                      <option value="16">16</option>
+                      <option value="17">17</option>
+                    </select>
+                    <select type="select" name="end-mins" className="ttm-time ttm-minutes">
+                      <option value="00">00</option>
+                      <option value="15">15</option>
+                      <option value="30">30</option>
+                      <option value="45">45</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div className={
+                hadBreak
+                  ? "hidden"
+                  : "form-section-container"
+              }>
+                <div className="label-box">
+                  <div className="phone-tiny-title">Explanation:</div>
+                  <input
+                    type="text"
+                    className="no-break-explanation"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="hours-submit-container">
+            <button type="submit" className="hours-submit">Submit</button>
           </div>
         </form>
       </div>

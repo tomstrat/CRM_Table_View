@@ -18,9 +18,9 @@ const TruckContents = (props) => {
         <div key={uniqid("row-")} className="truck-row">
           <div key={uniqid("name-")} className="truck-name">{truck.name}</div>
      
-          <TextBox passedClass={"contents"} key={uniqid("textbox-")}/>
-          <TextBox passedClass={"location"} key={uniqid("textbox-")}/>
-          <TextBox passedClass={"tools"} key={uniqid("textbox-")}/>
+          <TextBox passedClass={"contents"}/>
+          <TextBox passedClass={"location"}/>
+          <TextBox passedClass={"tools"}/>
     
         
         

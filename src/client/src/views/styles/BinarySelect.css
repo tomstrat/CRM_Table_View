@@ -1,0 +1,45 @@
+.binary-select {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 1%;
+  transition: 50%;
+}
+
+.binary-select-button {
+  text-align: center;
+  font-size: 16px;
+  width: 50%;
+  padding-top: 10%;
+  padding-bottom: 10%;
+  padding-left: 40%;
+  padding-right: 40%;
+  cursor: pointer;
+}
+
+.button-yes {
+  border: 2px solid #8dc63f;
+  border-left: 1px solid #8dc63f;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  
+}
+
+.button-no {
+  border: 2px solid #8dc63f;
+  border-right: 1px solid #8dc63f;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.binary-on {
+  background-color: #8dc63f;
+  color: white;
+}
+
+.binary-off {
+  background-color: white;
+  color: black;
+}
+
