@@ -2,6 +2,14 @@ import React from "react"
 import PropTypes from "prop-types"
 import "../../styles/BinarySelect.css"
 
+//simple binary radio control button
+//props:
+//stateBool - Boolean passed in by the parent
+//changeState - function to change stateBool
+//onName - user displayed title for 'on' button
+//offName - user displayed title for 'off' button
+//all props are required
+
 const BinarySelect = (props) => {
 
   const onClickYes = () => {
