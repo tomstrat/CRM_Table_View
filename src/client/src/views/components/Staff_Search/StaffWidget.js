@@ -32,13 +32,14 @@ const StaffWidget = (props) => {
     certified
   } = props.user
 
-  const updatedTypes = certified
+  const updatedTypes = (certified === "true")
     ? employeeType
     : [...employeeType, "uncertified"]
 
   function toggleOnClick () {
     props.resultsGetName(username)
   }
+  console.log(updatedTypes)
   return (
     <div key={uniqid("type-")} className={
       ownState

@@ -1,10 +1,9 @@
 .staff-widget {
   display: flex;
   justify-content: space-around;
-  border: 1px solid #00539f;
-  border-left: 4px solid #00539f;
+ 
   border-radius: 0 10px 10px 0;
-  background-color: rgba(240, 248, 255, 1);
+  background-color: white;
   display: flex;
   align-items: center;
   min-width: 10vw;
@@ -17,10 +16,7 @@
   cursor: pointer;
   color: black;
 }
-.staff-widget:hover {
-  background-color: #cedef0;
-  border-left: 10px solid #00539f;
-}
+
 .staff-widget-username {
   font-size: 11px;
   font-weight: 550;
@@ -59,8 +55,44 @@
 
 .staff-widget-toggled {
   background-color: #8dc63f;
-  border-left: 10px solid #00539f;
 }
+
 .staff-widget-toggled:hover {
-  background-color: #cde7a9;
+  background-color: #8dc63f;
+}
+
+.uncertified {
+  border: 1px solid #89cff0;
+  border-left: 12px solid #89cff0;
+}
+
+.uncertified:hover {
+  background-color: #cedef0;
+}
+
+.trainer {
+  border: 1px solid #00539f;
+  border-left: 12px solid #00539f;
+}
+
+.trainer:hover {
+  background-color: #cedef0;
+}
+
+.driver {
+  border: 1px solid #005c29;
+  border-left: 12px solid #005c29;
+}
+
+.driver:hover {
+  background-color: #cedef0;
+}
+
+.navigator {
+  border: 1px solid #FFBF00;
+  border-left: 12px solid #FFBF00;
+}
+
+.navigator:hover {
+  background-color: #cedef0;
 }

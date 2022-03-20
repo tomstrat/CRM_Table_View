@@ -8,8 +8,6 @@ import PropTypes from "prop-types"
 import { formatUsers } from "../../../utilities/formatters/users.formatters"
 import getCurrentDate from "../../../utilities/getCurrentDate"
 
-
-
 const StaffSearchResults = (props) => {
 
   const [users, setUsers] = useState({
@@ -98,7 +96,6 @@ const StaffSearchResults = (props) => {
 }
 
 export default StaffSearchResults
-
 
 StaffSearchResults.propTypes = {
   pageGetName: PropTypes.func,
