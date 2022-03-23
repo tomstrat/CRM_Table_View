@@ -98,9 +98,10 @@ const StaffSearchControls = (props) => {
     if(location) {
       if(direction[2].currState == true)
       {
+        locationQuery.push("cbd")
+        locationQuery.push("Unspecified")
         location.map((prox) => {
           if(prox.currState == true){
-            locationQuery.push("cbd")
             direction.map((obj) => {
               if(obj.buttonRole !== "master")
                 locationQuery.push(prox.name.toLowerCase() + obj.name)
@@ -135,8 +136,8 @@ const StaffSearchControls = (props) => {
             passState={controlsGetButtons} 
             buttons={
               [
-                {name: "All", currState: true, buttonRole: "master", classInject: ""}, 
-                {name: "Rostered", currState: false, buttonRole: "child", classInject: ""},
+                {name: "All", currState: false, buttonRole: "master", classInject: ""}, 
+                {name: "Rostered", currState: true, buttonRole: "child", classInject: ""},
                 {name: "Possible", currState: false, buttonRole: "child", classInject: ""}, 
               ]
             }

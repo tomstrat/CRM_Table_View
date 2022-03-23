@@ -97,13 +97,13 @@ input {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: aliceblue;
+  background: white;
   border-radius: 10px;
 }
 
 /* Corner */
 ::-webkit-scrollbar-corner {
-  background: aliceblue;
+  background: white;
   border-radius: 10px;
 }
 

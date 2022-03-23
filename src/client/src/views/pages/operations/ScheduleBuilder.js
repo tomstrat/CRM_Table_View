@@ -6,18 +6,21 @@ import StaffSearchResults from "../../components/Staff_Search/StaffSearchResults
 import RoutePlanner from "../../components/RoutePlanner/RoutePlanner"
 import getCurrentDate from "../../../utilities/getCurrentDate"
 import Nav from "../../components/Nav/Nav"
+import TruckContents from "../../components/SideBarComponents/TruckContents"
 
 
 const ScheduleBuilder = () => {
+  // eslint-disable-next-line no-unused-vars
+  const [sideFlip, setSideFlip] = useState(false)
   const [insertName, setInsertName] = useState("")
-  const [addedNames, setAddedNames] = useState([])
+  const [addedNames, setAddedNames] = useState([""])
   const [availQuery, setAvailQuery] = useState(["notWorking", "working", "contactable", "unselected"])
   const [hoursQuery, setHoursQuery] = useState(["temp", "fullTime", "casual"])
   const [roleQuery, setRoleQuery] = useState(["driver", "navigator", "trainer", "trainee", "temp"])
   const [currDay, setCurrday] = useState(1)
   const [locationQuery, setLocationQuery] = useState(
     [
-      "cbd", "innerNorth", "innerWest", "innerEast", "innerSouth", "outerNorth", "outerWest", "outerEast", "outerSouth"
+      "cbd", "Unspecified", "innerNorth", "innerWest", "innerEast", "innerSouth", "outerNorth", "outerWest", "outerEast", "outerSouth"
     ]
   )
   
@@ -58,6 +61,13 @@ const ScheduleBuilder = () => {
     setCurrday(currDay - 1)
   }
 
+  function sideBarSwitch(){
+    if (sideFlip) {
+      setSideFlip(false)
+    }
+    else setSideFlip(true)
+    
+  }
 
   return (
     <>
@@ -73,13 +83,152 @@ const ScheduleBuilder = () => {
             </div>
             <div className="date-title">{getCurrentDate("date", currDay)}</div>
           </div>
-          <div id="default-sidebar" className="visible-sidebar">
+          <div id="default-sidebar" 
+            className={
+              sideFlip 
+                ? "visible-sidebar"
+                : "hidden"
+            }
+          >
+            
             <SideBar 
               title={"Search Staff"} 
               component={StaffSearchControls}
               pageGetButtons={pageGetButtons}
             />
           </div>
+          <div id="secondary-sidebar" 
+            className={
+              sideFlip 
+                ? "hidden"
+                : "visible-sidebar"
+            }
+          >
+            
+            <SideBar 
+              title={"Truck Info"} 
+              component={TruckContents}
+              defaultTrucks={
+                [
+                  {
+                    name: "1AQ", 
+                    contents: "",
+                    location: "",
+                    tools: ""
+                  },
+                  {
+                    name: "1CZ", 
+                    contents: "",
+                    location: "",
+                    tools: ""
+                  },
+                  {
+                    name: "1GA",
+                    contents: "",
+                    location: "",
+                    tools: ""
+                  },
+                  {
+                    name:  "1IP",
+                    contents: "",
+                    location: "",
+                    tools: ""
+                  },
+                  {
+                    name: "1JK", 
+                    contents: "",
+                    location: "",
+                    tools: ""
+                  },
+                  {
+                    name: "1JW",
+                    contents: "",
+                    location: "",
+                    tools: ""
+                  },
+                  {
+                    name: "1LL",
+                    contents: "",
+                    location: "",
+                    tools: ""
+                  },
+                  {
+                    name:   "1LS",
+                    contents: "",
+                    location: "",
+                    tools: ""
+                  },
+                  {
+                    name: "1WZ",
+                    contents: "",
+                    location: "",
+                    tools: ""
+                  },
+                  {
+                    name: "289",
+                    contents: "",
+                    location: "",
+                    tools: ""
+                  },
+                  {
+                    name: "290", 
+                    contents: "",
+                    location: "",
+                    tools: ""
+                  },
+                  {
+                    name: "442",
+                    contents: "",
+                    location: "",
+                    tools: ""
+                  },
+                  {
+                    name: "554",
+                    contents: "",
+                    location: "",
+                    tools: ""
+                  },
+                  {
+                    name:  "XV4",
+                    contents: "",
+                    location: "",
+                    tools: ""
+                  },
+                  {
+                    name:  "XV5",
+                    contents: "",
+                    location: "",
+                    tools: ""
+                  },
+                  {
+                    name:  "XV81",
+                    contents: "",
+                    location: "",
+                    tools: ""
+                  },
+                  {
+                    name:   "XV88",
+                    contents: "",
+                    location: "",
+                    tools: ""
+                  },
+                  {
+                    name:  "XV9",
+                    contents: "",
+                    location: "",
+                    tools: ""
+                  },
+                  {
+                    name:  "ZPR",
+                    contents: "",
+                    location: "",
+                    tools: ""
+                  },
+                ]
+              }
+            />
+          </div>
+          <button className="switch-button" onClick={sideBarSwitch}>Switch Panel</button>
         </div>
         <div className="column-page">
           <StaffSearchResults 
