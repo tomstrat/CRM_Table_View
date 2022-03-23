@@ -5,7 +5,8 @@ import { RouteDefinition } from "../../models/route"
 import UserValType from "../../middleware/validation/types/users"
 import { Role } from "../../database/models/User"
 import { ViewWithErrors } from "../../views/types/views"
-import { formatUser, cleanObject } from "../formatters/user.formatters"
+import { formatUser } from "../formatters/user.formatters"
+import { cleanObject } from "../formatters/helper"
 
 export default function usersRouteFactory(
   {

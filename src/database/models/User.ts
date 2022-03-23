@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, OneToMany } from "typeorm"
 import { Roster } from "./Roster"
+import { Timesheet } from "./Timesheet"
 import dotenv from "dotenv"
 
 
@@ -97,4 +98,10 @@ export class User {
     cascade: true
   })
   roster!: Roster
+
+  @OneToMany(type => Timesheet, timesheet => timesheet.user, {
+    cascade: true,
+    nullable: true
+  })
+  timesheets?: Timesheet[]
 }

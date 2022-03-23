@@ -39,11 +39,11 @@ export default class UserClient extends Client<User> {
         hideOrShowPass,
         (user) => user
       )
-    ])({ [key]: unameOrId }, { relations: ["roster"] })
+    ])({ [key]: unameOrId }, { relations: ["roster", "timesheets"] })
   }
 
   async getAll(): Promise<User[] | undefined> {
-    const users = await this.find({ relations: ["roster"] })
+    const users = await this.find({ relations: ["roster", "timesheets"] })
     if (!users) return users
     return R.map(this.hidePassword, users)
   }

@@ -7,6 +7,7 @@ import express, { Express } from "express"
 import { Connection } from "typeorm"
 import {
   testUser, correctUser,
+  correctCreatedUser,
   updatedUser,
   correctPostUser,
   incorrectPostUser,
@@ -84,7 +85,7 @@ describe("Routes for Users", () => {
             .send(correctPostUser)
             .expect(200)
             .expect("Content-Type", /json/)
-            .expect(correctUser)
+            .expect(correctCreatedUser)
         })
       })
       describe("And incorrect data", () => {

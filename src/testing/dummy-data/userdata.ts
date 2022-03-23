@@ -2,6 +2,28 @@ import { User, Role, Contract, EmployeeType, Location } from "../../database/mod
 import { RosterStatus } from "../../database/models/Roster"
 import { ExternalInputUser, ExternalOutputUser } from "../../models/external.interfaces"
 
+const joined = new Date("2018-07-22")
+export const correctDatabaseUser: User = {
+  username: "Tom",
+  password: "password",
+  employeeType: [EmployeeType.driver, EmployeeType.navigator],
+  role: Role.user,
+  contract: Contract.fullTime,
+  certified: true,
+  injured: false,
+  joinDate: joined,
+  location: Location.cbd,
+  roster: {
+    monday: RosterStatus.working,
+    tuesday: RosterStatus.working,
+    wednesday: RosterStatus.working,
+    thursday: RosterStatus.working,
+    friday: RosterStatus.working,
+    saturday: RosterStatus.working,
+  },
+  timesheets: []
+}
+
 export const testUser: ExternalOutputUser = {
   id: 1,
   username: "test",
@@ -21,10 +43,34 @@ export const testUser: ExternalOutputUser = {
     thursday: RosterStatus.working,
     friday: RosterStatus.working,
     saturday: RosterStatus.working,
-  }
+  },
+  timesheets: []
 }
 
 export const correctUser: ExternalOutputUser = {
+  id: 2,
+  username: "newUser",
+  password: "",
+  employeeType: [EmployeeType.operations, EmployeeType.driver],
+  role: Role.admin,
+  contract: Contract.fullTime,
+  certified: true,
+  injured: true,
+  location: Location.innerEast,
+  joinDate: "2018-07-22T00:00:00.000Z",
+  roster: {
+    id: 2,
+    monday: RosterStatus.working,
+    tuesday: RosterStatus.notWorking,
+    wednesday: RosterStatus.working,
+    thursday: RosterStatus.notWorking,
+    friday: RosterStatus.contactable,
+    saturday: RosterStatus.working,
+  },
+  timesheets: []
+}
+
+export const correctCreatedUser: ExternalOutputUser = {
   id: 2,
   username: "newUser",
   password: "",
@@ -65,7 +111,8 @@ export const updatedUser: ExternalOutputUser = {
     thursday: RosterStatus.working,
     friday: RosterStatus.contactable,
     saturday: RosterStatus.working,
-  }
+  },
+  timesheets: []
 }
 
 export const correctPostUser: ExternalInputUser = {
@@ -85,6 +132,7 @@ export const correctPostUser: ExternalInputUser = {
   rosterThursday: RosterStatus.notWorking,
   rosterFriday: RosterStatus.contactable,
   rosterSaturday: RosterStatus.working,
+  timesheets: []
 }
 
 export const incorrectPostUser = {
@@ -197,6 +245,12 @@ export const errorObject = {
 }
 export const patchErrorObject = {
   errors: [
+    {
+      value: "test",
+      msg: "Username already exists",
+      param: "username",
+      location: "body"
+    },
     {
       value: "dd",
       msg: "Must be between 5 and 30 characters",

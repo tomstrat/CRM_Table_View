@@ -1,5 +1,6 @@
 import { RosterStatus } from "../database/models/Roster"
-import { Contract, EmployeeType, Location, Role } from "../database/models/User"
+import { Timesheet } from "../database/models/Timesheet"
+import { Contract, EmployeeType, Location, Role, User } from "../database/models/User"
 
 export interface AccessToken {
   access_token: string
@@ -50,6 +51,7 @@ export interface ExternalInputUser {
   rosterThursday: RosterStatus
   rosterFriday: RosterStatus
   rosterSaturday: RosterStatus
+  timesheets?: Timesheet[]
 }
 
 export interface ExternalOutputUser {
@@ -71,5 +73,21 @@ export interface ExternalOutputUser {
     thursday: RosterStatus
     friday: RosterStatus
     saturday: RosterStatus
-  }
+  },
+  timesheets?: Timesheet[]
+}
+
+export interface ExternalInputTimesheet {
+  route: string
+  startTime?: string
+  endTime?: string
+  breakStart?: string
+  plannedStart: string
+  ttmComments?: string
+  opsComments?: string
+  opsMessage: string
+  startTruck?: string
+  sick?: boolean
+  late?: boolean
+  edited: boolean
 }

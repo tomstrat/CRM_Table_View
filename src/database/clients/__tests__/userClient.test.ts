@@ -2,8 +2,9 @@ import { Connection } from "typeorm"
 import Config from "../../../config/config"
 import { createDatabase } from "../../"
 import UserClient from "../UserClient"
-import { User, Role, Contract, EmployeeType, Location } from "../../models/User"
-import { RosterStatus } from "../../models/Roster"
+import { User, Role } from "../../models/User"
+import { correctDatabaseUser } from "../../../testing/dummy-data/userdata"
+
 
 describe("UserClient Methods", () => {
 
@@ -21,28 +22,9 @@ describe("UserClient Methods", () => {
 
   describe("When adding a user", () => {
     const joined = new Date("2018-07-22")
-    const correctUser: User = {
-      username: "Tom",
-      password: "password",
-      employeeType: [EmployeeType.driver, EmployeeType.navigator],
-      role: Role.user,
-      contract: Contract.fullTime,
-      certified: true,
-      injured: false,
-      joinDate: joined,
-      location: Location.cbd,
-      roster: {
-        monday: RosterStatus.working,
-        tuesday: RosterStatus.working,
-        wednesday: RosterStatus.working,
-        thursday: RosterStatus.working,
-        friday: RosterStatus.working,
-        saturday: RosterStatus.working,
-      }
-    }
     describe("Passing correct parameters", () => {
       it("Should return the new user", async () => {
-        testUser = await userClient.addRecord(correctUser)
+        testUser = await userClient.addRecord(correctDatabaseUser)
         if (testUser) {
           expect(typeof testUser.id).toBe("number")
           expect(testUser.username).toBe("Tom")

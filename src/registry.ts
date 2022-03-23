@@ -7,25 +7,30 @@ import usersRouteFactory from "./routes/users"
 import authRouteFactory from "./routes/auth"
 import appFactory from "./app"
 import { requireAuth, handleErrors, handleValErrors } from "./middleware"
-import { tableViewBuilder, ttmoverview, ttmhours, ttmavailability } from "./views"
+import { tableViewBuilder } from "./views"
 import dataRouteFactory from "./routes/data"
 import timesheetsRouteFactory from "./routes/timesheets"
 import opstimesheetsRouteFactory from "./routes/ops/timesheets"
 import { opsoverview, scheduler, edithours, dataviewer, requests, manageusers } from "./views/opsviews/timesheets"
 import userValidatorFactory from "./middleware/validation/users.validation"
+import timesheetValidatorFactory from "./middleware/validation/timesheets.validation"
 import makeTestUser from "./routes/auth/testUser"
+import Client from "./database/clients/Client"
+import { Timesheet } from "./database/models/Timesheet"
 
 export default async function inject(testDB?: Connection) {
   dotenv.config()
   const notProduction = (process.env.PROD_DATABASE !== "true")
   const DB = testDB || await createDatabase({ Config, testdb: notProduction })
   const userClient = new UserClient(DB)
+  const timesheetClient = new Client("Timesheet", DB, Timesheet)
   const userValidators = userValidatorFactory({ userClient })
+  const timesheetValidators = timesheetValidatorFactory({ timesheetClient })
   const Routes = [
     usersRouteFactory({ userClient, userValidators, handleValErrors }),
     authRouteFactory({ userValidators, handleValErrors, userClient }),
     dataRouteFactory({ tableViewBuilder }),
-    timesheetsRouteFactory({ ttmoverview, ttmhours, ttmavailability }),
+    timesheetsRouteFactory({ timesheetClient, userClient, timesheetValidators, handleValErrors }),
     opstimesheetsRouteFactory({ userClient, opsoverview, scheduler, edithours, dataviewer, requests, manageusers }),
   ]
 

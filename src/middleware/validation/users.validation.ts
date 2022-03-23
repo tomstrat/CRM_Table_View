@@ -40,7 +40,7 @@ export default function userValidatorFactory({ userClient }:
       .custom(async (username, { req }) => {
         const id = req.params ? req.params.id : undefined
         const user = await userClient.getOne(username)
-        if (user && user.id === id) throw new Error("Username already exists")
+        if (user && user.id !== +id) throw new Error("Username already exists")
       }),
     requireNewPassword: body("password")
       .trim()

@@ -1,6 +1,6 @@
 import { ExternalInputUser } from "../../models/external.interfaces"
 import { EmployeeType, User } from "../../database/models/User"
-import { filter } from "ramda"
+import { convertCheckBox, convertDate } from "./helper"
 
 export function formatUser(user: ExternalInputUser): User {
   return {
@@ -22,18 +22,6 @@ export function formatUser(user: ExternalInputUser): User {
       saturday: user.rosterSaturday,
     }
   }
-}
-
-export function cleanObject(user: User): User | Partial<User> {
-  return filter((n: any) => n !== undefined, user)
-}
-
-function convertCheckBox(result: string): boolean {
-  return (result === "true")
-}
-
-function convertDate(date: string | undefined): Date | undefined {
-  return date ? new Date(date) : undefined
 }
 
 function formatTypes(types: string | string[] | undefined): EmployeeType[] | undefined {
