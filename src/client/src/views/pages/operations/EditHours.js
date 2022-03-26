@@ -1,10 +1,12 @@
 import Nav from "../../components/Nav/Nav"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import "../../styles/EditHours.css"
 import getCurrentDate from "../../../utilities/getCurrentDate"
 
+
 const EditHours = () => {
 
+  const [data, setData] = useState({data: [{}], populated: false})
   const [currDay, setCurrday] = useState(-1)
 
   function increaseDay(){
@@ -15,6 +17,17 @@ const EditHours = () => {
     setCurrday(currDay - 1)
   }
 
+
+  useEffect(() => {
+    const getTimesheets = async () => {
+      const result = await fetch("/api/timesheets")
+      const parsedResult = await result.json()
+      //add formatter
+      setData({data: parsedResult, populated: true})
+    }
+    console.log(data)
+    if(!data.populated) getTimesheets()
+  }, [data])
   return (
     <
       
