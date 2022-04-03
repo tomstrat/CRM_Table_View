@@ -6,8 +6,6 @@ import uniqid from "uniqid"
 
 const TableContents = (props) => {
   
-  
-
   return (
     <div className="table-content-container">
       <div className="table">
