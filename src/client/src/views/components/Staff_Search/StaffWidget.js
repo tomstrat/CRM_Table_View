@@ -39,7 +39,6 @@ const StaffWidget = (props) => {
   function toggleOnClick () {
     props.resultsGetName(username)
   }
-  console.log(updatedTypes)
   return (
     <div key={uniqid("type-")} className={
       ownState

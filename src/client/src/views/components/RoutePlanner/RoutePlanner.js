@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import RouteBox from "./RouteBox"
 import uniqid from "uniqid"
 import PropTypes from "prop-types"
-
+import formatSchedule from "./RouteFunctions"
 
 const RoutePlanner = (props) => {
   //top bar state for adding routes 
@@ -190,6 +190,10 @@ const RoutePlanner = (props) => {
       />
     )
   }
+  function saveOnClick () {
+    formatSchedule(routePlannerState)
+  }
+  
 
   return (
     <div className="route-planner-container">
@@ -203,7 +207,7 @@ const RoutePlanner = (props) => {
         <input type="text" name="routeName" value={addRouteState.routeName} className="route-name-input route-top-bar-element" onChange={handleChange} placeholder="Add route name..." ></input>  
         <button className="add-route-button route-top-bar-element" onClick={addRoutehandleClick}>Add New Route</button>
         <button className="add-staff-button route-top-bar-element" onClick={addNameClick}>Add Staff</button>
-        <button className="save-button route-top-bar-element">Save Schedule (P)</button>
+        <button className="save-button route-top-bar-element" onClick={saveOnClick}>Save Schedule (P)</button>
         <button className="publish-button">Publish Schedule (P)</button>
       </div> 
       <div className="container-of-the-routes">
