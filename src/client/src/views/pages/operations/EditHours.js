@@ -25,9 +25,9 @@ const EditHours = () => {
       //add formatter
       setData({data: parsedResult, populated: true})
     }
+    console.log(data)
     if(!data.populated) getTimesheets()
   }, [data])
-  console.log(data)
   return (
     <
       
