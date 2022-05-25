@@ -30,7 +30,6 @@ const ManageUsers = () => {
     const getData = async () => {
       const result = await fetch("/api/users")
       const parsedResult = await result.json()
-      console.log(parsedResult)
       const formattedResult = formatUsers(parsedResult, 
         [
           "passwordConfirm",

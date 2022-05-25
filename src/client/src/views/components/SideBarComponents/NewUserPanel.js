@@ -14,7 +14,9 @@ const NewUserPanel = (props) => {
 
   const [errors, setErrors] = useState({})
   const [values, setValues] = useState(initialUserState)
+  
 
+  console.log(values)
   const handleOnChange = (event) => {
     event.persist()
     const { target } = event
