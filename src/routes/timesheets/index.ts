@@ -60,8 +60,8 @@ export default function timesheetsRouteFactory(
     ],
     handleValErrors(),
     async (req: Request, res: Response) => {
-      const { id } = req.body
-      const user = await userClient.getOne(id)
+      const { userId } = req.body
+      const user = await userClient.getOne(userId)
       if (user) {
         const timesheet = await timesheetClient.addRecord(formatTimesheet(req.body, user))
         res.status(200).json(timesheet)

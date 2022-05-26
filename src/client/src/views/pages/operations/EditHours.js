@@ -49,6 +49,8 @@ const EditHours = () => {
         .catch((err) => {
           console.log(err)
         })
+      //maybe move this line into then?
+      //would it loop if i do?
       setData({data: response, populated: true})
     }
     if(!data.populated) getTimesheets()
