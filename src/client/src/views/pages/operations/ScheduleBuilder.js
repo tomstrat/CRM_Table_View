@@ -241,6 +241,7 @@ const ScheduleBuilder = () => {
             pageGetName={pageGetNames}>
           </StaffSearchResults>
           <RoutePlanner
+            currDay={currDay}
             addedNames={addedNames}
             nameWasRemoved={nameWasRemoved}
             nameWasAdded={nameWasAdded}

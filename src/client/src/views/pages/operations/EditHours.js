@@ -26,7 +26,7 @@ const EditHours = () => {
     setCurrday(currDay - 1)
   }
 
-  async function postOnClick(e) {
+  function postOnClick(e) {
     e.preventDefault()
     
     axios.post("/api/timesheets/new", timeData)
