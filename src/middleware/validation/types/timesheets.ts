@@ -6,8 +6,8 @@ export default interface TimesheetValType {
   requirePlannedStart: ValidationChain
   requireOpsMessage: ValidationChain
   requireEdited: ValidationChain
-  requireTimes: ValidationChain
-  requireComments: ValidationChain
-  requireStartTruck: ValidationChain
-  requireSickLate: ValidationChain
+  validateTimes: ValidationChain
+  validateComments: ValidationChain
+  validateStartTruck: ValidationChain
+  validateSickLate: ValidationChain
 }

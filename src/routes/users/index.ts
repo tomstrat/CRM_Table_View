@@ -22,19 +22,19 @@ export default function usersRouteFactory(
   const usersRouter = Router()
   const {
     requireNewUsername,
-    requireEditUsername,
+    validateEditUsername,
     requireNewPassword,
-    requireEditPassword,
+    validateEditPassword,
     requirePasswordConfirmation,
-    requireEditPasswordConfirmation,
+    validateEditPasswordConfirmation,
     requireContract,
     requireRole,
-    requireCert,
-    requireInjured,
-    requireRoster,
-    requireEmployeeType,
-    requireJoinDate,
-    requireLocation
+    validateCert,
+    validateInjured,
+    validateRoster,
+    validateEmployeeType,
+    validateJoinDate,
+    validateLocation
   } = userValidators
 
   usersRouter.get("/", async (req: Request, res: Response) => {
@@ -58,9 +58,9 @@ export default function usersRouteFactory(
       requireNewUsername, requireNewPassword,
       requirePasswordConfirmation,
       requireContract, requireRole,
-      requireCert, requireInjured, requireRoster,
-      requireEmployeeType, requireJoinDate,
-      requireLocation
+      validateCert, validateInjured, validateRoster,
+      validateEmployeeType, validateJoinDate,
+      validateLocation
     ],
     handleValErrors(),
     async (req: Request, res: Response) => {
@@ -71,12 +71,12 @@ export default function usersRouteFactory(
   usersRouter.patch(
     "/:id",
     [
-      requireEditUsername, requireEditPassword,
-      requireEditPasswordConfirmation,
+      validateEditUsername, validateEditPassword,
+      validateEditPasswordConfirmation,
       requireContract, requireRole,
-      requireCert, requireInjured, requireRoster,
-      requireEmployeeType, requireJoinDate,
-      requireLocation
+      validateCert, validateInjured, validateRoster,
+      validateEmployeeType, validateJoinDate,
+      validateLocation
     ],
     handleValErrors(),
     async (req: Request, res: Response) => {

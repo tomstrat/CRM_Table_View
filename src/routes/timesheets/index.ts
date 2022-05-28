@@ -28,10 +28,10 @@ export default function timesheetsRouteFactory(
     requirePlannedStart,
     requireOpsMessage,
     requireEdited,
-    requireTimes,
-    requireComments,
-    requireStartTruck,
-    requireSickLate
+    validateTimes,
+    validateComments,
+    validateStartTruck,
+    validateSickLate
   } = timesheetValidators
 
   timesheetsRouter.get("/", async (req: Request, res: Response) => {
@@ -55,8 +55,8 @@ export default function timesheetsRouteFactory(
       requireUserId,
       requireRoute, requirePlannedStart,
       requireOpsMessage, requireEdited,
-      requireTimes, requireComments,
-      requireStartTruck, requireSickLate
+      validateTimes, validateComments,
+      validateStartTruck, validateSickLate
     ],
     handleValErrors(),
     async (req: Request, res: Response) => {

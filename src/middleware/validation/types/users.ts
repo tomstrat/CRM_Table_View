@@ -4,17 +4,17 @@ export default interface UserValType {
   requireUsername: ValidationChain
   requirePassword: ValidationChain
   requireNewUsername: ValidationChain
-  requireEditUsername: ValidationChain
+  validateEditUsername: ValidationChain
   requireNewPassword: ValidationChain
-  requireEditPassword: ValidationChain
+  validateEditPassword: ValidationChain
   requirePasswordConfirmation: ValidationChain
-  requireEditPasswordConfirmation: ValidationChain
+  validateEditPasswordConfirmation: ValidationChain
   requireContract: ValidationChain
   requireRole: ValidationChain
-  requireCert: ValidationChain
-  requireInjured: ValidationChain
-  requireRoster: ValidationChain
-  requireEmployeeType: ValidationChain
-  requireLocation: ValidationChain
-  requireJoinDate: ValidationChain
+  validateCert: ValidationChain
+  validateInjured: ValidationChain
+  validateRoster: ValidationChain
+  validateEmployeeType: ValidationChain
+  validateLocation: ValidationChain
+  validateJoinDate: ValidationChain
 }

@@ -10,17 +10,17 @@ export default function timesheetValidatorFactory({ timesheetClient }:
     requirePlannedStart: body("plannedStart").trim().escape(),
     requireOpsMessage: body("opsMessage").trim().escape(),
     requireEdited: body("edited").isBoolean(),
-    requireTimes: body(["startTime", "endTime", "breakStart"])
+    validateTimes: body(["startTime", "endTime", "breakStart"])
       .optional()
       .trim()
       .isDate()
       .withMessage("Must be a valid date"),
-    requireComments: body(["ttmComments", "opsComments"])
+    validateComments: body(["ttmComments", "opsComments"])
       .optional()
       .trim()
       .escape(),
-    requireStartTruck: body("startTruck").optional().trim().escape(),
-    requireSickLate: body(["sick", "late"]).optional().isBoolean()
+    validateStartTruck: body("startTruck").optional().trim().escape(),
+    validateSickLate: body(["sick", "late"]).optional().isBoolean()
   }
 
 }

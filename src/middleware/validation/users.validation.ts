@@ -31,7 +31,7 @@ export default function userValidatorFactory({ userClient }:
         const user = await userClient.getOne(username)
         if (user) throw new Error("Username already exists")
       }),
-    requireEditUsername: body("username")
+    validateEditUsername: body("username")
       .trim()
       .escape()
       .optional()
@@ -48,7 +48,7 @@ export default function userValidatorFactory({ userClient }:
       .exists()
       .isLength({ min: 5, max: 30 })
       .withMessage("Must be between 5 and 30 characters"),
-    requireEditPassword: body("password")
+    validateEditPassword: body("password")
       .trim()
       .escape()
       .optional()
@@ -64,7 +64,7 @@ export default function userValidatorFactory({ userClient }:
         if (password != req.body.password) throw new Error("Passwords dont match")
         return true
       }),
-    requireEditPasswordConfirmation: body("confirmPassword")
+    validateEditPasswordConfirmation: body("confirmPassword")
       .trim()
       .escape()
       .optional()
@@ -84,24 +84,24 @@ export default function userValidatorFactory({ userClient }:
         if (!(role in Role)) throw new Error("Role not valid")
         return true
       }),
-    requireCert: body("certified")
+    validateCert: body("certified")
       .optional()
       .custom(cert => {
         if (cert != "true" && cert != "false") throw new Error("Certified not valid")
         return true
       }),
-    requireInjured: body("injured")
+    validateInjured: body("injured")
       .optional()
       .custom(inj => {
         if (inj != "true" && inj != "false") throw new Error("Injured not valid")
         return true
       }),
-    requireRoster: body(["rosterMonday", "rosterTuesday", "rosterWednesday", "rosterThursday", "rosterFriday", "rosterSaturday"])
+    validateRoster: body(["rosterMonday", "rosterTuesday", "rosterWednesday", "rosterThursday", "rosterFriday", "rosterSaturday"])
       .custom(roster => {
         if (!(roster in RosterStatus)) throw new Error("Roster not valid")
         return true
       }),
-    requireEmployeeType: body("employeeType")
+    validateEmployeeType: body("employeeType")
       .optional()
       .custom(types => {
         const typesArr: string[] = (typeof types === "string")
@@ -112,13 +112,13 @@ export default function userValidatorFactory({ userClient }:
         })
         return true
       }),
-    requireLocation: body("location")
+    validateLocation: body("location")
       .optional()
       .custom(location => {
         if (!(location in Location)) throw new Error("Location not valid")
         return true
       }),
-    requireJoinDate: body("joinDate")
+    validateJoinDate: body("joinDate")
       .optional()
       .trim()
       .custom(date => {
