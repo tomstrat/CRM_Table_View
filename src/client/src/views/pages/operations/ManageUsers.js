@@ -40,11 +40,13 @@ const ManageUsers = () => {
           "rosterThursday",
           "rosterFriday",
           "rosterSaturday",
-          "rosterSunday"
+          "rosterSunday",
+          "timesheets"
         ]
       )
       setData({data: formattedResult, populated: true})
     }
+    console.log(data)
     if(!data.populated) getData()
   }, [data])
  

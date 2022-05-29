@@ -21,6 +21,7 @@ export function formatUser(user, omissions) {
       userObject.rosterSaturday = R.path(["roster", "saturday"], userObject)
       userObject.rosterSunday = ""
       userObject.passwordConfirm = ""
+      userObject.timesheets = ""
       return userObject
     },
     (data) => {
