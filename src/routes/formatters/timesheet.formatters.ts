@@ -10,7 +10,7 @@ export function formatTimesheet(timesheet: ExternalInputTimesheet, user: User): 
     startTime: convertDate(timesheet.startTime),
     endTime: convertDate(timesheet.endTime),
     breakStart: convertDate(timesheet.breakStart),
-    plannedStart: timesheet.plannedStart,
+    plannedStart: convertDate(timesheet.plannedStart)!,
     ttmComments: timesheet.ttmComments,
     opsComments: timesheet.opsComments,
     opsMessage: timesheet.opsMessage,

@@ -30,7 +30,7 @@ describe("UserClient Methods", () => {
       startTime: date,
       endTime: date,
       breakStart: date,
-      plannedStart: "start",
+      plannedStart: date,
       ttmComments: "test ttm comments",
       opsComments: "test ops comments",
       opsMessage: "test ops message",
@@ -42,7 +42,7 @@ describe("UserClient Methods", () => {
     minimalTimesheet = {
       user: testUser!,
       route: "newTest",
-      plannedStart: "testPlanned",
+      plannedStart: date,
       opsMessage: "test Ops Message",
       edited: false
     }
@@ -59,7 +59,6 @@ describe("UserClient Methods", () => {
         if (testTS) {
           expect(testTS.user.id).toBe(1)
           expect(testTS.sick).toBe(false)
-          expect(testTS.plannedStart).toBe("start")
         }
       })
     })
@@ -70,7 +69,6 @@ describe("UserClient Methods", () => {
           expect(testTS.user.id).toBe(1)
           expect(testTS.sick).toBe(null)
           expect(testTS.endTime).toBe(null)
-          expect(testTS.plannedStart).toBe("testPlanned")
         }
       })
     })

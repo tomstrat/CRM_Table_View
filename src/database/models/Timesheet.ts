@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm"
 import dotenv from "dotenv"
 import { User } from "./User"
 
@@ -33,8 +33,8 @@ export class Timesheet {
   @Column({ type: datetime, nullable: true })
   breakStart?: Date
 
-  @Column()
-  plannedStart!: string
+  @Column({ type: datetime })
+  plannedStart!: Date
 
   @Column({ nullable: true })
   ttmComments?: string
