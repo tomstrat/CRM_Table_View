@@ -19,12 +19,16 @@ const ScheduleBuilder = () => {
   const [hoursQuery, setHoursQuery] = useState(["temp", "fullTime", "casual"])
   const [roleQuery, setRoleQuery] = useState(["driver", "navigator", "trainer", "trainee", "temp"])
   const [currDay, setCurrday] = useState(getCurrentDate("dateTime", 1))
+  const [idMap, setIdMap] = useState(null)
   const [locationQuery, setLocationQuery] = useState(
     [
       "cbd", "Unspecified", "innerNorth", "innerWest", "innerEast", "innerSouth", "outerNorth", "outerWest", "outerEast", "outerSouth"
     ]
   )
   
+  function getIdMap(map){
+    setIdMap(map)
+  }
   function pageGetButtons(avail, hours, role, location) {
     setAvailQuery(avail)
     setHoursQuery(hours)
@@ -60,7 +64,7 @@ const ScheduleBuilder = () => {
       return new Date(currDay)
     })
   }
-  console.log(parseInt("07") - 1)
+  
   function decreaseDay(){
     setCurrday(currDay => {
       currDay.setDate(currDay.getDate() - 1)
@@ -238,7 +242,9 @@ const ScheduleBuilder = () => {
           <button className="switch-button" onClick={sideBarSwitch}>Switch Panel</button>
         </div>
         <div className="column-page">
-          <StaffSearchResults 
+          <StaffSearchResults
+            getIdMap={getIdMap}
+            idMap={idMap} 
             currDay={currDay}
             availQuery={availQuery}
             hoursQuery={hoursQuery}
@@ -248,6 +254,7 @@ const ScheduleBuilder = () => {
             pageGetName={pageGetNames}>
           </StaffSearchResults>
           <RoutePlanner
+            idMap={idMap}
             currDay={currDay}
             addedNames={addedNames}
             nameWasRemoved={nameWasRemoved}

@@ -47,6 +47,9 @@ const StaffSearchResults = (props) => {
       const result = await fetch("/api/users")
       const parsedResult = await result.json()
       const formattedResult = formatUsers(parsedResult)
+      if(!props.idMap) props.getIdMap(R.map(R.pick([
+        "username", "id"
+      ]), formattedResult))
       if (toggleState == null){
         const allPresent = R.map(R.pick([
           "username"
@@ -98,6 +101,8 @@ const StaffSearchResults = (props) => {
 export default StaffSearchResults
 
 StaffSearchResults.propTypes = {
+  idMap: PropTypes.array,
+  getIdMap: PropTypes.func,
   pageGetName: PropTypes.func,
   addedNames: PropTypes.array,
   availQuery: PropTypes.array,
