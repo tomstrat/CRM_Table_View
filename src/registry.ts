@@ -1,4 +1,5 @@
 import UserClient from "./database/clients/UserClient"
+import TimesheetClient from "./database/clients/TimesheetClient"
 import dotenv from "dotenv"
 import { Connection } from "typeorm"
 import { createDatabase } from "./database"
@@ -15,15 +16,14 @@ import { opsoverview, scheduler, edithours, dataviewer, requests, manageusers } 
 import userValidatorFactory from "./middleware/validation/users.validation"
 import timesheetValidatorFactory from "./middleware/validation/timesheets.validation"
 import makeTestUser from "./routes/auth/testUser"
-import Client from "./database/clients/Client"
-import { Timesheet } from "./database/models/Timesheet"
+
 
 export default async function inject(testDB?: Connection) {
   dotenv.config()
   const notProduction = (process.env.PROD_DATABASE !== "true")
   const DB = testDB || await createDatabase({ Config, testdb: notProduction })
   const userClient = new UserClient(DB)
-  const timesheetClient = new Client("Timesheet", DB, Timesheet)
+  const timesheetClient = new TimesheetClient(DB)
   const userValidators = userValidatorFactory({ userClient })
   const timesheetValidators = timesheetValidatorFactory({ timesheetClient })
   const Routes = [

@@ -3,9 +3,8 @@ import { RouteDefinition } from "../../models/route"
 import { Role } from "../../database/models/User"
 import { ViewWithErrors } from "../../views/types/views"
 import TimesheetValType from "../../middleware/validation/types/timesheets"
-import Client from "../../database/clients/Client"
-import { Timesheet } from "../../database/models/Timesheet"
-import { User } from "../../database/models/User"
+import TimesheetClient from "../../database/clients/TimesheetClient"
+import UserClient from "../../database/clients/UserClient"
 import { formatTimesheet } from "../formatters/timesheet.formatters"
 
 export default function timesheetsRouteFactory(
@@ -15,8 +14,8 @@ export default function timesheetsRouteFactory(
     timesheetValidators,
     handleValErrors
   }: {
-    timesheetClient: Client<Timesheet>,
-    userClient: Client<User>,
+    timesheetClient: TimesheetClient,
+    userClient: UserClient,
     timesheetValidators: TimesheetValType,
     handleValErrors: (template?: ViewWithErrors) => RequestHandler
   }): RouteDefinition {
@@ -39,9 +38,10 @@ export default function timesheetsRouteFactory(
     return res.status(200).json(timesheets)
   })
 
-  timesheetsRouter.get("/:id", async (req: Request, res: Response) => {
-    const id = parseInt(req.params.id)
-    const timesheet = await timesheetClient.getOne(id)
+  timesheetsRouter.get("/:date", async (req: Request, res: Response) => {
+    const date = parseInt(req.params.date)
+    const formatDate = new Date(date)
+    const timesheet = await timesheetClient.getAllByDate(formatDate)
     if (timesheet) {
       return res.status(200).json(timesheet)
     } else {

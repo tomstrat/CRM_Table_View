@@ -54,6 +54,6 @@ export class Timesheet {
   @Column({ nullable: true })
   late?: Boolean
 
-  @Column()
-  edited!: Boolean
+  @Column({ nullable: true })
+  edited?: Boolean
 }

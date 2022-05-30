@@ -14,6 +14,8 @@ import { Role } from "./database/models/User"
 import { reverse } from "ramda"
 import morgan from "morgan"
 import chalk from "chalk"
+import swaggerUi from "swagger-ui-express"
+import { swaggerDocument } from "./swagger"
 
 export default function appFactory({ notProduction, Config, Routes, handleErrors, requireAuth }:
   { notProduction: boolean, Config: ConfigType, Routes: RouteDefinition[], handleErrors: ErrorRequestHandler, requireAuth: (role?: Role) => RequestHandler }):
@@ -57,6 +59,7 @@ export default function appFactory({ notProduction, Config, Routes, handleErrors
   app.use(limiter)
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(bodyParser.json())
+  app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument))
   app.use(express.static(path.join(__dirname + "/../src/client/build")))
   Routes.map(route => {
     route[1].use(requireAuth(route[2]))
