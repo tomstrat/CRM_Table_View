@@ -7,7 +7,8 @@ import RoutePlanner from "../../components/RoutePlanner/RoutePlanner"
 import getCurrentDate from "../../../utilities/getCurrentDate"
 import Nav from "../../components/Nav/Nav"
 import TruckContents from "../../components/SideBarComponents/TruckContents"
-
+import printDay from "../../../utilities/printDay"
+import fixMonth from "../../../utilities/fixMonth"
 
 const ScheduleBuilder = () => {
   // eslint-disable-next-line no-unused-vars
@@ -17,7 +18,7 @@ const ScheduleBuilder = () => {
   const [availQuery, setAvailQuery] = useState(["notWorking", "working", "contactable", "unselected"])
   const [hoursQuery, setHoursQuery] = useState(["temp", "fullTime", "casual"])
   const [roleQuery, setRoleQuery] = useState(["driver", "navigator", "trainer", "trainee", "temp"])
-  const [currDay, setCurrday] = useState(1)
+  const [currDay, setCurrday] = useState(getCurrentDate("dateTime", 1))
   const [locationQuery, setLocationQuery] = useState(
     [
       "cbd", "Unspecified", "innerNorth", "innerWest", "innerEast", "innerSouth", "outerNorth", "outerWest", "outerEast", "outerSouth"
@@ -54,11 +55,17 @@ const ScheduleBuilder = () => {
   }
   
   function increaseDay(){
-    setCurrday(currDay + 1)
+    setCurrday(currDay => {
+      currDay.setDate(currDay.getDate() + 1)
+      return new Date(currDay)
+    })
   }
-
+  
   function decreaseDay(){
-    setCurrday(currDay - 1)
+    setCurrday(currDay => {
+      currDay.setDate(currDay.getDate() - 1)
+      return new Date(currDay)
+    })
   }
 
   function sideBarSwitch(){
@@ -78,10 +85,10 @@ const ScheduleBuilder = () => {
             <div className="tiny-title">Schedule for:</div>
             <div className="date-container">
               <button className={"arrow-button"} onClick={decreaseDay}>&#60;</button>
-              <div className="day-title">{getCurrentDate("day", currDay)}</div>
+              <div className="day-title">{printDay(currDay.getDay())}</div>
               <button className={"arrow-button"} onClick={increaseDay}>&#62;</button>
             </div>
-            <div className="date-title">{getCurrentDate("date", currDay)}</div>
+            <div className="date-title">{currDay.getDate() + "-" + fixMonth(currDay.getMonth()) + "-" + currDay.getFullYear()}</div>
           </div>
           <div id="default-sidebar" 
             className={

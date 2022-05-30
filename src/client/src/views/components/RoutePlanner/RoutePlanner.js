@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react"
 import RouteBox from "./RouteBox"
 import uniqid from "uniqid"
 import PropTypes from "prop-types"
-import formatSchedule from "./formatSchedule"
-import postSchedule from "./postSchedule"
+// import formatSchedule from "./formatSchedule"
+// import postSchedule from "./postSchedule"
 
 const RoutePlanner = (props) => {
   //top bar state for adding routes 
@@ -22,7 +22,7 @@ const RoutePlanner = (props) => {
   //the addedNames state (held in the page), which is a list that recieves a name each time one is added to the route.
   //the lists are compared, and if a difference is found, it is returned to the page, and removed from added names. Although
   //names are techcially only removed one by one currently, this does not seem to stop multiple names being removed, for example, 
-  //when an entire route is removed, as the function will run until there is no differencei n the lists. 
+  //when an entire route is removed, as the function will run until there is no difference in the lists. 
   useEffect(() => {
     const namesCheckList = []
     routePlannerState.map((obj) => {
@@ -40,9 +40,9 @@ const RoutePlanner = (props) => {
     }
   }), []
 
-  function saveOnClick() {
-    postSchedule(formatSchedule(props.currDay, routePlannerState))
-  }
+  // function saveOnClick() {
+  //   postSchedule(formatSchedule(props.currDay, routePlannerState))
+  // }
   
   function addNameClick () {
     if (props.insertName){
@@ -208,7 +208,7 @@ const RoutePlanner = (props) => {
         <input type="text" name="routeName" value={addRouteState.routeName} className="route-name-input route-top-bar-element" onChange={handleChange} placeholder="Add route name..." ></input>  
         <button className="add-route-button route-top-bar-element" onClick={addRoutehandleClick}>Add New Route</button>
         <button className="add-staff-button route-top-bar-element" onClick={addNameClick}>Add Staff</button>
-        <button className="save-button route-top-bar-element" onClick={saveOnClick}>Save Schedule (P)</button>
+        <button className="save-button route-top-bar-element">Save Schedule (P)</button>
         <button className="publish-button">Publish Schedule (P)</button>
       </div> 
       <div className="container-of-the-routes">
@@ -229,7 +229,7 @@ const RoutePlanner = (props) => {
 export default RoutePlanner
 
 RoutePlanner.propTypes = {
-  currDay: PropTypes.number,
+  currDay: PropTypes.instanceOf(Date),
   defaultRoutes: PropTypes.array,
   insertName: PropTypes.string,
   nameWasAdded: PropTypes.func,
