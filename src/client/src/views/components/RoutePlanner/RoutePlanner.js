@@ -3,7 +3,6 @@ import RouteBox from "./RouteBox"
 import uniqid from "uniqid"
 import PropTypes from "prop-types"
 import formatSchedule from "./formatSchedule"
-// import postSchedule from "./postSchedule"
 
 const RoutePlanner = (props) => {
   //top bar state for adding routes 
