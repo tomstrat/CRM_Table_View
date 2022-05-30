@@ -6,7 +6,7 @@ import StaffWidget from "./StaffWidget"
 import uniqid from "uniqid"
 import PropTypes from "prop-types"
 import { formatUsers } from "../../../utilities/formatters/users.formatters"
-import getCurrentDate from "../../../utilities/getCurrentDate"
+import printDay from "../../../utilities/printDay"
 
 const StaffSearchResults = (props) => {
 
@@ -16,7 +16,7 @@ const StaffSearchResults = (props) => {
 
   const [toggleState, setToggleState] = useState(null)
   
-  const thisDay = "roster" + getCurrentDate("day", props.currDay)
+  const thisDay = "roster" + printDay(props.currDay.getDay())
   useEffect(() => {
     if(toggleState){
       let passNames = toggleState.map((obj) => {
@@ -28,7 +28,7 @@ const StaffSearchResults = (props) => {
         props.pageGetName(passNamesParsedString)
       }
     }}), [toggleState]
-
+  
   const resultsGetName = (name) => {
     const updateState = toggleState.map((obj) => {
       if(obj.username == name && obj.state == false) {
@@ -104,5 +104,5 @@ StaffSearchResults.propTypes = {
   hoursQuery: PropTypes.array,
   roleQuery: PropTypes.array,
   locationQuery: PropTypes.array,
-  currDay: PropTypes.number
+  currDay: PropTypes.instanceOf(Date)
 }

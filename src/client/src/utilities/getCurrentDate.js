@@ -57,5 +57,7 @@ export default function getCurrentDate(format, incre) {
     return weekDayArray[weekDay]
   case "form":
     return increDate.toISOString().slice(0,10)
+  case "dateTime":
+    return increDate 
   }
 }

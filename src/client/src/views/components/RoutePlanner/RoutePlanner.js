@@ -3,7 +3,6 @@ import RouteBox from "./RouteBox"
 import uniqid from "uniqid"
 import PropTypes from "prop-types"
 import formatSchedule from "./formatSchedule"
-import postSchedule from "./postSchedule"
 
 const RoutePlanner = (props) => {
   //top bar state for adding routes 
@@ -22,7 +21,7 @@ const RoutePlanner = (props) => {
   //the addedNames state (held in the page), which is a list that recieves a name each time one is added to the route.
   //the lists are compared, and if a difference is found, it is returned to the page, and removed from added names. Although
   //names are techcially only removed one by one currently, this does not seem to stop multiple names being removed, for example, 
-  //when an entire route is removed, as the function will run until there is no differencei n the lists. 
+  //when an entire route is removed, as the function will run until there is no difference in the lists. 
   useEffect(() => {
     const namesCheckList = []
     routePlannerState.map((obj) => {
@@ -41,7 +40,7 @@ const RoutePlanner = (props) => {
   }), []
 
   function saveOnClick() {
-    postSchedule(formatSchedule(props.currDay, routePlannerState))
+    console.log(formatSchedule(props.currDay, routePlannerState))
   }
   
   function addNameClick () {
@@ -229,7 +228,7 @@ const RoutePlanner = (props) => {
 export default RoutePlanner
 
 RoutePlanner.propTypes = {
-  currDay: PropTypes.number,
+  currDay: PropTypes.instanceOf(Date),
   defaultRoutes: PropTypes.array,
   insertName: PropTypes.string,
   nameWasAdded: PropTypes.func,
