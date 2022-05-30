@@ -1,48 +1,43 @@
-// import getCurrentDate from "../../../utilities/getCurrentDate"
+import formatStartTimes from "./formatStartTimes"
 
-export default function formatSchedule(routes){
+export default function formatSchedule(date, routes){
   const formattedSchedule = []
   routes.map((route => {
     if (route.name1 && route.name2 && route.name3) {
       formattedSchedule.push({
-        // date: getCurrentDate("date", currDay),
+        plannedStart: formatStartTimes(date, route.startHours, route.startMins),
         username: route.name1,
         route: route.routeName,
-        plannedStart: route.startHours + route.startMins,
         opsMessage: route.routeNotes,
         edited: false
       },
       {
-        // date: getCurrentDate("date", currDay),
+        plannedStart: formatStartTimes(date, route.startHours, route.startMins),
         username: route.name2,
         route: route.routeName,
-        plannedStart: route.startHours + route.startMins,
         opsMessage: route.routeNotes,
         edited: false
       },
       {
-        // date: getCurrentDate("date", currDay),
+        plannedStart: formatStartTimes(date, route.startHours, route.startMins),
         username: route.name3,
         route: route.routeName,
-        plannedStart: route.startHours + route.startMins,
         opsMessage: route.routeNotes,
         edited: false
       })
     } 
     else if (route.name1 && route.name2) {
       formattedSchedule.push({
-        // date: getCurrentDate("date", currDay),
+        plannedStart: formatStartTimes(date, route.startHours, route.startMins),
         username: route.name1,
         route: route.routeName,
-        plannedStart: route.startHours + route.startMins,
         opsMessage: route.routeNotes,
         edited: false
       },
       {
-        // date: getCurrentDate("date", currDay),
+        plannedStart: formatStartTimes(date, route.startHours, route.startMins),
         username: route.name2,
         route: route.routeName,
-        plannedStart: route.startHours + route.startMins,
         opsMessage: route.routeNotes,
         edited: false
       }
@@ -50,10 +45,9 @@ export default function formatSchedule(routes){
     }
     else if (route.name1) {
       formattedSchedule.push({
-        // date: getCurrentDate("date", currDay),
+        plannedStart: formatStartTimes(date, route.startHours, route.startMins),
         username: route.name1,
         route: route.routeName,
-        plannedStart: route.startHours + route.startMins,
         opsMessage: route.routeNotes,
         edited: false
       }

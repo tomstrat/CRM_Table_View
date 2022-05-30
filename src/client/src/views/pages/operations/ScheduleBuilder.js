@@ -60,7 +60,7 @@ const ScheduleBuilder = () => {
       return new Date(currDay)
     })
   }
-  
+  console.log(parseInt("07") - 1)
   function decreaseDay(){
     setCurrday(currDay => {
       currDay.setDate(currDay.getDate() - 1)
