@@ -9,7 +9,7 @@ export default function timesheetValidatorFactory({ timesheetClient }:
     requireRoute: body("route").trim().escape(),
     requirePlannedStart: body("plannedStart").trim().escape(),
     requireOpsMessage: body("opsMessage").trim().escape(),
-    requireEdited: body("edited").isBoolean(),
+    requireEdited: body("edited").optional().isBoolean(),
     validateTimes: body(["startTime", "endTime", "breakStart"])
       .optional()
       .trim()
