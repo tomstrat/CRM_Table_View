@@ -15,21 +15,21 @@ export default function formatSchedule(date, routes, idMap){
         userId: getId(idMap, route.name1),
         route: route.routeName,
         opsMessage: route.routeNotes,
-        edited: false
+        
       },
       {
         plannedStart: formatStartTimes(date, route.startHours, route.startMins),
         userId: getId(idMap, route.name2),
         route: route.routeName,
         opsMessage: route.routeNotes,
-        edited: false
+        
       },
       {
         plannedStart: formatStartTimes(date, route.startHours, route.startMins),
         userId: getId(idMap, route.name3),
         route: route.routeName,
         opsMessage: route.routeNotes,
-        edited: false
+        
       })
     } 
     else if (route.name1 && route.name2) {
@@ -38,14 +38,14 @@ export default function formatSchedule(date, routes, idMap){
         userId: getId(idMap, route.name1),
         route: route.routeName,
         opsMessage: route.routeNotes,
-        edited: false
+        
       },
       {
         plannedStart: formatStartTimes(date, route.startHours, route.startMins),
         userId: getId(idMap, route.name2),
         route: route.routeName,
         opsMessage: route.routeNotes,
-        edited: false
+        
       }
       )
     }
@@ -55,7 +55,7 @@ export default function formatSchedule(date, routes, idMap){
         userId: getId(idMap, route.name1),
         route: route.routeName,
         opsMessage: route.routeNotes,
-        edited: false
+        
       }
       )
     }}))
