@@ -3,6 +3,7 @@ import RouteBox from "./RouteBox"
 import uniqid from "uniqid"
 import PropTypes from "prop-types"
 import formatSchedule from "./formatSchedule"
+import postSchedule from "./postSchedule"
 
 const RoutePlanner = (props) => {
   //top bar state for adding routes 
@@ -40,7 +41,7 @@ const RoutePlanner = (props) => {
   }), []
 
   function saveOnClick() {
-    console.log(formatSchedule(props.currDay, routePlannerState))
+    postSchedule(formatSchedule(props.currDay, routePlannerState, props.idMap))
   }
   
   function addNameClick () {
@@ -228,6 +229,7 @@ const RoutePlanner = (props) => {
 export default RoutePlanner
 
 RoutePlanner.propTypes = {
+  idMap: PropTypes.array,
   currDay: PropTypes.instanceOf(Date),
   defaultRoutes: PropTypes.array,
   insertName: PropTypes.string,

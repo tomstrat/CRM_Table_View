@@ -57,7 +57,10 @@ export const timesheetResponse = {
 export const timesheetRequest = {
   type: "object",
   properties: {
-    user: userResponse,
+    userId: {
+      type: "number",
+      required: true
+    },
     route: {
       type: "string",
       required: true
