@@ -9,3 +9,4 @@ https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_
 https://www.tableau.com/solutions/salesforce
 https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/quickstart_code.htm
 https://gomakethings.com/using-oauth-with-fetch-in-vanilla-js/
+https://stackoverflow.com/questions/53537952/validate-array-of-objects-in-express-validator
