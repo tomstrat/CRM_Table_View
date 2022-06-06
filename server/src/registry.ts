@@ -15,7 +15,7 @@ import makeTestUser from "./routes/auth/testUser"
 
 
 export default async function inject(testDB?: Connection) {
-  dotenv.config()
+  dotenv.config({ path: "../.env" })
   const notProduction = (process.env.PROD_DATABASE !== "true")
   const DB = testDB || await createDatabase({ Config, testdb: notProduction })
   const userClient = new UserClient(DB)

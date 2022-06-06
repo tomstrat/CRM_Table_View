@@ -28,7 +28,6 @@ export default function authRouteFactory(
       req.session = {
         jwt: jwt.sign({ username, role }, process.env.JWT_SECRET_KEY!),
       }
-      console.log(req.session)
       return res.json({ role })
     })
 

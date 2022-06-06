@@ -1,7 +1,7 @@
 import inject from "./registry"
 import dotenv from "dotenv"
 
-dotenv.config()
+dotenv.config({ path: "../.env" })
 
 const PORT = process.env.PORT || 3001
 

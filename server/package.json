@@ -9,7 +9,6 @@
     "test": "jest --maxWorkers=50% --silent --verbose",
     "test-log": "jest --maxWorkers=50%",
     "lint": "eslint ./src/**/*.ts",
-    "prepare": "husky install",
     "start": "node dist/index.js",
     "heroku-postbuild": "cd ./src/client && npm install && npm run build",
     "deploy": "git add . && git commit -m Heroku && git push heroku master"
