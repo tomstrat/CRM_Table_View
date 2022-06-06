@@ -8,7 +8,6 @@ import { ExternalInputTimesheet } from "../../schemas/external.interfaces"
 import UserClient from "../../database/clients/UserClient"
 import { formatTimesheet } from "../formatters/timesheet.formatters"
 import { includes, map } from "ramda"
-import { NotFound } from "../../schemas/error"
 
 export default function timesheetsRouteFactory(
   {

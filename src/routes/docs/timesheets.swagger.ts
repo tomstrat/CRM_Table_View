@@ -75,7 +75,10 @@ export const postTimesheet = {
     required: true,
     "content": {
       "application/json": {
-        schema: timesheetRequest
+        schema: {
+          type: "array",
+          items: timesheetRequest
+        }
       }
     }
   },
@@ -84,7 +87,10 @@ export const postTimesheet = {
       description: "A successful response, created timesheet is returned",
       "content": {
         "application/json": {
-          schema: timesheetResponse
+          schema: {
+            type: "array",
+            items: timesheetResponse
+          }
         }
       }
     },
