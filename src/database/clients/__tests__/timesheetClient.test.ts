@@ -83,8 +83,6 @@ describe("UserClient Methods", () => {
       testTS = await tsClient.addRecord(fullTimesheet)
       testTSs = await tsClient.getAllByDate(justDate)
       if (testTSs) {
-        console.log(testTS)
-        console.log(testTSs)
         expect(testTSs[0].sick).toBe(false)
         expect(testTSs[0].endTime).toStrictEqual(date)
       }

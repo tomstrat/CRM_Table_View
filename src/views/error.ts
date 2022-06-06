@@ -1,5 +1,5 @@
 import layout from "./layout"
-import { BaseError } from "../models/error"
+import { BaseError } from "../schemas/error"
 
 export default function errorPage(err: BaseError): string {
   return layout(`

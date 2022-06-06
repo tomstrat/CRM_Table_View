@@ -1,5 +1,5 @@
-import { ExternalDataFormat, ExternalRecord } from "../../models/external.interfaces"
-import { InternalDataFormat, InternalRecord } from "../../models/internal.interfaces"
+import { ExternalDataFormat, ExternalRecord } from "../../schemas/external.interfaces"
+import { InternalDataFormat, InternalRecord } from "../../schemas/internal.interfaces"
 import * as R from "ramda"
 
 

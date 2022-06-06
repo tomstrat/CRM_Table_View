@@ -1,5 +1,5 @@
 import { Connection, Repository, EntityTarget, DeepPartial } from "typeorm"
-import { BadRequest } from "../../models/error"
+import { BadRequest } from "../../schemas/error"
 
 
 export default class Client<Model> {

@@ -1,7 +1,7 @@
 import { Router, Request, Response, RequestHandler } from "express"
 import Client from "../../database/clients/Client"
 import { User } from "../../database/models/User"
-import { RouteDefinition } from "../../models/route"
+import { RouteDefinition } from "../../schemas/route"
 import UserValType from "../../middleware/validation/types/users"
 import { Role } from "../../database/models/User"
 import { ViewWithErrors } from "../../views/types/views"

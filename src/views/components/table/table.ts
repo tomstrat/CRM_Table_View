@@ -1,4 +1,4 @@
-import { InternalDataFormat, InternalRecord } from "../../../models/internal.interfaces"
+import { InternalDataFormat, InternalRecord } from "../../../schemas/internal.interfaces"
 import layout from "../../layout"
 import controls from "./controls"
 import * as R from "ramda"

@@ -1,11 +1,14 @@
 import { Router, Request, Response, RequestHandler } from "express"
-import { RouteDefinition } from "../../models/route"
+import { RouteDefinition } from "../../schemas/route"
 import { Role } from "../../database/models/User"
 import { ViewWithErrors } from "../../views/types/views"
 import TimesheetValType from "../../middleware/validation/types/timesheets"
 import TimesheetClient from "../../database/clients/TimesheetClient"
+import { ExternalInputTimesheet } from "../../schemas/external.interfaces"
 import UserClient from "../../database/clients/UserClient"
 import { formatTimesheet } from "../formatters/timesheet.formatters"
+import { includes, map } from "ramda"
+import { NotFound } from "../../schemas/error"
 
 export default function timesheetsRouteFactory(
   {
@@ -22,11 +25,12 @@ export default function timesheetsRouteFactory(
 
   const timesheetsRouter = Router()
   const {
+    requireBody,
     requireUserId,
     requireRoute,
     requirePlannedStart,
     requireOpsMessage,
-    requireEdited,
+    validateEdited,
     validateTimes,
     validateComments,
     validateStartTruck,
@@ -39,10 +43,10 @@ export default function timesheetsRouteFactory(
   })
 
   timesheetsRouter.get("/:date", async (req: Request, res: Response) => {
-    const date = parseInt(req.params.date)
+    const date = req.params.date
     const formatDate = new Date(date)
     const timesheet = await timesheetClient.getAllByDate(formatDate)
-    if (timesheet) {
+    if (timesheet.length) {
       return res.status(200).json(timesheet)
     } else {
       return res.status(404).json(undefined)
@@ -52,22 +56,27 @@ export default function timesheetsRouteFactory(
   timesheetsRouter.post(
     "/new",
     [
-      requireUserId,
+      requireBody, requireUserId,
       requireRoute, requirePlannedStart,
-      requireOpsMessage, requireEdited,
+      requireOpsMessage, validateEdited,
       validateTimes, validateComments,
       validateStartTruck, validateSickLate
     ],
     handleValErrors(),
     async (req: Request, res: Response) => {
-      const { userId } = req.body
-      const user = await userClient.getOne(userId)
-      if (user) {
-        const timesheet = await timesheetClient.addRecord(formatTimesheet(req.body, user))
-        res.status(200).json(timesheet)
-      } else {
-        return res.status(404).json(undefined)
-      }
+      const timesheets = map(async (timesheet: ExternalInputTimesheet) => {
+        const { userId } = timesheet
+        const user = await userClient.getOne(userId)
+        if (user) {
+          return await timesheetClient.addRecord(formatTimesheet(timesheet, user))
+        }
+      })(req.body)
+      return Promise.all(timesheets).then(data => {
+        if (includes(undefined, data)) {
+          return res.status(404).json(undefined)
+        }
+        return res.status(200).json(data)
+      })
     })
 
 

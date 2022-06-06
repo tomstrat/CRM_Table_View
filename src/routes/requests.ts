@@ -1,4 +1,4 @@
-import { BadRequest, NotFound } from "../models/error"
+import { BadRequest, NotFound } from "../schemas/error"
 import Config from "../config/config"
 import got from "got"
 import dotenv from "dotenv"

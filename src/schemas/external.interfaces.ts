@@ -78,6 +78,7 @@ export interface ExternalOutputUser {
 }
 
 export interface ExternalInputTimesheet {
+  userId: number
   route: string
   startTime?: string
   endTime?: string

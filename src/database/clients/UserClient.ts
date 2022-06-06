@@ -2,7 +2,7 @@ import Client from "./Client"
 import { User } from "../models/User"
 import { Connection } from "typeorm"
 import crypto from "crypto"
-import { BadRequest } from "../../models/error"
+import { BadRequest } from "../../schemas/error"
 import pipeWithPromise from "../../utilities/pipeWithPromise"
 import * as R from "ramda"
 

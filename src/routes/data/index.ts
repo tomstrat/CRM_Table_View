@@ -2,8 +2,8 @@ import { Router, Request, Response, RequestHandler } from "express"
 import { requestResources } from "../requests"
 import { buildQuery } from "../../utilities/buildQuery"
 import { formatRecords } from "../formatters/data.formatters"
-import { RouteDefinition } from "../../models/route"
-import { InternalDataFormat } from "../../models/internal.interfaces"
+import { RouteDefinition } from "../../schemas/route"
+import { InternalDataFormat } from "../../schemas/internal.interfaces"
 import { Role } from "../../database/models/User"
 
 

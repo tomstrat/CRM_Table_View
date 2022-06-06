@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction, RequestHandler } from "express"
 import { Role, RolePermission } from "../database/models/User"
-import { Unauthorised } from "../models/error"
+import { Unauthorised } from "../schemas/error"
 import jwt from "jsonwebtoken"
 
 export default function requireAuth(requiredRole?: Role): RequestHandler {

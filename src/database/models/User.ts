@@ -100,7 +100,6 @@ export class User {
   roster!: Roster
 
   @OneToMany(type => Timesheet, timesheet => timesheet.user, {
-    cascade: true,
     nullable: true
   })
   timesheets?: Timesheet[]

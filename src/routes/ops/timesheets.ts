@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express"
-import { RouteDefinition } from "../../models/route"
+import { RouteDefinition } from "../../schemas/route"
 import { Role } from "../../database/models/User"
 import { User } from "../../database/models/User"
 import Client from "../../database/clients/Client"

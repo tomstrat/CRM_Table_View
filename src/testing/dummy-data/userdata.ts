@@ -1,6 +1,6 @@
 import { User, Role, Contract, EmployeeType, Location } from "../../database/models/User"
 import { RosterStatus } from "../../database/models/Roster"
-import { ExternalInputUser, ExternalOutputUser } from "../../models/external.interfaces"
+import { ExternalInputUser, ExternalOutputUser } from "../../schemas/external.interfaces"
 
 const joined = new Date("2018-07-22")
 export const correctDatabaseUser: User = {

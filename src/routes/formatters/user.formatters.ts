@@ -1,4 +1,4 @@
-import { ExternalInputUser } from "../../models/external.interfaces"
+import { ExternalInputUser } from "../../schemas/external.interfaces"
 import { EmployeeType, User } from "../../database/models/User"
 import { convertCheckBox, convertDate } from "./helper"
 

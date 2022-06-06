@@ -1,5 +1,5 @@
 import { Timesheet } from "../../database/models/Timesheet"
-import { ExternalInputTimesheet } from "../../models/external.interfaces"
+import { ExternalInputTimesheet } from "../../schemas/external.interfaces"
 import { User } from "../../database/models/User"
 import { convertDate } from "./helper"
 
