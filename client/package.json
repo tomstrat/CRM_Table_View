@@ -12,6 +12,7 @@
     "axios": "^0.27.2",
     "lodash": "^4.17.21",
     "prop-types": "^15.8.1",
+    "ramda": "^0.28.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router": "^6.2.1",
@@ -27,7 +28,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint ./src/**/*.js"
   },
-  "proxy": "http://localhost:3001",
+  "proxy": "http://server:3001",
   "eslintConfig": {
     "extends": [
       "react-app",

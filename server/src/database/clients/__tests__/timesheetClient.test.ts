@@ -1,6 +1,6 @@
 import { Connection } from "typeorm"
 import Config from "../../../config/config"
-import { createDatabase } from "../../"
+import { createDatabase } from "../.."
 import Client from "../Client"
 import UserClient from "../UserClient"
 import TimesheetClient from "../TimesheetClient"

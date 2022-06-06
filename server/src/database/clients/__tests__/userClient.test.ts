@@ -1,6 +1,6 @@
 import { Connection } from "typeorm"
 import Config from "../../../config/config"
-import { createDatabase } from "../../"
+import { createDatabase } from "../.."
 import UserClient from "../UserClient"
 import { User, Role } from "../../models/User"
 import { correctDatabaseUser } from "../../../testing/dummy-data/userdata"

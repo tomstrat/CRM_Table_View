@@ -3,8 +3,6 @@ import express, { Express, Request, ErrorRequestHandler, Response, RequestHandle
 import cookieSession from "cookie-session"
 import helmet from "helmet"
 import hpp from "hpp"
-import csurf from "csurf"
-import path from "path"
 import { rateLimit } from "express-rate-limit"
 import bodyParser from "body-parser"
 import ConfigType from "./config/type"
@@ -59,15 +57,10 @@ export default function appFactory({ notProduction, Config, Routes, handleErrors
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(bodyParser.json())
   app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument))
-  app.use(express.static(path.join(__dirname + "/../src/client/build")))
   Routes.map(route => {
     route[1].use(requireAuth(route[2]))
     route[1].stack = reverse(route[1].stack) // Reverse stack to put auth on top
     app.use(route[0], route[1])
-  })
-
-  app.all("*", (req: Request, res: Response) => {
-    return res.sendFile(path.join(__dirname + "/../src/client/build/index.html"))
   })
 
   app.use(handleErrors)

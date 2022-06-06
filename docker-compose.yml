@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  # setup node container
+
+  server:
+    build: ./server
+    expose:
+      - ${APP_SERVER_PORT}
+    environment:
+      API_HOST: ${API_HOST}
+      APP_SERVER_PORT: ${APP_SERVER_PORT}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      COOKIE_SECRET: ${COOKIE_SECRET}
+      PROD_DATABASE: ${PROD_DATABASE}
+    ports:
+      - ${APP_SERVER_PORT}:${APP_SERVER_PORT}
+    volumes:
+      - ./server/src:/usr/app/server/src
+    command: npm run server
+
+  # setup client container
+
+  client:
+    build: ./client
+    expose:
+      - ${APP_CLIENT_PORT}
+    environment:
+      - APP_CLIENT_PORT=${APP_CLIENT_PORT}
+    ports:
+      - ${APP_CLIENT_PORT}:${APP_CLIENT_PORT}
+    volumes:
+      - ./client/src:/usr/app/client/src
+      - ./client/public:/usr/app/client/public
+    links:
+      - server
+    command: npm run start
