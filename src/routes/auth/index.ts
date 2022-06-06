@@ -1,6 +1,5 @@
 import { Router, Request, Response, RequestHandler } from "express"
 import UserValType from "../../middleware/validation/types/users"
-import { ViewWithErrors } from "../../views/types/views"
 import { RouteDefinition } from "../../schemas/route"
 import UserClient from "../../database/clients/UserClient"
 import { User } from "../../database/models/User"
@@ -13,7 +12,7 @@ export default function authRouteFactory(
     userClient
   }: {
     userValidators: UserValType,
-    handleValErrors: (template?: ViewWithErrors) => RequestHandler,
+    handleValErrors: () => RequestHandler,
     userClient: UserClient
   }): RouteDefinition {
 

@@ -4,7 +4,6 @@ import { User } from "../../database/models/User"
 import { RouteDefinition } from "../../schemas/route"
 import UserValType from "../../middleware/validation/types/users"
 import { Role } from "../../database/models/User"
-import { ViewWithErrors } from "../../views/types/views"
 import { formatUser } from "../formatters/user.formatters"
 import { cleanObject } from "../formatters/helper"
 
@@ -16,7 +15,7 @@ export default function usersRouteFactory(
   }: {
     userClient: Client<User>,
     userValidators: UserValType,
-    handleValErrors: (template?: ViewWithErrors) => RequestHandler
+    handleValErrors: () => RequestHandler
   }): RouteDefinition {
 
   const usersRouter = Router()

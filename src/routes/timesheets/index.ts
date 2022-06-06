@@ -1,7 +1,6 @@
 import { Router, Request, Response, RequestHandler } from "express"
 import { RouteDefinition } from "../../schemas/route"
 import { Role } from "../../database/models/User"
-import { ViewWithErrors } from "../../views/types/views"
 import TimesheetValType from "../../middleware/validation/types/timesheets"
 import TimesheetClient from "../../database/clients/TimesheetClient"
 import { ExternalInputTimesheet } from "../../schemas/external.interfaces"
@@ -19,7 +18,7 @@ export default function timesheetsRouteFactory(
     timesheetClient: TimesheetClient,
     userClient: UserClient,
     timesheetValidators: TimesheetValType,
-    handleValErrors: (template?: ViewWithErrors) => RequestHandler
+    handleValErrors: () => RequestHandler
   }): RouteDefinition {
 
   const timesheetsRouter = Router()
