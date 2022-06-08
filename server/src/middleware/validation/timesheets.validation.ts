@@ -8,13 +8,13 @@ export default function timesheetValidatorFactory({ timesheetClient }:
     requireBody: body().isArray(),
     requireUserId: body("*.userId").isNumeric(),
     requireRoute: body("*.route").trim().escape(),
-    requirePlannedStart: body("*.plannedStart").trim().escape().isDate(),
+    requirePlannedStart: body("*.plannedStart").trim().escape().isISO8601(),
     requireOpsMessage: body("*.opsMessage").trim().escape(),
     validateEdited: body("*.edited").optional().isBoolean(),
     validateTimes: body(["*.startTime", "*.endTime", "*.breakStart"])
       .optional()
       .trim()
-      .isDate()
+      .isISO8601()
       .withMessage("Must be a valid date"),
     validateComments: body(["*.ttmComments", "*.opsComments"])
       .optional()

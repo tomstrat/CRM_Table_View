@@ -6,8 +6,10 @@ import cookieSession from "cookie-session"
 import express, { Express } from "express"
 import { Connection } from "typeorm"
 import { testTimesheet, correctPostTimesheet, minimumPostTimesheet, incorrectPostTimesheet } from "../../testing/dummy-data/timesheetdata"
+import { correctPostUser } from "../../testing/dummy-data/userdata"
 import TimesheetClient from "../../database/clients/TimesheetClient"
 import { type } from "ramda"
+import UserClient from "../../database/clients/UserClient"
 
 
 let parentApp: Express
@@ -16,7 +18,7 @@ let agent: SuperAgentTest
 
 beforeAll(async () => {
   DB = await createDatabase({ Config })
-  const client = new TimesheetClient(DB)
+  const tsClient = new TimesheetClient(DB)
   const app = await inject(DB)
   parentApp = express()
   parentApp.use(cookieSession({
@@ -28,7 +30,10 @@ beforeAll(async () => {
   await agent
     .post("/auth/login")
     .send({ username: "test", password: "test" })
-  await client.addRecord(minimumPostTimesheet)
+  await tsClient.addRecord(minimumPostTimesheet)
+  await agent
+    .post("/api/users/new")
+    .send(correctPostUser)
 })
 
 afterAll(async () => {
@@ -89,6 +94,34 @@ describe("Routes for Timesheets", () => {
             })
         })
       })
+      describe("And minimal data", () => {
+        it("sends 200 code", async () => {
+          await agent
+            .post("/api/timesheets/new")
+            .send([
+              {
+                userId: 1,
+                route: "N1",
+                plannedStart: "2022-06-08T07:00:00.000Z",
+                opsMessage: ""
+              },
+              {
+                userId: 2,
+                route: "N5",
+                plannedStart: "2022-06-08T07:00:00.000Z",
+                opsMessage: ""
+              },
+            ])
+            .expect(200)
+            .expect("Content-Type", /json/)
+            .expect(res => {
+              expect(type(res.body)).toBe("Array")
+              expect(res.body.length).toBe(2)
+              expect(res.body[0]).toHaveProperty("user")
+              expect(res.body[0].user).toHaveProperty("timesheets")
+            })
+        })
+      })
       describe("And incorrect userId", () => {
         it("sends 400 code", async () => {
           await agent
@@ -124,7 +157,7 @@ describe("Routes for Timesheets", () => {
           .expect("Content-Type", /json/)
           .expect(res => {
             expect(type(res.body)).toBe("Array")
-            expect(res.body.length).toBe(4)
+            expect(res.body.length).toBe(6)
             expect(res.body[0]).toHaveProperty("user")
             expect(res.body[0].user).toHaveProperty("roster")
           })
