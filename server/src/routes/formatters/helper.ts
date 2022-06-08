@@ -11,3 +11,9 @@ export function convertCheckBox(result: string): boolean {
 export function convertDate(date: string | undefined): Date | undefined {
   return date ? new Date(date) : undefined
 }
+
+export function justDate(date: string): Date {
+  const newDate = new Date(date)
+  console.log("TESTING", date, newDate, newDate.toDateString())
+  return new Date(newDate.toDateString())
+}

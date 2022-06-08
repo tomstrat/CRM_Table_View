@@ -1,7 +1,6 @@
 import { Connection } from "typeorm"
 import Config from "../../../config/config"
 import { createDatabase } from "../.."
-import Client from "../Client"
 import UserClient from "../UserClient"
 import TimesheetClient from "../TimesheetClient"
 import { Timesheet } from "../../models/Timesheet"
@@ -24,6 +23,9 @@ describe("UserClient Methods", () => {
   const justDate = new Date()
   justDate.setHours(0, 0, 0, 0)
 
+  const justDate2 = new Date("2018-12-15")
+  justDate.setHours(0, 0, 0, 0)
+
   beforeAll(async () => {
     DB = await createDatabase({ Config })
     tsClient = new TimesheetClient(DB)
@@ -36,6 +38,7 @@ describe("UserClient Methods", () => {
       endTime: date,
       breakStart: date,
       plannedStart: justDate,
+      workingDate: justDate,
       ttmComments: "test ttm comments",
       opsComments: "test ops comments",
       opsMessage: "test ops message",
@@ -47,7 +50,8 @@ describe("UserClient Methods", () => {
     minimalTimesheet = {
       user: testUser!,
       route: "newTest",
-      plannedStart: justDate,
+      plannedStart: justDate2,
+      workingDate: justDate2,
       opsMessage: "test Ops Message",
       edited: false
     }

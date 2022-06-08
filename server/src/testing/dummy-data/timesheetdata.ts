@@ -31,6 +31,7 @@ export const minimumPostTimesheet: Timesheet = {
   endTime: undefined,
   breakStart: undefined,
   plannedStart: genDate,
+  workingDate: genDate,
   ttmComments: undefined,
   opsComments: undefined,
   opsMessage: "test",

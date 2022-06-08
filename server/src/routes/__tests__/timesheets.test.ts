@@ -9,7 +9,6 @@ import { testTimesheet, correctPostTimesheet, minimumPostTimesheet, incorrectPos
 import { correctPostUser } from "../../testing/dummy-data/userdata"
 import TimesheetClient from "../../database/clients/TimesheetClient"
 import { type } from "ramda"
-import UserClient from "../../database/clients/UserClient"
 
 
 let parentApp: Express

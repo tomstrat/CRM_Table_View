@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Unique } from "typeorm"
 import dotenv from "dotenv"
 import { User } from "./User"
 
@@ -11,6 +11,7 @@ const datetime = process.env.PROD_DATABASE === "true"
   : "datetime"
 
 @Entity()
+@Unique(["user", "workingDate"])
 export class Timesheet {
 
   @PrimaryGeneratedColumn()
@@ -35,6 +36,9 @@ export class Timesheet {
 
   @Column({ type: datetime })
   plannedStart!: Date
+
+  @Column({ type: "date" })
+  workingDate!: Date
 
   @Column({ nullable: true })
   ttmComments?: string

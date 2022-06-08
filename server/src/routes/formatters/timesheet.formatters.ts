@@ -1,7 +1,7 @@
 import { Timesheet } from "../../database/models/Timesheet"
 import { ExternalInputTimesheet } from "../../schemas/external.interfaces"
 import { User } from "../../database/models/User"
-import { convertDate } from "./helper"
+import { convertDate, justDate } from "./helper"
 
 export function formatTimesheet(timesheet: ExternalInputTimesheet, user: User): Timesheet {
   return {
@@ -11,6 +11,7 @@ export function formatTimesheet(timesheet: ExternalInputTimesheet, user: User): 
     endTime: convertDate(timesheet.endTime),
     breakStart: convertDate(timesheet.breakStart),
     plannedStart: convertDate(timesheet.plannedStart)!,
+    workingDate: justDate(timesheet.plannedStart),
     ttmComments: timesheet.ttmComments,
     opsComments: timesheet.opsComments,
     opsMessage: timesheet.opsMessage,
