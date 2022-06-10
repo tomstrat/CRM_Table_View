@@ -3,7 +3,8 @@ import { Timesheet } from "../../database/models/Timesheet"
 import { RosterStatus } from "../../database/models/Roster"
 import { Role, Contract, EmployeeType, Location } from "../../database/models/User"
 
-const genDate = new Date("2018-07-22")
+const genDate = new Date("2019-07-22")
+const userDate = new Date("2018-07-22")
 
 export const minimumPostTimesheet: Timesheet = {
   user: {
@@ -52,7 +53,7 @@ export const testTimesheet = {
     certified: true,
     injured: false,
     location: Location.cbd,
-    joinDate: genDate.toISOString(),
+    joinDate: userDate.toISOString(),
     roster: {
       id: 1,
       monday: RosterStatus.working,
@@ -69,6 +70,7 @@ export const testTimesheet = {
   endTime: null,
   breakStart: null,
   plannedStart: genDate.toISOString(),
+  workingDate: "2019-07-22",
   ttmComments: null,
   opsComments: null,
   opsMessage: "test",
@@ -159,10 +161,10 @@ export const correctPostTimesheet: ExternalInputTimesheet[] = [
   {
     userId: 1,
     route: "route",
-    startTime: "2018-07-22",
-    endTime: "2018-07-22",
-    breakStart: "2018-07-22",
-    plannedStart: "2018-07-22",
+    startTime: "2018-07-22T00:00:00.000Z",
+    endTime: "2018-07-22T00:00:00.000Z",
+    breakStart: "2018-07-22T00:00:00.000Z",
+    plannedStart: "2018-07-22T11:23:42.023Z",
     ttmComments: "ttmcomments",
     opsComments: "comments",
     opsMessage: "message",
@@ -174,10 +176,10 @@ export const correctPostTimesheet: ExternalInputTimesheet[] = [
   {
     userId: 1,
     route: "route2",
-    startTime: "2018-07-22",
-    endTime: "2018-07-22",
-    breakStart: "2018-07-22",
-    plannedStart: "2018-07-22",
+    startTime: "2018-07-22T00:00:00.000Z",
+    endTime: "2018-07-22T00:00:00.000Z",
+    breakStart: "2018-07-22T00:00:00.000Z",
+    plannedStart: "2018-07-23T00:00:00.000Z",
     ttmComments: "ttmcomments",
     opsComments: "comments",
     opsMessage: "message",
@@ -195,7 +197,7 @@ export const incorrectPostTimesheet: ExternalInputTimesheet[] = [
     startTime: "2018-07-22",
     endTime: "2018-07-22",
     breakStart: "2018-07-22",
-    plannedStart: "2018-07-22",
+    plannedStart: "2018-07-25",
     ttmComments: "ttmcomments",
     opsComments: "comments",
     opsMessage: "message",

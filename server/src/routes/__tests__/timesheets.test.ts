@@ -52,7 +52,7 @@ describe("Routes for Timesheets", () => {
       describe("And existing timesheet", () => {
         it("sends 200 code and user", async () => {
           await agent
-            .get("/api/timesheets/2018-07-22")
+            .get("/api/timesheets/2019-07-22")
             .expect(200)
             .expect("Content-Type", /json/)
             .expect([testTimesheet])
@@ -121,8 +121,16 @@ describe("Routes for Timesheets", () => {
             })
         })
       })
-      describe("And incorrect userId", () => {
+      describe("And duplicate userId", () => {
         it("sends 400 code", async () => {
+          await agent
+            .post("/api/timesheets/new")
+            .send(correctPostTimesheet)
+            .expect(400)
+        })
+      })
+      describe("And incorrect userId", () => {
+        it("sends 404 code", async () => {
           await agent
             .post("/api/timesheets/new")
             .send(incorrectPostTimesheet)

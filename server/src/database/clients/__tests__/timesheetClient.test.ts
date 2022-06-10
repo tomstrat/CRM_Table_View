@@ -6,6 +6,7 @@ import TimesheetClient from "../TimesheetClient"
 import { Timesheet } from "../../models/Timesheet"
 import { User } from "../../models/User"
 import { correctDatabaseUser } from "../../../testing/dummy-data/userdata"
+import { clone, assoc } from "ramda"
 
 
 describe("UserClient Methods", () => {
@@ -16,7 +17,9 @@ describe("UserClient Methods", () => {
   let testTS: Timesheet | void
   let testTSs: Timesheet[] | void
   let testUser: User | void
+  let testUser2: User | void
   let fullTimesheet: Timesheet
+  let fullTimesheet2: Timesheet
   let minimalTimesheet: Timesheet
 
   const date = new Date()
@@ -31,8 +34,26 @@ describe("UserClient Methods", () => {
     tsClient = new TimesheetClient(DB)
     userClient = new UserClient(DB)
     testUser = await userClient.addRecord(correctDatabaseUser)
+    const correctDatabaseUser2 = assoc("username", "test", clone(correctDatabaseUser))
+    testUser2 = await userClient.addRecord(correctDatabaseUser2)
     fullTimesheet = {
       user: testUser!,
+      route: "test",
+      startTime: date,
+      endTime: date,
+      breakStart: date,
+      plannedStart: justDate,
+      workingDate: justDate,
+      ttmComments: "test ttm comments",
+      opsComments: "test ops comments",
+      opsMessage: "test ops message",
+      startTruck: "test",
+      sick: false,
+      late: false,
+      edited: false
+    }
+    fullTimesheet2 = {
+      user: testUser2!,
       route: "test",
       startTime: date,
       endTime: date,
@@ -84,9 +105,10 @@ describe("UserClient Methods", () => {
   })
   describe("When getting a timesheet by date", () => {
     it("Should return timesheets with that date", async () => {
-      testTS = await tsClient.addRecord(fullTimesheet)
+      testTS = await tsClient.addRecord(fullTimesheet2)
       testTSs = await tsClient.getAllByDate(justDate)
       if (testTSs) {
+        expect(testTSs.length).toBe(2)
         expect(testTSs[0].sick).toBe(false)
         expect(testTSs[0].endTime).toStrictEqual(date)
       }

@@ -35,7 +35,7 @@ describe("Using formatters", () => {
         startTime: new Date("2018-07-22T00:00:00.000Z"),
         endTime: new Date("2018-07-22T00:00:00.000Z"),
         breakStart: new Date("2018-07-22T00:00:00.000Z"),
-        plannedStart: new Date("2018-07-22T00:00:00.000Z"),
+        plannedStart: new Date("2018-07-22T11:23:42.023Z"),
         workingDate: new Date("2018-07-22T00:00:00.000Z"),
         ttmComments: correctPostTimesheet[0].ttmComments,
         opsComments: correctPostTimesheet[0].opsComments,

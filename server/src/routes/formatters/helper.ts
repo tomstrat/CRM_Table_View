@@ -12,8 +12,6 @@ export function convertDate(date: string | undefined): Date | undefined {
   return date ? new Date(date) : undefined
 }
 
-export function justDate(date: string): Date {
-  const newDate = new Date(date)
-  console.log("TESTING", date, newDate, newDate.toDateString())
-  return new Date(newDate.toDateString())
+export function removeTime(date: string): Date {
+  return new Date(date.split("T")[0])
 }
