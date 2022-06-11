@@ -11,3 +11,7 @@ export function convertCheckBox(result: string): boolean {
 export function convertDate(date: string | undefined): Date | undefined {
   return date ? new Date(date) : undefined
 }
+
+export function removeTime(date: string): Date {
+  return new Date(date.split("T")[0])
+}

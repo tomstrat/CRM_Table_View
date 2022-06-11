@@ -2,8 +2,8 @@ import { ValidationChain } from "express-validator"
 
 export default interface TimesheetValType {
   requireBody: ValidationChain
-  requireUserId: ValidationChain
   requireRoute: ValidationChain
+  validateRouteType: ValidationChain
   requirePlannedStart: ValidationChain
   requireOpsMessage: ValidationChain
   validateEdited: ValidationChain

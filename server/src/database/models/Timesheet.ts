@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Unique } from "typeorm"
 import dotenv from "dotenv"
 import { User } from "./User"
 
@@ -10,7 +10,15 @@ const datetime = process.env.PROD_DATABASE === "true"
   ? "timestamp"
   : "datetime"
 
+export enum RouteType {
+  standard = "standard",
+  training = "training",
+  float = "float",
+  depot = "depot"
+}
+
 @Entity()
+@Unique(["user", "workingDate"])
 export class Timesheet {
 
   @PrimaryGeneratedColumn()
@@ -24,6 +32,13 @@ export class Timesheet {
   @Column()
   route!: string
 
+  @Column({
+    type: "simple-enum",
+    enum: RouteType,
+    default: RouteType.standard
+  })
+  routeType?: RouteType
+
   @Column({ type: datetime, nullable: true })
   startTime?: Date
 
@@ -35,6 +50,9 @@ export class Timesheet {
 
   @Column({ type: datetime })
   plannedStart!: Date
+
+  @Column({ type: "date" })
+  workingDate!: Date
 
   @Column({ nullable: true })
   ttmComments?: string

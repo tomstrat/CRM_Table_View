@@ -1,6 +1,7 @@
 import { RosterStatus } from "../database/models/Roster"
 import { Timesheet } from "../database/models/Timesheet"
 import { Contract, EmployeeType, Location, Role, User } from "../database/models/User"
+import { RouteType } from "../database/models/Timesheet"
 
 export interface AccessToken {
   access_token: string
@@ -80,6 +81,7 @@ export interface ExternalOutputUser {
 export interface ExternalInputTimesheet {
   userId: number
   route: string
+  routeType?: RouteType,
   startTime?: string
   endTime?: string
   breakStart?: string
