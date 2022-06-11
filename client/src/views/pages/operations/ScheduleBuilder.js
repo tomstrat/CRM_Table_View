@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import SideBar from "../../components/SideBarComponents/SideBar"
 import StaffSearchControls from "../../components/Staff_Search/StaffSearchControls"
 import "../../styles/ScheduleBuilder.css"
@@ -9,6 +9,11 @@ import Nav from "../../components/Nav/Nav"
 import TruckContents from "../../components/SideBarComponents/TruckContents"
 import printDay from "../../../utilities/printDay"
 import fixMonth from "../../../utilities/fixMonth"
+import defaultRoutes from "../../components/RoutePlanner/defaultRoutes"
+import recodeSchedule from "../../components/RoutePlanner/recodeSchedule"
+import getSchedule from "../../components/RoutePlanner/getSchedule"
+
+ 
 
 const ScheduleBuilder = () => {
   // eslint-disable-next-line no-unused-vars
@@ -20,12 +25,27 @@ const ScheduleBuilder = () => {
   const [roleQuery, setRoleQuery] = useState(["driver", "navigator", "trainer", "trainee", "temp"])
   const [currDay, setCurrday] = useState(getCurrentDate("dateTime", 1))
   const [idMap, setIdMap] = useState(null)
+  const [data, setData] = useState({data: [{}], populated: false})
   const [locationQuery, setLocationQuery] = useState(
     [
       "cbd", "Unspecified", "innerNorth", "innerWest", "innerEast", "innerSouth", "outerNorth", "outerWest", "outerEast", "outerSouth"
     ]
   )
   
+  useEffect(() => {
+    const getData = async () => {
+      const result = await getSchedule(currDay)
+      if(result.response.status == 200){
+        const formattedResult = recodeSchedule(result.body)
+        setData({data: formattedResult, populated: true})
+      }
+      else {
+        setData({data: defaultRoutes, populated: true})
+      }
+    }
+    if(!data.populated) getData()
+  }), [data, currDay]
+  console.log(data.data)
   function getIdMap(map){
     setIdMap(map)
   }
@@ -260,119 +280,8 @@ const ScheduleBuilder = () => {
             nameWasRemoved={nameWasRemoved}
             nameWasAdded={nameWasAdded}
             insertName={insertName}
-            defaultRoutes={[
-              {
-                routeName: "N1",
-                routeType: "Standard",
-                startHours: "07",
-                startMins: "00",
-                name1: "Unassigned",
-                name2: "",
-                name3: "",
-                routeNotes: "",
-                toggleState: false
-              },
-              {
-                routeName: "N2",
-                routeType: "Standard",
-                startHours: "07",
-                startMins: "00",
-                name1: "Unassigned",
-                name2: "",
-                name3: "",
-                routeNotes: "",
-                toggleState: false
-              },
-              {
-                routeName: "E1",
-                routeType: "Standard",
-                startHours: "07",
-                startMins: "00",
-                name1: "Unassigned",
-                name2: "",
-                name3: "",
-                routeNotes: "",
-                toggleState: false
-              },
-              {
-                routeName: "E2",
-                routeType: "Standard",
-                startHours: "07",
-                startMins: "00",
-                name1: "Unassigned",
-                name2: "",
-                name3: "",
-                routeNotes: "",
-                toggleState: false
-              },
-              {
-                routeName: "S1",
-                routeType: "Standard",
-                startHours: "07",
-                startMins: "00",
-                name1: "Unassigned",
-                name2: "",
-                name3: "",
-                routeNotes: "",
-                toggleState: false
-              },
-              {
-                routeName: "S2",
-                routeType: "Standard",
-                startHours: "07",
-                startMins: "00",
-                name1: "Unassigned",
-                name2: "",
-                name3: "",
-                routeNotes: "",
-                toggleState: false
-              },
-              {
-                routeName: "W1",
-                routeType: "Standard",
-                startHours: "07",
-                startMins: "00",
-                name1: "Unassigned",
-                name2: "",
-                name3: "",
-                routeNotes: "",
-                toggleState: false
-              },
-              {
-                routeName: "F1",
-                routeType: "Float",
-                startHours: "07",
-                startMins: "00",
-                name1: "Unassigned",
-                name2: "",
-                name3: "",
-                routeNotes: "",
-                toggleState: false
-              },
-              {
-                routeName: "W2",
-                routeType: "Training",
-                startHours: "07",
-                startMins: "00",
-                name1: "Unassigned",
-                name2: "",
-                name3: "",
-                routeNotes: "",
-                toggleState: false
-              },
-              {
-                routeName: "D1",
-                routeType: "Depot",
-                startHours: "07",
-                startMins: "00",
-                name1: "Unassigned",
-                name2: "",
-                name3: "",
-                routeNotes: "",
-                toggleState: false
-              }
-            ]}
-          
+            defaultRoutes={defaultRoutes}
+            data={data}
           >
             
           </RoutePlanner>

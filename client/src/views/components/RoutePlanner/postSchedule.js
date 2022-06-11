@@ -2,7 +2,7 @@ import axios from "axios"
 
 export default function postSchedule(schedule) {
   
-  axios.post("/api/timesheets/new", schedule[0])
+  axios.post("/api/timesheets/new", schedule)
     .then(res => {
       console.log(res)
       console.log(res.data)
