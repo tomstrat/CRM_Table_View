@@ -2,6 +2,7 @@ import { ExternalInputTimesheet } from "../../schemas/external.interfaces"
 import { Timesheet } from "../../database/models/Timesheet"
 import { RosterStatus } from "../../database/models/Roster"
 import { Role, Contract, EmployeeType, Location } from "../../database/models/User"
+import { RouteType } from "../../database/models/Timesheet"
 
 const genDate = new Date("2019-07-22")
 const userDate = new Date("2018-07-22")
@@ -66,6 +67,7 @@ export const testTimesheet = {
   },
   id: 1,
   route: "route",
+  routeType: RouteType.standard,
   startTime: null,
   endTime: null,
   breakStart: null,
@@ -105,6 +107,7 @@ export const correctCreatedTimesheet = [
       timesheets: []
     },
     route: "route",
+    routeType: RouteType.standard,
     startTime: genDate.toISOString(),
     endTime: genDate.toISOString(),
     breakStart: genDate.toISOString(),
@@ -142,6 +145,7 @@ export const correctCreatedTimesheet = [
       timesheets: []
     },
     route: "route",
+    routeType: RouteType.standard,
     startTime: genDate.toISOString(),
     endTime: genDate.toISOString(),
     breakStart: genDate.toISOString(),
@@ -161,12 +165,13 @@ export const correctPostTimesheet: ExternalInputTimesheet[] = [
   {
     userId: 1,
     route: "route",
+    routeType: RouteType.standard,
     startTime: "2018-07-22T00:00:00.000Z",
     endTime: "2018-07-22T00:00:00.000Z",
     breakStart: "2018-07-22T00:00:00.000Z",
     plannedStart: "2018-07-22T11:23:42.023Z",
     ttmComments: "ttmcomments",
-    opsComments: "comments",
+    opsComments: "correctPostTimesheet",
     opsMessage: "message",
     startTruck: "test",
     sick: false,
@@ -181,7 +186,7 @@ export const correctPostTimesheet: ExternalInputTimesheet[] = [
     breakStart: "2018-07-22T00:00:00.000Z",
     plannedStart: "2018-07-23T00:00:00.000Z",
     ttmComments: "ttmcomments",
-    opsComments: "comments",
+    opsComments: "correctPostTimesheet",
     opsMessage: "message",
     startTruck: "test",
     sick: false,

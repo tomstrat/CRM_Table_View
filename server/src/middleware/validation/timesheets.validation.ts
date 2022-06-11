@@ -1,37 +1,38 @@
 import { body } from "express-validator"
 import TimesheetClient from "../../database/clients/TimesheetClient"
 import UserClient from "../../database/clients/UserClient"
-import { BadRequest, NotFound } from "../../schemas/error"
+import { BadRequest } from "../../schemas/error"
 import { ExternalInputTimesheet } from "../../schemas/external.interfaces"
+import * as R from "ramda"
+import { RouteType, Timesheet } from "../../database/models/Timesheet"
 
 export default function timesheetValidatorFactory({ timesheetClient, userClient }:
   { timesheetClient: TimesheetClient, userClient: UserClient }) {
   return {
     requireBody: body().isArray().withMessage("Body must be an array")
       .custom(async timesheets => {
-        const pairs = timesheets.map((ts: ExternalInputTimesheet) => ({ user: ts.userId, date: ts.plannedStart }))
-        pairs.map((pair: { user: number, date: string }) => {
+        const conflicts = await R.pipe(
+          R.map(async (timesheet: ExternalInputTimesheet) => (
+            timesheetClient.getAllByDate(new Date(timesheet.plannedStart))
+              .then(R.filter((exTimesheet: Timesheet) => exTimesheet.user.id === timesheet.userId))
+          )),
+          R.bind(Promise.all, Promise),
+          R.andThen(R.flatten),
+          R.andThen(R.length),
+        )(timesheets)
 
-        })
-      }),
-    requireUserId: body("*.userId").isNumeric()
-      .custom(async userId => {
-        const user = await userClient.getOne(userId)
-        if (!user) throw new NotFound("Could not find user")
-      }),
-    requireUnique: body("*")
-      .custom(async timesheet => {
-        console.log("GOT IN HERE")
-        const timesheets = await timesheetClient.getAllByDate(timesheet.plannedStart)
-        timesheets.map(sheet => {
-          console.log(sheet, timesheet)
-          if (sheet.user.id === timesheet.userId)
-            throw new BadRequest("User already has a timesheet on this date")
-        })
+        if (conflicts > 0) throw new BadRequest("User already has a timesheet on this date")
+        return true
       }),
     requireRoute: body("*.route").trim().escape(),
     requirePlannedStart: body("*.plannedStart").trim().escape().isISO8601(),
     requireOpsMessage: body("*.opsMessage").trim().escape(),
+    validateRouteType: body("*.routeType").optional()
+      .custom(type => {
+        console.log(type)
+        if (!(type in RouteType)) throw new Error("RouteType not valid")
+        return true
+      }),
     validateEdited: body("*.edited").optional().isBoolean(),
     validateTimes: body(["*.startTime", "*.endTime", "*.breakStart"])
       .optional()

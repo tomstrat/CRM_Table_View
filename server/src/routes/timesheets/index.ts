@@ -24,9 +24,9 @@ export default function timesheetsRouteFactory(
   const timesheetsRouter = Router()
   const {
     requireBody,
-    requireUserId,
     requireRoute,
     requirePlannedStart,
+    validateRouteType,
     requireOpsMessage,
     validateEdited,
     validateTimes,
@@ -54,7 +54,7 @@ export default function timesheetsRouteFactory(
   timesheetsRouter.post(
     "/new",
     [
-      requireBody, requireUserId,
+      requireBody, validateRouteType,
       requireRoute, requirePlannedStart,
       requireOpsMessage, validateEdited,
       validateTimes, validateComments,

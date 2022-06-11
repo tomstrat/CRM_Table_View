@@ -12,6 +12,7 @@ export function formatTimesheet(timesheet: ExternalInputTimesheet, user: User): 
     breakStart: convertDate(timesheet.breakStart),
     plannedStart: convertDate(timesheet.plannedStart)!,
     workingDate: removeTime(timesheet.plannedStart),
+    routeType: timesheet.routeType,
     ttmComments: timesheet.ttmComments,
     opsComments: timesheet.opsComments,
     opsMessage: timesheet.opsMessage,
