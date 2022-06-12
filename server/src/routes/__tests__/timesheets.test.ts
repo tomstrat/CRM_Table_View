@@ -1,49 +1,28 @@
-import inject from "../../registry"
-import { createDatabase } from "../../database"
-import request, { SuperAgentTest } from "supertest"
-import Config from "../../config/config"
-import cookieSession from "cookie-session"
-import express, { Express } from "express"
-import { Connection } from "typeorm"
 import { testTimesheet, correctPostTimesheet, minimumPostTimesheet, incorrectPostTimesheet } from "../../testing/dummy-data/timesheetdata"
 import { correctPostUser } from "../../testing/dummy-data/userdata"
-import TimesheetClient from "../../database/clients/TimesheetClient"
 import { type } from "ramda"
+import { makeTestEnvironment, TestEnvironment } from "../../testing/utilities/environment"
 
 
-let parentApp: Express
-let DB: Connection
-let agent: SuperAgentTest
+let testEnv: TestEnvironment
 
 beforeAll(async () => {
-  DB = await createDatabase({ Config })
-  const tsClient = new TimesheetClient(DB)
-  const app = await inject(DB)
-  parentApp = express()
-  parentApp.use(cookieSession({
-    name: "session",
-    keys: ["WPOIJADad'#/]11"],
-  }))
-  parentApp.use(app)
-  agent = request.agent(parentApp)
-  await agent
-    .post("/auth/login")
-    .send({ username: "test", password: "test" })
-  await tsClient.addRecord(minimumPostTimesheet)
-  await agent
+  testEnv = await makeTestEnvironment()
+  await testEnv.timesheetClient().addRecord(minimumPostTimesheet)
+  await testEnv.authRequest()
     .post("/api/users/new")
     .send(correctPostUser)
 })
 
 afterAll(async () => {
-  DB.close()
+  testEnv.closeEnvironment()
 })
 
 describe("Routes for Timesheets", () => {
   describe("GET /api/timesheets/:date", () => {
     describe("Without Auth", () => {
       it("sends 401 code", async () => {
-        await request(parentApp)
+        await testEnv.request()
           .get("/api/timesheets/1")
           .expect(401)
       })
@@ -51,7 +30,7 @@ describe("Routes for Timesheets", () => {
     describe("With Auth", () => {
       describe("And existing timesheet", () => {
         it("sends 200 code and user", async () => {
-          await agent
+          await testEnv.authRequest()
             .get("/api/timesheets/2019-07-22")
             .expect(200)
             .expect("Content-Type", /json/)
@@ -60,7 +39,7 @@ describe("Routes for Timesheets", () => {
       })
       describe("And non-existent timesheet", () => {
         it("sends 404 code", async () => {
-          await agent
+          await testEnv.authRequest()
             .get("/api/timesheets/2020-12-14")
             .expect(404)
         })
@@ -71,7 +50,7 @@ describe("Routes for Timesheets", () => {
   describe("POST /api/timesheets/new", () => {
     describe("Without Auth", () => {
       it("sends 401 code", async () => {
-        await request(parentApp)
+        await testEnv.request()
           .post("/api/timesheets/new")
           .send(correctPostTimesheet)
           .expect(401)
@@ -80,7 +59,7 @@ describe("Routes for Timesheets", () => {
     describe("With Auth", () => {
       describe("And correct data", () => {
         it("sends 200 code", async () => {
-          await agent
+          await testEnv.authRequest()
             .post("/api/timesheets/new")
             .send(correctPostTimesheet)
             .expect(200)
@@ -95,7 +74,7 @@ describe("Routes for Timesheets", () => {
       })
       describe("And minimal data", () => {
         it("sends 200 code", async () => {
-          await agent
+          await testEnv.authRequest()
             .post("/api/timesheets/new")
             .send([
               {
@@ -123,7 +102,7 @@ describe("Routes for Timesheets", () => {
       })
       describe("And duplicate userId", () => {
         it("sends 400 code", async () => {
-          await agent
+          await testEnv.authRequest()
             .post("/api/timesheets/new")
             .send(correctPostTimesheet)
             .expect(400)
@@ -131,7 +110,7 @@ describe("Routes for Timesheets", () => {
       })
       describe("And incorrect userId", () => {
         it("sends 404 code", async () => {
-          await agent
+          await testEnv.authRequest()
             .post("/api/timesheets/new")
             .send(incorrectPostTimesheet)
             .expect(404)
@@ -139,7 +118,7 @@ describe("Routes for Timesheets", () => {
       })
       describe("And empty data", () => {
         it("sends 400 code", async () => {
-          await agent
+          await testEnv.authRequest()
             .post("/api/timesheets/new")
             .send({})
             .expect(400)
@@ -151,14 +130,14 @@ describe("Routes for Timesheets", () => {
   describe("GET /api/timesheets", () => {
     describe("Without Auth", () => {
       it("sends 401 code", async () => {
-        await request(parentApp)
+        await testEnv.request()
           .get("/api/timesheets")
           .expect(401)
       })
     })
     describe("With Auth", () => {
       it("sends 200 code and timesheets", async () => {
-        await agent
+        await testEnv.authRequest()
           .get("/api/timesheets")
           .expect(200)
           .expect("Content-Type", /json/)
