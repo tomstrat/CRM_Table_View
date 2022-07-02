@@ -1,12 +1,11 @@
 export default function recodeSchedule(schedule){
   const formattedSchedule = []
   const routes = []
-
+  console.log(schedule)
   schedule.map(row => {
     if (!routes.includes(row.route)){
       const tempDate = new Date(row.plannedStart)
       const allNames = schedule.filter(elem => elem.route === row.route).map(thing => thing.user.username)
-
       formattedSchedule.push(
         {
           routeName: row.route, 
@@ -23,7 +22,7 @@ export default function recodeSchedule(schedule){
       routes.push(row.route)
     }
   })
-  console.log(schedule)
+  formattedSchedule.push({populated: true})
   return formattedSchedule
 }
 

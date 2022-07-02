@@ -14,7 +14,7 @@ export default function formatSchedule(date, routes, idMap){
         plannedStart: formatStartTimes(date, route.startHours, route.startMins),
         userId: getId(idMap, route.name1),
         route: route.routeName,
-        routeType: route.routeType,
+        routeType: route.routeType.toLowerCase(),
         opsMessage: route.routeNotes,
         
       },
@@ -22,7 +22,7 @@ export default function formatSchedule(date, routes, idMap){
         plannedStart: formatStartTimes(date, route.startHours, route.startMins),
         userId: getId(idMap, route.name2),
         route: route.routeName,
-        routeType: route.routeType,
+        routeType: route.routeType.toLowerCase(),
         opsMessage: route.routeNotes,
         
       },
@@ -30,7 +30,7 @@ export default function formatSchedule(date, routes, idMap){
         plannedStart: formatStartTimes(date, route.startHours, route.startMins),
         userId: getId(idMap, route.name3),
         route: route.routeName,
-        routeType: route.routeType,
+        routeType: route.routeType.toLowerCase(),
         opsMessage: route.routeNotes,
         
       })
@@ -40,7 +40,7 @@ export default function formatSchedule(date, routes, idMap){
         plannedStart: formatStartTimes(date, route.startHours, route.startMins),
         userId: getId(idMap, route.name1),
         route: route.routeName,
-        routeType: route.routeType,
+        routeType: route.routeType.toLowerCase(),
         opsMessage: route.routeNotes,
         
       },
@@ -48,7 +48,7 @@ export default function formatSchedule(date, routes, idMap){
         plannedStart: formatStartTimes(date, route.startHours, route.startMins),
         userId: getId(idMap, route.name2),
         route: route.routeName,
-        routeType: route.routeType,
+        routeType: route.routeType.toLowerCase(),
         opsMessage: route.routeNotes,
         
       }
@@ -59,7 +59,7 @@ export default function formatSchedule(date, routes, idMap){
         plannedStart: formatStartTimes(date, route.startHours, route.startMins),
         userId: getId(idMap, route.name1),
         route: route.routeName,
-        routeType: route.routeType,
+        routeType: route.routeType.toLowerCase(),
         opsMessage: route.routeNotes,
         
       }

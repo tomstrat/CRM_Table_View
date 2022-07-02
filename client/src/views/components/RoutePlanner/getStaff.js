@@ -1,8 +1,8 @@
 import axios from "axios"
 
-export default function getSchedule(date) {
+export default function getStaff() {
   
-  return axios.get(`/api/timesheets/${date}`)
+  return axios.get("/api/users/")
     .then(res => {
       console.log(res)
       return res
@@ -13,4 +13,3 @@ export default function getSchedule(date) {
       
     })
 }
-

@@ -18,7 +18,7 @@
 }
 
 .day-title {
-  font-size: 26px;
+  font-size: 18px;
 }
 
 .date-title {
@@ -45,6 +45,15 @@
   padding-right: 0px;
   font-size: 11px;
   height: 66vh;
+}
+
+.new-container-of-the-routes {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-around;
+  
 }
 
 .container-of-the-routes {
@@ -89,7 +98,7 @@
   border: 2px solid #8dc63f;
   border-radius: 12px;
   margin: 2%;
-  width: 60%;
+  width: 10%;
 }
 
 .route-top-bar {
@@ -444,7 +453,35 @@
   text-align: center;
   z-index: 2;
 }
+.new-route-box {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0.5%;
+  align-items: center;
+  background-color: aliceblue;
+  
 
+}
+.new-staff-search-results-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 1%;
+  margin-bottom: 0.5%;
+  background-color: white;
+  border: 2px solid #8dc63f;
+  border-radius: 12px;
+  width: 82%;
+  height: 15vh;
+  font-size: 11px;
+  overflow: scroll;
+}
+.date-staff-container {
+  display: flex;
+  flex-direction: row;
+}
 .xbutton-name {
   display: flex;
   justify-content: center;

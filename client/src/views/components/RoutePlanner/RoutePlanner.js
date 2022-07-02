@@ -40,11 +40,6 @@ const RoutePlanner = (props) => {
     }
   }), []
 
-  useEffect(() => {
-    if(props.data.populated == true) {
-      setRoutePlannerState(props.data.data)
-    }
-  }), [props.data.populated]
 
   function saveOnClick() {
     postSchedule(formatSchedule(props.currDay, routePlannerState, props.idMap))

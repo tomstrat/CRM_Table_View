@@ -17,6 +17,7 @@ import Overview from "./views/pages/user/Overview"
 import AddHours from "./views/pages/user/AddHours"
 import TimeOff from "./views/pages/user/TimeOff"
 import Forms from "./views/pages/user/Forms"
+import NewScheduleBuilder from "./views/pages/operations/NewScheduleBuilder"
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
           <PrivateRoute exact path="/" component={OpsOverview} />
           <PrivateRoute exact path="/ops/overview" component={OpsOverview} />
           <PrivateRoute exact path="/ops/scheduler" component={ScheduleBuilder} />
+          <PrivateRoute exact path="/ops/newschedulebuilder" component={NewScheduleBuilder} />
           <PrivateRoute exact path="/ops/edithours" component={EditHours} />
           <PrivateRoute exact path="/ops/dataviewer" component={DataViewer} />
           <PrivateRoute exact path="/ops/requests" component={Requests} />

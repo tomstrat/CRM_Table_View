@@ -35,8 +35,9 @@ const ScheduleBuilder = () => {
   useEffect(() => {
     const getData = async () => {
       const result = await getSchedule(currDay)
-      if(result.response.status == 200){
-        const formattedResult = recodeSchedule(result.body)
+      if(result.status == 200){
+        const formattedResult = recodeSchedule(result.data)
+        console.log("result:", formattedResult)
         setData({data: formattedResult, populated: true})
       }
       else {
@@ -45,7 +46,7 @@ const ScheduleBuilder = () => {
     }
     if(!data.populated) getData()
   }), [data, currDay]
-  console.log(data.data)
+  
   function getIdMap(map){
     setIdMap(map)
   }
