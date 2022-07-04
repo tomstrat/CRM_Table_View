@@ -17,7 +17,8 @@ const NewStaffWidget = (props) => {
   const {
     username,
     employeeType,
-    certified
+    certified,
+    toggleState
   } = props.user
 
   const updatedTypes = (certified === "true")
@@ -30,7 +31,7 @@ const NewStaffWidget = (props) => {
   
   return (
     <div key={uniqid("type-")} className={
-      props.user.toggleState
+      toggleState
         ? `staff-widget staff-widget-toggled ${findTopRole(updatedTypes)}`
         : `staff-widget ${findTopRole(updatedTypes)}`
       
@@ -49,6 +50,5 @@ export default NewStaffWidget
 NewStaffWidget.propTypes = {
   index: PropTypes.number,
   user: PropTypes.object,
-  toggleState: PropTypes.array,
   toggleStaff: PropTypes.func,
 }

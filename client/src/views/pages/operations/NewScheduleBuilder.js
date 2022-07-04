@@ -19,34 +19,52 @@ const NewScheduleBuilder = () => {
   const nameToAdd = useRef("")
 
   useEffect(() => {
+   
     const getStaff = async () => {
-      const url = "/api/users"
-      axios.get(url)
-        .then(res => {
-          if(!staff.length > 0) setStaff(res.data)
-          return res
-        })
-        .catch((err) => {
-          console.log(err)
-          return err
-        })
+      if (!staff.length > 0) {
+        const url = "/api/users"
+        axios.get(url)
+          .then(res => {
+            const usersWithToggle = res.data.map((user)=> {
+              return {...user, toggleState: false}
+            })
+            setStaff(usersWithToggle)
+            return res
+          })
+          .catch((err) => {
+            console.log(err)
+            return err
+          })
+      }
     }
     getStaff()
   }), []
 
+
   function addName() {
     const name = nameToAdd.current
-    setTimeSheet(values => {
-      return values.map((obj) => {
-        if (obj.toggleState) 
-          return {...obj, names: [...obj.names, name]}
-        else return obj
-      })
+    const toggleCheck = timeSheet.some(function(e) {
+      return e.toggleState == true
     })
+     
+    console.log(toggleCheck)
+    if (name && toggleCheck) {
+      nameToAdd.current = ""
+      setTimeSheet(values => {
+        return values.map((obj) => {
+          if (obj.toggleState) 
+            return {...obj, names: [...obj.names, name]}
+          else return obj
+        })
+      })
+    }
   }
   
   function toggleStaff(targetIndex, name) {
-    nameToAdd.current = name
+    if(!nameToAdd.current) nameToAdd.current = name
+    else if (nameToAdd.current && nameToAdd.current !== name) nameToAdd.current = name
+    else nameToAdd.current = ""
+    
     setStaff(values => {
       return values.map((obj, index) => {
         if (index == targetIndex && obj.toggleState == false) {

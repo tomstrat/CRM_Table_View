@@ -1,14 +1,33 @@
+/* eslint-disable no-unused-vars */
 import React from "react"
 import PropTypes from "prop-types"
 import NewTimeBox from "./NewTimeBox"
 import NewTextBox from "./NewTextBox"
-
+import NewNameBox from "./NewNameBox"
 
 export default function NewRouteBox(props){
   
   function toggle(){
     props.toggleRoute(props.index)
   }
+
+  function makeNameBox (names, routeIndex) {
+    return names.map((name, index) => {
+      return (
+        <NewNameBox
+          toggleState={props.toggleState}
+          key={routeIndex + "NameBox" + index}
+          name={name}
+          index={index}
+        />
+      )
+    })
+
+   
+    
+  }
+
+
   return(
     <div className="new-route-box">
       <div  onClick={toggle} >{props.routeName}</div>
@@ -26,7 +45,7 @@ export default function NewRouteBox(props){
       }</div>
       <div>{
         props.names.length > 0
-          ?props.names 
+          ? makeNameBox(props.names, props.index)
           :"Unassigned"
       
       }</div>
