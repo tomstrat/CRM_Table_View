@@ -11,13 +11,16 @@ import formatStaff from "../../components/RoutePlanner/formatStaff"
 import NewStaffWidget from "../../components/Staff_Search/NewStaffWidget"
 import axios from "axios"
 import { formatStaffName } from "../../../utilities/formatters/util"
+import truckList from "../../components/RoutePlanner/truckList"
+import NewTruckContents from "../../components/RoutePlanner/NewTruckContents"
 
 const NewScheduleBuilder = () => { 
   const [currDay, setCurrDay] = useState(getCurrentDate("dateTime", + 1))
   const [staff, setStaff] = useState([])
   const [timeSheet, setTimeSheet] = useState(defaultRoutes2) 
+  const [truckState, setTruckState] = useState(truckList)
   const nameToAdd = useRef("")
-
+  
   useEffect(() => {
    
     const getStaff = async () => {
@@ -29,6 +32,7 @@ const NewScheduleBuilder = () => {
               return {...user, toggleState: false}
             })
             setStaff(usersWithToggle)
+            //pointless line? 
             return res
           })
           .catch((err) => {
@@ -101,7 +105,7 @@ const NewScheduleBuilder = () => {
     })
   }
 
-  function notesChange(targetIndex, newValue) {
+  function notesChange(targetIndex, name, newValue) {
     setTimeSheet(values => {
       return values.map((obj, index) => {
         if (index == targetIndex) 
@@ -125,6 +129,19 @@ const NewScheduleBuilder = () => {
     })
   }
 
+  function truckContentsChange (row, column, newValue) {
+    // row is index (int), column is column name(string) 
+    setTruckState(values => {
+      return values.map((truck, index) => {
+        if(index == row) {
+          if(column == "tools") return {...truck, tools: newValue}
+          else if(column == "contents") return {...truck, contents: newValue}
+          else if(column == "location") return {...truck, location: newValue}
+        }
+        else return truck
+      })
+    })
+  }
   function makeRoute(routeInfo, index){
     const {routeName, routeType, startTime, names, routeNotes, toggleState} = routeInfo
     const formattedTimes = formatHours(startTime)
@@ -190,10 +207,20 @@ const NewScheduleBuilder = () => {
 
         </div>
       </div>
-      <div className="new-container-of-the-routes">
-        {timeSheet.map((route, index) => {
-          return makeRoute(route, index)
-        })}
+      <div className="lower-row-container">
+        <div className="truck-contents-container">
+          <NewTruckContents
+            key={"truckcontents"}
+            truckList={truckState}
+            truckContentsChange={truckContentsChange}
+          />
+        </div>
+        <div className="new-container-of-the-routes">
+          {timeSheet.map((route, index) => {
+            return makeRoute(route, index)
+          })}
+        </div>
+
       </div>
       
     </>

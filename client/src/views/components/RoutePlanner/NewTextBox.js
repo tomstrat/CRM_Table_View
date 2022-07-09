@@ -4,22 +4,23 @@ import PropTypes from "prop-types"
 
 export default function NewTextBox(props) {
 
-  function handleNotes(e){
-    props.notesChange(props.index, e.target.value)
+  function handleChange(e){
+    props.valChange(props.index, props.name, e.target.value)
   }
 
   return (
     <input
       type="text"
-      value={props.routeNotes}
-      onChange={handleNotes}
+      value={props.currVal}
+      onChange={handleChange}
     />
 
   )
 }
 
 NewTextBox.propTypes = {
-  routeNotes: PropTypes.string,
-  notesChange: PropTypes.func,
-  index: PropTypes.number
+  currVal: PropTypes.string,
+  valChange: PropTypes.func,
+  index: PropTypes.number,
+  name: PropTypes.string
 }

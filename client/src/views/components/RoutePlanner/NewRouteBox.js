@@ -54,8 +54,8 @@ export default function NewRouteBox(props){
           ? <NewTextBox
             key={"textbox" + props.index}
             index={props.index}
-            routeNotes={props.routeNotes}
-            notesChange={props.notesChange}
+            currVal={props.routeNotes}
+            valChange={props.notesChange}
           />
           : props.routeNotes
       }</div>
