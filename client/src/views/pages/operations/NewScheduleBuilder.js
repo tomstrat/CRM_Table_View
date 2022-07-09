@@ -51,7 +51,7 @@ const NewScheduleBuilder = () => {
       return e.toggleState == true
     })
      
-    console.log(toggleCheck)
+    
     if (name && toggleCheck) {
       nameToAdd.current = ""
       setTimeSheet(values => {
@@ -63,7 +63,8 @@ const NewScheduleBuilder = () => {
       })
     }
   }
-  function removeName (routeIndex, targetIndex) {
+  function removeName (routeIndex, targetIndex, name) {
+    nameToAdd.current = name
     setTimeSheet(values => {
       return values.map((obj, index) => {
         if (index == routeIndex) return {...obj, names: obj.names.filter((element, index) => index !== targetIndex)}
@@ -138,7 +139,6 @@ const NewScheduleBuilder = () => {
   }
 
   function truckContentsChange (row, column, newValue) {
-    // row is index (int), column is column name(string) 
     setTruckState(values => {
       return values.map((truck, index) => {
         if(index == row) {

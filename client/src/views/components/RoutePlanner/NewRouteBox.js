@@ -33,7 +33,6 @@ export default function NewRouteBox(props){
   return(
     <div className="new-route-box">
       <div  onClick={toggle} >{props.routeName}</div>
-      <div>{props.routeType}</div>
       <div>{
         props.toggleState
           ? <NewTimeBox

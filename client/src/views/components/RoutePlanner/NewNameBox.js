@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 
 export default function NewNameBox (props) {
   function handleClick () {
-    props.removeName(props.routeIndex, props.index )
+    props.removeName(props.routeIndex, props.index, props.name )
   }
   return (
     props.toggleState
