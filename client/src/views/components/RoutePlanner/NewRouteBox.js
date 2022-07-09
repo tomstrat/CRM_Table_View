@@ -15,10 +15,12 @@ export default function NewRouteBox(props){
     return names.map((name, index) => {
       return (
         <NewNameBox
+          routeIndex={routeIndex}
           toggleState={props.toggleState}
           key={routeIndex + "NameBox" + index}
           name={name}
           index={index}
+          removeName={props.removeName}
         />
       )
     })
@@ -74,5 +76,6 @@ NewRouteBox.propTypes = {
   routeNotes: PropTypes.string,
   toggleRoute: PropTypes.func,
   timeChange: PropTypes.func,
-  notesChange: PropTypes.func
+  notesChange: PropTypes.func,
+  removeName: PropTypes.func
 }

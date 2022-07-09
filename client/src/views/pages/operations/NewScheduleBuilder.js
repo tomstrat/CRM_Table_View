@@ -63,6 +63,14 @@ const NewScheduleBuilder = () => {
       })
     }
   }
+  function removeName (routeIndex, targetIndex) {
+    setTimeSheet(values => {
+      return values.map((obj, index) => {
+        if (index == routeIndex) return {...obj, names: obj.names.filter((element, index) => index !== targetIndex)}
+        else return obj
+      })
+    })
+  }
   
   function toggleStaff(targetIndex, name) {
     if(!nameToAdd.current) nameToAdd.current = name
@@ -160,6 +168,7 @@ const NewScheduleBuilder = () => {
         toggleRoute={toggleRoute}
         timeChange={timeChange}
         notesChange={notesChange}
+        removeName={removeName}
       />
     )
   }
