@@ -5,7 +5,7 @@ import PropTypes from "prop-types"
 export default function NewTextBox(props) {
 
   function handleChange(e){
-    props.valChange(props.index, props.name, e.target.value)
+    props.valChange({targetIndex: props.index, name: props.name, newValue: e.target.value})
   }
 
   return (

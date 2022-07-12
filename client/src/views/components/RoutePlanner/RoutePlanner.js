@@ -17,7 +17,7 @@ const RoutePlanner = (props) => {
     copyState.splice(indexExtracted, 1)
     setRoutePlannerState(copyState)
   }
-  console.log(props.defaultRoutes)
+  
   //runs on every render, generates and formats a list of all current names attached to routes and compares it against 
   //the addedNames state (held in the page), which is a list that recieves a name each time one is added to the route.
   //the lists are compared, and if a difference is found, it is returned to the page, and removed from added names. Although

@@ -16,8 +16,6 @@ const NewTruckContents = (props) => {
             currVal={truck.tools}
             name={"tools"}
             valChange={props.truckContentsChange}
-            
-            
           />
           <NewTextBox
             index={index}
@@ -25,7 +23,6 @@ const NewTruckContents = (props) => {
             currVal={truck.location}
             name={"location"}
             valChange={props.truckContentsChange}
-            
           />
           <NewTextBox
             index={index}
@@ -33,11 +30,7 @@ const NewTruckContents = (props) => {
             currVal={truck.contents}
             name={"contents"}
             valChange={props.truckContentsChange}
-            
           />
-    
-        
-        
         </div>
       </>
     )
