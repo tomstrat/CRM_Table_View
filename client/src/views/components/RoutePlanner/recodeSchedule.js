@@ -1,7 +1,6 @@
 export default function recodeSchedule(schedule){
   const formattedSchedule = []
   const routes = []
-  console.log(schedule)
   schedule.map(row => {
     if (!routes.includes(row.route)){
       const tempDate = new Date(row.plannedStart)
@@ -10,31 +9,31 @@ export default function recodeSchedule(schedule){
         {
           routeName: row.route, 
           routeType: row.routeType,
-          startHours: tempDate.getHours(),
-          startMins: tempDate.getMinutes(),
+          startTime: tempDate,
           routeNotes: row.opsMessage,
           toggleState: false,
-          name1: allNames[0],
-          name2: allNames[1],
-          name3: allNames[2]
+          names: allNames
         }
       )
       routes.push(row.route)
     }
   })
-  formattedSchedule.push({populated: true})
   return formattedSchedule
 }
 
-// {
-//   routeName: "N1",
-//   routeType: "Standard",
-//   startHours: "07",
-//   startMins: "00",
-//   name1: "Unassigned",
-//   name2: "",
-//   name3: "",
-//   routeNotes: "",
-//   toggleState: false
-// },
+{/* <NewRouteBox
+index={index}
+key={"routebox" + index}
+routeName={routeName}
+routeType={routeType}
+startHours={formattedTimes[0]}
+startMins={formattedTimes[1]}
+names={names}
+routeNotes={routeNotes}
+toggleState={toggleState}
+toggleRoute={toggleRoute}
+timeChange={timeChange}
+notesChange={notesChange}
+removeName={removeName}
+/> */}
 

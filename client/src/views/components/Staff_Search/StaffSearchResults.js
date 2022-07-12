@@ -88,7 +88,7 @@ const StaffSearchResults = (props) => {
               key={uniqid("staffwidget-")} 
               toggleState={toggleState}
               resultsGetName={resultsGetName} 
-              user={user}
+              user={{...user, toggleState: false}}
             />
           }
         }

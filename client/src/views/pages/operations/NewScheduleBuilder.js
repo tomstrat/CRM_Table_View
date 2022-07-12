@@ -11,42 +11,69 @@ import formatStaff from "../../components/RoutePlanner/formatStaff"
 import NewStaffWidget from "../../components/Staff_Search/NewStaffWidget"
 import axios from "axios"
 import { formatStaffName } from "../../../utilities/formatters/util"
+import truckList from "../../components/RoutePlanner/truckList"
+import NewTruckContents from "../../components/RoutePlanner/NewTruckContents"
+import postSchedule from "../../components/RoutePlanner/postSchedule"
+import testSheet from "../../components/RoutePlanner/testSheet"
+import getStaff from "../../components/RoutePlanner/getStaff"
+import getTimeSheet from "../../components/RoutePlanner/getTimeSheet"
+import recodeSchedule from "../../components/RoutePlanner/recodeSchedule"
 
 const NewScheduleBuilder = () => { 
-  const [currDay, setCurrDay] = useState(getCurrentDate("dateTime", + 1))
+  const [currDay, setCurrDay] = useState(getCurrentDate("dateTime", 1))
   const [staff, setStaff] = useState([])
-  const [timeSheet, setTimeSheet] = useState(defaultRoutes2) 
+  const [timeSheet, setTimeSheet] = useState([]) 
+  const [truckState, setTruckState] = useState(truckList)
+  const dateChange = useRef(true)
   const nameToAdd = useRef("")
-
+  
   useEffect(() => {
-    const getStaff = async () => {
-      const url = "/api/users"
-      axios.get(url)
-        .then(res => {
-          if(!staff.length > 0) setStaff(res.data)
-          return res
-        })
-        .catch((err) => {
-          console.log(err)
-          return err
-        })
+    if (dateChange.current == true) {
+      dateChange.current = false
+      getTimeSheet(currDay, setTimeSheet)
     }
-    getStaff()
+   
+    getStaff(staff, setStaff)
+   
   }), []
 
+  function testPost() {
+    postSchedule(testSheet)
+  }
+  
   function addName() {
     const name = nameToAdd.current
+    const toggleCheck = timeSheet.some(function(e) {
+      return e.toggleState == true
+    })
+    
+    if (name && toggleCheck) {
+      nameToAdd.current = ""
+      setTimeSheet(values => {
+        return values.map((obj) => {
+          if (obj.toggleState) 
+            return {...obj, names: [...obj.names, name]}
+          else return obj
+        })
+      })
+    }
+  }
+
+  function removeName (routeIndex, targetIndex, name) {
+    nameToAdd.current = name
     setTimeSheet(values => {
-      return values.map((obj) => {
-        if (obj.toggleState) 
-          return {...obj, names: [...obj.names, name]}
+      return values.map((obj, index) => {
+        if (index == routeIndex) return {...obj, names: obj.names.filter((element, index) => index !== targetIndex)}
         else return obj
       })
     })
   }
   
   function toggleStaff(targetIndex, name) {
-    nameToAdd.current = name
+    if(!nameToAdd.current) nameToAdd.current = name
+    else if (nameToAdd.current && nameToAdd.current !== name) nameToAdd.current = name
+    else nameToAdd.current = ""
+    
     setStaff(values => {
       return values.map((obj, index) => {
         if (index == targetIndex && obj.toggleState == false) {
@@ -68,8 +95,6 @@ const NewScheduleBuilder = () => {
     })
   }
   
-  
-
   function timeChange(targetIndex, type, newValue) {
     const tempDate = new Date(timeSheet[targetIndex].startTime)
     if (type == "start-hours") tempDate.setHours(newValue)
@@ -83,7 +108,7 @@ const NewScheduleBuilder = () => {
     })
   }
 
-  function notesChange(targetIndex, newValue) {
+  function notesChange({targetIndex, newValue}) {
     setTimeSheet(values => {
       return values.map((obj, index) => {
         if (index == targetIndex) 
@@ -94,24 +119,37 @@ const NewScheduleBuilder = () => {
   }
 
   function increaseDay(){
-    setCurrDay(currDay => {
-      currDay.setDate(currDay.getDate() + 1)
-      return new Date(currDay)
-    })
+    const increDate = new Date(currDay)
+    increDate.setDate(increDate.getDate() + 1)
+    dateChange.current = true
+    setCurrDay(increDate)
   }
 
   function decreaseDay(){
-    setCurrDay(currDay => {
-      currDay.setDate(currDay.getDate() - 1)
-      return new Date(currDay)
+    const decreDate = new Date(currDay)
+    decreDate.setDate(decreDate.getDate() - 1)
+    dateChange.current = true
+    setCurrDay(decreDate)
+  }
+
+  function truckContentsChange ({targetIndex, name, newValue}) {
+    setTruckState(values => {
+      return values.map((truck, index) => {
+        if(index == targetIndex) {
+          if(name == "tools") return {...truck, tools: newValue}
+          else if(name == "contents") return {...truck, contents: newValue}
+          else if(name == "location") return {...truck, location: newValue}
+        }
+        else return truck
+      })
     })
   }
 
   function makeRoute(routeInfo, index){
     const {routeName, routeType, startTime, names, routeNotes, toggleState} = routeInfo
     const formattedTimes = formatHours(startTime)
+    
     return (
-
       <NewRouteBox
         index={index}
         key={"routebox" + index}
@@ -125,6 +163,7 @@ const NewScheduleBuilder = () => {
         toggleRoute={toggleRoute}
         timeChange={timeChange}
         notesChange={notesChange}
+        removeName={removeName}
       />
     )
   }
@@ -151,6 +190,7 @@ const NewScheduleBuilder = () => {
   return (
     <>
       <Nav auth={true}/>
+      <div onClick={testPost}>Test Post</div>
       <div className="date-staff-container">
         <div className="day-select-container">
           <div className="tiny-title">Schedule for:</div>
@@ -161,21 +201,35 @@ const NewScheduleBuilder = () => {
           </div>
           <div className="date-title">{currDay.getDate() + "-" + fixMonth(currDay.getMonth()) + "-" + currDay.getFullYear()}</div>
         </div>
+        
         <div className="new-staff-search-results-container">
+          
           <div className="add-route-button" onClick={addName}>Test</div>
-          {staff.map((user, index) => {
-            return makeWidget(user, index)
-          })}
-       
-
-
-
+          {timeSheet.length > 0
+            ? staff.map((user, index) => {
+              return makeWidget(user, index)
+            })
+            :<div>Loading</div>
+          }
         </div>
       </div>
-      <div className="new-container-of-the-routes">
-        {timeSheet.map((route, index) => {
-          return makeRoute(route, index)
-        })}
+      <div className="lower-row-container">
+        <div className="truck-contents-container">
+          <NewTruckContents
+            key={"truckcontents"}
+            truckList={truckState}
+            truckContentsChange={truckContentsChange}
+          /> 
+        </div>
+        <div className="new-container-of-the-routes">
+          {timeSheet.length > 0 
+            ?timeSheet.map((route, index) => {
+              return makeRoute(route, index)
+            })
+            : <div>Loading</div>
+          }
+        </div>
+
       </div>
       
     </>

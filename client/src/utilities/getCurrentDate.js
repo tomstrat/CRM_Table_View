@@ -22,6 +22,7 @@ export default function getCurrentDate(format, incre) {
   
   const increDate = new Date()
   increDate.setDate(increDate.getDate() + incre)
+  increDate.setHours(0, 0, 0)
   const [day, month, year, weekDay] = 
   
   [

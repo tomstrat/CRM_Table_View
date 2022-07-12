@@ -25,12 +25,30 @@
   font-size: 11px;
   margin-bottom: 2%;
 }
-
+.truck-header-name {
+  padding-right: 10%;
+}
+.truck-contents-name {
+  display: flex;
+  padding-right: 0.5%;
+}
+.truck-header {
+  padding-right: 21%;
+}
+.truck-contents-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+}
 .staff-search-results-widgets {
   display: flex;
   flex-wrap: wrap;
 }
-
+.truck-header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
 .route-planner-container {
   display: flex;
   flex-direction: column;
@@ -50,9 +68,10 @@
 .new-container-of-the-routes {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-around;
+  width: 70%;
+  margin: 1%;
   
 }
 
@@ -72,7 +91,15 @@
   flex-direction: row;
   height: 100%;
 }
-
+.lower-row-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 1%;
+ 
+}
 .column-page {
   display: flex;
   flex-direction: column;
@@ -463,6 +490,12 @@
   background-color: aliceblue;
   
 
+}
+.truck-contents-container {
+  display: flex;
+  flex-direction: column;
+ 
+ 
 }
 .new-staff-search-results-container {
   display: flex;
