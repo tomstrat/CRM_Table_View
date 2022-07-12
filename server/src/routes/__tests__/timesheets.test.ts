@@ -78,13 +78,13 @@ describe("Routes for Timesheets", () => {
             .post("/api/timesheets/new")
             .send([
               {
-                userId: 1,
+                username: "test",
                 route: "N1",
                 plannedStart: "2022-06-08T07:00:00.000Z",
                 opsMessage: ""
               },
               {
-                userId: 2,
+                username: "newUser",
                 route: "N5",
                 plannedStart: "2022-06-08T07:00:00.000Z",
                 opsMessage: ""

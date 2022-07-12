@@ -79,7 +79,7 @@ export interface ExternalOutputUser {
 }
 
 export interface ExternalInputTimesheet {
-  userId: number
+  username: string
   route: string
   routeType?: RouteType,
   startTime?: string

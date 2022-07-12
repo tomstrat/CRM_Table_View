@@ -163,7 +163,7 @@ export const correctCreatedTimesheet = [
 
 export const correctPostTimesheet: ExternalInputTimesheet[] = [
   {
-    userId: 1,
+    username: "test",
     route: "route",
     routeType: RouteType.standard,
     startTime: "2018-07-22T00:00:00.000Z",
@@ -179,7 +179,7 @@ export const correctPostTimesheet: ExternalInputTimesheet[] = [
     edited: true
   },
   {
-    userId: 1,
+    username: "test",
     route: "route2",
     startTime: "2018-07-22T00:00:00.000Z",
     endTime: "2018-07-22T00:00:00.000Z",
@@ -197,7 +197,7 @@ export const correctPostTimesheet: ExternalInputTimesheet[] = [
 
 export const incorrectPostTimesheet: ExternalInputTimesheet[] = [
   {
-    userId: 1,
+    username: "test",
     route: "route",
     startTime: "2018-07-22",
     endTime: "2018-07-22",
@@ -212,7 +212,7 @@ export const incorrectPostTimesheet: ExternalInputTimesheet[] = [
     edited: true
   },
   {
-    userId: 50,
+    username: "wawawawawwa",
     route: "route",
     startTime: "2018-07-22",
     endTime: "2018-07-22",

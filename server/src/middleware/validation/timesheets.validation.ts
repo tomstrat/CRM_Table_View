@@ -14,7 +14,7 @@ export default function timesheetValidatorFactory({ timesheetClient, userClient 
         const conflicts = await R.pipe(
           R.map(async (timesheet: ExternalInputTimesheet) => (
             timesheetClient.getAllByDate(new Date(timesheet.plannedStart))
-              .then(R.filter((exTimesheet: Timesheet) => exTimesheet.user.id === timesheet.userId))
+              .then(R.filter((exTimesheet: Timesheet) => exTimesheet.user.username === timesheet.username))
           )),
           R.bind(Promise.all, Promise),
           R.andThen(R.flatten),
