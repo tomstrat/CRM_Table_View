@@ -15,34 +15,22 @@ import truckList from "../../components/RoutePlanner/truckList"
 import NewTruckContents from "../../components/RoutePlanner/NewTruckContents"
 import postSchedule from "../../components/RoutePlanner/postSchedule"
 import testSheet from "../../components/RoutePlanner/testSheet"
+import getStaff from "../../components/RoutePlanner/getStaff"
+import getTimeSheet from "../../components/RoutePlanner/getTimeSheet"
+import recodeSchedule from "../../components/RoutePlanner/recodeSchedule"
 
 const NewScheduleBuilder = () => { 
   const [currDay, setCurrDay] = useState(getCurrentDate("dateTime", 1))
   const [staff, setStaff] = useState([])
-  const [timeSheet, setTimeSheet] = useState(defaultRoutes2) 
+  const [timeSheet, setTimeSheet] = useState([]) 
   const [truckState, setTruckState] = useState(truckList)
   const nameToAdd = useRef("")
   
   useEffect(() => {
-    const getStaff = async () => {
-      if (!staff.length > 0) {
-        const url = "/api/users"
-        axios.get(url)
-          .then(res => {
-            const usersWithToggle = res.data.map((user)=> {
-              return {...user, toggleState: false}
-            })
-            setStaff(usersWithToggle)
-            //pointless line? 
-            return res
-          })
-          .catch((err) => {
-            console.log(err)
-            return err
-          })
-      }
-    }
-    getStaff()
+    if (!timeSheet.length > 0) getTimeSheet(currDay, setTimeSheet)
+   
+    getStaff(staff, setStaff)
+   
   }), []
 
   function testPost() {
@@ -154,6 +142,7 @@ const NewScheduleBuilder = () => {
   function makeRoute(routeInfo, index){
     const {routeName, routeType, startTime, names, routeNotes, toggleState} = routeInfo
     const formattedTimes = formatHours(startTime)
+    
     return (
       <NewRouteBox
         index={index}
@@ -210,9 +199,12 @@ const NewScheduleBuilder = () => {
         <div className="new-staff-search-results-container">
           
           <div className="add-route-button" onClick={addName}>Test</div>
-          {staff.map((user, index) => {
-            return makeWidget(user, index)
-          })}
+          {timeSheet.length > 0
+            ? staff.map((user, index) => {
+              return makeWidget(user, index)
+            })
+            :<div>Loading</div>
+          }
         </div>
       </div>
       <div className="lower-row-container">
@@ -221,12 +213,15 @@ const NewScheduleBuilder = () => {
             key={"truckcontents"}
             truckList={truckState}
             truckContentsChange={truckContentsChange}
-          />
+          /> 
         </div>
         <div className="new-container-of-the-routes">
-          {timeSheet.map((route, index) => {
-            return makeRoute(route, index)
-          })}
+          {timeSheet.length > 0 
+            ?timeSheet.map((route, index) => {
+              return makeRoute(route, index)
+            })
+            : <div>Loading</div>
+          }
         </div>
 
       </div>

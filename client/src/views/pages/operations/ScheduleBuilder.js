@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react"
 import SideBar from "../../components/SideBarComponents/SideBar"
 import StaffSearchControls from "../../components/Staff_Search/StaffSearchControls"
@@ -11,7 +12,7 @@ import printDay from "../../../utilities/printDay"
 import fixMonth from "../../../utilities/fixMonth"
 import defaultRoutes from "../../components/RoutePlanner/defaultRoutes"
 import recodeSchedule from "../../components/RoutePlanner/recodeSchedule"
-import getSchedule from "../../components/RoutePlanner/getSchedule"
+
 
  
 
@@ -32,20 +33,20 @@ const ScheduleBuilder = () => {
     ]
   )
   
-  useEffect(() => {
-    const getData = async () => {
-      const result = await getSchedule(currDay)
-      if(result.status == 200){
-        const formattedResult = recodeSchedule(result.data)
-        console.log("result:", formattedResult)
-        setData({data: formattedResult, populated: true})
-      }
-      else {
-        setData({data: defaultRoutes, populated: true})
-      }
-    }
-    if(!data.populated) getData()
-  }), [data, currDay]
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const result = await getSchedule(currDay)
+  //     if(result.status == 200){
+  //       const formattedResult = recodeSchedule(result.data)
+  //       console.log("result:", formattedResult)
+  //       setData({data: formattedResult, populated: true})
+  //     }
+  //     else {
+  //       setData({data: defaultRoutes, populated: true})
+  //     }
+  //   }
+  //   if(!data.populated) getData()
+  // }), [data, currDay]
   
   function getIdMap(map){
     setIdMap(map)
