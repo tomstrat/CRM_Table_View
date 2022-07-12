@@ -24,10 +24,14 @@ const NewScheduleBuilder = () => {
   const [staff, setStaff] = useState([])
   const [timeSheet, setTimeSheet] = useState([]) 
   const [truckState, setTruckState] = useState(truckList)
+  const dateChange = useRef(true)
   const nameToAdd = useRef("")
   
   useEffect(() => {
-    if (!timeSheet.length > 0) getTimeSheet(currDay, setTimeSheet)
+    if (dateChange.current == true) {
+      dateChange.current = false
+      getTimeSheet(currDay, setTimeSheet)
+    }
    
     getStaff(staff, setStaff)
    
@@ -117,12 +121,14 @@ const NewScheduleBuilder = () => {
   function increaseDay(){
     const increDate = new Date(currDay)
     increDate.setDate(increDate.getDate() + 1)
+    dateChange.current = true
     setCurrDay(increDate)
   }
 
   function decreaseDay(){
     const decreDate = new Date(currDay)
     decreDate.setDate(decreDate.getDate() - 1)
+    dateChange.current = true
     setCurrDay(decreDate)
   }
 
