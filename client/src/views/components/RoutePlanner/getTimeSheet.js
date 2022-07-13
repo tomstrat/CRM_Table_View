@@ -1,5 +1,5 @@
 import axios from "axios"
-import defaultRoutes2 from "./defaultRoutes2"
+import defaultRoutes from "./defaultRoutes"
 import recodeSchedule from "./recodeSchedule"
 
 const getTimeSheet = async (date, setTimeSheet) => {
@@ -13,7 +13,7 @@ const getTimeSheet = async (date, setTimeSheet) => {
     })
     .catch((err) => {
       console.log(err)
-      setTimeSheet(defaultRoutes2)
+      setTimeSheet(defaultRoutes(date))
       return err
     })
 }

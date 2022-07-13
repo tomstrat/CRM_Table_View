@@ -5,7 +5,7 @@ import getCurrentDate from "../../../utilities/getCurrentDate"
 import printDay from "../../../utilities/printDay"
 import fixMonth from "../../../utilities/fixMonth"
 import NewRouteBox from "../../components/RoutePlanner/NewRouteBox"
-import defaultRoutes2 from "../../components/RoutePlanner/defaultRoutes2"
+import defaultRoutes2 from "../../components/RoutePlanner/defaultRoutes"
 import formatHours from "../../components/RoutePlanner/formatHours"
 import formatStaff from "../../components/RoutePlanner/formatStaff"
 import NewStaffWidget from "../../components/Staff_Search/NewStaffWidget"
@@ -18,6 +18,8 @@ import testSheet from "../../components/RoutePlanner/testSheet"
 import getStaff from "../../components/RoutePlanner/getStaff"
 import getTimeSheet from "../../components/RoutePlanner/getTimeSheet"
 import recodeSchedule from "../../components/RoutePlanner/recodeSchedule"
+import formatForPost from "../../components/RoutePlanner/formatForPost"
+formatForPost
 
 const NewScheduleBuilder = () => { 
   const [currDay, setCurrDay] = useState(getCurrentDate("dateTime", 1))
@@ -41,6 +43,10 @@ const NewScheduleBuilder = () => {
     postSchedule(testSheet)
   }
   
+  function saveTimesheet () {
+    postSchedule(formatForPost(timeSheet))
+  }
+
   function addName() {
     const name = nameToAdd.current
     const toggleCheck = timeSheet.some(function(e) {
@@ -221,7 +227,9 @@ const NewScheduleBuilder = () => {
             truckContentsChange={truckContentsChange}
           /> 
         </div>
+        
         <div className="new-container-of-the-routes">
+          <div onClick={saveTimesheet}>Save</div>
           {timeSheet.length > 0 
             ?timeSheet.map((route, index) => {
               return makeRoute(route, index)
@@ -231,6 +239,7 @@ const NewScheduleBuilder = () => {
         </div>
 
       </div>
+      
       
     </>
   )

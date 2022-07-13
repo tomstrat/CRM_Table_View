@@ -10,7 +10,6 @@ export default function formatStartTimes(date, hours, mins) {
   tempDate.setMinutes(parseInt(mins))
   tempDate.setSeconds(0)
   tempDate.setMilliseconds(0)
-  
   const dateString = tempDate.toISOString()
   
   return dateString
