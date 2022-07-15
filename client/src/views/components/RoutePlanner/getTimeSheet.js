@@ -9,7 +9,6 @@ const getTimeSheet = async (date, setTimeSheet) => {
       console.log(res)
       const formattedData = recodeSchedule(res.data)
       setTimeSheet(formattedData)
-      return res
     })
     .catch((err) => {
       console.log(err)

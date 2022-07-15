@@ -1,62 +1,51 @@
+/* eslint-disable no-unused-vars */
 import Nav from "../../components/Nav/Nav"
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import "../../styles/EditHours.css"
 import getCurrentDate from "../../../utilities/getCurrentDate"
 import axios from "axios"
+import printDay from "../../../utilities/printDay"
+import fixMonth from "../../../utilities/fixMonth"
+import getTable from "../../components/RoutePlanner/getTable"
+import TableRow from "../../components/EditHours/TableRow"
 
 const EditHours = () => {
 
-  const [data, setData] = useState({data: [{}], populated: false})
-  const [currDay, setCurrday] = useState(-1)
-
-  const timeData = {
-    userId: 1,
-    route:"Test1",
-    plannedStart:"0800",
-    opsMessage:"Test message",
-    edited: false,
-  }
+  const [timeTable, setTimeTable] = useState(null)
+  const [currDay, setCurrDay] = useState(getCurrentDate("dateTime", - 1))
+  const dateChange = useRef(true)
   
+  useEffect(() => {
+    if (dateChange.current == true) {
+      dateChange.current = false
+      getTable(currDay, setTimeTable)
+    }
+  }), []
   
   function increaseDay(){
-    setCurrday(currDay + 1)
+    const increDate = new Date(currDay)
+    increDate.setDate(increDate.getDate() + 1)
+    dateChange.current = true
+    setCurrDay(increDate)
   }
 
   function decreaseDay(){
-    setCurrday(currDay - 1)
+    const decreDate = new Date(currDay)
+    decreDate.setDate(decreDate.getDate() - 1)
+    dateChange.current = true
+    setCurrDay(decreDate)
   }
 
-  function postOnClick(e) {
-    e.preventDefault()
-    
-    axios.post("/api/timesheets/new", timeData)
-      .then(res => {
-        console.log(res)
-        console.log(res.data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+  function makeRow(rowData, index) {
+   
+    return (
+      <TableRow
+        index={index}
+        key={"row " + index}
+        rowData={rowData}
+      />
+    )
   }
-
-  
-  useEffect(() => {
-    const getTimesheets = async () => {
-      const response = axios.get("/api/timesheets")
-        .then(res => {
-          console.log(res)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-      //maybe move this line into then?
-      //would it loop if i do?
-      setData({data: response, populated: true})
-    }
-    if(!data.populated) getTimesheets()
-  }, [data])
-
-
 
   return (
     <
@@ -64,22 +53,40 @@ const EditHours = () => {
     >
       <Nav auth={true}/>
       <div className="edit-hours-page-container">
-        <div className="hours-day-select-container">
-          <div className="tiny-title">Timesheet for:</div>
+        <div className="day-select-container">
+          <div className="tiny-title">Timetable for:</div>
           <div className="date-container">
             <button className={"arrow-button"} onClick={decreaseDay}>&#60;</button>
-            <div className="day-title">{getCurrentDate("day", currDay)}</div>
+            <div className="day-title">{printDay(currDay.getDay())}</div>
             <button className={"arrow-button"} onClick={increaseDay}>&#62;</button>
           </div>
-          <div className="date-title">{getCurrentDate("date", currDay)}</div>
-         
-         
-          
+          <div className="date-title">{currDay.getDate() + "-" + fixMonth(currDay.getMonth()) + "-" + currDay.getFullYear()}</div>
         </div>
-        <div className="timesheets-contents">
-          <button onClick={postOnClick}>Post</button>
+        <div className="time-table-contents">
+          <div className="table-headers">
+            <div className="header-cell">TTM</div>
+            <div className="header-cell">Route</div>
+            <div className="header-cell">Route Start</div>
+            <div className="header-cell">Start</div>
+            <div className="header-cell">End</div>
+            <div className="header-cell">Break</div>
+            <div className="header-cell">TTM Notes</div>
+            <div className="header-cell">Ops Notes</div>
+            <div className="header-cell">Sick</div>
+            <div className="header-cell">Late</div>
+            <div className="header-cell">TTM Edit</div>
+          </div>
+          {
+            timeTable
+              ? timeTable.map((row, index) => {
+                return makeRow(row, index)
+              })
+              : <div className="no-data-found">No data found for selected day</div>
+          }
         </div>
       </div>
+     
+      
       
     </>
   )
@@ -87,27 +94,3 @@ const EditHours = () => {
 
 export default EditHours
 
-// POSTs correctly to users
-// const postData =  {
-//   username: "test2",
-//   password:"test2",
-//   confirmPassword:"test2",
-//   contract:"fullTime",
-//   role:"user",
-//   operations:"true",
-//   trainer:"",
-//   driver:"true",
-//   navigator:"",
-//   temp:"",
-//   certified:"true",
-//   injured:"false",
-//   joinDate:"2022-05-04",
-//   location:"innerEast",
-//   rosterMonday:"working",
-//   rosterTuesday:"working",
-//   rosterWednesday:"working",
-//   rosterThursday:"working",
-//   rosterFriday:"working",
-//   rosterSaturday:"working",
-//   employeeType:"operations,driver" 
-// }
