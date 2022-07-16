@@ -19,7 +19,6 @@ import getStaff from "../../components/RoutePlanner/getStaff"
 import getTimeSheet from "../../components/RoutePlanner/getTimeSheet"
 import recodeSchedule from "../../components/RoutePlanner/recodeSchedule"
 import formatForPost from "../../components/RoutePlanner/formatForPost"
-formatForPost
 
 const NewScheduleBuilder = () => { 
   const [currDay, setCurrDay] = useState(getCurrentDate("dateTime", 1))
@@ -38,10 +37,6 @@ const NewScheduleBuilder = () => {
     getStaff(staff, setStaff)
    
   }), []
-
-  function testPost() {
-    postSchedule(testSheet)
-  }
   
   function saveTimesheet () {
     postSchedule(formatForPost(timeSheet))
@@ -54,7 +49,6 @@ const NewScheduleBuilder = () => {
     })
     
     if (name && toggleCheck) {
-      nameToAdd.current = ""
       setTimeSheet(values => {
         return values.map((obj) => {
           if (obj.toggleState) 
@@ -65,8 +59,7 @@ const NewScheduleBuilder = () => {
     }
   }
 
-  function removeName (routeIndex, targetIndex, name) {
-    nameToAdd.current = name
+  function removeName (routeIndex, targetIndex) {
     setTimeSheet(values => {
       return values.map((obj, index) => {
         if (index == routeIndex) return {...obj, names: obj.names.filter((element, index) => index !== targetIndex)}
@@ -196,7 +189,6 @@ const NewScheduleBuilder = () => {
   return (
     <>
       <Nav auth={true}/>
-      <div onClick={testPost}>Test Post</div>
       <div className="date-staff-container">
         <div className="day-select-container">
           <div className="tiny-title">Schedule for:</div>
@@ -209,8 +201,6 @@ const NewScheduleBuilder = () => {
         </div>
         
         <div className="new-staff-search-results-container">
-          
-          <div className="add-route-button" onClick={addName}>Test</div>
           {timeSheet.length > 0
             ? staff.map((user, index) => {
               return makeWidget(user, index)

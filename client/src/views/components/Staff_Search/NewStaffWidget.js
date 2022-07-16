@@ -11,9 +11,13 @@ const NewStaffWidget = (props) => {
     if(list.includes("trainer")) return "trainer"
     if(list.includes("driver")) return "driver"
     if(list.includes("navigator")) return "navigator"
-    
   }
- 
+  
+  function addNameClick () {
+    props.addName()
+  }
+  
+
   const {
     username,
     employeeType,
@@ -29,20 +33,31 @@ const NewStaffWidget = (props) => {
     props.toggleStaff(props.index, username)
   }
   
-  return (
-    <div key={uniqid("type-")} className={
-      toggleState
-        ? `staff-widget staff-widget-toggled ${findTopRole(updatedTypes)}`
-        : `staff-widget ${findTopRole(updatedTypes)}`
-      
-    }
-    onClick={toggleOnClick} 
-    >
-      <div className="staff-widget-username">{formatStaffName(username, ".")}
-      </div>
-    </div>
-  )
   
+
+  return (
+    toggleState
+      ? 
+      <>
+        <div key={uniqid("type-")} 
+          className={`staff-widget staff-widget-toggled ${findTopRole(updatedTypes)}`
+          }
+          onClick={toggleOnClick} 
+        >
+          <div className="staff-widget-username">{formatStaffName(username, ".")}</div>
+          <div className="staff-add-button" onClick={addNameClick}>+</div>
+        </div>
+       
+      </>
+      :
+      <div key={uniqid("type-")} 
+        className={`staff-widget ${findTopRole(updatedTypes)}`
+        }
+        onClick={toggleOnClick} 
+      >
+        <div className="staff-widget-username">{formatStaffName(username, ".")}</div>
+      </div>
+  )
 }
 
 export default NewStaffWidget
@@ -51,4 +66,5 @@ NewStaffWidget.propTypes = {
   index: PropTypes.number,
   user: PropTypes.object,
   toggleStaff: PropTypes.func,
+  addName: PropTypes.func
 }

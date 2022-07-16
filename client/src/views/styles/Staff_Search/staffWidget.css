@@ -1,10 +1,9 @@
 .staff-widget {
   display: flex;
   justify-content: space-around;
- 
   border-radius: 0 10px 10px 0;
   background-color: white;
-  display: flex;
+  z-index: 1;
   align-items: center;
   min-width: 10vw;
   margin-top: 5px;
@@ -52,12 +51,17 @@
   filter: drop-shadow(0px 0px 1px rgb(80, 80, 80));
   color: rgb(255, 255, 255);
 }
-
-.staff-widget-toggled {
-  background-color: #8dc63f;
+.staff-add-button {
+  display: flex;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  padding-left: 5%;
+  padding-right: 5%;
+  border: 1px solid white;
+  
 }
-
-.staff-widget-toggled:hover {
+.staff-widget-toggled {
   background-color: #8dc63f;
 }
 
@@ -66,33 +70,20 @@
   border-left: 12px solid #89cff0;
 }
 
-.uncertified:hover {
-  background-color: #cedef0;
-}
 
 .trainer {
   border: 1px solid #00539f;
   border-left: 12px solid #00539f;
 }
 
-.trainer:hover {
-  background-color: #cedef0;
-}
 
 .driver {
   border: 1px solid #005c29;
   border-left: 12px solid #005c29;
 }
 
-.driver:hover {
-  background-color: #cedef0;
-}
 
 .navigator {
   border: 1px solid #FFBF00;
   border-left: 12px solid #FFBF00;
-}
-
-.navigator:hover {
-  background-color: #cedef0;
 }
