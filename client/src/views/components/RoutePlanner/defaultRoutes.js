@@ -9,7 +9,7 @@ export default function defaultRoutes(currDay) {
         routeType: "Standard",
         startTime: defaultTime,
         names: [],
-        routeNotes: "Test notes",
+        routeNotes: "",
         toggleState: false
       },
       {
@@ -17,7 +17,7 @@ export default function defaultRoutes(currDay) {
         routeType: "Standard",
         startTime: defaultTime,
         names: [],
-        routeNotes: "Test notes",
+        routeNotes: "",
         toggleState: false
       },
       {
@@ -25,7 +25,7 @@ export default function defaultRoutes(currDay) {
         routeType: "Standard",
         startTime: defaultTime,
         names: [],
-        routeNotes: "Test notes",
+        routeNotes: "",
         toggleState: false
       },
       {
@@ -33,7 +33,7 @@ export default function defaultRoutes(currDay) {
         routeType: "Standard",
         startTime: defaultTime,
         names: [],
-        routeNotes: "Test notes",
+        routeNotes: "",
         toggleState: false
       },
       {
@@ -41,7 +41,7 @@ export default function defaultRoutes(currDay) {
         routeType: "Standard",
         startTime: defaultTime,
         names: [],
-        routeNotes: "Test notes",
+        routeNotes: "",
         toggleState: false
       },
       {
@@ -49,7 +49,7 @@ export default function defaultRoutes(currDay) {
         routeType: "Standard",
         startTime: defaultTime,
         names: [],
-        routeNotes: "Test notes",
+        routeNotes: "",
         toggleState: false
       },
       {
@@ -57,7 +57,7 @@ export default function defaultRoutes(currDay) {
         routeType: "Standard",
         startTime: defaultTime,
         names: [],
-        routeNotes: "Test notes",
+        routeNotes: "",
         toggleState: false
       },
       {
@@ -65,7 +65,7 @@ export default function defaultRoutes(currDay) {
         routeType: "Standard",
         startTime: defaultTime,
         names: [],
-        routeNotes: "Test notes",
+        routeNotes: "",
         toggleState: false
       },
       {
@@ -73,7 +73,7 @@ export default function defaultRoutes(currDay) {
         routeType: "Standard",
         startTime: defaultTime,
         names: [],
-        routeNotes: "Test notes",
+        routeNotes: "",
         toggleState: false
       },
       {
@@ -81,7 +81,7 @@ export default function defaultRoutes(currDay) {
         routeType: "Standard",
         startTime: defaultTime,
         names: [],
-        routeNotes: "Test notes",
+        routeNotes: "",
         toggleState: false
       }
     ]

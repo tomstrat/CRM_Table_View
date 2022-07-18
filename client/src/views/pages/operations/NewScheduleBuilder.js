@@ -25,6 +25,7 @@ const NewScheduleBuilder = () => {
   const [staff, setStaff] = useState([])
   const [timeSheet, setTimeSheet] = useState([]) 
   const [truckState, setTruckState] = useState(truckList)
+  const [newRoute, setNewRoute] = useState({name: "", type: ""})
   const dateChange = useRef(true)
   const nameToAdd = useRef("")
   
@@ -93,7 +94,41 @@ const NewScheduleBuilder = () => {
       })
     })
   }
+  function newRouteTypeHandler (e) {
+    const newValue = e.target.value
+    setNewRoute({...newRoute, type: newValue})
+  }
   
+  function newRouteNameHandler (e) {
+    const newValue = e.target.value
+    setNewRoute({...newRoute, name: newValue})
+  }
+
+  function addNewRoute () {
+    const defaultTime = new Date(currDay)
+    defaultTime.setHours(7, 0, 0, 0)
+
+    setTimeSheet([...timeSheet, {
+      routeName: newRoute.name,
+      routeType: newRoute.type,
+      startTime: defaultTime,
+      names: [],
+      routeNotes: "",
+      toggleState: false
+    }])
+  }
+
+  function removeRoute () {
+    setTimeSheet(values => {
+      return values.filter((obj) => {
+        {
+          if(obj.toggleState == false) return [...timeSheet, obj]
+        }
+      }
+      )
+    })
+  }
+
   function timeChange(targetIndex, type, newValue) {
     const tempDate = new Date(timeSheet[targetIndex].startTime)
     if (type == "start-hours") tempDate.setHours(newValue)
@@ -123,6 +158,8 @@ const NewScheduleBuilder = () => {
     dateChange.current = true
     setCurrDay(increDate)
   }
+  
+
 
   function decreaseDay(){
     const decreDate = new Date(currDay)
@@ -219,7 +256,19 @@ const NewScheduleBuilder = () => {
         </div>
         
         <div className="new-container-of-the-routes">
-          <div onClick={saveTimesheet}>Save</div>
+          <div className="route-top-bar">
+            <select onChange={newRouteTypeHandler} placeholder="Standard" name="routeType" id="routeType" className="new-route-drop route-top-bar-element">
+              <option value="Standard">Standard</option>
+              <option value="Float">Float</option>
+              <option value="Training">Training</option>
+              <option value="Depot">Depot</option>
+            </select>
+            <input type="text" onChange={newRouteNameHandler} name="routeName" className="route-name-input route-top-bar-element" placeholder="Add route name..." ></input>  
+            <button className="add-route-button route-top-bar-element" onClick={addNewRoute}>Add New Route</button>
+            <button className="add-route-button route-top-bar-element" onClick={removeRoute}>Remove Route</button>
+            <button className="save-button route-top-bar-element" onClick={saveTimesheet}>Save Schedule</button>
+            <button className="publish-button">Publish Schedule</button>
+          </div> 
           {timeSheet.length > 0 
             ?timeSheet.map((route, index) => {
               return makeRoute(route, index)
