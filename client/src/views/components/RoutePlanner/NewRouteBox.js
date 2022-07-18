@@ -32,8 +32,8 @@ export default function NewRouteBox(props){
 
   return(
     <div className="new-route-box">
-      <div  onClick={toggle} >{props.routeName}</div>
-      <div>{
+      <div className="route-name-box"  onClick={toggle} >{props.routeName}</div>
+      <div className="new-time-container">{
         props.toggleState
           ? <NewTimeBox
             key={"timebox" + props.index}
@@ -44,7 +44,7 @@ export default function NewRouteBox(props){
           />
           :props.startHours + ":" + props.startMins
       }</div>
-      <div>{
+      <div className="new-name-container">{
         props.names.length > 0
           ? makeNameBox(props.names, props.index)
           :"Unassigned"

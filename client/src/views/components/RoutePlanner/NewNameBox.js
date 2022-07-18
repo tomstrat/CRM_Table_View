@@ -12,9 +12,9 @@ export default function NewNameBox (props) {
           className="name-box"
         >
           {props.name}
-          
+          <div onClick={handleClick} >X</div>
         </div>
-        <div onClick={handleClick} >X</div>
+        
       </>
       : <div className="name-box">{props.name}</div>
     
