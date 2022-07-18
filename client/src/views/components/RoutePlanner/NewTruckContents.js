@@ -40,7 +40,7 @@ const NewTruckContents = (props) => {
       <div className="truck-header-container">
         <div className="truck-header-name">Truck</div>
         <div className="truck-header">Tools</div>
-        <div className="truck-header">Location</div>
+        <div className="truck-header-location">Location</div>
         <div className="truck-header">Contents</div>
       </div>
       {props.truckList.map((truck, index) => {

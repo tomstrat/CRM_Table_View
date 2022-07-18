@@ -26,14 +26,17 @@
   margin-bottom: 2%;
 }
 .truck-header-name {
-  padding-right: 10%;
+  padding-right: 9%;
 }
 .truck-contents-name {
   display: flex;
   padding-right: 0.5%;
 }
 .truck-header {
-  padding-right: 21%;
+  padding-right: 17%;
+}
+.truck-header-location {
+  padding-right: 13%;
 }
 .truck-contents-row {
   display: flex;
@@ -70,7 +73,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-around;
-  width: 70%;
+  width: 58%;
   margin: 1%;
   
 }
@@ -94,8 +97,8 @@
 .lower-row-container {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-around;
+  align-items: flex-start;
   width: 100%;
   margin: 1%;
  
@@ -423,15 +426,14 @@
 
 .start-time-box {
   display: flex;
-  margin-top: 10%;
-  display: flex;
   flex-direction: row;
 }
 .new-time-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 2%;
+  margin-right: 0.5%;
+  min-width: 10%;
 }
 .start-time-select {
   font-size: 12px;
@@ -441,6 +443,17 @@
   z-index: 5;
 }
 
+.route-text-area {
+  display: flex;
+  min-height: 10vh;
+  width: 110%;
+  border: none;
+}
+.route-notes {
+  font-size: 12px;
+  overflow: hidden;
+  padding-left: 5%;
+}
 .names-container {
   display: flex;
   flex-direction: column;
@@ -452,7 +465,9 @@
 .new-name-container {
   display: flex;
   flex-direction: row;
-  margin-right: 3%;
+  min-width: 60%;
+  justify-content: center;
+  align-items: center;
 }
 .name-box {
   display: flex;
@@ -505,21 +520,25 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  background-color: aliceblue;
-  
-  
+  background-color: white;
+  transition: all ease-in 0.1s;
 }
-/* .new-route-box-toggled {
-  border: 1px solid #8dc63f;
-} */
+
+.new-route-box-toggled {
+  border: 2px solid #8dc63f;
+  background-color: aliceblue;
+}
 .truck-contents-container {
   display: flex;
   flex-direction: column;
+  
 }
-
+.new-text-box{
+  width: 8vw;
+  font-size: 11px;
+}
 .route-name-box {
-  margin-right: 2%;
-  background-color: pink;
+  /* margin-right: 0.5%; */
   height: 100%;
   padding: 0.5%;
   min-width: 5%;

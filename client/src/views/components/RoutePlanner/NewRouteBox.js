@@ -4,6 +4,8 @@ import PropTypes from "prop-types"
 import NewTimeBox from "./NewTimeBox"
 import NewTextBox from "./NewTextBox"
 import NewNameBox from "./NewNameBox"
+import NewStaffWidget from "../Staff_Search/NewStaffWidget"
+import RouteTextArea from "./RouteTextArea"
 
 export default function NewRouteBox(props){
   
@@ -24,14 +26,15 @@ export default function NewRouteBox(props){
         />
       )
     })
-
-   
-    
   }
 
 
-  return(
-    <div className="new-route-box">
+  return( <>
+    <div className={props.toggleState
+      ? "new-route-box new-route-box-toggled"
+      : "new-route-box"
+    }
+    >
       <div className="route-name-box"  onClick={toggle} >{props.routeName}</div>
       <div className="new-time-container">{
         props.toggleState
@@ -52,15 +55,16 @@ export default function NewRouteBox(props){
       }</div>
       <div>{
         props.toggleState
-          ? <NewTextBox
-            key={"textbox" + props.index}
+          ? <RouteTextArea
+            key={"textarea" + props.index}
             index={props.index}
             currVal={props.routeNotes}
             valChange={props.notesChange}
           />
-          : props.routeNotes
+          : <div className="route-notes">{props.routeNotes}</div>
       }</div>
     </div>
+  </>
   )
 }
 NewRouteBox.propTypes = {

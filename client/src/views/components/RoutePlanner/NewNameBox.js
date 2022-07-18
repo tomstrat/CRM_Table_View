@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
-
+import { formatStaffName } from "../../../utilities/formatters/util"
+import "../../styles/Staff_Search/staffWidget.css"
 export default function NewNameBox (props) {
   function handleClick () {
     props.removeName(props.routeIndex, props.index)
@@ -9,15 +10,24 @@ export default function NewNameBox (props) {
     props.toggleState
       ? <>
         <div 
-          className="name-box"
+          className={"route-staff-widget-toggled"}
         >
-          {props.name}
-          <div onClick={handleClick} >X</div>
+          <div className={"staff-widget-username"}>{formatStaffName(props.name, ".")}</div>
+          
+          <div className={"staff-remove-button"} onClick={handleClick}>x</div>
         </div>
         
       </>
-      : <div className="name-box">{props.name}</div>
-    
+      : <>
+        <div 
+          className={"route-staff-widget-toggled"}
+        >
+          <div className={"staff-widget-username"}>{formatStaffName(props.name, ".")}</div>
+          
+          
+        </div>
+        
+      </>
   )
 }
 
