@@ -26,17 +26,17 @@
   margin-bottom: 2%;
 }
 .truck-header-name {
-  padding-right: 9%;
+  padding-left: 9%;
 }
 .truck-contents-name {
   display: flex;
-  padding-right: 0.5%;
+  padding-left: 0.5%;
 }
 .truck-header {
-  padding-right: 17%;
+  padding-left: 17%;
 }
 .truck-header-location {
-  padding-right: 13%;
+  padding-left: 13%;
 }
 .truck-contents-row {
   display: flex;
@@ -50,7 +50,7 @@
 .truck-header-container {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: flex-end;
 }
 .route-planner-container {
   display: flex;
@@ -94,6 +94,8 @@
   flex-direction: row;
   height: 100%;
 }
+
+
 .lower-row-container {
   display: flex;
   flex-direction: row;
@@ -109,6 +111,8 @@
   width: 75.5%;
   height: 100%;
 }
+
+
 
 .centralise-sidebar {
   display: flex;
@@ -127,8 +131,7 @@
   background-color: aliceblue;
   border: 2px solid #8dc63f;
   border-radius: 12px;
-  margin: 2%;
-  width: 10%;
+  margin: 3%;
 }
 
 .route-top-bar {
@@ -284,11 +287,6 @@
   background-color: #BC544B;
   border: 2px solid #BC544B;
 }
-
-
-
-
-
 
 .route-box-clicked {
   display: flex;
@@ -484,9 +482,6 @@
   border-radius: 6px;
 }
 
-.name-box-toggled {
-
-}
 .route-box-clicked .name-box{
   margin-top: 1px;
   border: 1px solid #8dc63f;
@@ -554,15 +549,55 @@
   background-color: white;
   border: 2px solid #8dc63f;
   border-radius: 12px;
-  width: 82%;
+  
   height: 15vh;
   font-size: 11px;
   overflow: scroll;
 }
-.date-staff-container {
+.upper-row-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+  margin: 0.5%;
+}
+
+.date-view-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.view-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #8dc63f;
+  font-size: 12px;
+  margin: 2%;
+  border-radius: 8px;
+  width: 5vw;
+  height: 3vh;
+  background-color: #ffffff;
+  user-select: none;
+  cursor: pointer;
+}
+
+.view-button-toggled {
+  background-color: #8dc63f;
+  color: #ffffff;
+  border: 2px solid white;
+}
+
+.basic-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.basic-row {
   display: flex;
   flex-direction: row;
 }
+
 .xbutton-name {
   display: flex;
   justify-content: center;

@@ -19,9 +19,15 @@ import getStaff from "../../components/RoutePlanner/getStaff"
 import getTimeSheet from "../../components/RoutePlanner/getTimeSheet"
 import recodeSchedule from "../../components/RoutePlanner/recodeSchedule"
 import formatForPost from "../../components/RoutePlanner/formatForPost"
+import ViewButton from "../../components/Buttons/ViewButton"
 
 const NewScheduleBuilder = () => { 
   const [currDay, setCurrDay] = useState(getCurrentDate("dateTime", 1))
+  const [viewState, setViewState] = useState([
+    {name: "Trucks", state: false},
+    {name: "Planner", state: true},
+    {name: "Routes", state: false}
+  ])
   const [staff, setStaff] = useState([])
   const [timeSheet, setTimeSheet] = useState([]) 
   const [truckState, setTruckState] = useState(truckList)
@@ -120,12 +126,7 @@ const NewScheduleBuilder = () => {
 
   function removeRoute () {
     setTimeSheet(values => {
-      return values.filter((obj) => {
-        {
-          if(obj.toggleState == false) return [...timeSheet, obj]
-        }
-      }
-      )
+      return values.filter((obj) => {if(obj.toggleState == false) return [...timeSheet, obj]})
     })
   }
 
@@ -158,8 +159,6 @@ const NewScheduleBuilder = () => {
     dateChange.current = true
     setCurrDay(increDate)
   }
-  
-
 
   function decreaseDay(){
     const decreDate = new Date(currDay)
@@ -179,6 +178,30 @@ const NewScheduleBuilder = () => {
         else return truck
       })
     })
+  }
+
+  function makeViewButton (viewName, viewState, index) {
+    return (
+      <ViewButton
+        key={"ViewButton" + index}
+        index={index}
+        viewName={viewName}
+        viewState={viewState}
+        updateState={updateView}
+      />
+    )
+  }
+
+  function updateView (targetIndex) {
+    setViewState(values => {
+      return values.map((obj, index) => {
+        if (index == targetIndex && obj.state == false) return {...obj, state: true}
+        else if (index == targetIndex && obj.state == true) return obj
+        else return {...obj, state: false}
+      })
+    }
+      
+    )
   }
 
   function makeRoute(routeInfo, index){
@@ -226,18 +249,32 @@ const NewScheduleBuilder = () => {
   return (
     <>
       <Nav auth={true}/>
-      <div className="date-staff-container">
-        <div className="day-select-container">
-          <div className="tiny-title">Schedule for:</div>
-          <div className="date-container">
-            <button className={"arrow-button"} onClick={decreaseDay}>&#60;</button>
-            <div className="day-title">{printDay(currDay.getDay())}</div>
-            <button className={"arrow-button"} onClick={increaseDay}>&#62;</button>
+      
+      <div className="upper-row-container">
+        <div className="basic-column">
+          <div className="basic-row">
+            {viewState.map((view, index) => {
+              return makeViewButton(view.name, view.state, index)
+            })}
           </div>
-          <div className="date-title">{currDay.getDate() + "-" + fixMonth(currDay.getMonth()) + "-" + currDay.getFullYear()}</div>
+          <div className={
+            viewState[0].state
+              ? "hidden"
+              :"day-select-container"}>
+            <div className="tiny-title">Schedule for:</div>
+            <div className="date-container">
+              <button className={"arrow-button"} onClick={decreaseDay}>&#60;</button>
+              <div className="day-title">{printDay(currDay.getDay())}</div>
+              <button className={"arrow-button"} onClick={increaseDay}>&#62;</button>
+            </div>
+            <div className="date-title">{currDay.getDate() + "-" + fixMonth(currDay.getMonth()) + "-" + currDay.getFullYear()}</div>
+          </div>
         </div>
-        
-        <div className="new-staff-search-results-container">
+        <div className={
+          viewState[1].state
+            ? "new-staff-search-results-container"
+            : "hidden"
+        }>
           {timeSheet.length > 0
             ? staff.map((user, index) => {
               return makeWidget(user, index)
@@ -246,8 +283,13 @@ const NewScheduleBuilder = () => {
           }
         </div>
       </div>
+      
       <div className="lower-row-container">
-        <div className="truck-contents-container">
+        <div className={
+          viewState[2].state
+            ? "hidden"
+            : "truck-contents-container"
+        }>
           <NewTruckContents
             key={"truckcontents"}
             truckList={truckState}
@@ -255,7 +297,11 @@ const NewScheduleBuilder = () => {
           /> 
         </div>
         
-        <div className="new-container-of-the-routes">
+        <div className={
+          viewState[0].state
+            ? "hidden"
+            : "new-container-of-the-routes"
+        }>
           <div className="route-top-bar">
             <select onChange={newRouteTypeHandler} placeholder="Standard" name="routeType" id="routeType" className="new-route-drop route-top-bar-element">
               <option value="Standard">Standard</option>
