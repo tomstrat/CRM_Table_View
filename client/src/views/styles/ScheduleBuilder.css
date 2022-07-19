@@ -18,7 +18,11 @@
 }
 
 .day-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 18px;
+  width: 8vw;
 }
 
 .date-title {
@@ -73,9 +77,8 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-around;
-  width: 58%;
-  margin: 1%;
-  
+  width: 90%;
+  margin-top: 1%;
 }
 
 .container-of-the-routes {
@@ -103,7 +106,6 @@
   align-items: flex-start;
   width: 100%;
   margin: 1%;
- 
 }
 .column-page {
   display: flex;
@@ -131,7 +133,8 @@
   background-color: aliceblue;
   border: 2px solid #8dc63f;
   border-radius: 12px;
-  margin: 3%;
+  width: 12vw;
+  /* margin: 3%; */
 }
 
 .route-top-bar {
@@ -452,6 +455,12 @@
   overflow: hidden;
   padding-left: 5%;
 }
+
+.route-notes-expanded {
+  white-space: normal;
+  word-wrap: break-word;
+  min-height: 10vh;
+}
 .names-container {
   display: flex;
   flex-direction: column;
@@ -517,6 +526,7 @@
   align-items: center;
   background-color: white;
   transition: all ease-in 0.1s;
+  border: 1px solid aliceblue;
 }
 
 .new-route-box-toggled {
@@ -533,26 +543,30 @@
   font-size: 11px;
 }
 .route-name-box {
-  /* margin-right: 0.5%; */
+  display: flex;
+  justify-content: center;
+  align-items: center ;
   height: 100%;
   padding: 0.5%;
   min-width: 5%;
-  text-align: center;
+  
+  
   
 }
 .new-staff-search-results-container {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 1%;
-  margin-bottom: 0.5%;
+  margin-top: 1%;
   background-color: white;
   border: 2px solid #8dc63f;
   border-radius: 12px;
-  
-  height: 15vh;
+  height: 20vh;
+  width: 90%;
   font-size: 11px;
-  overflow: scroll;
+  max-width: 90%;
+  overflow: auto;
+  flex-wrap: wrap;
 }
 .upper-row-container {
   display: flex;
@@ -591,6 +605,26 @@
 .basic-column {
   display: flex;
   flex-direction: column;
+}
+
+.scheduler-left-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 30%;
+}
+.small-left-column {
+  width: 15%;
+  margin-left: 2.5%;
+}
+
+.scheduler-right-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 70%;
 }
 
 .basic-row {

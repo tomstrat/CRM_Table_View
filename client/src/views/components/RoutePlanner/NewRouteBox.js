@@ -61,7 +61,12 @@ export default function NewRouteBox(props){
             currVal={props.routeNotes}
             valChange={props.notesChange}
           />
-          : <div className="route-notes">{props.routeNotes}</div>
+          : <div className={
+            props.viewState[2].state
+              ? "route-notes route-notes-expanded"
+              : "route-notes"
+            
+          }>{props.routeNotes}</div>
       }</div>
     </div>
   </>
@@ -80,5 +85,6 @@ NewRouteBox.propTypes = {
   toggleRoute: PropTypes.func,
   timeChange: PropTypes.func,
   notesChange: PropTypes.func,
-  removeName: PropTypes.func
+  removeName: PropTypes.func,
+  viewState: PropTypes.array
 }

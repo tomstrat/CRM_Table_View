@@ -223,6 +223,7 @@ const NewScheduleBuilder = () => {
         timeChange={timeChange}
         notesChange={notesChange}
         removeName={removeName}
+        viewState={viewState}
       />
     )
   }
@@ -249,9 +250,12 @@ const NewScheduleBuilder = () => {
   return (
     <>
       <Nav auth={true}/>
-      
-      <div className="upper-row-container">
-        <div className="basic-column">
+      <div className="basic-row">
+        <div className={
+          viewState[2].state
+            ? "scheduler-left-column small-left-column"
+            : "scheduler-left-column"
+        }>
           <div className="basic-row">
             {viewState.map((view, index) => {
               return makeViewButton(view.name, view.state, index)
@@ -269,61 +273,67 @@ const NewScheduleBuilder = () => {
             </div>
             <div className="date-title">{currDay.getDate() + "-" + fixMonth(currDay.getMonth()) + "-" + currDay.getFullYear()}</div>
           </div>
+          <div className={
+            viewState[2].state
+              ? "hidden"
+              : "truck-contents-container"
+          }>
+            <NewTruckContents
+              key={"truckcontents"}
+              truckList={truckState}
+              truckContentsChange={truckContentsChange}
+            /> 
+          </div>
         </div>
-        <div className={
-          viewState[1].state
-            ? "new-staff-search-results-container"
-            : "hidden"
-        }>
-          {timeSheet.length > 0
-            ? staff.map((user, index) => {
-              return makeWidget(user, index)
-            })
-            :<div>Loading</div>
-          }
-        </div>
-      </div>
-      
-      <div className="lower-row-container">
-        <div className={
-          viewState[2].state
-            ? "hidden"
-            : "truck-contents-container"
-        }>
-          <NewTruckContents
-            key={"truckcontents"}
-            truckList={truckState}
-            truckContentsChange={truckContentsChange}
-          /> 
-        </div>
+          
+        
+        
+       
         
         <div className={
           viewState[0].state
             ? "hidden"
-            : "new-container-of-the-routes"
-        }>
-          <div className="route-top-bar">
-            <select onChange={newRouteTypeHandler} placeholder="Standard" name="routeType" id="routeType" className="new-route-drop route-top-bar-element">
-              <option value="Standard">Standard</option>
-              <option value="Float">Float</option>
-              <option value="Training">Training</option>
-              <option value="Depot">Depot</option>
-            </select>
-            <input type="text" onChange={newRouteNameHandler} name="routeName" className="route-name-input route-top-bar-element" placeholder="Add route name..." ></input>  
-            <button className="add-route-button route-top-bar-element" onClick={addNewRoute}>Add New Route</button>
-            <button className="add-route-button route-top-bar-element" onClick={removeRoute}>Remove Route</button>
-            <button className="save-button route-top-bar-element" onClick={saveTimesheet}>Save Schedule</button>
-            <button className="publish-button">Publish Schedule</button>
-          </div> 
-          {timeSheet.length > 0 
-            ?timeSheet.map((route, index) => {
-              return makeRoute(route, index)
-            })
-            : <div>Loading</div>
-          }
+            : "scheduler-right-column"}>
+          <div className={
+            viewState[1].state
+              ? "new-staff-search-results-container"
+              : "hidden"
+          }>
+            {timeSheet.length > 0
+              ? staff.map((user, index) => {
+                return makeWidget(user, index)
+              })
+              :<div>Loading</div>
+            }
+          </div>
+          <div className={
+            viewState[0].state
+              ? "hidden"
+              : "new-container-of-the-routes"
+          }>
+            <div className="route-top-bar">
+              <select onChange={newRouteTypeHandler} placeholder="Standard" name="routeType" id="routeType" className="new-route-drop route-top-bar-element">
+                <option value="Standard">Standard</option>
+                <option value="Float">Float</option>
+                <option value="Training">Training</option>
+                <option value="Depot">Depot</option>
+              </select>
+              <input type="text" onChange={newRouteNameHandler} name="routeName" className="route-name-input route-top-bar-element" placeholder="Add route name..." ></input>  
+              <button className="add-route-button route-top-bar-element" onClick={addNewRoute}>Add New Route</button>
+              <button className="add-route-button route-top-bar-element" onClick={removeRoute}>Remove Route</button>
+              <button className="save-button route-top-bar-element" onClick={saveTimesheet}>Save Schedule</button>
+              <button className="publish-button">Publish Schedule</button>
+            </div> 
+            {timeSheet.length > 0 
+              ?timeSheet.map((route, index) => {
+                return makeRoute(route, index)
+              })
+              : <div>Loading</div>
+            }
+          </div>
         </div>
-
       </div>
+      {/* </div> */}
       
       
     </>
