@@ -94,3 +94,12 @@
   overflow: hidden !important;
   text-overflow: ellipsis;
 }
+
+.time-card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60vw;
+  border: 2px solid white;
+}

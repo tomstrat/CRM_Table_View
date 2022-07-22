@@ -9,13 +9,23 @@ const TableRow = (props) => {
     id, route, routeType, startTime, endTime, 
     breakStart, plannedStart, workingDate,
     ttmComments, opsComments, opsMessage, 
-    sick, late, edited, user
+    sick, late, edited, user, toggleState
   } = props.rowData
   
   const plannedStartObj = new Date(plannedStart)
   const pStartFormatted = formatHours(plannedStartObj)
+
+  function clickHandler () {
+    console.log(props.index)
+    props.toggleRow(props.index)
+  }
   return (
-    <div className="table-row">
+    <div onClick={clickHandler}
+      className={
+        toggleState
+          ? "table-row-toggled"
+          : "table-row"
+      }>
       <div className="table-cell">{user.username}</div>
       <div className="table-cell">{route}</div>
       <div className="table-cell">{`${pStartFormatted[0] + ":" + pStartFormatted[1]}`}</div>
@@ -76,5 +86,7 @@ const TableRow = (props) => {
 export default TableRow
 
 TableRow.propTypes = {
-  rowData: PropTypes.object
+  rowData: PropTypes.object,
+  toggleRow: PropTypes.func,
+  index: PropTypes.number
 }

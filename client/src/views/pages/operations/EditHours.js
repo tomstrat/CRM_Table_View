@@ -8,11 +8,13 @@ import printDay from "../../../utilities/printDay"
 import fixMonth from "../../../utilities/fixMonth"
 import getTable from "../../components/RoutePlanner/getTable"
 import TableRow from "../../components/EditHours/TableRow"
+import TimeCard from "../../components/EditHours/TimeCard"
 
 const EditHours = () => {
 
   const [timeTable, setTimeTable] = useState(null)
   const [currDay, setCurrDay] = useState(getCurrentDate("dateTime", - 1))
+  
   const dateChange = useRef(true)
   
   useEffect(() => {
@@ -22,6 +24,18 @@ const EditHours = () => {
     }
   }), []
   
+  function toggleRow (targetIndex) {
+    console.log("runs")
+    setTimeTable(values => {
+      return values.map((obj, index) => {
+        if (index == targetIndex && obj.toggleState == false) {
+          return {...obj, toggleState: true}
+        }
+        else return {...obj, toggleState: false}
+      })
+    })
+  }
+
   function increaseDay(){
     const increDate = new Date(currDay)
     increDate.setDate(increDate.getDate() + 1)
@@ -36,6 +50,8 @@ const EditHours = () => {
     setCurrDay(decreDate)
   }
 
+
+
   function makeRow(rowData, index) {
    
     return (
@@ -43,6 +59,8 @@ const EditHours = () => {
         index={index}
         key={"row " + index}
         rowData={rowData}
+        toggleRow={toggleRow}
+      
       />
     )
   }
@@ -62,6 +80,9 @@ const EditHours = () => {
           </div>
           <div className="date-title">{currDay.getDate() + "-" + fixMonth(currDay.getMonth()) + "-" + currDay.getFullYear()}</div>
         </div>
+        
+          
+          
         <div className="time-table-contents">
           <div className="table-headers">
             <div className="header-cell">TTM</div>
@@ -84,7 +105,9 @@ const EditHours = () => {
               : <div className="no-data-found">No data found for selected day</div>
           }
         </div>
+        
       </div>
+        
      
       
       
