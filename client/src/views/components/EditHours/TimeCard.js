@@ -2,6 +2,10 @@
 import React from "react"
 import PropTypes from "prop-types"
 import formatHours from "../RoutePlanner/formatHours"
+import NewTimeBox from "../RoutePlanner/NewTimeBox"
+import TCTimeBox from "./TCTimeBox"
+import RouteTextArea from "../RoutePlanner/RouteTextArea"
+import TCBool from "./TCBool"
 
 export default function TimeCard (props) {
   const {
@@ -14,66 +18,99 @@ export default function TimeCard (props) {
   const plannedStartObj = new Date(plannedStart)
   const pStartFormatted = formatHours(plannedStartObj)
 
+  const sTimeObj = new Date(startTime)
+  const sTimeFormatted = formatHours(sTimeObj)
+
+  const eTimeObj = new Date(endTime)
+  const eTimeFormatted = formatHours(eTimeObj)
+
+  const bTimeObj = new Date(breakStart)
+  const bTimeFormatted = formatHours(bTimeObj)
+
   return (
     <div className="time-card-container">
       <div className="time-card-column-left">
         <div className="time-card-elem">Card ID: {id}</div>
         <div className="time-card-elem">Employee: {user.username}</div>
         <div className="time-card-elem">Date: {workingDate}</div>
+        <div className="time-card-elem">Planned Start: {`${pStartFormatted[0] + ":" + pStartFormatted[1]}`}</div>
         <div className="time-card-elem">Route Name: {route}</div>
         <div className="time-card-elem">Route Type: {routeType}</div>
-        <div className="time-card-elem">Planned Start: {`${pStartFormatted[0] + ":" + pStartFormatted[1]}`}</div>
         <div className="time-card-elem">{opsMessage}</div>
-      </div>
-      <div className="time-card-column">
-        
-        <div className="time-card-elem">Start Time: {
-          startTime
-            ? startTime
-            : "Not set"
-        }
-        </div>
-        <div className="time-card-elem">End Time: {
-          endTime
-            ? endTime
-            : "Not set"
-        }
-        </div>
-        <div className="time-card-elem">Break Start Time: {
-          breakStart
-            ? breakStart
-            : "Not set"
-        }
-        </div>
-       
-       
-        <div className="time-card-elem">Sick?: {
-          sick
-            ? sick
-            : "False"
-        }
-        </div>
-        <div className="time-card-elem">Late?: {
-          late
-            ? late
-            : "False"}
-        </div>
-        <div className="time-card-elem">Operations Comments: {
-          opsComments
+        <div className="time-card-elem">TTM Comments: {
+          ttmComments
             ? "True"
             : "False"
         }
+        </div>
+      </div>
+      <div className="time-card-column">
+        
+        <div className="time-card-elem">Start Time:
+          <TCTimeBox
+            key={"starttimebox"}
+            index={0}
+            startHours={sTimeFormatted[0]}
+            startMins={sTimeFormatted[1]}
+            timeChange={props.startTimeChange}
+          />
+        
+        </div>
+        <div className="time-card-elem">End Time: 
+          <TCTimeBox
+            key={"endtimebox"}
+            index={1}
+            startHours={eTimeFormatted[0]}
+            startMins={eTimeFormatted[1]}
+            timeChange={props.endTimeChange}
+          />
+        </div>
+        <div className="time-card-elem">Break Start:  
+
+          <TCTimeBox
+            key={"breaktimebox"}
+            index={2}
+            startHours={bTimeFormatted[0]}
+            startMins={bTimeFormatted[1]}
+            timeChange={props.breakTimeChange}
+          />
+        </div>
+       
+       
+        <div className="time-card-elem">Sick?:
+          <TCBool
+            boolChange={props.boolChange}
+            name={"sick"}
+            value={sick}
+          />
+        </div>
+        <div className="time-card-elem">Late?: 
+          <TCBool
+            boolChange={props.boolChange}
+            name={"late"}
+            value={late}
+          />
+        </div>
+        <div className="time-card-elem">Operations Comments: 
+          <RouteTextArea
+            key={"opscomments"}
+            index={0}
+            currVal={
+              opsComments
+                ? opsComments
+                : ""
+            }
+            valChange={props.commentsChange}
+          />
         </div>
         <div className="time-card-elem">Ops Edit?: {
           edited
             ? edited
             : "False"}
         </div>
-        <div className="time-card-elem">TTM Comments: {
-          ttmComments
-            ? "True"
-            : "False"
-        }
+        <div className="basic-row">
+          <div>Update</div>
+          <div onClick={props.closeTimeCard}>Close</div>
         </div>
        
       </div>
@@ -84,5 +121,11 @@ export default function TimeCard (props) {
 
 TimeCard.propTypes = {
   onClick: PropTypes.func,
-  data: PropTypes.object
+  data: PropTypes.object,
+  startTimeChange: PropTypes.func,
+  endTimeChange: PropTypes.func,
+  breakTimeChange: PropTypes.func,
+  commentsChange: PropTypes.func,
+  boolChange: PropTypes.func,
+  closeTimeCard: PropTypes.func
 }

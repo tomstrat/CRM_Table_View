@@ -9,7 +9,6 @@ import getTable from "../../components/EditHours/getTable"
 import TableRow from "../../components/EditHours/TableRow"
 import TimeCard from "../../components/EditHours/TimeCard"
 
-
 const EditHours = () => {
 
   const [timeTable, setTimeTable] = useState(null)
@@ -42,8 +41,41 @@ const EditHours = () => {
     setCurrDay(decreDate)
   }
 
+  function startTimeChange (name, newValue) {
+    const tempStartDate = new Date(timeCardData.startTime)
+    if (name == "start-hours") tempStartDate.setHours(newValue)
+    else if (name == "start-mins") tempStartDate.setMinutes(newValue)
+    setTimeCardData({...timeCardData, startTime: tempStartDate})
+  }
+
+  function endTimeChange (name, newValue) {
+    const tempEndDate = new Date(timeCardData.endTime)
+    if (name == "start-hours") tempEndDate.setHours(newValue)
+    else if (name == "start-mins") tempEndDate.setMinutes(newValue)
+    setTimeCardData({...timeCardData, endTime: tempEndDate})
+  }
+
+  function breakTimeChange (name, newValue) {
+    const tempBreakDate = new Date(timeCardData.breakStart)
+    if (name == "start-hours") tempBreakDate.setHours(newValue)
+    else if (name == "start-mins") tempBreakDate.setMinutes(newValue)
+    setTimeCardData({...timeCardData, breakStart: tempBreakDate})
+  }
+
+  function commentsChange ({newValue}) {
+    setTimeCardData({...timeCardData, opsComments: newValue})
+  }
+
+  function boolChange (name, value) {
+    if (name == "sick") setTimeCardData({...timeCardData, sick: value})
+    else if (name == "late") setTimeCardData({...timeCardData, late: value})
+  }
+
+  function closeTimeCard () {
+    setTimeCardData(null)
+  }
   function makeRow(rowData, index) {
-   
+  
     return (
       <TableRow
         index={index}
@@ -63,6 +95,12 @@ const EditHours = () => {
           <div className="time-card-page">
             <TimeCard
               data={timeCardData}
+              startTimeChange={startTimeChange}
+              endTimeChange={endTimeChange}
+              breakTimeChange={breakTimeChange}
+              commentsChange={commentsChange}
+              boolChange={boolChange}
+              closeTimeCard={closeTimeCard}
             />
           </div>
           :

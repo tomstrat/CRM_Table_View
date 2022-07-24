@@ -76,11 +76,6 @@ const TableRow = (props) => {
       </div>
     </div>
   )
-
-  
-   
-  
-   
 }
 
 export default TableRow

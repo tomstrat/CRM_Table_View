@@ -114,24 +114,39 @@
 .time-card-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
-  width: 80%;
-  border: 2px solid white;
+  width: 50%;
+  background-color: aliceblue;
+  border: 2px solid #8dc63f;
+  border-radius: 12px;
 }
 
 .time-card-column {
   display: flex;
   flex-direction: column;
+  margin-left: 9.5%;
+  
+}
+
+.basic-row {
+  display: flex;
+  flex-direction: row;
 }
 .time-card-column-left {
   display: flex;
   flex-direction: column;
-  width: 25%;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 35%;
+  border-right: 1px solid #8dc63f ;
 }
 
 .time-card-elem {
-  margin: 2%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2%;
 }
 
 .hidden {
