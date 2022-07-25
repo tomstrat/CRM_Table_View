@@ -13,8 +13,8 @@ export default function formatForPost(routes){
       )
     })
   })
- 
   console.log(formattedSchedule)
+ 
   return formattedSchedule
 }
 

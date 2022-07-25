@@ -65,7 +65,7 @@ export default function formatSchedule(date, routes, idMap){
       }
       )
     }}))
-  console.log(formattedSchedule)
+  
   return formattedSchedule
 }
 

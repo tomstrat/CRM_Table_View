@@ -2,10 +2,10 @@
 import React from "react"
 import PropTypes from "prop-types"
 import formatHours from "../RoutePlanner/formatHours"
-import NewTimeBox from "../RoutePlanner/NewTimeBox"
 import TCTimeBox from "./TCTimeBox"
 import RouteTextArea from "../RoutePlanner/RouteTextArea"
 import TCBool from "./TCBool"
+import patchTimeSheet from "./patchTimeSheet"
 
 export default function TimeCard (props) {
   const {
@@ -27,6 +27,10 @@ export default function TimeCard (props) {
   const bTimeObj = new Date(breakStart)
   const bTimeFormatted = formatHours(bTimeObj)
 
+  function patchOnClick () {
+    patchTimeSheet(props.data)
+  }
+
   return (
     <div className="time-card-container">
       <div className="time-card-column-left">
@@ -45,7 +49,6 @@ export default function TimeCard (props) {
         </div>
       </div>
       <div className="time-card-column">
-        
         <div className="time-card-elem">Start Time:
           <TCTimeBox
             key={"starttimebox"}
@@ -54,7 +57,6 @@ export default function TimeCard (props) {
             startMins={sTimeFormatted[1]}
             timeChange={props.startTimeChange}
           />
-        
         </div>
         <div className="time-card-elem">End Time: 
           <TCTimeBox
@@ -65,8 +67,7 @@ export default function TimeCard (props) {
             timeChange={props.endTimeChange}
           />
         </div>
-        <div className="time-card-elem">Break Start:  
-
+        <div className="time-card-elem">Break Start: 
           <TCTimeBox
             key={"breaktimebox"}
             index={2}
@@ -75,8 +76,6 @@ export default function TimeCard (props) {
             timeChange={props.breakTimeChange}
           />
         </div>
-       
-       
         <div className="time-card-elem">Sick?:
           <TCBool
             boolChange={props.boolChange}
@@ -108,13 +107,11 @@ export default function TimeCard (props) {
             ? edited
             : "False"}
         </div>
-        <div className="basic-row">
-          <div>Update</div>
-          <div onClick={props.closeTimeCard}>Close</div>
+        <div className="basic-row button-row">
+          <div className={"update-button"} onClick={patchOnClick}>Update</div>
+          <div className={"close-button"} onClick={props.closeTimeCard}>Close</div>
         </div>
-       
       </div>
-      
     </div>
   )
 }

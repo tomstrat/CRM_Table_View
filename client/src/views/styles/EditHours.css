@@ -149,6 +149,38 @@
   padding: 2%;
 }
 
+.close-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  color: #ffffff;
+  font-size: 20px;
+  border: 1px solid white;
+  border-radius: 8px;
+  width: 25%;
+  cursor: pointer;
+}
+
+.update-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: green;
+  color: #ffffff;
+  font-size: 20px;
+  border: 1px solid white;
+  border-radius: 8px;
+  width: 25%;
+  cursor: pointer;
+}
 .hidden {
   display: none;
+}
+
+.button-row {
+  justify-content: space-around;
+  padding: 5%;
 }

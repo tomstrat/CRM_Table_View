@@ -16,7 +16,6 @@ const TableRow = (props) => {
   const pStartFormatted = formatHours(plannedStartObj)
 
   function clickHandler () {
-    console.log(props.index)
     props.toggleRow(props.index)
   }
   return (
