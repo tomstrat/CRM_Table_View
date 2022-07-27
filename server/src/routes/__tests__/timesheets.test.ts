@@ -1,4 +1,4 @@
-import { testTimesheet, correctPostTimesheet, minimumPostTimesheet, incorrectPostTimesheet } from "../../testing/dummy-data/timesheetdata"
+import { testTimesheet, correctPostTimesheet, correctPatchTimesheet, minimumPostTimesheet, incorrectPostTimesheet } from "../../testing/dummy-data/timesheetdata"
 import { correctPostUser } from "../../testing/dummy-data/userdata"
 import { type } from "ramda"
 import { makeTestEnvironment, TestEnvironment } from "../../testing/utilities/environment"
@@ -120,6 +120,68 @@ describe("Routes for Timesheets", () => {
         it("sends 400 code", async () => {
           await testEnv.authRequest()
             .post("/api/timesheets/new")
+            .send({})
+            .expect(400)
+        })
+      })
+    })
+  })
+
+  describe("PATCH /api/timesheets", () => {
+    describe("Without Auth", () => {
+      it("sends 401 code", async () => {
+        await testEnv.request()
+          .patch("/api/timesheets")
+          .send(correctPatchTimesheet)
+          .expect(401)
+      })
+    })
+    describe("With Auth", () => {
+      describe("And correct data", () => {
+        it("sends 200 code", async () => {
+          await testEnv.authRequest()
+            .patch("/api/timesheets")
+            .send(correctPatchTimesheet)
+            .expect(200)
+            .expect("Content-Type", /json/)
+            .expect(res => {
+              console.log(res.body[0])
+              expect(type(res.body)).toBe("Array")
+              expect(res.body.length).toBe(2)
+              expect(res.body[0]).toHaveProperty("route", "routeChange")
+              expect(res.body[0]).toHaveProperty("plannedStart", "2019-07-22T00:00:00.000Z")
+              expect(res.body[1]).toHaveProperty("ttmComments", "ttmcomments2")
+            })
+        })
+      })
+      describe("And minimal data", () => {
+        it("sends 200 code", async () => {
+          await testEnv.authRequest()
+            .patch("/api/timesheets")
+            .send([
+              {
+                id: 1,
+                route: "N1",
+              },
+              {
+                id: 2,
+                plannedStart: "2022-06-08T07:00:00.000Z",
+              },
+            ])
+            .expect(200)
+            .expect("Content-Type", /json/)
+            .expect(res => {
+              expect(type(res.body)).toBe("Array")
+              expect(res.body.length).toBe(2)
+              expect(res.body[0]).toHaveProperty("route", "N1")
+              expect(res.body[1]).toHaveProperty("plannedStart", "2018-07-23T00:00:00.000Z")
+            })
+        })
+      })
+      describe("And empty data", () => {
+        it("sends 400 code", async () => {
+          await testEnv.authRequest()
+            .patch("/api/timesheets")
             .send({})
             .expect(400)
         })

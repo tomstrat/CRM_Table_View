@@ -5,8 +5,10 @@ import TimesheetValType from "../../middleware/validation/types/timesheets"
 import TimesheetClient from "../../database/clients/TimesheetClient"
 import { ExternalInputTimesheet } from "../../schemas/external.interfaces"
 import UserClient from "../../database/clients/UserClient"
-import { formatTimesheet } from "../formatters/timesheet.formatters"
+import { formatTimesheet, formatPatchTimesheet } from "../formatters/timesheet.formatters"
 import { includes, map } from "ramda"
+import { cleanObject } from "../formatters/helper"
+
 
 export default function timesheetsRouteFactory(
   {
@@ -24,6 +26,8 @@ export default function timesheetsRouteFactory(
   const timesheetsRouter = Router()
   const {
     requireBody,
+    requireEditBody,
+    requireId,
     requireRoute,
     requirePlannedStart,
     validateRouteType,
@@ -32,7 +36,9 @@ export default function timesheetsRouteFactory(
     validateTimes,
     validateComments,
     validateStartTruck,
-    validateSickLate
+    validateSickLate,
+    validateEditRoute,
+    validateEditOpsMessage,
   } = timesheetValidators
 
   timesheetsRouter.get("/", async (req: Request, res: Response) => {
@@ -69,6 +75,28 @@ export default function timesheetsRouteFactory(
         if (user) {
           return await timesheetClient.addRecord(formatTimesheet(timesheet, user))
         }
+      })(req.body)
+      return Promise.all(timesheets).then(data => {
+        if (includes(undefined, data)) {
+          return res.status(404).json(undefined)
+        }
+        return res.status(200).json(data)
+      })
+    })
+
+  timesheetsRouter.patch(
+    "/",
+    [
+      requireEditBody, validateEditRoute,
+      requireId, validateEditOpsMessage, validateRouteType,
+      validateEdited, validateTimes, validateComments,
+      validateStartTruck, validateSickLate
+    ],
+    handleValErrors(),
+    async (req: Request, res: Response) => {
+      const timesheets = map(async (timesheet: ExternalInputTimesheet) => {
+        const { id } = timesheet
+        return await timesheetClient.updateRecord(id!, cleanObject(formatPatchTimesheet(timesheet)))
       })(req.body)
       return Promise.all(timesheets).then(data => {
         if (includes(undefined, data)) {

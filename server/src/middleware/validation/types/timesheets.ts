@@ -11,4 +11,9 @@ export default interface TimesheetValType {
   validateComments: ValidationChain
   validateStartTruck: ValidationChain
   validateSickLate: ValidationChain
+  requireEditBody: ValidationChain
+  requireId: ValidationChain
+  validateEditRoute: ValidationChain
+  validateEditPlannedStart: ValidationChain
+  validateEditOpsMessage: ValidationChain
 }

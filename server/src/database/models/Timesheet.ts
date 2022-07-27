@@ -7,7 +7,7 @@ import { User } from "./User"
 dotenv.config()
 
 const datetime = process.env.PROD_DATABASE === "true"
-  ? "timestamp"
+  ? "timestamptz"
   : "datetime"
 
 export enum RouteType {

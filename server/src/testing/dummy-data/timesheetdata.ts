@@ -195,6 +195,42 @@ export const correctPostTimesheet: ExternalInputTimesheet[] = [
   },
 ]
 
+export const correctPatchTimesheet: ExternalInputTimesheet[] = [
+  {
+    id: 1,
+    username: "hello",
+    route: "routeChange",
+    routeType: RouteType.standard,
+    startTime: "2018-07-22T00:00:00.000Z",
+    endTime: "2018-07-22T00:00:00.000Z",
+    breakStart: "2018-07-22T00:00:00.000Z",
+    plannedStart: "2017-07-22T11:23:42.023Z",
+    ttmComments: "ttmcommentschanged",
+    opsComments: "correctPatchTimesheet",
+    opsMessage: "message",
+    startTruck: "test",
+    sick: false,
+    late: false,
+    edited: true
+  },
+  {
+    id: 2,
+    username: "test23",
+    route: "route2",
+    startTime: "2018-07-22T00:00:00.000Z",
+    endTime: "2018-07-22T00:00:00.000Z",
+    breakStart: "2018-07-22T00:00:00.000Z",
+    plannedStart: "2019-07-23T00:00:00.000Z",
+    ttmComments: "ttmcomments2",
+    opsComments: "correctPatchTimesheet",
+    opsMessage: "message",
+    startTruck: "test",
+    sick: false,
+    late: false,
+    edited: true
+  },
+]
+
 export const incorrectPostTimesheet: ExternalInputTimesheet[] = [
   {
     username: "test",

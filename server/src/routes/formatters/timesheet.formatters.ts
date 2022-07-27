@@ -22,3 +22,20 @@ export function formatTimesheet(timesheet: ExternalInputTimesheet, user: User): 
     edited: timesheet.edited,
   }
 }
+
+export function formatPatchTimesheet(timesheet: ExternalInputTimesheet): Partial<Timesheet> {
+  return {
+    route: timesheet.route,
+    startTime: convertDate(timesheet.startTime),
+    endTime: convertDate(timesheet.endTime),
+    breakStart: convertDate(timesheet.breakStart),
+    routeType: timesheet.routeType,
+    ttmComments: timesheet.ttmComments,
+    opsComments: timesheet.opsComments,
+    opsMessage: timesheet.opsMessage,
+    startTruck: timesheet.startTruck,
+    sick: timesheet.sick,
+    late: timesheet.late,
+    edited: timesheet.edited,
+  }
+}

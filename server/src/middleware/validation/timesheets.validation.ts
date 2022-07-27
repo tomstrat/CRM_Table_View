@@ -27,9 +27,13 @@ export default function timesheetValidatorFactory({ timesheetClient, userClient 
     requireRoute: body("*.route").trim().escape(),
     requirePlannedStart: body("*.plannedStart").trim().escape().isISO8601(),
     requireOpsMessage: body("*.opsMessage").trim().escape(),
+    requireEditBody: body().isArray().withMessage("Body must be an array"),
+    requireId: body("*.id").trim().escape().isNumeric().withMessage("Must have an id"),
+    validateEditRoute: body("*.route").trim().escape().optional(),
+    validateEditPlannedStart: body("*.plannedStart").trim().escape().isISO8601().optional(),
+    validateEditOpsMessage: body("*.opsMessage").trim().escape().optional(),
     validateRouteType: body("*.routeType").optional()
       .custom(type => {
-        console.log(type)
         if (!(type in RouteType)) throw new Error("RouteType not valid")
         return true
       }),
