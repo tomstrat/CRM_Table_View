@@ -19,6 +19,7 @@ export default class Client<Model> {
 
   async addRecord(record: Model): Promise<Model | undefined> {
     try {
+      console.log(record)
       const recordToAdd = this.repository.create(record)
       const savedRecord = await this.repository.save(recordToAdd)
       console.log(`${this.clientName} has been saved`)

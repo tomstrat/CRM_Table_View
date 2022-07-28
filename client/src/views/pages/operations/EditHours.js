@@ -13,7 +13,7 @@ const EditHours = () => {
 
   const [timeTable, setTimeTable] = useState(null)
   const [timeCardData, setTimeCardData] = useState(null)
-  const [currDay, setCurrDay] = useState(getCurrentDate("dateTime", - 1))
+  const [currDay, setCurrDay] = useState(getCurrentDate("dateTime", -1))
   const dateChange = useRef(true)
  
   useEffect(() => {

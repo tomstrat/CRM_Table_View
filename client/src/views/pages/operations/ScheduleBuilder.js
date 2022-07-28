@@ -1,113 +1,265 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react"
-import SideBar from "../../components/SideBarComponents/SideBar"
-import StaffSearchControls from "../../components/Staff_Search/StaffSearchControls"
+import React, { useState, useEffect, useRef} from "react"
 import "../../styles/ScheduleBuilder.css"
-import StaffSearchResults from "../../components/Staff_Search/StaffSearchResults"
-import RoutePlanner from "../../components/RoutePlanner/RoutePlanner"
-import getCurrentDate from "../../../utilities/getCurrentDate"
 import Nav from "../../components/Nav/Nav"
-import TruckContents from "../../components/SideBarComponents/TruckContents"
+import getCurrentDate from "../../../utilities/getCurrentDate"
 import printDay from "../../../utilities/printDay"
 import fixMonth from "../../../utilities/fixMonth"
-import defaultRoutes from "../../components/RoutePlanner/defaultRoutes"
-import recodeSchedule from "../../components/RoutePlanner/recodeSchedule"
+import NewRouteBox from "../../components/RoutePlanner/NewRouteBox"
+import defaultRoutes2 from "../../components/RoutePlanner/defaultRoutes"
+import formatHours from "../../components/RoutePlanner/formatHours"
+import NewStaffWidget from "../../components/Staff_Search/NewStaffWidget"
+import truckList from "../../components/RoutePlanner/truckList"
+import NewTruckContents from "../../components/RoutePlanner/NewTruckContents"
+import postSchedule from "../../components/RoutePlanner/postSchedule"
+import getStaff from "../../components/RoutePlanner/getStaff"
+import getTimeSheet from "../../components/RoutePlanner/getTimeSheet"
+import formatForPost from "../../components/RoutePlanner/formatForPost"
+import ViewButton from "../../components/Buttons/ViewButton"
 
-
- 
-
-const ScheduleBuilder = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [sideFlip, setSideFlip] = useState(false)
-  const [insertName, setInsertName] = useState("")
-  const [addedNames, setAddedNames] = useState([""])
-  const [availQuery, setAvailQuery] = useState(["notWorking", "working", "contactable", "unselected"])
-  const [hoursQuery, setHoursQuery] = useState(["temp", "fullTime", "casual"])
-  const [roleQuery, setRoleQuery] = useState(["driver", "navigator", "trainer", "trainee", "temp"])
-  const [currDay, setCurrday] = useState(getCurrentDate("dateTime", 1))
-  const [idMap, setIdMap] = useState(null)
-  const [data, setData] = useState({data: [{}], populated: false})
-  const [locationQuery, setLocationQuery] = useState(
-    [
-      "cbd", "Unspecified", "innerNorth", "innerWest", "innerEast", "innerSouth", "outerNorth", "outerWest", "outerEast", "outerSouth"
-    ]
-  )
+const ScheduleBuilder = () => { 
+  const [currDay, setCurrDay] = useState(getCurrentDate("dateTime", 1))
+  const [viewState, setViewState] = useState([
+    {name: "Trucks", state: false},
+    {name: "Planner", state: true},
+    {name: "Routes", state: false}
+  ])
+  const [staff, setStaff] = useState([])
+  const [timeSheet, setTimeSheet] = useState([]) 
+  const [truckState, setTruckState] = useState(truckList)
+  const [newRoute, setNewRoute] = useState({name: "", type: ""})
+  const dateChange = useRef(true)
+  const nameToAdd = useRef("")
   
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const result = await getSchedule(currDay)
-  //     if(result.status == 200){
-  //       const formattedResult = recodeSchedule(result.data)
-  //       console.log("result:", formattedResult)
-  //       setData({data: formattedResult, populated: true})
-  //     }
-  //     else {
-  //       setData({data: defaultRoutes, populated: true})
-  //     }
-  //   }
-  //   if(!data.populated) getData()
-  // }), [data, currDay]
-  
-  function getIdMap(map){
-    setIdMap(map)
-  }
-  function pageGetButtons(avail, hours, role, location) {
-    setAvailQuery(avail)
-    setHoursQuery(hours)
-    setRoleQuery(role)
-    setLocationQuery(location)
-  }
-  function pageGetNames(newName) {
-    if(newName == undefined) setInsertName("")
-    else {
-      setInsertName(newName)
+  useEffect(() => {
+    if (dateChange.current == true) {
+      dateChange.current = false
+      getTimeSheet(currDay, setTimeSheet)
     }
+   
+    getStaff(staff, setStaff)
+   
+  }), []
+  
+  function saveTimesheet () {
+    postSchedule(formatForPost(timeSheet))
   }
 
-  function nameWasAdded() {
-    if(insertName){
-      setAddedNames([...addedNames, insertName])
-      setInsertName("")
-    }
-  }
-
-  function nameWasRemoved(removedName){
-    if(removedName) {
-      const tempNameList = addedNames.filter((elem) => {
-        if(elem !== removedName  && elem) return true
-      })
-      setAddedNames(tempNameList)
-    }
-  }
-  
-  function increaseDay(){
-    setCurrday(currDay => {
-      currDay.setDate(currDay.getDate() + 1)
-      return new Date(currDay)
+  function addName() {
+    const name = nameToAdd.current
+    const toggleCheck = timeSheet.some(function(e) {
+      return e.toggleState == true
     })
-  }
-  
-  function decreaseDay(){
-    setCurrday(currDay => {
-      currDay.setDate(currDay.getDate() - 1)
-      return new Date(currDay)
-    })
-  }
-
-  function sideBarSwitch(){
-    if (sideFlip) {
-      setSideFlip(false)
-    }
-    else setSideFlip(true)
     
+    if (name && toggleCheck) {
+      setTimeSheet(values => {
+        return values.map((obj) => {
+          if (obj.toggleState) 
+            return {...obj, names: [...obj.names, name]}
+          else return obj
+        })
+      })
+    }
   }
 
+  function removeName (routeIndex, targetIndex) {
+    setTimeSheet(values => {
+      return values.map((obj, index) => {
+        if (index == routeIndex) return {...obj, names: obj.names.filter((element, index) => index !== targetIndex)}
+        else return obj
+      })
+    })
+  }
+  
+  function toggleStaff(targetIndex, name) {
+    if(!nameToAdd.current) nameToAdd.current = name
+    else if (nameToAdd.current && nameToAdd.current !== name) nameToAdd.current = name
+    else nameToAdd.current = ""
+    
+    setStaff(values => {
+      return values.map((obj, index) => {
+        if (index == targetIndex && obj.toggleState == false) {
+          return {...obj, toggleState: true}
+        }
+        else return {...obj, toggleState: false}
+      })
+    })
+  }
+
+  function toggleRoute(targetIndex){
+    setTimeSheet(values => {
+      return values.map((obj, index) => {
+        if (index == targetIndex && obj.toggleState == false) {
+          return {...obj, toggleState: true}
+        }
+        else return {...obj, toggleState: false}
+      })
+    })
+  }
+  function newRouteTypeHandler (e) {
+    const newValue = e.target.value
+    setNewRoute({...newRoute, type: newValue})
+  }
+  
+  function newRouteNameHandler (e) {
+    const newValue = e.target.value
+    setNewRoute({...newRoute, name: newValue})
+  }
+
+  function addNewRoute () {
+    const defaultTime = new Date(currDay)
+    defaultTime.setHours(7, 0, 0, 0)
+
+    setTimeSheet([...timeSheet, {
+      routeName: newRoute.name,
+      routeType: newRoute.type,
+      startTime: defaultTime,
+      names: [],
+      routeNotes: "",
+      toggleState: false
+    }])
+  }
+
+  function removeRoute () {
+    setTimeSheet(values => {
+      return values.filter((obj) => {if(obj.toggleState == false) return [...timeSheet, obj]})
+    })
+  }
+
+  function timeChange(targetIndex, type, newValue) {
+    const tempDate = new Date(timeSheet[targetIndex].startTime)
+    if (type == "start-hours") tempDate.setHours(newValue)
+    else if (type == "start-mins") tempDate.setMinutes(newValue)
+    setTimeSheet(values => {
+      return values.map((obj, index) => {
+        if (index == targetIndex) 
+          return {...obj, startTime: tempDate}
+        else return obj
+      })
+    })
+  }
+
+  function notesChange({targetIndex, newValue}) {
+    setTimeSheet(values => {
+      return values.map((obj, index) => {
+        if (index == targetIndex) 
+          return {...obj, routeNotes: newValue}
+        else return obj
+      })
+    })
+  }
+
+  function increaseDay(){
+    const increDate = new Date(currDay)
+    increDate.setDate(increDate.getDate() + 1)
+    dateChange.current = true
+    setCurrDay(increDate)
+  }
+
+  function decreaseDay(){
+    const decreDate = new Date(currDay)
+    decreDate.setDate(decreDate.getDate() - 1)
+    dateChange.current = true
+    setCurrDay(decreDate)
+  }
+
+  function truckContentsChange ({targetIndex, name, newValue}) {
+    setTruckState(values => {
+      return values.map((truck, index) => {
+        if(index == targetIndex) {
+          if(name == "tools") return {...truck, tools: newValue}
+          else if(name == "contents") return {...truck, contents: newValue}
+          else if(name == "location") return {...truck, location: newValue}
+        }
+        else return truck
+      })
+    })
+  }
+
+  function makeViewButton (viewName, viewState, index) {
+    return (
+      <ViewButton
+        key={"ViewButton" + index}
+        index={index}
+        viewName={viewName}
+        viewState={viewState}
+        updateState={updateView}
+      />
+    )
+  }
+
+  function updateView (targetIndex) {
+    setViewState(values => {
+      return values.map((obj, index) => {
+        if (index == targetIndex && obj.state == false) return {...obj, state: true}
+        else if (index == targetIndex && obj.state == true) return obj
+        else return {...obj, state: false}
+      })
+    }
+    )
+  }
+
+  function makeRoute(routeInfo, index){
+    const {routeName, routeType, startTime, names, routeNotes, toggleState} = routeInfo
+    const formattedTimes = formatHours(startTime)
+    
+    return (
+      <NewRouteBox
+        index={index}
+        key={"routebox" + index}
+        routeName={routeName}
+        routeType={routeType}
+        startHours={formattedTimes[0]}
+        startMins={formattedTimes[1]}
+        names={names}
+        routeNotes={routeNotes}
+        toggleState={toggleState}
+        toggleRoute={toggleRoute}
+        timeChange={timeChange}
+        notesChange={notesChange}
+        removeName={removeName}
+        viewState={viewState}
+      />
+    )
+  }
+
+  function makeWidget(user, index){
+    const addedNames = []
+    timeSheet.map((route) => {
+      route.names.map((name) => {
+        if (name && name !== "Unassigned") addedNames.push(name)
+      })
+    })
+    if (!addedNames.includes(user.username)){
+      return (
+        <NewStaffWidget
+          index={index}
+          key={"staffWidget" + index} 
+          user={user}
+          toggleStaff={toggleStaff}
+          addName={addName}
+        />
+      )
+    }
+  }
   return (
     <>
       <Nav auth={true}/>
-      <div className="schedule-builder-container">
-        <div className="centralise-sidebar">
-          <div className="day-select-container">
+      <div className="basic-row">
+        <div className={
+          viewState[2].state
+            ? "scheduler-left-column small-left-column"
+            : "scheduler-left-column"
+        }>
+          <div className="basic-row">
+            {viewState.map((view, index) => {
+              return makeViewButton(view.name, view.state, index)
+            })}
+          </div>
+          <div className={
+            viewState[0].state
+              ? "hidden"
+              :"day-select-container"}>
             <div className="tiny-title">Schedule for:</div>
             <div className="date-container">
               <button className={"arrow-button"} onClick={decreaseDay}>&#60;</button>
@@ -116,182 +268,63 @@ const ScheduleBuilder = () => {
             </div>
             <div className="date-title">{currDay.getDate() + "-" + fixMonth(currDay.getMonth()) + "-" + currDay.getFullYear()}</div>
           </div>
-          <div id="default-sidebar" 
-            className={
-              sideFlip 
-                ? "visible-sidebar"
-                : "hidden"
-            }
-          >
-            
-            <SideBar 
-              title={"Search Staff"} 
-              component={StaffSearchControls}
-              pageGetButtons={pageGetButtons}
-            />
+          <div className={
+            viewState[2].state
+              ? "hidden"
+              : "truck-contents-container"
+          }>
+            <NewTruckContents
+              key={"truckcontents"}
+              truckList={truckState}
+              truckContentsChange={truckContentsChange}
+            /> 
           </div>
-          <div id="secondary-sidebar" 
-            className={
-              sideFlip 
-                ? "hidden"
-                : "visible-sidebar"
+        </div>
+        <div className={
+          viewState[0].state
+            ? "hidden"
+            : "scheduler-right-column"}>
+          <div className={
+            viewState[1].state
+              ? "new-staff-search-results-container"
+              : "hidden"
+          }>
+            <div className="search-button-holder"></div>
+            {timeSheet.length > 0
+              ? staff.map((user, index) => {
+                return makeWidget(user, index)
+              })
+              :<div>Loading</div>
             }
-          >
-            
-            <SideBar 
-              title={"Truck Info"} 
-              component={TruckContents}
-              defaultTrucks={
-                [
-                  {
-                    name: "1AQ", 
-                    contents: "",
-                    location: "",
-                    tools: ""
-                  },
-                  {
-                    name: "1CZ", 
-                    contents: "",
-                    location: "",
-                    tools: ""
-                  },
-                  {
-                    name: "1GA",
-                    contents: "",
-                    location: "",
-                    tools: ""
-                  },
-                  {
-                    name:  "1IP",
-                    contents: "",
-                    location: "",
-                    tools: ""
-                  },
-                  {
-                    name: "1JK", 
-                    contents: "",
-                    location: "",
-                    tools: ""
-                  },
-                  {
-                    name: "1JW",
-                    contents: "",
-                    location: "",
-                    tools: ""
-                  },
-                  {
-                    name: "1LL",
-                    contents: "",
-                    location: "",
-                    tools: ""
-                  },
-                  {
-                    name:   "1LS",
-                    contents: "",
-                    location: "",
-                    tools: ""
-                  },
-                  {
-                    name: "1WZ",
-                    contents: "",
-                    location: "",
-                    tools: ""
-                  },
-                  {
-                    name: "289",
-                    contents: "",
-                    location: "",
-                    tools: ""
-                  },
-                  {
-                    name: "290", 
-                    contents: "",
-                    location: "",
-                    tools: ""
-                  },
-                  {
-                    name: "442",
-                    contents: "",
-                    location: "",
-                    tools: ""
-                  },
-                  {
-                    name: "554",
-                    contents: "",
-                    location: "",
-                    tools: ""
-                  },
-                  {
-                    name:  "XV4",
-                    contents: "",
-                    location: "",
-                    tools: ""
-                  },
-                  {
-                    name:  "XV5",
-                    contents: "",
-                    location: "",
-                    tools: ""
-                  },
-                  {
-                    name:  "XV81",
-                    contents: "",
-                    location: "",
-                    tools: ""
-                  },
-                  {
-                    name:   "XV88",
-                    contents: "",
-                    location: "",
-                    tools: ""
-                  },
-                  {
-                    name:  "XV9",
-                    contents: "",
-                    location: "",
-                    tools: ""
-                  },
-                  {
-                    name:  "ZPR",
-                    contents: "",
-                    location: "",
-                    tools: ""
-                  },
-                ]
-              }
-            />
           </div>
-          <button className="switch-button" onClick={sideBarSwitch}>Switch Panel</button>
+          <div className={
+            viewState[0].state
+              ? "hidden"
+              : "new-container-of-the-routes"
+          }>
+            <div className="route-top-bar">
+              <select onChange={newRouteTypeHandler} placeholder="Standard" name="routeType" id="routeType" className="new-route-drop route-top-bar-element">
+                <option value="Standard">Standard</option>
+                <option value="Float">Float</option>
+                <option value="Training">Training</option>
+                <option value="Depot">Depot</option>
+              </select>
+              <input type="text" onChange={newRouteNameHandler} name="routeName" className="route-name-input route-top-bar-element" placeholder="Add route name..." ></input>  
+              <button className="add-route-button route-top-bar-element" onClick={addNewRoute}>Add New Route</button>
+              <button className="add-route-button route-top-bar-element" onClick={removeRoute}>Remove Route</button>
+              <button className="save-button route-top-bar-element" onClick={saveTimesheet}>Save Schedule</button>
+              <button className="publish-button">Publish Schedule</button>
+            </div> 
+            {timeSheet.length > 0 
+              ?timeSheet.map((route, index) => {
+                return makeRoute(route, index)
+              })
+              : <div>Loading</div>
+            }
+          </div>
         </div>
-        <div className="column-page">
-          <StaffSearchResults
-            getIdMap={getIdMap}
-            idMap={idMap} 
-            currDay={currDay}
-            availQuery={availQuery}
-            hoursQuery={hoursQuery}
-            roleQuery={roleQuery}
-            locationQuery={locationQuery}
-            addedNames={addedNames}
-            pageGetName={pageGetNames}>
-          </StaffSearchResults>
-          <RoutePlanner
-            idMap={idMap}
-            currDay={currDay}
-            addedNames={addedNames}
-            nameWasRemoved={nameWasRemoved}
-            nameWasAdded={nameWasAdded}
-            insertName={insertName}
-            defaultRoutes={defaultRoutes}
-            data={data}
-          >
-            
-          </RoutePlanner>
-        </div>
-      </div>
+      </div> 
     </>
   )
 }
-
 export default ScheduleBuilder
-

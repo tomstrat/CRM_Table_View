@@ -9,7 +9,6 @@ import ManageUsers from "./views/pages/operations/ManageUsers"
 import OpsOverview from "./views/pages/operations/OpsOverview"
 import Logout from "./views/pages/logout"
 import UserCard from "./views/pages/operations/UserCard"
-import ScheduleBuilder from "./views/pages/operations/ScheduleBuilder"
 import EditHours from "./views/pages/operations/EditHours"
 import DataViewer from "./views/pages/operations/DataViewer"
 import Requests from "./views/pages/operations/Requests"
@@ -17,7 +16,7 @@ import Overview from "./views/pages/user/Overview"
 import AddHours from "./views/pages/user/AddHours"
 import TimeOff from "./views/pages/user/TimeOff"
 import Forms from "./views/pages/user/Forms"
-import NewScheduleBuilder from "./views/pages/operations/NewScheduleBuilder"
+import ScheduleBuilder from "./views/pages/operations/ScheduleBuilder"
 
 function App() {
 
@@ -28,8 +27,7 @@ function App() {
         <Switch>
           <PrivateRoute exact path="/" component={OpsOverview} />
           <PrivateRoute exact path="/ops/overview" component={OpsOverview} />
-          <PrivateRoute exact path="/ops/scheduler" component={ScheduleBuilder} />
-          <PrivateRoute exact path="/ops/newschedulebuilder" component={NewScheduleBuilder} />
+          <PrivateRoute exact path="/ops/schedulebuilder" component={ScheduleBuilder} />
           <PrivateRoute exact path="/ops/edithours" component={EditHours} />
           <PrivateRoute exact path="/ops/dataviewer" component={DataViewer} />
           <PrivateRoute exact path="/ops/requests" component={Requests} />
