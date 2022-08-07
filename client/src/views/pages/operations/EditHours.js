@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import Nav from "../../components/Nav/Nav"
-import React, { useState, useEffect, useRef } from "react"
+import React, { useState, useEffect } from "react"
 import "../../styles/EditHours.css"
 import getCurrentDate from "../../../utilities/getCurrentDate"
 import printDay from "../../../utilities/printDay"
@@ -8,20 +8,22 @@ import fixMonth from "../../../utilities/fixMonth"
 import getTable from "../../components/EditHours/getTable"
 import TableRow from "../../components/EditHours/TableRow"
 import TimeCard from "../../components/EditHours/TimeCard"
+import useFetch from "../../../hooks/useFetch"
 
 const EditHours = () => {
 
   const [timeTable, setTimeTable] = useState(null)
   const [timeCardData, setTimeCardData] = useState(null)
   const [currDay, setCurrDay] = useState(getCurrentDate("dateTime", -1))
-  const dateChange = useRef(true)
- 
+  const {data, loading, error} = useFetch(`/api/timesheets/${currDay}`)
+  
+  
   useEffect(() => {
-    if (dateChange.current == true) {
-      dateChange.current = false
-      getTable(currDay, setTimeTable)
-    }
-  }), [] 
+    
+    setTimeTable(data)
+
+  }, [data]) 
+  
 
   function toggleRow (targetIndex) {
     setTimeCardData(timeTable[targetIndex])
@@ -30,14 +32,12 @@ const EditHours = () => {
   function increaseDay(){
     const increDate = new Date(currDay)
     increDate.setDate(increDate.getDate() + 1)
-    dateChange.current = true
     setCurrDay(increDate)
   }
 
   function decreaseDay(){
     const decreDate = new Date(currDay)
     decreDate.setDate(decreDate.getDate() - 1)
-    dateChange.current = true
     setCurrDay(decreDate)
   }
 

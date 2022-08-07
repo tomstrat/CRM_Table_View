@@ -11,9 +11,12 @@ function useFetch(url) {
     axios.get(url)
       .then((response) => {
         setData(response.data)
+        setError(null)
       })
       .catch((err) => {
-        setError(err)
+        setError(err.message)
+        setData(null)
+        
       })
       .finally(() => {
         setLoading(false)

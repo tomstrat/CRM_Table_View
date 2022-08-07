@@ -16,6 +16,9 @@ import getStaff from "../../components/RoutePlanner/getStaff"
 import getTimeSheet from "../../components/RoutePlanner/getTimeSheet"
 import formatForPost from "../../components/RoutePlanner/formatForPost"
 import ViewButton from "../../components/Buttons/ViewButton"
+import useFetch from "../../../hooks/useFetch"
+import recodeSchedule from "../../components/RoutePlanner/recodeSchedule"
+import defaultRoutes from "../../components/RoutePlanner/defaultRoutes"
 
 const ScheduleBuilder = () => { 
   const [currDay, setCurrDay] = useState(getCurrentDate("dateTime", 1))
@@ -28,18 +31,17 @@ const ScheduleBuilder = () => {
   const [timeSheet, setTimeSheet] = useState([]) 
   const [truckState, setTruckState] = useState(truckList)
   const [newRoute, setNewRoute] = useState({name: "", type: ""})
-  const dateChange = useRef(true)
   const nameToAdd = useRef("")
+  const {data, loading, error} = useFetch(`/api/timesheets/${currDay}`)
   
   useEffect(() => {
-    if (dateChange.current == true) {
-      dateChange.current = false
-      getTimeSheet(currDay, setTimeSheet)
-    }
-   
+    
+    if(data)setTimeSheet(recodeSchedule(data))
+    else setTimeSheet(defaultRoutes(currDay))
+    
     getStaff(staff, setStaff)
    
-  }), []
+  }, [data])
   
   function saveTimesheet () {
     postSchedule(formatForPost(timeSheet))
@@ -152,14 +154,12 @@ const ScheduleBuilder = () => {
   function increaseDay(){
     const increDate = new Date(currDay)
     increDate.setDate(increDate.getDate() + 1)
-    dateChange.current = true
     setCurrDay(increDate)
   }
 
   function decreaseDay(){
     const decreDate = new Date(currDay)
     decreDate.setDate(decreDate.getDate() - 1)
-    dateChange.current = true
     setCurrDay(decreDate)
   }
 

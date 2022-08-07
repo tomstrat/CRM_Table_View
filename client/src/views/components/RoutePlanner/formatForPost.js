@@ -8,7 +8,7 @@ export default function formatForPost(routes){
     route.names.map((name) => {
       formattedSchedule.push(
         {
-          plannedStart: tempDate.toLocaleString(),
+          plannedStart: tempDate,
           username: name,
           route: route.routeName,
           routeType: route.routeType.toLowerCase(),
