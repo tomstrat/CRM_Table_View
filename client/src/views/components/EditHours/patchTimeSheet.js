@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export default function patchTimeSheet(data) {
-  
+  console.log(data)
   axios.patch(`/api/timesheets/${data.id}`, data)
     .then(res => {
       console.log(res)

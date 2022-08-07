@@ -1,15 +1,14 @@
-import getISOTimezone from "../../../utilities/getISOTimezone"
 
 export default function formatForPost(routes){
   
   const formattedSchedule = []
   
   routes.map((route) => {
-    
+    const tempDate = new Date(route.startTime)
     route.names.map((name) => {
       formattedSchedule.push(
         {
-          plannedStart: getISOTimezone(route.startTime),
+          plannedStart: tempDate.toLocaleString(),
           username: name,
           route: route.routeName,
           routeType: route.routeType.toLowerCase(),
