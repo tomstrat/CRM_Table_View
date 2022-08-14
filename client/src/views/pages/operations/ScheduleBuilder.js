@@ -27,6 +27,9 @@ const ScheduleBuilder = () => {
     {name: "Planner", state: true},
     {name: "Routes", state: false}
   ])
+  const [searchState, setSearchState] = useState([
+    {name: "Rostered", state: true}
+  ])
   const [staff, setStaff] = useState([])
   const [timeSheet, setTimeSheet] = useState([]) 
   const [truckState, setTruckState] = useState(truckList)
@@ -35,13 +38,12 @@ const ScheduleBuilder = () => {
   const {data, loading, error} = useFetch(`/api/timesheets/${currDay}`)
   
   useEffect(() => {
-    
-    if(data)setTimeSheet(recodeSchedule(data))
+    if(data) setTimeSheet(recodeSchedule(data))
     else setTimeSheet(defaultRoutes(currDay))
     
     getStaff(staff, setStaff)
-   
-  }, [data])
+    
+  }, [data, currDay])
   
   function saveTimesheet () {
     postSchedule(formatForPost(timeSheet))
@@ -176,15 +178,27 @@ const ScheduleBuilder = () => {
     })
   }
 
-  function makeViewButton (viewName, viewState, index) {
+  function makeViewButton (viewName, viewState, updateState, index, offClass, onClass) {
     return (
       <ViewButton
-        key={"ViewButton" + index}
+        key={"Button" + viewName + index}
         index={index}
-        viewName={viewName}
-        viewState={viewState}
-        updateState={updateView}
+        name={viewName}
+        state={viewState}
+        updateState={updateState}
+        offClass={offClass}
+        onClass={onClass}
       />
+    )
+  }
+  function updateSearch (targetIndex) {
+    setSearchState(values => {
+      return values.map((obj, index) => {
+        if (index == targetIndex && obj.state == false) return {...obj, state: true}
+        else if (index == targetIndex && obj.state == true) return {...obj, state: false}
+        else return obj
+      })
+    }
     )
   }
 
@@ -248,25 +262,26 @@ const ScheduleBuilder = () => {
       <div className="basic-row">
         <div className={
           viewState[2].state
-            ? "scheduler-left-column small-left-column"
+            ? "scheduler-left-column  small-left-column"
             : "scheduler-left-column"
-        }>
-          <div className="basic-row">
-            {viewState.map((view, index) => {
-              return makeViewButton(view.name, view.state, index)
-            })}
-          </div>
-          <div className={
-            viewState[0].state
-              ? "hidden"
-              :"day-select-container"}>
-            <div className="tiny-title">Schedule for:</div>
-            <div className="date-container">
-              <button className={"arrow-button"} onClick={decreaseDay}>&#60;</button>
-              <div className="day-title">{printDay(currDay.getDay())}</div>
-              <button className={"arrow-button"} onClick={increaseDay}>&#62;</button>
+        }><div className="top-left-row">
+            <div className="view-button-column">
+              {viewState.map((view, index) => {
+                return makeViewButton(view.name, view.state, updateView, index, "view-button", "view-button-toggled")
+              })}
             </div>
-            <div className="date-title">{currDay.getDate() + "-" + fixMonth(currDay.getMonth()) + "-" + currDay.getFullYear()}</div>
+            <div className={
+              viewState[0].state
+                ? "hidden"
+                :"day-select-container"}>
+              <div className="tiny-title">Schedule for:</div>
+              <div className="date-container">
+                <button className={"arrow-button"} onClick={decreaseDay}>&#60;</button>
+                <div className="day-title">{printDay(currDay.getDay())}</div>
+                <button className={"arrow-button"} onClick={increaseDay}>&#62;</button>
+              </div>
+              <div className="date-title">{currDay.getDate() + "-" + fixMonth(currDay.getMonth()) + "-" + currDay.getFullYear()}</div>
+            </div>
           </div>
           <div className={
             viewState[2].state
@@ -284,12 +299,21 @@ const ScheduleBuilder = () => {
           viewState[0].state
             ? "hidden"
             : "scheduler-right-column"}>
+
+          <div className={
+            viewState[1].state 
+              ? "search-button-holder"
+              : "hidden"
+          }>{
+              searchState.map((button, index) => {
+                return makeViewButton(button.name, button.state, updateSearch, index)
+              })
+            }</div>    
           <div className={
             viewState[1].state
               ? "new-staff-search-results-container"
               : "hidden"
           }>
-            <div className="search-button-holder"></div>
             {timeSheet.length > 0
               ? staff.map((user, index) => {
                 return makeWidget(user, index)

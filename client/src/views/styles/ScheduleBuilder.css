@@ -12,6 +12,18 @@
   font-size: 11px;
   overflow: scroll;
 }
+
+.search-button-holder {
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+  width: 90%;
+  height: fit-content;
+  margin-top: 0.5%;
+  border-radius: 12px 12px 0px 0px;
+  
+  
+}
 .tiny-title {
   margin-top: 2%;
   font-size: 11px;
@@ -550,17 +562,13 @@
   padding: 0.5%;
   min-width: 5%;
   
-  
-  
 }
 .new-staff-search-results-container {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 1%;
+  
   background-color: white;
-  border: 2px solid #8dc63f;
-  border-radius: 12px;
   height: 20vh;
   width: 90%;
   font-size: 11px;
@@ -587,25 +595,50 @@
   align-items: center;
   border: 1px solid #8dc63f;
   font-size: 12px;
-  margin: 2%;
   border-radius: 8px;
-  width: 5vw;
+  width: 4vw;
   height: 3vh;
   background-color: #ffffff;
   user-select: none;
   cursor: pointer;
+  margin: 1.5%;
 }
 
 .view-button-toggled {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  font-size: 12px;
+  width: 4vw;
+  height: 3vh;
   background-color: #8dc63f;
   color: #ffffff;
   border: 2px solid white;
+  user-select: none;
+  cursor: pointer;
+  margin: 0.1vw;
+}
+
+.view-button-column {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1vw;
+  margin-right: 1vw;
 }
 
 .basic-column {
   display: flex;
   flex-direction: column;
 }
+
+.top-left-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 0.5vw;
+  width: 100%;
+} 
 
 .scheduler-left-column {
   display: flex;
@@ -616,7 +649,7 @@
 }
 .small-left-column {
   width: 15%;
-  margin-left: 2.5%;
+
 }
 
 .scheduler-right-column {

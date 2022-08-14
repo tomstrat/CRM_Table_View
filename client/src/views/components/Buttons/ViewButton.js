@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 
 export default function ViewButton (props) {
   
-  const {viewName, viewState, updateState, index} = props
+  const {name, state, updateState, index, offClass, onClass} = props
 
   function handleClick () {
     updateState(index)
@@ -13,18 +13,20 @@ export default function ViewButton (props) {
     <div 
       onClick={handleClick}
       className={
-        viewState
-          ? "view-button view-button-toggled"
-          : "view-button "
+        state
+          ? onClass
+          : offClass
       }
-    >{viewName}
+    >{name}
     </div>
   )
 }
 
 ViewButton.propTypes = {
-  viewName: PropTypes.string,
-  viewState: PropTypes.bool,
+  name: PropTypes.string,
+  state: PropTypes.bool,
   updateState: PropTypes.func,
-  index: PropTypes.number
+  index: PropTypes.number,
+  offClass: PropTypes.string,
+  onClass: PropTypes.string
 }
