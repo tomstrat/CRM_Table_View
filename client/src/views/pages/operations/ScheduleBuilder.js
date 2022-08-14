@@ -19,6 +19,7 @@ import ViewButton from "../../components/Buttons/ViewButton"
 import useFetch from "../../../hooks/useFetch"
 import recodeSchedule from "../../components/RoutePlanner/recodeSchedule"
 import defaultRoutes from "../../components/RoutePlanner/defaultRoutes"
+import staffSearchCheck from "../../../utilities/staffSearchCheck"
 
 const ScheduleBuilder = () => { 
   const [currDay, setCurrDay] = useState(getCurrentDate("dateTime", 1))
@@ -42,7 +43,7 @@ const ScheduleBuilder = () => {
     else setTimeSheet(defaultRoutes(currDay))
     
     getStaff(staff, setStaff)
-    
+
   }, [data, currDay])
   
   function saveTimesheet () {
@@ -113,15 +114,21 @@ const ScheduleBuilder = () => {
   function addNewRoute () {
     const defaultTime = new Date(currDay)
     defaultTime.setHours(7, 0, 0, 0)
+    
+    const nameCheck = timeSheet.filter((route) => {
+      if(route.routeName == newRoute.name) return true
+    })
 
-    setTimeSheet([...timeSheet, {
-      routeName: newRoute.name,
-      routeType: newRoute.type,
-      startTime: defaultTime,
-      names: [],
-      routeNotes: "",
-      toggleState: false
-    }])
+    if(nameCheck.length < 1) {
+      setTimeSheet([...timeSheet, {
+        routeName: newRoute.name,
+        routeType: newRoute.type,
+        startTime: defaultTime,
+        names: [],
+        routeNotes: "",
+        toggleState: false
+      }])
+    }
   }
 
   function removeRoute () {
@@ -236,15 +243,18 @@ const ScheduleBuilder = () => {
       />
     )
   }
-
+  
   function makeWidget(user, index){
     const addedNames = []
+    const dayName = printDay(currDay.getDay()).toLowerCase()
+
     timeSheet.map((route) => {
       route.names.map((name) => {
         if (name && name !== "Unassigned") addedNames.push(name)
       })
     })
-    if (!addedNames.includes(user.username)){
+    if (!addedNames.includes(user.username) && staffSearchCheck(searchState, user, dayName)){
+      
       return (
         <NewStaffWidget
           index={index}
@@ -306,7 +316,7 @@ const ScheduleBuilder = () => {
               : "hidden"
           }>{
               searchState.map((button, index) => {
-                return makeViewButton(button.name, button.state, updateSearch, index)
+                return makeViewButton(button.name, button.state, updateSearch, index, "view-button", "view-button-toggled")
               })
             }</div>    
           <div className={

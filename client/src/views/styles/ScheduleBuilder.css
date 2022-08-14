@@ -601,7 +601,7 @@
   background-color: #ffffff;
   user-select: none;
   cursor: pointer;
-  margin: 1.5%;
+  margin: 0.1vw;
 }
 
 .view-button-toggled {
